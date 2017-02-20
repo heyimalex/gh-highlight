@@ -4,7 +4,7 @@
   "description": "Highlight code like github",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "format": "prettier --trailingComma all --singleQuote --write \"scripts/**/*.js\" \"lib/**/*.js\""
   },
   "author": "Alex Guerra",
@@ -13,6 +13,7 @@
     "highlights": "^2.1.1"
   },
   "devDependencies": {
+    "jest": "^18.1.0",
     "js-yaml": "^3.8.1",
     "prettier": "^0.18.0"
   }
