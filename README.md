@@ -64,7 +64,7 @@ cd linguist
 
 ## Roadmap
 
-- [x] Complete basic functionality.
+- [ ] Complete basic functionality.
 - [ ] Add basic tests.
 - [ ] Load grammars lazily.
 - [ ] Minify the grammars so that the package's download size is smaller. Should remove unnecessary keys, comments, disabled rules, unused rules, whitespace.
