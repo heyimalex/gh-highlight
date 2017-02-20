@@ -3,12 +3,12 @@
 // block, to scope name, which is used to figure out the grammar to use for
 // highlighting.
 
-const fs = require("fs");
-const path = require("path");
-const yaml = require("js-yaml");
+const fs = require('fs');
+const path = require('path');
+const yaml = require('js-yaml');
 
-const languagesYmlPath = "./linguist/lib/linguist/languages.yml";
-const languages = yaml.safeLoad(fs.readFileSync(languagesYmlPath, "utf8"));
+const languagesYmlPath = './linguist/lib/linguist/languages.yml';
+const languages = yaml.safeLoad(fs.readFileSync(languagesYmlPath, 'utf8'));
 
 // Unfortunately, many of the entries in languages.yml don't have an
 // associated tm_scope. This is the case even for common languages like go and
@@ -33,10 +33,11 @@ function multiMapAdd(map, key, value) {
   map.set(key, set);
 }
 
-const grammars = fs.readdirSync("./grammars").map(grammarFileName => require(`../grammars/${grammarFileName}`));
+const grammars = fs
+  .readdirSync('./grammars')
+  .map(grammarFileName => require(`../grammars/${grammarFileName}`));
 
 for (const grammar of grammars) {
-
   if (grammar.hasOwnProperty('name')) {
     multiMapAdd(grammarsByName, slugify(grammar.name), grammar);
   }
@@ -81,7 +82,6 @@ console.log('\nAssociating scopes...');
 
 langloop:
 for (let [name, language] of Object.entries(languages)) {
-
   // Skip languages that already have an associated tm_scope. This 'none'
   // convention is documented in languages.yml.
   if (language.hasOwnProperty('tm_scope') && language.tm_scope !== 'none') {
@@ -97,7 +97,6 @@ for (let [name, language] of Object.entries(languages)) {
 
   // Check for an extension match.
   if (language.hasOwnProperty('extensions')) {
-
     for (let ext of language.extensions) {
       ext = ext.substring(1).toLowerCase(); // Remove leading period
       if (grammarsByExt.has(ext)) {
@@ -123,7 +122,7 @@ for (let [name, language] of Object.entries(languages)) {
 // Log all of the unused grammars for good measure.
 
 console.log('\nChecking for unused grammars...');
-console.log('Note that these may still be included from other grammars.')
+console.log('Note that these may still be included from other grammars.');
 
 const unused = new Set([...grammarsByScope.keys()]);
 for (let [name, language] of Object.entries(languages)) {
@@ -132,7 +131,7 @@ for (let [name, language] of Object.entries(languages)) {
   }
 }
 for (const scopeName of unused.values()) {
-  console.log(`  ${scopeName}`)
+  console.log(`  ${scopeName}`);
 }
 
 console.log('\nCreating indexes...');
@@ -141,7 +140,6 @@ const index = new Map();
 const extensionIndex = new Map();
 
 for (let [name, language] of Object.entries(languages)) {
-
   // We won't be able to highlight any languages that don't have an
   // associated grammar, so just skip these.
   if (!language.hasOwnProperty('tm_scope')) {
@@ -158,8 +156,8 @@ for (let [name, language] of Object.entries(languages)) {
       // Ignore if the scopes are the same anyways.
       if (otherScope !== scopeName) {
         throw new Error(
-          `Duplicate key "${key}" for scope "${scopeName}". `+
-          `Previous entry points to scope "${otherScope}"`
+          `Duplicate key "${key}" for scope "${scopeName}". ` +
+            `Previous entry points to scope "${otherScope}"`,
         );
       }
     }
@@ -175,7 +173,9 @@ for (let [name, language] of Object.entries(languages)) {
     if (extensionIndex.has(extension)) {
       const otherScope = extensionIndex.get(extension);
       if (otherScope !== scopeName) {
-        console.warn(`Duplicate extension "${extension}" for scope "${scopeName}".`);
+        console.warn(
+          `Duplicate extension "${extension}" for scope "${scopeName}".`,
+        );
         console.warn(`Scope will be "${otherScope}" instead.`);
       }
     } else {
@@ -185,7 +185,7 @@ for (let [name, language] of Object.entries(languages)) {
 
   // Sanity check
   if (typeof scopeName !== 'string') {
-    throw new Error(`Invalid scope name for "${name}": ${scopeName}`)
+    throw new Error(`Invalid scope name for "${name}": ${scopeName}`);
   }
 
   // Add slugified versions of the name to the index.
@@ -198,7 +198,7 @@ for (let [name, language] of Object.entries(languages)) {
   }
 
   // Add all of the aliases to the index.
-  if (language.hasOwnProperty("aliases")) {
+  if (language.hasOwnProperty('aliases')) {
     language.aliases.forEach(addToIndex);
   }
 
@@ -206,7 +206,7 @@ for (let [name, language] of Object.entries(languages)) {
   // there's no reconciliation. So if the key is already taken, just skip.
   // Need to think of a better way to do this, since more popular languages
   // could be overridden by less popular ones.
-  if (language.hasOwnProperty("extensions")) {
+  if (language.hasOwnProperty('extensions')) {
     language.extensions.forEach(addToExtensions);
   }
 }
@@ -228,7 +228,7 @@ const indexObj = [...index.keys()].sort().reduce((obj, key) => {
   return obj;
 }, {});
 
-fs.writeFileSync("./lib/aliases.json", JSON.stringify(indexObj, null, 2));
+fs.writeFileSync('./lib/aliases.json', JSON.stringify(indexObj, null, 2));
 
 function slugify(s) {
   return s.toLowerCase().replace(' ', '-');
