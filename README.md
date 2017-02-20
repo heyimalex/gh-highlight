@@ -9,7 +9,7 @@ This project is the synthesis of a couple of other projects:
 
 ## Usage
 
-The API was designed for highlighting fenced code blocks in markdown. For a list of names that are usable, check out [lanugages.yml]. All aliases are supported, as are all file extensions.
+The API was designed for highlighting fenced code blocks in markdown. For a list of names that are usable, check out [languages.yml]. All aliases are supported, as are all file extensions.
 
 ```js
 const highlight = require('gh-highlight');
