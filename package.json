@@ -1,0 +1,19 @@
+{
+  "name": "gh-highlight",
+  "version": "0.1.0",
+  "description": "Highlight code like github",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --trailingComma all --singleQuote --write \"scripts/**/*.js\" \"lib/**/*.js\""
+  },
+  "author": "Alex Guerra",
+  "license": "MIT",
+  "dependencies": {
+    "highlights": "^2.1.1"
+  },
+  "devDependencies": {
+    "js-yaml": "^3.8.1",
+    "prettier": "^0.18.0"
+  }
+}
