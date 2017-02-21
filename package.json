@@ -2,7 +2,7 @@
   "name": "gh-highlight",
   "version": "0.1.0",
   "description": "Highlight code like github",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "jest",
     "format": "prettier --single-quote --write \"scripts/**/*.js\" \"lib/**/*.js\""
