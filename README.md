@@ -9,7 +9,11 @@ This project is the synthesis of a couple of other projects:
 
 ## Usage
 
-The API was designed for highlighting fenced code blocks in markdown. For a list of names that are usable, check out [languages.yml]. All aliases are supported, as are all file extensions.
+The API was designed for highlighting fenced code blocks in markdown. For a list of names that are usable, check out [aliases.json]. The keys are the names you can use, the values are the scope name of the grammar that will be used to highlight.
+
+Two functions are exposed; `highlight` and `highlight.sync`. They both take the code-to-be-highlighted as the first paramater and the language-infront-of-the-code-block as the second. For the top level version, the last parameter needs to be a callback.
+
+If the language doesn't point to any grammar, no error will be reported.
 
 ```js
 const highlight = require('gh-highlight');
@@ -64,17 +68,19 @@ cd linguist
 
 ## Roadmap
 
-- [ ] Complete basic functionality.
-- [ ] Add basic tests.
+- [x] Complete basic functionality.
+- [x] Add basic tests.
+- [x] Finish packaging for npm and publish.
 - [ ] Load grammars lazily.
-- [ ] Add playground and visual examples.
 - [ ] Minify the grammars so that the package's download size is smaller. Should remove unnecessary keys, comments, disabled rules, unused rules, whitespace.
-- [ ] Finish packaging for npm and publish.
+- [ ] Compile code to support older node versions.
 - [ ] Make development process more user friendly, add more documentation.
 - [ ] Add pre-built common themes to this package.
+- [ ] Add playground and visual examples.
+- [ ] Continuous integration.
 - [ ] Consider including a tool for generating themes.
 - [ ] Consider convention-based extension method for adding grammars.
 
 [github/linguist]: https://github.com/github/linguist
 [atom/highlights]: https://github.com/atom/highlights
-[languages.yml]: https://github.com/github/linguist/blob/master/lib/linguist/languages.yml
+[aliases.json]: https://github.com/heyimalex/gh-highlight/blob/master/lib/aliases.json
