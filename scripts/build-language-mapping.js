@@ -157,7 +157,7 @@ for (let [name, language] of Object.entries(languages)) {
       if (otherScope !== scopeName) {
         throw new Error(
           `Duplicate key "${key}" for scope "${scopeName}". ` +
-            `Previous entry points to scope "${otherScope}"`,
+            `Previous entry points to scope "${otherScope}"`
         );
       }
     }
@@ -174,7 +174,7 @@ for (let [name, language] of Object.entries(languages)) {
       const otherScope = extensionIndex.get(extension);
       if (otherScope !== scopeName) {
         console.warn(
-          `Duplicate extension "${extension}" for scope "${scopeName}".`,
+          `Duplicate extension "${extension}" for scope "${scopeName}".`
         );
         console.warn(`Scope will be "${otherScope}" instead.`);
       }

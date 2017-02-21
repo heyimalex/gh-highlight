@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "format": "prettier --trailing-comma all --single-quote --write \"scripts/**/*.js\" \"lib/**/*.js\""
+    "format": "prettier --single-quote --write \"scripts/**/*.js\" \"lib/**/*.js\""
   },
   "author": "Alex Guerra",
   "license": "MIT",
