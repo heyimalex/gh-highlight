@@ -1,6 +1,8 @@
 # gh-highlight specific
 linguist/*
 .vagrant/*
+ubuntu-xenial-16.04-cloudimg-console.log
+Vagrantfile
 
 # Logs
 logs
