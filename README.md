@@ -67,6 +67,7 @@ cd linguist
 - [ ] Complete basic functionality.
 - [ ] Add basic tests.
 - [ ] Load grammars lazily.
+- [ ] Add playground and visual examples.
 - [ ] Minify the grammars so that the package's download size is smaller. Should remove unnecessary keys, comments, disabled rules, unused rules, whitespace.
 - [ ] Finish packaging for npm and publish.
 - [ ] Make development process more user friendly, add more documentation.
