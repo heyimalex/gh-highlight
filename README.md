@@ -58,12 +58,13 @@ For now I'm just going to defer to [atom/highlights], as the process for creatin
 Development is not very user friendly at this point, but this is the initial commit chill out. Here's roughly how to build linguist's grammars on a fresh xenial box.
 
 ```bash
-sudo apt install git subversion ruby ruby-bundler curl nodejs npm cmake pkg-config libicu-dev
+sudo apt-get update
+sudo apt-get install git subversion ruby ruby-dev ruby-bundler curl nodejs npm cmake pkg-config libicu-dev
 sudo ln -s "$(which nodejs)" /usr/bin/node
 git clone https://github.com/github/linguist.git
 cd linguist
-./scripts/bootstrap
-./scripts/convert-grammars
+./script/bootstrap
+./script/convert-grammars
 ```
 
 ## Roadmap
