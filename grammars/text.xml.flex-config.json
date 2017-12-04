@@ -1,8 +1,6 @@
 {
-  "comment": "The majority of items in the language repository are automatically generated and may not be complete.\n\t\t\t  Please post to the TM list if you spot anything thats missing.",
-  "firstLineMatch": "flex-config",
-  "keyEquivalent": "^~X",
   "name": "Flex Config",
+  "scopeName": "text.xml.flex-config",
   "patterns": [
     {
       "include": "#flex-config"
@@ -13,163 +11,158 @@
   ],
   "repository": {
     "accessible": {
-      "begin": "<accessible>",
+      "contentName": "meta.scope.flex-config.compiler.accessible",
+      "begin": "\u003caccessible\u003e",
+      "end": "\u003c/accessible\u003e",
+      "patterns": [
+        {
+          "include": "#etc"
+        }
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.accessible"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.accessible",
-      "end": "</accessible>",
+      }
+    },
+    "actionscript-file-encoding": {
+      "contentName": "meta.scope.flex-config.compiler.actionscript-file-encoding",
+      "begin": "\u003cactionscript-file-encoding\u003e",
+      "end": "\u003c/actionscript-file-encoding\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "actionscript-file-encoding": {
-      "begin": "<actionscript-file-encoding>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.actionscript-file-encoding"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.actionscript-file-encoding",
-      "end": "</actionscript-file-encoding>",
+      }
+    },
+    "advanced-anti-aliasing": {
+      "contentName": "meta.scope.flex-config.compiler.fonts.advanced-anti-aliasing",
+      "begin": "\u003cadvanced-anti-aliasing\u003e",
+      "end": "\u003c/advanced-anti-aliasing\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "advanced-anti-aliasing": {
-      "begin": "<advanced-anti-aliasing>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.fonts.advanced-anti-aliasing"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.fonts.advanced-anti-aliasing",
-      "end": "</advanced-anti-aliasing>",
+      }
+    },
+    "allow-source-path-overlap": {
+      "contentName": "meta.scope.flex-config.compiler.allow-source-path-overlap",
+      "begin": "\u003callow-source-path-overlap\u003e",
+      "end": "\u003c/allow-source-path-overlap\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "allow-source-path-overlap": {
-      "begin": "<allow-source-path-overlap>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.allow-source-path-overlap"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.allow-source-path-overlap",
-      "end": "</allow-source-path-overlap>",
+      }
+    },
+    "appendable": {
+      "name": "entity.other.attribute.xml.flex-config",
+      "match": " (append)=\"(true|false)\""
+    },
+    "as-three": {
+      "contentName": "meta.scope.flex-config.compiler.as3",
+      "begin": "\u003cas3\u003e",
+      "end": "\u003c/as3\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "appendable": {
-      "match": " (append)=\"(true|false)\"",
-      "name": "entity.other.attribute.xml.flex-config"
-    },
-    "as-three": {
-      "begin": "<as3>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.as3"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.as3",
-      "end": "</as3>",
+      }
+    },
+    "benchmark": {
+      "contentName": "meta.scope.flex-config.benchmark",
+      "begin": "\u003cbenchmark\u003e",
+      "end": "\u003c/benchmark\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "benchmark": {
-      "begin": "<benchmark>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.benchmark"
         }
-      },
-      "contentName": "meta.scope.flex-config.benchmark",
-      "end": "</benchmark>",
+      }
+    },
+    "bundle": {
+      "contentName": "meta.scope.flex-config.include-resource-bundles.bundle",
+      "begin": "\u003cbundle\u003e",
+      "end": "\u003c/bundle\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "bundle": {
-      "begin": "<bundle>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.include-resource-bundles.bundle"
         }
-      },
-      "contentName": "meta.scope.flex-config.include-resource-bundles.bundle",
-      "end": "</bundle>",
+      }
+    },
+    "classname": {
+      "contentName": "meta.scope.flex-config.frames.frame.classname",
+      "begin": "\u003cclassname\u003e",
+      "end": "\u003c/classname\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "classname": {
-      "begin": "<classname>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.frames.frame.classname"
         }
-      },
-      "contentName": "meta.scope.flex-config.frames.frame.classname",
-      "end": "</classname>",
-      "patterns": [
-        {
-          "include": "#etc"
-        }
-      ]
+      }
     },
     "comments": {
-      "begin": "<[!%]--",
+      "name": "comment.block.xml.flex-config",
+      "begin": "\u003c[!%]--",
+      "end": "--%?\u003e",
       "captures": {
         "0": {
           "name": "punctuation.definition.comment.xml.flex-config"
         }
-      },
-      "end": "--%?>",
-      "name": "comment.block.xml.flex-config"
+      }
     },
     "compatibility-version": {
-      "begin": "<compatibility-version>",
-      "captures": {
-        "0": {
-          "name": "meta.tag.xml.flex-config.compiler.mxml.compatibility-version"
-        }
-      },
       "contentName": "meta.scope.flex-config.compiler.mxml.compatibility-version",
-      "end": "</compatibility-version>",
+      "begin": "\u003ccompatibility-version\u003e",
+      "end": "\u003c/compatibility-version\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "compiler": {
-      "begin": "<compiler>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.compiler"
+          "name": "meta.tag.xml.flex-config.compiler.mxml.compatibility-version"
         }
-      },
+      }
+    },
+    "compiler": {
       "contentName": "meta.scope.flex-config.compiler",
-      "end": "</compiler>",
+      "begin": "\u003ccompiler\u003e",
+      "end": "\u003c/compiler\u003e",
       "patterns": [
         {
           "include": "#accessible"
@@ -381,137 +374,137 @@
         {
           "include": "#etc"
         }
-      ]
+      ],
+      "captures": {
+        "0": {
+          "name": "meta.tag.xml.flex-config.compiler"
+        }
+      }
     },
     "context-root": {
-      "begin": "<context-root>",
+      "contentName": "meta.scope.flex-config.compiler.context-root",
+      "begin": "\u003ccontext-root\u003e",
+      "end": "\u003c/context-root\u003e",
+      "patterns": [
+        {
+          "include": "#etc"
+        }
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.context-root"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.context-root",
-      "end": "</context-root>",
+      }
+    },
+    "contributor": {
+      "contentName": "meta.scope.flex-config.metadata.contributor",
+      "begin": "\u003ccontributor\u003e",
+      "end": "\u003c/contributor\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "contributor": {
-      "begin": "<contributor>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.metadata.contributor"
         }
-      },
-      "contentName": "meta.scope.flex-config.metadata.contributor",
-      "end": "</contributor>",
+      }
+    },
+    "creator": {
+      "contentName": "meta.scope.flex-config.metadata.creator",
+      "begin": "\u003ccreator\u003e",
+      "end": "\u003c/creator\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "creator": {
-      "begin": "<creator>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.metadata.creator"
         }
-      },
-      "contentName": "meta.scope.flex-config.metadata.creator",
-      "end": "</creator>",
+      }
+    },
+    "date": {
+      "contentName": "meta.scope.flex-config.metadata.date",
+      "begin": "\u003cdate\u003e",
+      "end": "\u003c/date\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "date": {
-      "begin": "<date>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.metadata.date"
         }
-      },
-      "contentName": "meta.scope.flex-config.metadata.date",
-      "end": "</date>",
+      }
+    },
+    "debug": {
+      "contentName": "meta.scope.flex-config.compiler.debug",
+      "begin": "\u003cdebug\u003e",
+      "end": "\u003c/debug\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "debug": {
-      "begin": "<debug>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.debug"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.debug",
-      "end": "</debug>",
+      }
+    },
+    "debug-password": {
+      "contentName": "meta.scope.flex-config.debug-password",
+      "begin": "\u003cdebug-password\u003e",
+      "end": "\u003c/debug-password\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "debug-password": {
-      "begin": "<debug-password>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.debug-password"
         }
-      },
-      "contentName": "meta.scope.flex-config.debug-password",
-      "end": "</debug-password>",
+      }
+    },
+    "default-background-color": {
+      "contentName": "meta.scope.flex-config.default-background-color",
+      "begin": "\u003cdefault-background-color\u003e",
+      "end": "\u003c/default-background-color\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "default-background-color": {
-      "begin": "<default-background-color>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.default-background-color"
         }
-      },
-      "contentName": "meta.scope.flex-config.default-background-color",
-      "end": "</default-background-color>",
+      }
+    },
+    "default-frame-rate": {
+      "contentName": "meta.scope.flex-config.default-frame-rate",
+      "begin": "\u003cdefault-frame-rate\u003e",
+      "end": "\u003c/default-frame-rate\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "default-frame-rate": {
-      "begin": "<default-frame-rate>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.default-frame-rate"
         }
-      },
-      "contentName": "meta.scope.flex-config.default-frame-rate",
-      "end": "</default-frame-rate>",
-      "patterns": [
-        {
-          "include": "#etc"
-        }
-      ]
+      }
     },
     "default-script-limits": {
-      "begin": "<default-script-limits>",
-      "captures": {
-        "0": {
-          "name": "meta.tag.xml.flex-config.default-script-limits"
-        }
-      },
       "contentName": "meta.scope.flex-config.default-script-limits",
-      "end": "</default-script-limits>",
+      "begin": "\u003cdefault-script-limits\u003e",
+      "end": "\u003c/default-script-limits\u003e",
       "patterns": [
         {
           "include": "#max-recursion-depth"
@@ -522,17 +515,17 @@
         {
           "include": "#etc"
         }
-      ]
-    },
-    "default-size": {
-      "begin": "<default-size>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.default-size"
+          "name": "meta.tag.xml.flex-config.default-script-limits"
         }
-      },
+      }
+    },
+    "default-size": {
       "contentName": "meta.scope.flex-config.default-size",
-      "end": "</default-size>",
+      "begin": "\u003cdefault-size\u003e",
+      "end": "\u003c/default-size\u003e",
       "patterns": [
         {
           "include": "#width"
@@ -543,17 +536,17 @@
         {
           "include": "#etc"
         }
-      ]
-    },
-    "defaults-css-files": {
-      "begin": "<defaults-css-files>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.compiler.defaults-css-files"
+          "name": "meta.tag.xml.flex-config.default-size"
         }
-      },
+      }
+    },
+    "defaults-css-files": {
       "contentName": "meta.scope.flex-config.compiler.defaults-css-files",
-      "end": "</defaults-css-files>",
+      "begin": "\u003cdefaults-css-files\u003e",
+      "end": "\u003c/defaults-css-files\u003e",
       "patterns": [
         {
           "include": "#filename"
@@ -561,32 +554,32 @@
         {
           "include": "#etc"
         }
-      ]
-    },
-    "defaults-css-url": {
-      "begin": "<defaults-css-url>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.compiler.defaults-css-url"
+          "name": "meta.tag.xml.flex-config.compiler.defaults-css-files"
         }
-      },
+      }
+    },
+    "defaults-css-url": {
       "contentName": "meta.scope.flex-config.compiler.defaults-css-url",
-      "end": "</defaults-css-url>",
+      "begin": "\u003cdefaults-css-url\u003e",
+      "end": "\u003c/defaults-css-url\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "define": {
-      "begin": "<define>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.compiler.define"
+          "name": "meta.tag.xml.flex-config.compiler.defaults-css-url"
         }
-      },
+      }
+    },
+    "define": {
       "contentName": "meta.scope.flex-config.compiler.define",
-      "end": "</define>",
+      "begin": "\u003cdefine\u003e",
+      "end": "\u003c/define\u003e",
       "patterns": [
         {
           "include": "#name"
@@ -597,57 +590,62 @@
         {
           "include": "#etc"
         }
-      ]
-    },
-    "description": {
-      "begin": "<description>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.metadata.description"
+          "name": "meta.tag.xml.flex-config.compiler.define"
         }
-      },
+      }
+    },
+    "description": {
       "contentName": "meta.scope.flex-config.metadata.description",
-      "end": "</description>",
+      "begin": "\u003cdescription\u003e",
+      "end": "\u003c/description\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
+      ],
+      "captures": {
+        "0": {
+          "name": "meta.tag.xml.flex-config.metadata.description"
+        }
+      }
     },
     "doublequotedString": {
+      "name": "string.quoted.double.xml.flex-config",
       "begin": "\"",
+      "end": "\"",
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.xml.flex-config"
         }
       },
-      "end": "\"",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.xml.flex-config"
         }
-      },
-      "name": "string.quoted.double.xml.flex-config"
+      }
     },
     "errors": {
-      "begin": "(</?)(?:([-_a-zA-Z0-9]+)((:)))?([-_a-zA-Z0-9:]+)",
-      "end": "(/?>)",
-      "name": "invalid.illegal.directive.flex-config"
+      "name": "invalid.illegal.directive.flex-config",
+      "begin": "(\u003c/?)(?:([-_a-zA-Z0-9]+)((:)))?([-_a-zA-Z0-9:]+)",
+      "end": "(/?\u003e)"
     },
     "es": {
-      "begin": "<es>",
-      "captures": {
-        "0": {
-          "name": "meta.tag.xml.flex-config.compiler.es"
-        }
-      },
       "contentName": "meta.scope.flex-config.compiler.es",
-      "end": "</es>",
+      "begin": "\u003ces\u003e",
+      "end": "\u003c/es\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
+      ],
+      "captures": {
+        "0": {
+          "name": "meta.tag.xml.flex-config.compiler.es"
+        }
+      }
     },
     "etc": {
       "patterns": [
@@ -666,14 +664,9 @@
       ]
     },
     "external-library-path": {
-      "begin": "<external-library-path( append=\"true\")?>",
-      "captures": {
-        "0": {
-          "name": "meta.tag.xml.flex-config.compiler.external-library-path"
-        }
-      },
       "contentName": "meta.scope.flex-config.compiler.external-library-path",
-      "end": "</external-library-path>",
+      "begin": "\u003cexternal-library-path( append=\"true\")?\u003e",
+      "end": "\u003c/external-library-path\u003e",
       "patterns": [
         {
           "include": "#path-element"
@@ -681,17 +674,17 @@
         {
           "include": "#etc"
         }
-      ]
-    },
-    "externs": {
-      "begin": "<externs( append=\"true\")?>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.externs"
+          "name": "meta.tag.xml.flex-config.compiler.external-library-path"
         }
-      },
+      }
+    },
+    "externs": {
       "contentName": "meta.scope.flex-config.externs",
-      "end": "</externs>",
+      "begin": "\u003cexterns( append=\"true\")?\u003e",
+      "end": "\u003c/externs\u003e",
       "patterns": [
         {
           "include": "#symbol"
@@ -699,47 +692,47 @@
         {
           "include": "#etc"
         }
-      ]
+      ],
+      "captures": {
+        "0": {
+          "name": "meta.tag.xml.flex-config.externs"
+        }
+      }
     },
     "filename": {
-      "begin": "<filename>",
+      "contentName": "meta.scope.flex-config.compiler.theme.filename",
+      "begin": "\u003cfilename\u003e",
+      "end": "\u003c/filename\u003e",
+      "patterns": [
+        {
+          "include": "#etc"
+        }
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.theme.filename"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.theme.filename",
-      "end": "</filename>",
+      }
+    },
+    "flash-type": {
+      "contentName": "meta.scope.flex-config.compiler.fonts.flash-type",
+      "begin": "\u003cflash-type\u003e",
+      "end": "\u003c/flash-type\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "flash-type": {
-      "begin": "<flash-type>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.fonts.flash-type"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.fonts.flash-type",
-      "end": "</flash-type>",
-      "patterns": [
-        {
-          "include": "#etc"
-        }
-      ]
+      }
     },
     "flex-config": {
-      "begin": "<flex-config>",
-      "captures": {
-        "0": {
-          "name": "meta.tag.xml.flex-config"
-        }
-      },
       "contentName": "meta.scope.flex-config",
-      "end": "</flex-config>",
+      "begin": "\u003cflex-config\u003e",
+      "end": "\u003c/flex-config\u003e",
       "patterns": [
         {
           "include": "#benchmark"
@@ -825,17 +818,17 @@
         {
           "include": "#etc"
         }
-      ]
-    },
-    "fonts": {
-      "begin": "<fonts>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.compiler.fonts"
+          "name": "meta.tag.xml.flex-config"
         }
-      },
+      }
+    },
+    "fonts": {
       "contentName": "meta.scope.flex-config.compiler.fonts",
-      "end": "</fonts>",
+      "begin": "\u003cfonts\u003e",
+      "end": "\u003c/fonts\u003e",
       "patterns": [
         {
           "include": "#advanced-anti-aliasing"
@@ -861,17 +854,17 @@
         {
           "include": "#etc"
         }
-      ]
-    },
-    "frame": {
-      "begin": "<frame>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.frames.frame"
+          "name": "meta.tag.xml.flex-config.compiler.fonts"
         }
-      },
+      }
+    },
+    "frame": {
       "contentName": "meta.scope.flex-config.frames.frame",
-      "end": "</frame>",
+      "begin": "\u003cframe\u003e",
+      "end": "\u003c/frame\u003e",
       "patterns": [
         {
           "include": "#label"
@@ -882,17 +875,17 @@
         {
           "include": "#etc"
         }
-      ]
-    },
-    "frames": {
-      "begin": "<frames>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.frames"
+          "name": "meta.tag.xml.flex-config.frames.frame"
         }
-      },
+      }
+    },
+    "frames": {
       "contentName": "meta.scope.flex-config.frames",
-      "end": "</frames>",
+      "begin": "\u003cframes\u003e",
+      "end": "\u003c/frames\u003e",
       "patterns": [
         {
           "include": "#frame"
@@ -900,47 +893,47 @@
         {
           "include": "#etc"
         }
-      ]
+      ],
+      "captures": {
+        "0": {
+          "name": "meta.tag.xml.flex-config.frames"
+        }
+      }
     },
     "headless-server": {
-      "begin": "<headless-server>",
+      "contentName": "meta.scope.flex-config.compiler.headless-server",
+      "begin": "\u003cheadless-server\u003e",
+      "end": "\u003c/headless-server\u003e",
+      "patterns": [
+        {
+          "include": "#etc"
+        }
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.headless-server"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.headless-server",
-      "end": "</headless-server>",
+      }
+    },
+    "height": {
+      "contentName": "meta.scope.flex-config.default-size.height",
+      "begin": "\u003cheight\u003e",
+      "end": "\u003c/height\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "height": {
-      "begin": "<height>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.default-size.height"
         }
-      },
-      "contentName": "meta.scope.flex-config.default-size.height",
-      "end": "</height>",
-      "patterns": [
-        {
-          "include": "#etc"
-        }
-      ]
+      }
     },
     "include-libraries": {
-      "begin": "<include-libraries( append=\"true\")?>",
-      "captures": {
-        "0": {
-          "name": "meta.tag.xml.flex-config.compiler.include-libraries"
-        }
-      },
       "contentName": "meta.scope.flex-config.compiler.include-libraries",
-      "end": "</include-libraries>",
+      "begin": "\u003cinclude-libraries( append=\"true\")?\u003e",
+      "end": "\u003c/include-libraries\u003e",
       "patterns": [
         {
           "include": "#library"
@@ -948,17 +941,17 @@
         {
           "include": "#etc"
         }
-      ]
-    },
-    "include-resource-bundles": {
-      "begin": "<include-resource-bundles( append=\"true\")?>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.include-resource-bundles"
+          "name": "meta.tag.xml.flex-config.compiler.include-libraries"
         }
-      },
+      }
+    },
+    "include-resource-bundles": {
       "contentName": "meta.scope.flex-config.include-resource-bundles",
-      "end": "</include-resource-bundles>",
+      "begin": "\u003cinclude-resource-bundles( append=\"true\")?\u003e",
+      "end": "\u003c/include-resource-bundles\u003e",
       "patterns": [
         {
           "include": "#bundle"
@@ -966,17 +959,17 @@
         {
           "include": "#etc"
         }
-      ]
-    },
-    "includes": {
-      "begin": "<includes( append=\"true\")?>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.includes"
+          "name": "meta.tag.xml.flex-config.include-resource-bundles"
         }
-      },
+      }
+    },
+    "includes": {
       "contentName": "meta.scope.flex-config.includes",
-      "end": "</includes>",
+      "begin": "\u003cincludes( append=\"true\")?\u003e",
+      "end": "\u003c/includes\u003e",
       "patterns": [
         {
           "include": "#symbol"
@@ -984,47 +977,47 @@
         {
           "include": "#etc"
         }
-      ]
+      ],
+      "captures": {
+        "0": {
+          "name": "meta.tag.xml.flex-config.includes"
+        }
+      }
     },
     "incremental": {
-      "begin": "<incremental>",
+      "contentName": "meta.scope.flex-config.compiler.incremental",
+      "begin": "\u003cincremental\u003e",
+      "end": "\u003c/incremental\u003e",
+      "patterns": [
+        {
+          "include": "#etc"
+        }
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.incremental"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.incremental",
-      "end": "</incremental>",
+      }
+    },
+    "keep-all-type-selectors": {
+      "contentName": "meta.scope.flex-config.compiler.keep-all-type-selectors",
+      "begin": "\u003ckeep-all-type-selectors\u003e",
+      "end": "\u003c/keep-all-type-selectors\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "keep-all-type-selectors": {
-      "begin": "<keep-all-type-selectors>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.keep-all-type-selectors"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.keep-all-type-selectors",
-      "end": "</keep-all-type-selectors>",
-      "patterns": [
-        {
-          "include": "#etc"
-        }
-      ]
+      }
     },
     "keep-as-three-metadata": {
-      "begin": "<keep-as3-metadata( append=\"true\")?>",
-      "captures": {
-        "0": {
-          "name": "meta.tag.xml.flex-config.compiler.keep-as3-metadata"
-        }
-      },
       "contentName": "meta.scope.flex-config.compiler.keep-as3-metadata",
-      "end": "</keep-as3-metadata>",
+      "begin": "\u003ckeep-as3-metadata( append=\"true\")?\u003e",
+      "end": "\u003c/keep-as3-metadata\u003e",
       "patterns": [
         {
           "include": "#name"
@@ -1032,77 +1025,77 @@
         {
           "include": "#etc"
         }
-      ]
+      ],
+      "captures": {
+        "0": {
+          "name": "meta.tag.xml.flex-config.compiler.keep-as3-metadata"
+        }
+      }
     },
     "keep-generated-actionscript": {
-      "begin": "<keep-generated-actionscript>",
+      "contentName": "meta.scope.flex-config.compiler.keep-generated-actionscript",
+      "begin": "\u003ckeep-generated-actionscript\u003e",
+      "end": "\u003c/keep-generated-actionscript\u003e",
+      "patterns": [
+        {
+          "include": "#etc"
+        }
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.keep-generated-actionscript"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.keep-generated-actionscript",
-      "end": "</keep-generated-actionscript>",
+      }
+    },
+    "label": {
+      "contentName": "meta.scope.flex-config.frames.frame.label",
+      "begin": "\u003clabel\u003e",
+      "end": "\u003c/label\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "label": {
-      "begin": "<label>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.frames.frame.label"
         }
-      },
-      "contentName": "meta.scope.flex-config.frames.frame.label",
-      "end": "</label>",
+      }
+    },
+    "lang": {
+      "contentName": "meta.scope.flex-config.metadata.localized-title.lang",
+      "begin": "\u003clang\u003e",
+      "end": "\u003c/lang\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "lang": {
-      "begin": "<lang>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.metadata.localized-title.lang"
         }
-      },
-      "contentName": "meta.scope.flex-config.metadata.localized-title.lang",
-      "end": "</lang>",
+      }
+    },
+    "language": {
+      "contentName": "meta.scope.flex-config.metadata.language",
+      "begin": "\u003clanguage\u003e",
+      "end": "\u003c/language\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "language": {
-      "begin": "<language>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.metadata.language"
         }
-      },
-      "contentName": "meta.scope.flex-config.metadata.language",
-      "end": "</language>",
-      "patterns": [
-        {
-          "include": "#etc"
-        }
-      ]
+      }
     },
     "language-range": {
-      "begin": "<language-range>",
-      "captures": {
-        "0": {
-          "name": "meta.tag.xml.flex-config.compiler.fonts.languages.language-range"
-        }
-      },
       "contentName": "meta.scope.flex-config.compiler.fonts.languages.language-range",
-      "end": "</language-range>",
+      "begin": "\u003clanguage-range\u003e",
+      "end": "\u003c/language-range\u003e",
       "patterns": [
         {
           "include": "#lang"
@@ -1113,17 +1106,17 @@
         {
           "include": "#etc"
         }
-      ]
-    },
-    "languages": {
-      "begin": "<languages>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.compiler.fonts.languages"
+          "name": "meta.tag.xml.flex-config.compiler.fonts.languages.language-range"
         }
-      },
+      }
+    },
+    "languages": {
       "contentName": "meta.scope.flex-config.compiler.fonts.languages",
-      "end": "</languages>",
+      "begin": "\u003clanguages\u003e",
+      "end": "\u003c/languages\u003e",
       "patterns": [
         {
           "include": "#language-range"
@@ -1131,32 +1124,32 @@
         {
           "include": "#etc"
         }
-      ]
-    },
-    "library": {
-      "begin": "<library>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.compiler.include-libraries.library"
+          "name": "meta.tag.xml.flex-config.compiler.fonts.languages"
         }
-      },
+      }
+    },
+    "library": {
       "contentName": "meta.scope.flex-config.compiler.include-libraries.library",
-      "end": "</library>",
+      "begin": "\u003clibrary\u003e",
+      "end": "\u003c/library\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "library-path": {
-      "begin": "<library-path( append=\"true\")?>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.compiler.library-path"
+          "name": "meta.tag.xml.flex-config.compiler.include-libraries.library"
         }
-      },
+      }
+    },
+    "library-path": {
       "contentName": "meta.scope.flex-config.compiler.library-path",
-      "end": "</library-path>",
+      "begin": "\u003clibrary-path( append=\"true\")?\u003e",
+      "end": "\u003c/library-path\u003e",
       "patterns": [
         {
           "include": "#path-element"
@@ -1164,77 +1157,77 @@
         {
           "include": "#etc"
         }
-      ]
+      ],
+      "captures": {
+        "0": {
+          "name": "meta.tag.xml.flex-config.compiler.library-path"
+        }
+      }
     },
     "link-report": {
-      "begin": "<link-report>",
+      "contentName": "meta.scope.flex-config.link-report",
+      "begin": "\u003clink-report\u003e",
+      "end": "\u003c/link-report\u003e",
+      "patterns": [
+        {
+          "include": "#etc"
+        }
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.link-report"
         }
-      },
-      "contentName": "meta.scope.flex-config.link-report",
-      "end": "</link-report>",
+      }
+    },
+    "load-config": {
+      "contentName": "meta.scope.flex-config.load-config",
+      "begin": "\u003cload-config\u003e",
+      "end": "\u003c/load-config\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "load-config": {
-      "begin": "<load-config>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.load-config"
         }
-      },
-      "contentName": "meta.scope.flex-config.load-config",
-      "end": "</load-config>",
+      }
+    },
+    "load-externs": {
+      "contentName": "meta.scope.flex-config.load-externs",
+      "begin": "\u003cload-externs\u003e",
+      "end": "\u003c/load-externs\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "load-externs": {
-      "begin": "<load-externs>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.load-externs"
         }
-      },
-      "contentName": "meta.scope.flex-config.load-externs",
-      "end": "</load-externs>",
+      }
+    },
+    "local-fonts-snapshot": {
+      "contentName": "meta.scope.flex-config.compiler.fonts.local-fonts-snapshot",
+      "begin": "\u003clocal-fonts-snapshot\u003e",
+      "end": "\u003c/local-fonts-snapshot\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "local-fonts-snapshot": {
-      "begin": "<local-fonts-snapshot>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.fonts.local-fonts-snapshot"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.fonts.local-fonts-snapshot",
-      "end": "</local-fonts-snapshot>",
-      "patterns": [
-        {
-          "include": "#etc"
-        }
-      ]
+      }
     },
     "locale": {
-      "begin": "<locale>",
-      "captures": {
-        "0": {
-          "name": "meta.tag.xml.flex-config.compiler.locale"
-        }
-      },
       "contentName": "meta.scope.flex-config.compiler.locale",
-      "end": "</locale>",
+      "begin": "\u003clocale\u003e",
+      "end": "\u003c/locale\u003e",
       "patterns": [
         {
           "include": "#locale-element"
@@ -1242,32 +1235,32 @@
         {
           "include": "#etc"
         }
-      ]
-    },
-    "locale-element": {
-      "begin": "<locale-element>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.compiler.locale.locale-element"
+          "name": "meta.tag.xml.flex-config.compiler.locale"
         }
-      },
+      }
+    },
+    "locale-element": {
       "contentName": "meta.scope.flex-config.compiler.locale.locale-element",
-      "end": "</locale-element>",
+      "begin": "\u003clocale-element\u003e",
+      "end": "\u003c/locale-element\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "localized-description": {
-      "begin": "<localized-description>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.metadata.localized-description"
+          "name": "meta.tag.xml.flex-config.compiler.locale.locale-element"
         }
-      },
+      }
+    },
+    "localized-description": {
       "contentName": "meta.scope.flex-config.metadata.localized-description",
-      "end": "</localized-description>",
+      "begin": "\u003clocalized-description\u003e",
+      "end": "\u003c/localized-description\u003e",
       "patterns": [
         {
           "include": "#text"
@@ -1278,17 +1271,17 @@
         {
           "include": "#etc"
         }
-      ]
-    },
-    "localized-title": {
-      "begin": "<localized-title>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.metadata.localized-title"
+          "name": "meta.tag.xml.flex-config.metadata.localized-description"
         }
-      },
+      }
+    },
+    "localized-title": {
       "contentName": "meta.scope.flex-config.metadata.localized-title",
-      "end": "</localized-title>",
+      "begin": "\u003clocalized-title\u003e",
+      "end": "\u003c/localized-title\u003e",
       "patterns": [
         {
           "include": "#title"
@@ -1299,32 +1292,32 @@
         {
           "include": "#etc"
         }
-      ]
-    },
-    "manager-class": {
-      "begin": "<manager-class>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.compiler.fonts.managers.manager-class"
+          "name": "meta.tag.xml.flex-config.metadata.localized-title"
         }
-      },
+      }
+    },
+    "manager-class": {
       "contentName": "meta.scope.flex-config.compiler.fonts.managers.manager-class",
-      "end": "</manager-class>",
+      "begin": "\u003cmanager-class\u003e",
+      "end": "\u003c/manager-class\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "managers": {
-      "begin": "<managers>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.compiler.fonts.managers"
+          "name": "meta.tag.xml.flex-config.compiler.fonts.managers.manager-class"
         }
-      },
+      }
+    },
+    "managers": {
       "contentName": "meta.scope.flex-config.compiler.fonts.managers",
-      "end": "</managers>",
+      "begin": "\u003cmanagers\u003e",
+      "end": "\u003c/managers\u003e",
       "patterns": [
         {
           "include": "#manager-class"
@@ -1332,92 +1325,92 @@
         {
           "include": "#etc"
         }
-      ]
+      ],
+      "captures": {
+        "0": {
+          "name": "meta.tag.xml.flex-config.compiler.fonts.managers"
+        }
+      }
     },
     "manifest": {
-      "begin": "<manifest>",
+      "contentName": "meta.scope.flex-config.compiler.namespaces.namespace.manifest",
+      "begin": "\u003cmanifest\u003e",
+      "end": "\u003c/manifest\u003e",
+      "patterns": [
+        {
+          "include": "#etc"
+        }
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.namespaces.namespace.manifest"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.namespaces.namespace.manifest",
-      "end": "</manifest>",
+      }
+    },
+    "max-cached-fonts": {
+      "contentName": "meta.scope.flex-config.compiler.fonts.max-cached-fonts",
+      "begin": "\u003cmax-cached-fonts\u003e",
+      "end": "\u003c/max-cached-fonts\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "max-cached-fonts": {
-      "begin": "<max-cached-fonts>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.fonts.max-cached-fonts"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.fonts.max-cached-fonts",
-      "end": "</max-cached-fonts>",
+      }
+    },
+    "max-execution-time": {
+      "contentName": "meta.scope.flex-config.default-script-limits.max-execution-time",
+      "begin": "\u003cmax-execution-time\u003e",
+      "end": "\u003c/max-execution-time\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "max-execution-time": {
-      "begin": "<max-execution-time>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.default-script-limits.max-execution-time"
         }
-      },
-      "contentName": "meta.scope.flex-config.default-script-limits.max-execution-time",
-      "end": "</max-execution-time>",
+      }
+    },
+    "max-glyphs-per-face": {
+      "contentName": "meta.scope.flex-config.compiler.fonts.max-glyphs-per-face",
+      "begin": "\u003cmax-glyphs-per-face\u003e",
+      "end": "\u003c/max-glyphs-per-face\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "max-glyphs-per-face": {
-      "begin": "<max-glyphs-per-face>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.fonts.max-glyphs-per-face"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.fonts.max-glyphs-per-face",
-      "end": "</max-glyphs-per-face>",
+      }
+    },
+    "max-recursion-depth": {
+      "contentName": "meta.scope.flex-config.default-script-limits.max-recursion-depth",
+      "begin": "\u003cmax-recursion-depth\u003e",
+      "end": "\u003c/max-recursion-depth\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "max-recursion-depth": {
-      "begin": "<max-recursion-depth>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.default-script-limits.max-recursion-depth"
         }
-      },
-      "contentName": "meta.scope.flex-config.default-script-limits.max-recursion-depth",
-      "end": "</max-recursion-depth>",
-      "patterns": [
-        {
-          "include": "#etc"
-        }
-      ]
+      }
     },
     "metadata": {
-      "begin": "<metadata>",
-      "captures": {
-        "0": {
-          "name": "meta.tag.xml.flex-config.metadata"
-        }
-      },
       "contentName": "meta.scope.flex-config.metadata",
-      "end": "</metadata>",
+      "begin": "\u003cmetadata\u003e",
+      "end": "\u003c/metadata\u003e",
       "patterns": [
         {
           "include": "#contributor"
@@ -1449,17 +1442,17 @@
         {
           "include": "#etc"
         }
-      ]
-    },
-    "mxml": {
-      "begin": "<mxml>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.compiler.mxml"
+          "name": "meta.tag.xml.flex-config.metadata"
         }
-      },
+      }
+    },
+    "mxml": {
       "contentName": "meta.scope.flex-config.compiler.mxml",
-      "end": "</mxml>",
+      "begin": "\u003cmxml\u003e",
+      "end": "\u003c/mxml\u003e",
       "patterns": [
         {
           "include": "#compatibility-version"
@@ -1467,32 +1460,32 @@
         {
           "include": "#etc"
         }
-      ]
-    },
-    "name": {
-      "begin": "<name>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.compiler.keep-as3-metadata.name"
+          "name": "meta.tag.xml.flex-config.compiler.mxml"
         }
-      },
+      }
+    },
+    "name": {
       "contentName": "meta.scope.flex-config.compiler.keep-as3-metadata.name",
-      "end": "</name>",
+      "begin": "\u003cname\u003e",
+      "end": "\u003c/name\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "namespace": {
-      "begin": "<namespace>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.compiler.namespaces.namespace"
+          "name": "meta.tag.xml.flex-config.compiler.keep-as3-metadata.name"
         }
-      },
+      }
+    },
+    "namespace": {
       "contentName": "meta.scope.flex-config.compiler.namespaces.namespace",
-      "end": "</namespace>",
+      "begin": "\u003cnamespace\u003e",
+      "end": "\u003c/namespace\u003e",
       "patterns": [
         {
           "include": "#uri"
@@ -1503,17 +1496,17 @@
         {
           "include": "#etc"
         }
-      ]
-    },
-    "namespaces": {
-      "begin": "<namespaces>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.compiler.namespaces"
+          "name": "meta.tag.xml.flex-config.compiler.namespaces.namespace"
         }
-      },
+      }
+    },
+    "namespaces": {
       "contentName": "meta.scope.flex-config.compiler.namespaces",
-      "end": "</namespaces>",
+      "begin": "\u003cnamespaces\u003e",
+      "end": "\u003c/namespaces\u003e",
       "patterns": [
         {
           "include": "#namespace"
@@ -1521,152 +1514,152 @@
         {
           "include": "#etc"
         }
-      ]
+      ],
+      "captures": {
+        "0": {
+          "name": "meta.tag.xml.flex-config.compiler.namespaces"
+        }
+      }
     },
     "optimize": {
-      "begin": "<optimize>",
+      "contentName": "meta.scope.flex-config.compiler.optimize",
+      "begin": "\u003coptimize\u003e",
+      "end": "\u003c/optimize\u003e",
+      "patterns": [
+        {
+          "include": "#etc"
+        }
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.optimize"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.optimize",
-      "end": "</optimize>",
+      }
+    },
+    "output": {
+      "contentName": "meta.scope.flex-config.output",
+      "begin": "\u003coutput\u003e",
+      "end": "\u003c/output\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "output": {
-      "begin": "<output>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.output"
         }
-      },
-      "contentName": "meta.scope.flex-config.output",
-      "end": "</output>",
+      }
+    },
+    "path-element": {
+      "contentName": "meta.scope.flex-config.runtime-shared-library-path.path-element",
+      "begin": "\u003cpath-element\u003e",
+      "end": "\u003c/path-element\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "path-element": {
-      "begin": "<path-element>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.runtime-shared-library-path.path-element"
         }
-      },
-      "contentName": "meta.scope.flex-config.runtime-shared-library-path.path-element",
-      "end": "</path-element>",
+      }
+    },
+    "policy-file-url": {
+      "contentName": "meta.scope.flex-config.runtime-shared-library-path.policy-file-url",
+      "begin": "\u003cpolicy-file-url\u003e",
+      "end": "\u003c/policy-file-url\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "policy-file-url": {
-      "begin": "<policy-file-url>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.runtime-shared-library-path.policy-file-url"
         }
-      },
-      "contentName": "meta.scope.flex-config.runtime-shared-library-path.policy-file-url",
-      "end": "</policy-file-url>",
+      }
+    },
+    "publisher": {
+      "contentName": "meta.scope.flex-config.metadata.publisher",
+      "begin": "\u003cpublisher\u003e",
+      "end": "\u003c/publisher\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "publisher": {
-      "begin": "<publisher>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.metadata.publisher"
         }
-      },
-      "contentName": "meta.scope.flex-config.metadata.publisher",
-      "end": "</publisher>",
+      }
+    },
+    "range": {
+      "contentName": "meta.scope.flex-config.compiler.fonts.languages.language-range.range",
+      "begin": "\u003crange\u003e",
+      "end": "\u003c/range\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "range": {
-      "begin": "<range>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.fonts.languages.language-range.range"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.fonts.languages.language-range.range",
-      "end": "</range>",
+      }
+    },
+    "raw-metadata": {
+      "contentName": "meta.scope.flex-config.raw-metadata",
+      "begin": "\u003craw-metadata\u003e",
+      "end": "\u003c/raw-metadata\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "raw-metadata": {
-      "begin": "<raw-metadata>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.raw-metadata"
         }
-      },
-      "contentName": "meta.scope.flex-config.raw-metadata",
-      "end": "</raw-metadata>",
+      }
+    },
+    "resource-bundle-list": {
+      "contentName": "meta.scope.flex-config.resource-bundle-list",
+      "begin": "\u003cresource-bundle-list\u003e",
+      "end": "\u003c/resource-bundle-list\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "resource-bundle-list": {
-      "begin": "<resource-bundle-list>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.resource-bundle-list"
         }
-      },
-      "contentName": "meta.scope.flex-config.resource-bundle-list",
-      "end": "</resource-bundle-list>",
+      }
+    },
+    "rsl-url": {
+      "contentName": "meta.scope.flex-config.runtime-shared-library-path.rsl-url",
+      "begin": "\u003crsl-url\u003e",
+      "end": "\u003c/rsl-url\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "rsl-url": {
-      "begin": "<rsl-url>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.runtime-shared-library-path.rsl-url"
         }
-      },
-      "contentName": "meta.scope.flex-config.runtime-shared-library-path.rsl-url",
-      "end": "</rsl-url>",
-      "patterns": [
-        {
-          "include": "#etc"
-        }
-      ]
+      }
     },
     "runtime-shared-libraries": {
-      "begin": "<runtime-shared-libraries( append=\"true\")?>",
-      "captures": {
-        "0": {
-          "name": "meta.tag.xml.flex-config.runtime-shared-libraries"
-        }
-      },
       "contentName": "meta.scope.flex-config.runtime-shared-libraries",
-      "end": "</runtime-shared-libraries>",
+      "begin": "\u003cruntime-shared-libraries( append=\"true\")?\u003e",
+      "end": "\u003c/runtime-shared-libraries\u003e",
       "patterns": [
         {
           "include": "#url"
@@ -1674,17 +1667,17 @@
         {
           "include": "#etc"
         }
-      ]
-    },
-    "runtime-shared-library-path": {
-      "begin": "<runtime-shared-library-path>",
+      ],
       "captures": {
         "0": {
-          "name": "meta.tag.xml.flex-config.runtime-shared-library-path"
+          "name": "meta.tag.xml.flex-config.runtime-shared-libraries"
         }
-      },
+      }
+    },
+    "runtime-shared-library-path": {
       "contentName": "meta.scope.flex-config.runtime-shared-library-path",
-      "end": "</runtime-shared-library-path>",
+      "begin": "\u003cruntime-shared-library-path\u003e",
+      "end": "\u003c/runtime-shared-library-path\u003e",
       "patterns": [
         {
           "include": "#path-element"
@@ -1698,112 +1691,112 @@
         {
           "include": "#etc"
         }
-      ]
+      ],
+      "captures": {
+        "0": {
+          "name": "meta.tag.xml.flex-config.runtime-shared-library-path"
+        }
+      }
     },
     "services": {
-      "begin": "<services>",
+      "contentName": "meta.scope.flex-config.compiler.services",
+      "begin": "\u003cservices\u003e",
+      "end": "\u003c/services\u003e",
+      "patterns": [
+        {
+          "include": "#etc"
+        }
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.services"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.services",
-      "end": "</services>",
+      }
+    },
+    "show-actionscript-warnings": {
+      "contentName": "meta.scope.flex-config.compiler.show-actionscript-warnings",
+      "begin": "\u003cshow-actionscript-warnings\u003e",
+      "end": "\u003c/show-actionscript-warnings\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "show-actionscript-warnings": {
-      "begin": "<show-actionscript-warnings>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.show-actionscript-warnings"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.show-actionscript-warnings",
-      "end": "</show-actionscript-warnings>",
+      }
+    },
+    "show-binding-warnings": {
+      "contentName": "meta.scope.flex-config.compiler.show-binding-warnings",
+      "begin": "\u003cshow-binding-warnings\u003e",
+      "end": "\u003c/show-binding-warnings\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "show-binding-warnings": {
-      "begin": "<show-binding-warnings>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.show-binding-warnings"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.show-binding-warnings",
-      "end": "</show-binding-warnings>",
+      }
+    },
+    "show-shadowed-device-font-warnings": {
+      "contentName": "meta.scope.flex-config.compiler.show-shadowed-device-font-warnings",
+      "begin": "\u003cshow-shadowed-device-font-warnings\u003e",
+      "end": "\u003c/show-shadowed-device-font-warnings\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "show-shadowed-device-font-warnings": {
-      "begin": "<show-shadowed-device-font-warnings>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.show-shadowed-device-font-warnings"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.show-shadowed-device-font-warnings",
-      "end": "</show-shadowed-device-font-warnings>",
+      }
+    },
+    "show-unused-type-selector-warnings": {
+      "contentName": "meta.scope.flex-config.compiler.show-unused-type-selector-warnings",
+      "begin": "\u003cshow-unused-type-selector-warnings\u003e",
+      "end": "\u003c/show-unused-type-selector-warnings\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "show-unused-type-selector-warnings": {
-      "begin": "<show-unused-type-selector-warnings>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.show-unused-type-selector-warnings"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.show-unused-type-selector-warnings",
-      "end": "</show-unused-type-selector-warnings>",
-      "patterns": [
-        {
-          "include": "#etc"
-        }
-      ]
+      }
     },
     "singlequotedString": {
+      "name": "string.quoted.single.flex-config",
       "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "include": "#javaProperties"
+        }
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.xml.flex-config"
         }
       },
-      "end": "'",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.xml.flex-config"
         }
-      },
-      "name": "string.quoted.single.flex-config",
-      "patterns": [
-        {
-          "include": "#javaProperties"
-        }
-      ]
+      }
     },
     "source-path": {
-      "begin": "<source-path( append=\"true\")?>",
-      "captures": {
-        "0": {
-          "name": "meta.tag.xml.flex-config.compiler.source-path"
-        }
-      },
       "contentName": "meta.scope.flex-config.compiler.source-path",
-      "end": "</source-path>",
+      "begin": "\u003csource-path( append=\"true\")?\u003e",
+      "end": "\u003c/source-path\u003e",
       "patterns": [
         {
           "include": "#path-element"
@@ -1811,107 +1804,107 @@
         {
           "include": "#etc"
         }
-      ]
+      ],
+      "captures": {
+        "0": {
+          "name": "meta.tag.xml.flex-config.compiler.source-path"
+        }
+      }
     },
     "static-link-runtime-shared-libraries": {
-      "begin": "<static-link-runtime-shared-libraries>",
+      "contentName": "meta.scope.flex-config.static-link-runtime-shared-libraries",
+      "begin": "\u003cstatic-link-runtime-shared-libraries\u003e",
+      "end": "\u003c/static-link-runtime-shared-libraries\u003e",
+      "patterns": [
+        {
+          "include": "#etc"
+        }
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.static-link-runtime-shared-libraries"
         }
-      },
-      "contentName": "meta.scope.flex-config.static-link-runtime-shared-libraries",
-      "end": "</static-link-runtime-shared-libraries>",
+      }
+    },
+    "static-rsls": {
+      "contentName": "meta.scope.flex-config.static-rsls",
+      "begin": "\u003cstatic-rsls\u003e",
+      "end": "\u003c/static-rsls\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "static-rsls": {
-      "begin": "<static-rsls>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.static-rsls"
         }
-      },
-      "contentName": "meta.scope.flex-config.static-rsls",
-      "end": "</static-rsls>",
+      }
+    },
+    "strict": {
+      "contentName": "meta.scope.flex-config.compiler.strict",
+      "begin": "\u003cstrict\u003e",
+      "end": "\u003c/strict\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "strict": {
-      "begin": "<strict>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.strict"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.strict",
-      "end": "</strict>",
+      }
+    },
+    "symbol": {
+      "contentName": "meta.scope.flex-config.includes.symbol",
+      "begin": "\u003csymbol\u003e",
+      "end": "\u003c/symbol\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "symbol": {
-      "begin": "<symbol>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.includes.symbol"
         }
-      },
-      "contentName": "meta.scope.flex-config.includes.symbol",
-      "end": "</symbol>",
+      }
+    },
+    "target-player": {
+      "contentName": "meta.scope.flex-config.target-player",
+      "begin": "\u003ctarget-player\u003e",
+      "end": "\u003c/target-player\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "target-player": {
-      "begin": "<target-player>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.target-player"
         }
-      },
-      "contentName": "meta.scope.flex-config.target-player",
-      "end": "</target-player>",
+      }
+    },
+    "text": {
+      "contentName": "meta.scope.flex-config.metadata.localized-description.text",
+      "begin": "\u003ctext\u003e",
+      "end": "\u003c/text\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "text": {
-      "begin": "<text>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.metadata.localized-description.text"
         }
-      },
-      "contentName": "meta.scope.flex-config.metadata.localized-description.text",
-      "end": "</text>",
-      "patterns": [
-        {
-          "include": "#etc"
-        }
-      ]
+      }
     },
     "theme": {
-      "begin": "<theme( append=\"true\")?>",
-      "captures": {
-        "0": {
-          "name": "meta.tag.xml.flex-config.compiler.theme"
-        }
-      },
       "contentName": "meta.scope.flex-config.compiler.theme",
-      "end": "</theme>",
+      "begin": "\u003ctheme( append=\"true\")?\u003e",
+      "end": "\u003c/theme\u003e",
       "patterns": [
         {
           "include": "#filename"
@@ -1919,714 +1912,717 @@
         {
           "include": "#etc"
         }
-      ]
+      ],
+      "captures": {
+        "0": {
+          "name": "meta.tag.xml.flex-config.compiler.theme"
+        }
+      }
     },
     "title": {
-      "begin": "<title>",
+      "contentName": "meta.scope.flex-config.metadata.title",
+      "begin": "\u003ctitle\u003e",
+      "end": "\u003c/title\u003e",
+      "patterns": [
+        {
+          "include": "#etc"
+        }
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.metadata.title"
         }
-      },
-      "contentName": "meta.scope.flex-config.metadata.title",
-      "end": "</title>",
+      }
+    },
+    "uri": {
+      "contentName": "meta.scope.flex-config.compiler.namespaces.namespace.uri",
+      "begin": "\u003curi\u003e",
+      "end": "\u003c/uri\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "uri": {
-      "begin": "<uri>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.namespaces.namespace.uri"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.namespaces.namespace.uri",
-      "end": "</uri>",
+      }
+    },
+    "url": {
+      "contentName": "meta.scope.flex-config.runtime-shared-libraries.url",
+      "begin": "\u003curl\u003e",
+      "end": "\u003c/url\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "url": {
-      "begin": "<url>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.runtime-shared-libraries.url"
         }
-      },
-      "contentName": "meta.scope.flex-config.runtime-shared-libraries.url",
-      "end": "</url>",
+      }
+    },
+    "use-network": {
+      "contentName": "meta.scope.flex-config.use-network",
+      "begin": "\u003cuse-network\u003e",
+      "end": "\u003c/use-network\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "use-network": {
-      "begin": "<use-network>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.use-network"
         }
-      },
-      "contentName": "meta.scope.flex-config.use-network",
-      "end": "</use-network>",
+      }
+    },
+    "use-resource-bundle-metadata": {
+      "contentName": "meta.scope.flex-config.compiler.use-resource-bundle-metadata",
+      "begin": "\u003cuse-resource-bundle-metadata\u003e",
+      "end": "\u003c/use-resource-bundle-metadata\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "use-resource-bundle-metadata": {
-      "begin": "<use-resource-bundle-metadata>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.use-resource-bundle-metadata"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.use-resource-bundle-metadata",
-      "end": "</use-resource-bundle-metadata>",
+      }
+    },
+    "value": {
+      "contentName": "meta.scope.flex-config.compiler.define.value",
+      "begin": "\u003cvalue\u003e",
+      "end": "\u003c/value\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "value": {
-      "begin": "<value>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.define.value"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.define.value",
-      "end": "</value>",
+      }
+    },
+    "verbose-stacktraces": {
+      "contentName": "meta.scope.flex-config.compiler.verbose-stacktraces",
+      "begin": "\u003cverbose-stacktraces\u003e",
+      "end": "\u003c/verbose-stacktraces\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "verbose-stacktraces": {
-      "begin": "<verbose-stacktraces>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.verbose-stacktraces"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.verbose-stacktraces",
-      "end": "</verbose-stacktraces>",
+      }
+    },
+    "verify-digests": {
+      "contentName": "meta.scope.flex-config.verify-digests",
+      "begin": "\u003cverify-digests\u003e",
+      "end": "\u003c/verify-digests\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "verify-digests": {
-      "begin": "<verify-digests>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.verify-digests"
         }
-      },
-      "contentName": "meta.scope.flex-config.verify-digests",
-      "end": "</verify-digests>",
+      }
+    },
+    "version": {
+      "contentName": "meta.scope.flex-config.version",
+      "begin": "\u003cversion\u003e",
+      "end": "\u003c/version\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "version": {
-      "begin": "<version>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.version"
         }
-      },
-      "contentName": "meta.scope.flex-config.version",
-      "end": "</version>",
+      }
+    },
+    "warn-array-tostring-changes": {
+      "contentName": "meta.scope.flex-config.compiler.warn-array-tostring-changes",
+      "begin": "\u003cwarn-array-tostring-changes\u003e",
+      "end": "\u003c/warn-array-tostring-changes\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-array-tostring-changes": {
-      "begin": "<warn-array-tostring-changes>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-array-tostring-changes"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-array-tostring-changes",
-      "end": "</warn-array-tostring-changes>",
+      }
+    },
+    "warn-assignment-within-conditional": {
+      "contentName": "meta.scope.flex-config.compiler.warn-assignment-within-conditional",
+      "begin": "\u003cwarn-assignment-within-conditional\u003e",
+      "end": "\u003c/warn-assignment-within-conditional\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-assignment-within-conditional": {
-      "begin": "<warn-assignment-within-conditional>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-assignment-within-conditional"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-assignment-within-conditional",
-      "end": "</warn-assignment-within-conditional>",
+      }
+    },
+    "warn-bad-array-cast": {
+      "contentName": "meta.scope.flex-config.compiler.warn-bad-array-cast",
+      "begin": "\u003cwarn-bad-array-cast\u003e",
+      "end": "\u003c/warn-bad-array-cast\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-bad-array-cast": {
-      "begin": "<warn-bad-array-cast>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-bad-array-cast"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-bad-array-cast",
-      "end": "</warn-bad-array-cast>",
+      }
+    },
+    "warn-bad-bool-assignment": {
+      "contentName": "meta.scope.flex-config.compiler.warn-bad-bool-assignment",
+      "begin": "\u003cwarn-bad-bool-assignment\u003e",
+      "end": "\u003c/warn-bad-bool-assignment\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-bad-bool-assignment": {
-      "begin": "<warn-bad-bool-assignment>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-bad-bool-assignment"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-bad-bool-assignment",
-      "end": "</warn-bad-bool-assignment>",
+      }
+    },
+    "warn-bad-date-cast": {
+      "contentName": "meta.scope.flex-config.compiler.warn-bad-date-cast",
+      "begin": "\u003cwarn-bad-date-cast\u003e",
+      "end": "\u003c/warn-bad-date-cast\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-bad-date-cast": {
-      "begin": "<warn-bad-date-cast>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-bad-date-cast"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-bad-date-cast",
-      "end": "</warn-bad-date-cast>",
+      }
+    },
+    "warn-bad-es-three-type-method": {
+      "contentName": "meta.scope.flex-config.compiler.warn-bad-es3-type-method",
+      "begin": "\u003cwarn-bad-es3-type-method\u003e",
+      "end": "\u003c/warn-bad-es3-type-method\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-bad-es-three-type-method": {
-      "begin": "<warn-bad-es3-type-method>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-bad-es3-type-method"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-bad-es3-type-method",
-      "end": "</warn-bad-es3-type-method>",
+      }
+    },
+    "warn-bad-es-three-type-prop": {
+      "contentName": "meta.scope.flex-config.compiler.warn-bad-es3-type-prop",
+      "begin": "\u003cwarn-bad-es3-type-prop\u003e",
+      "end": "\u003c/warn-bad-es3-type-prop\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-bad-es-three-type-prop": {
-      "begin": "<warn-bad-es3-type-prop>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-bad-es3-type-prop"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-bad-es3-type-prop",
-      "end": "</warn-bad-es3-type-prop>",
+      }
+    },
+    "warn-bad-nan-comparison": {
+      "contentName": "meta.scope.flex-config.compiler.warn-bad-nan-comparison",
+      "begin": "\u003cwarn-bad-nan-comparison\u003e",
+      "end": "\u003c/warn-bad-nan-comparison\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-bad-nan-comparison": {
-      "begin": "<warn-bad-nan-comparison>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-bad-nan-comparison"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-bad-nan-comparison",
-      "end": "</warn-bad-nan-comparison>",
+      }
+    },
+    "warn-bad-null-assignment": {
+      "contentName": "meta.scope.flex-config.compiler.warn-bad-null-assignment",
+      "begin": "\u003cwarn-bad-null-assignment\u003e",
+      "end": "\u003c/warn-bad-null-assignment\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-bad-null-assignment": {
-      "begin": "<warn-bad-null-assignment>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-bad-null-assignment"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-bad-null-assignment",
-      "end": "</warn-bad-null-assignment>",
+      }
+    },
+    "warn-bad-null-comparison": {
+      "contentName": "meta.scope.flex-config.compiler.warn-bad-null-comparison",
+      "begin": "\u003cwarn-bad-null-comparison\u003e",
+      "end": "\u003c/warn-bad-null-comparison\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-bad-null-comparison": {
-      "begin": "<warn-bad-null-comparison>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-bad-null-comparison"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-bad-null-comparison",
-      "end": "</warn-bad-null-comparison>",
+      }
+    },
+    "warn-bad-undefined-comparison": {
+      "contentName": "meta.scope.flex-config.compiler.warn-bad-undefined-comparison",
+      "begin": "\u003cwarn-bad-undefined-comparison\u003e",
+      "end": "\u003c/warn-bad-undefined-comparison\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-bad-undefined-comparison": {
-      "begin": "<warn-bad-undefined-comparison>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-bad-undefined-comparison"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-bad-undefined-comparison",
-      "end": "</warn-bad-undefined-comparison>",
+      }
+    },
+    "warn-boolean-constructor-with-no-args": {
+      "contentName": "meta.scope.flex-config.compiler.warn-boolean-constructor-with-no-args",
+      "begin": "\u003cwarn-boolean-constructor-with-no-args\u003e",
+      "end": "\u003c/warn-boolean-constructor-with-no-args\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-boolean-constructor-with-no-args": {
-      "begin": "<warn-boolean-constructor-with-no-args>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-boolean-constructor-with-no-args"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-boolean-constructor-with-no-args",
-      "end": "</warn-boolean-constructor-with-no-args>",
+      }
+    },
+    "warn-changes-in-resolve": {
+      "contentName": "meta.scope.flex-config.compiler.warn-changes-in-resolve",
+      "begin": "\u003cwarn-changes-in-resolve\u003e",
+      "end": "\u003c/warn-changes-in-resolve\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-changes-in-resolve": {
-      "begin": "<warn-changes-in-resolve>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-changes-in-resolve"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-changes-in-resolve",
-      "end": "</warn-changes-in-resolve>",
+      }
+    },
+    "warn-class-is-sealed": {
+      "contentName": "meta.scope.flex-config.compiler.warn-class-is-sealed",
+      "begin": "\u003cwarn-class-is-sealed\u003e",
+      "end": "\u003c/warn-class-is-sealed\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-class-is-sealed": {
-      "begin": "<warn-class-is-sealed>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-class-is-sealed"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-class-is-sealed",
-      "end": "</warn-class-is-sealed>",
+      }
+    },
+    "warn-const-not-initialized": {
+      "contentName": "meta.scope.flex-config.compiler.warn-const-not-initialized",
+      "begin": "\u003cwarn-const-not-initialized\u003e",
+      "end": "\u003c/warn-const-not-initialized\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-const-not-initialized": {
-      "begin": "<warn-const-not-initialized>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-const-not-initialized"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-const-not-initialized",
-      "end": "</warn-const-not-initialized>",
+      }
+    },
+    "warn-constructor-returns-value": {
+      "contentName": "meta.scope.flex-config.compiler.warn-constructor-returns-value",
+      "begin": "\u003cwarn-constructor-returns-value\u003e",
+      "end": "\u003c/warn-constructor-returns-value\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-constructor-returns-value": {
-      "begin": "<warn-constructor-returns-value>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-constructor-returns-value"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-constructor-returns-value",
-      "end": "</warn-constructor-returns-value>",
+      }
+    },
+    "warn-deprecated-event-handler-error": {
+      "contentName": "meta.scope.flex-config.compiler.warn-deprecated-event-handler-error",
+      "begin": "\u003cwarn-deprecated-event-handler-error\u003e",
+      "end": "\u003c/warn-deprecated-event-handler-error\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-deprecated-event-handler-error": {
-      "begin": "<warn-deprecated-event-handler-error>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-deprecated-event-handler-error"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-deprecated-event-handler-error",
-      "end": "</warn-deprecated-event-handler-error>",
+      }
+    },
+    "warn-deprecated-function-error": {
+      "contentName": "meta.scope.flex-config.compiler.warn-deprecated-function-error",
+      "begin": "\u003cwarn-deprecated-function-error\u003e",
+      "end": "\u003c/warn-deprecated-function-error\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-deprecated-function-error": {
-      "begin": "<warn-deprecated-function-error>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-deprecated-function-error"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-deprecated-function-error",
-      "end": "</warn-deprecated-function-error>",
+      }
+    },
+    "warn-deprecated-property-error": {
+      "contentName": "meta.scope.flex-config.compiler.warn-deprecated-property-error",
+      "begin": "\u003cwarn-deprecated-property-error\u003e",
+      "end": "\u003c/warn-deprecated-property-error\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-deprecated-property-error": {
-      "begin": "<warn-deprecated-property-error>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-deprecated-property-error"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-deprecated-property-error",
-      "end": "</warn-deprecated-property-error>",
+      }
+    },
+    "warn-duplicate-argument-names": {
+      "contentName": "meta.scope.flex-config.compiler.warn-duplicate-argument-names",
+      "begin": "\u003cwarn-duplicate-argument-names\u003e",
+      "end": "\u003c/warn-duplicate-argument-names\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-duplicate-argument-names": {
-      "begin": "<warn-duplicate-argument-names>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-duplicate-argument-names"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-duplicate-argument-names",
-      "end": "</warn-duplicate-argument-names>",
+      }
+    },
+    "warn-duplicate-variable-def": {
+      "contentName": "meta.scope.flex-config.compiler.warn-duplicate-variable-def",
+      "begin": "\u003cwarn-duplicate-variable-def\u003e",
+      "end": "\u003c/warn-duplicate-variable-def\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-duplicate-variable-def": {
-      "begin": "<warn-duplicate-variable-def>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-duplicate-variable-def"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-duplicate-variable-def",
-      "end": "</warn-duplicate-variable-def>",
+      }
+    },
+    "warn-for-var-in-changes": {
+      "contentName": "meta.scope.flex-config.compiler.warn-for-var-in-changes",
+      "begin": "\u003cwarn-for-var-in-changes\u003e",
+      "end": "\u003c/warn-for-var-in-changes\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-for-var-in-changes": {
-      "begin": "<warn-for-var-in-changes>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-for-var-in-changes"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-for-var-in-changes",
-      "end": "</warn-for-var-in-changes>",
+      }
+    },
+    "warn-import-hides-class": {
+      "contentName": "meta.scope.flex-config.compiler.warn-import-hides-class",
+      "begin": "\u003cwarn-import-hides-class\u003e",
+      "end": "\u003c/warn-import-hides-class\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-import-hides-class": {
-      "begin": "<warn-import-hides-class>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-import-hides-class"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-import-hides-class",
-      "end": "</warn-import-hides-class>",
+      }
+    },
+    "warn-instance-of-changes": {
+      "contentName": "meta.scope.flex-config.compiler.warn-instance-of-changes",
+      "begin": "\u003cwarn-instance-of-changes\u003e",
+      "end": "\u003c/warn-instance-of-changes\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-instance-of-changes": {
-      "begin": "<warn-instance-of-changes>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-instance-of-changes"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-instance-of-changes",
-      "end": "</warn-instance-of-changes>",
+      }
+    },
+    "warn-internal-error": {
+      "contentName": "meta.scope.flex-config.compiler.warn-internal-error",
+      "begin": "\u003cwarn-internal-error\u003e",
+      "end": "\u003c/warn-internal-error\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-internal-error": {
-      "begin": "<warn-internal-error>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-internal-error"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-internal-error",
-      "end": "</warn-internal-error>",
+      }
+    },
+    "warn-level-not-supported": {
+      "contentName": "meta.scope.flex-config.compiler.warn-level-not-supported",
+      "begin": "\u003cwarn-level-not-supported\u003e",
+      "end": "\u003c/warn-level-not-supported\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-level-not-supported": {
-      "begin": "<warn-level-not-supported>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-level-not-supported"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-level-not-supported",
-      "end": "</warn-level-not-supported>",
+      }
+    },
+    "warn-missing-namespace-decl": {
+      "contentName": "meta.scope.flex-config.compiler.warn-missing-namespace-decl",
+      "begin": "\u003cwarn-missing-namespace-decl\u003e",
+      "end": "\u003c/warn-missing-namespace-decl\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-missing-namespace-decl": {
-      "begin": "<warn-missing-namespace-decl>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-missing-namespace-decl"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-missing-namespace-decl",
-      "end": "</warn-missing-namespace-decl>",
+      }
+    },
+    "warn-negative-uint-literal": {
+      "contentName": "meta.scope.flex-config.compiler.warn-negative-uint-literal",
+      "begin": "\u003cwarn-negative-uint-literal\u003e",
+      "end": "\u003c/warn-negative-uint-literal\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-negative-uint-literal": {
-      "begin": "<warn-negative-uint-literal>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-negative-uint-literal"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-negative-uint-literal",
-      "end": "</warn-negative-uint-literal>",
+      }
+    },
+    "warn-no-constructor": {
+      "contentName": "meta.scope.flex-config.compiler.warn-no-constructor",
+      "begin": "\u003cwarn-no-constructor\u003e",
+      "end": "\u003c/warn-no-constructor\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-no-constructor": {
-      "begin": "<warn-no-constructor>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-no-constructor"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-no-constructor",
-      "end": "</warn-no-constructor>",
+      }
+    },
+    "warn-no-explicit-super-call-in-constructor": {
+      "contentName": "meta.scope.flex-config.compiler.warn-no-explicit-super-call-in-constructor",
+      "begin": "\u003cwarn-no-explicit-super-call-in-constructor\u003e",
+      "end": "\u003c/warn-no-explicit-super-call-in-constructor\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-no-explicit-super-call-in-constructor": {
-      "begin": "<warn-no-explicit-super-call-in-constructor>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-no-explicit-super-call-in-constructor"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-no-explicit-super-call-in-constructor",
-      "end": "</warn-no-explicit-super-call-in-constructor>",
+      }
+    },
+    "warn-no-type-decl": {
+      "contentName": "meta.scope.flex-config.compiler.warn-no-type-decl",
+      "begin": "\u003cwarn-no-type-decl\u003e",
+      "end": "\u003c/warn-no-type-decl\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-no-type-decl": {
-      "begin": "<warn-no-type-decl>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-no-type-decl"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-no-type-decl",
-      "end": "</warn-no-type-decl>",
+      }
+    },
+    "warn-number-from-string-changes": {
+      "contentName": "meta.scope.flex-config.compiler.warn-number-from-string-changes",
+      "begin": "\u003cwarn-number-from-string-changes\u003e",
+      "end": "\u003c/warn-number-from-string-changes\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-number-from-string-changes": {
-      "begin": "<warn-number-from-string-changes>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-number-from-string-changes"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-number-from-string-changes",
-      "end": "</warn-number-from-string-changes>",
+      }
+    },
+    "warn-scoping-change-in-this": {
+      "contentName": "meta.scope.flex-config.compiler.warn-scoping-change-in-this",
+      "begin": "\u003cwarn-scoping-change-in-this\u003e",
+      "end": "\u003c/warn-scoping-change-in-this\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-scoping-change-in-this": {
-      "begin": "<warn-scoping-change-in-this>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-scoping-change-in-this"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-scoping-change-in-this",
-      "end": "</warn-scoping-change-in-this>",
+      }
+    },
+    "warn-slow-text-field-addition": {
+      "contentName": "meta.scope.flex-config.compiler.warn-slow-text-field-addition",
+      "begin": "\u003cwarn-slow-text-field-addition\u003e",
+      "end": "\u003c/warn-slow-text-field-addition\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-slow-text-field-addition": {
-      "begin": "<warn-slow-text-field-addition>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-slow-text-field-addition"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-slow-text-field-addition",
-      "end": "</warn-slow-text-field-addition>",
+      }
+    },
+    "warn-unlikely-function-value": {
+      "contentName": "meta.scope.flex-config.compiler.warn-unlikely-function-value",
+      "begin": "\u003cwarn-unlikely-function-value\u003e",
+      "end": "\u003c/warn-unlikely-function-value\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-unlikely-function-value": {
-      "begin": "<warn-unlikely-function-value>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-unlikely-function-value"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-unlikely-function-value",
-      "end": "</warn-unlikely-function-value>",
+      }
+    },
+    "warn-xml-class-has-changed": {
+      "contentName": "meta.scope.flex-config.compiler.warn-xml-class-has-changed",
+      "begin": "\u003cwarn-xml-class-has-changed\u003e",
+      "end": "\u003c/warn-xml-class-has-changed\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warn-xml-class-has-changed": {
-      "begin": "<warn-xml-class-has-changed>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.compiler.warn-xml-class-has-changed"
         }
-      },
-      "contentName": "meta.scope.flex-config.compiler.warn-xml-class-has-changed",
-      "end": "</warn-xml-class-has-changed>",
+      }
+    },
+    "warnings": {
+      "contentName": "meta.scope.flex-config.warnings",
+      "begin": "\u003cwarnings\u003e",
+      "end": "\u003c/warnings\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "warnings": {
-      "begin": "<warnings>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.warnings"
         }
-      },
-      "contentName": "meta.scope.flex-config.warnings",
-      "end": "</warnings>",
+      }
+    },
+    "width": {
+      "contentName": "meta.scope.flex-config.default-size.width",
+      "begin": "\u003cwidth\u003e",
+      "end": "\u003c/width\u003e",
       "patterns": [
         {
           "include": "#etc"
         }
-      ]
-    },
-    "width": {
-      "begin": "<width>",
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.xml.flex-config.default-size.width"
         }
-      },
-      "contentName": "meta.scope.flex-config.default-size.width",
-      "end": "</width>",
-      "patterns": [
-        {
-          "include": "#etc"
-        }
-      ]
+      }
     }
-  },
-  "scopeName": "text.xml.flex-config",
-  "uuid": "5032E3E5-E59B-43B9-97EA-154331CB057A"
+  }
 }

@@ -1,135 +1,187 @@
 {
-  "fileTypes": [
-    "st"
-  ],
-  "foldingStartMarker": "\\[",
-  "foldingStopMarker": "^\\s*\\]|^\\s\\]",
-  "keyEquivalent": "^~S",
   "name": "Smalltalk",
+  "scopeName": "source.smalltalk",
   "patterns": [
     {
-      "match": "\\b(super|self|yourself|new|extend|class|Smalltalk)\\b",
-      "name": "keyword.language.smalltalk"
+      "name": "storage.type.$1.smalltalk",
+      "match": "\\b(class)\\b"
     },
     {
-      "match": ":=",
-      "name": "keyword.operator.assignment.smalltalk"
+      "name": "storage.modifier.$1.smalltalk",
+      "match": "\\b(extend|super|self)\\b"
     },
     {
-      "comment": "Parse the variable declaration like: |a b c|",
-      "match": "/^:\\w*\\s*\\|/",
-      "name": "constant.other.block.smalltalk"
+      "name": "keyword.control.$1.smalltalk",
+      "match": "\\b(yourself|new|Smalltalk)\\b"
     },
     {
+      "name": "keyword.operator.assignment.smalltalk",
+      "match": ":="
+    },
+    {
+      "name": "constant.other.block.smalltalk",
+      "match": "/^:\\w*\\s*\\|/"
+    },
+    {
+      "match": "(\\|)(\\s*\\w[\\w ]*)(\\|)",
       "captures": {
         "1": {
-          "name": "punctuation.separator.variable.smalltalk"
+          "name": "punctuation.definition.instance-variables.begin.smalltalk"
         },
         "2": {
-          "name": "support.type.variable.declaration.smalltalk"
+          "patterns": [
+            {
+              "name": "support.type.variable.declaration.smalltalk",
+              "match": "\\w+"
+            }
+          ]
         },
         "3": {
-          "name": "punctuation.separator.variable.smalltalk"
+          "name": "punctuation.definition.instance-variables.end.smalltalk"
         }
-      },
-      "match": "(\\|)+([\\w\\ ]+)+(\\|)"
+      }
     },
     {
+      "match": "\\[((\\s+|:\\w+)*)\\|",
       "captures": {
         "1": {
-          "name": "entity.name.function.block.smalltalk"
+          "patterns": [
+            {
+              "name": "entity.name.function.block.smalltalk",
+              "match": ":\\w+"
+            }
+          ]
         }
-      },
-      "comment": "Parse the blocks like: [ :a :b | ...... ]",
-      "match": "\\[\\s{0,}(:{1,}[\\w\\ ]+.*\\|)"
+      }
     },
     {
-      "match": "<(?!<|=)|>(?!<|=|>)|<=|>=|=|==|~=|~~|>>|\\^",
-      "name": "keyword.operator.comparison.smalltalk"
+      "name": "keyword.operator.comparison.smalltalk",
+      "match": "\u003c(?!\u003c|=)|\u003e(?!\u003c|=|\u003e)|\u003c=|\u003e=|=|==|~=|~~|\u003e\u003e|\\^"
     },
     {
-      "match": "(\\*|\\+|\\-|/|\\\\)",
-      "name": "keyword.operator.arithmetic.smalltalk"
+      "name": "keyword.operator.arithmetic.smalltalk",
+      "match": "(\\*|\\+|\\-|/|\\\\)"
     },
     {
-      "match": "(?<=[ \\t])!+|\\bnot\\b|&|\\band\\b|\\||\\bor\\b",
-      "name": "keyword.operator.logical.smalltalk"
+      "name": "keyword.operator.logical.smalltalk",
+      "match": "(?\u003c=[ \\t])!+|\\bnot\\b|\u0026|\\band\\b|\\||\\bor\\b"
     },
     {
-      "comment": "Fake reserved word -> main Smalltalk messages",
-      "match": "(?<!\\.)\\b(ensure|resume|retry|signal)\\b(?![?!])",
-      "name": "keyword.control.smalltalk"
+      "name": "keyword.control.smalltalk",
+      "match": "(?\u003c!\\.)\\b(ensure|resume|retry|signal)\\b(?![?!])"
     },
     {
-      "comment": "Fake conditionals. Smalltalk Methods.",
-      "match": "ifCurtailed:|ifTrue:|ifFalse:|whileFalse:|whileTrue:",
-      "name": "keyword.control.conditionals.smalltalk"
+      "name": "keyword.control.conditionals.smalltalk",
+      "match": "ifCurtailed:|ifTrue:|ifFalse:|whileFalse:|whileTrue:"
     },
     {
+      "name": "meta.class.smalltalk",
+      "match": "(\\w+)(\\s+(subclass:))\\s*(\\w*)",
       "captures": {
         "1": {
           "name": "entity.other.inherited-class.smalltalk"
         },
-        "2": {
+        "3": {
           "name": "keyword.control.smalltalk"
         },
         "4": {
           "name": "entity.name.type.class.smalltalk"
         }
-      },
-      "match": "(\\w*\\s)+(\\s*(subclass:))+\\s*(\\w*)",
-      "name": "meta.class.smalltalk"
+      }
     },
     {
+      "name": "comment.block.smalltalk",
       "begin": "\"",
       "end": "\"",
-      "name": "comment.language.smalltalk"
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.begin.smalltalk"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.end.smalltalk"
+        }
+      }
     },
     {
-      "match": "\\b(true|false|nil)\\b",
-      "name": "constant.language.smalltalk"
+      "name": "constant.language.boolean.smalltalk",
+      "match": "\\b(true|false)\\b"
     },
     {
+      "name": "constant.language.nil.smalltalk",
+      "match": "\\b(nil)\\b"
+    },
+    {
+      "name": "constant.other.messages.smalltalk",
+      "match": "(?\u003e[a-zA-Z_]\\w*(?\u003e[?!])?)(:)(?!:)",
       "captures": {
         "1": {
           "name": "punctuation.definition.constant.smalltalk"
         }
-      },
-      "comment": "messages/methods",
-      "match": "(?>[a-zA-Z_]\\w*(?>[?!])?)(:)(?!:)",
-      "name": "constant.other.messages.smalltalk"
+      }
     },
     {
-      "comment": "symbols",
-      "match": "#[a-zA-Z_][a-zA-Z0-9_:]*",
-      "name": "constant.other.symbol.smalltalk"
+      "name": "constant.other.symbol.smalltalk",
+      "match": "(#)[a-zA-Z_][a-zA-Z0-9_:]*",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.constant.smalltalk"
+        }
+      }
     },
     {
+      "name": "constant.other.bytearray.smalltalk",
       "begin": "#\\[",
-      "comment": "ByteArray Constructor. Unfortunely this dont validate only numbers. TODO.",
       "end": "\\]",
-      "name": "constant.other.bytearray.smalltalk"
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.constant.begin.smalltalk"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.constant.end.smalltalk"
+        }
+      }
     },
     {
+      "name": "constant.other.array.smalltalk",
       "begin": "#\\(",
-      "comment": "Array Constructor",
       "end": "\\)",
-      "name": "constant.other.array.smalltalk"
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.constant.begin.smalltalk"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.constant.end.smalltalk"
+        }
+      }
     },
     {
+      "name": "string.quoted.single.smalltalk",
       "begin": "'",
       "end": "'",
-      "name": "string.smalltalk"
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.smalltalk"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.smalltalk"
+        }
+      }
     },
     {
-      "match": "\\b(0[xX]\\h(?>_?\\h)*|\\d(?>_?\\d)*(\\.(?![^[:space:][:digit:]])(?>_?\\d)*)?([eE][-+]?\\d(?>_?\\d)*)?|0[bB][01]+)\\b",
-      "name": "constant.numeric.smalltalk"
+      "name": "constant.numeric.smalltalk",
+      "match": "\\b(0[xX][0-9A-Fa-f](?\u003e_?[0-9A-Fa-f])*|\\d(?\u003e_?\\d)*(\\.(?![^[:space:][:digit:]])(?\u003e_?\\d)*)?([eE][-+]?\\d(?\u003e_?\\d)*)?|0[bB][01]+)\\b"
     },
     {
-      "match": "\\b[A-Z]\\w*\\b",
-      "name": "variable.other.constant.smalltalk"
+      "name": "variable.other.constant.smalltalk",
+      "match": "\\b[A-Z]\\w*\\b"
     }
-  ],
-  "scopeName": "source.smalltalk",
-  "uuid": "1ED64A34-BCB1-44E1-A0FE-84053003E232"
+  ]
 }

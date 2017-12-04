@@ -1,62 +1,58 @@
 {
-  "fileTypes": [
-    "pogo"
-  ],
-  "foldingStartMarker": "\\{\\s*$",
-  "foldingStopMarker": "^\\s*\\}",
   "name": "PogoScript",
+  "scopeName": "source.pogoscript",
   "patterns": [
     {
-      "match": "[(){}@]",
-      "name": "variable.language.pogoscript"
+      "name": "variable.language.pogoscript",
+      "match": "[(){}@]"
     },
     {
-      "match": "\\b[0-9]+\\b",
-      "name": "constant.numeric.pogoscript"
+      "name": "constant.numeric.pogoscript",
+      "match": "\\b[0-9]+\\b"
     },
     {
-      "match": "//[^\\n]*",
-      "name": "comment.line.double-slash.pogoscript"
+      "name": "comment.line.double-slash.pogoscript",
+      "match": "//[^\\n]*"
     },
     {
+      "name": "comment.block.pogoscript",
       "begin": "/\\*",
-      "end": "\\*/",
-      "name": "comment.block.pogoscript"
+      "end": "\\*/"
     },
     {
-      "match": "=>|[.:?!;,=]|self",
-      "name": "keyword"
+      "name": "keyword",
+      "match": "=\u003e|[.:?!;,=]|self"
     },
     {
-      "match": "\\t",
-      "name": "invalid"
+      "name": "invalid",
+      "match": "\\t"
     },
     {
+      "name": "string.quoted.single.pogoscript",
       "begin": "'",
       "end": "'",
-      "name": "string.quoted.single.pogoscript",
       "patterns": [
         {
-          "match": "\\\\.",
-          "name": "constant.character.escape.pogoscript"
+          "name": "constant.character.escape.pogoscript",
+          "match": "\\\\."
         }
       ]
     },
     {
+      "name": "string.regexp.pogoscript",
       "begin": "r/",
       "end": "/[gim]?",
-      "name": "string.regexp.pogoscript",
       "patterns": [
         {
-          "match": "\\\\.",
-          "name": "constant.character.escape.pogoscript"
+          "name": "constant.character.escape.pogoscript",
+          "match": "\\\\."
         }
       ]
     },
     {
+      "name": "string.quoted.double.pogoscript",
       "begin": "\"",
       "end": "\"",
-      "name": "string.quoted.double.pogoscript",
       "patterns": [
         {
           "include": "#interpolated"
@@ -68,9 +64,9 @@
     "interpolated": {
       "patterns": [
         {
+          "name": "source.pogoscript",
           "begin": "#\\(",
           "end": "\\)",
-          "name": "source.pogoscript",
           "patterns": [
             {
               "include": "source.pogoscript"
@@ -79,7 +75,5 @@
         }
       ]
     }
-  },
-  "scopeName": "source.pogoscript",
-  "uuid": "680491D0-A323-4442-8262-AB07B93CC386"
+  }
 }

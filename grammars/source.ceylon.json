@@ -1,77 +1,93 @@
 {
-  "fileTypes": [
-    "ceylon"
-  ],
-  "foldingStartMarker": "(\\{\\s*(//.*)?$|^\\s*// \\{\\{\\{)",
-  "foldingStopMarker": "^\\s*(\\}|// \\}\\}\\}$)",
-  "keyEquivalent": "^~C",
   "name": "Ceylon",
+  "scopeName": "source.ceylon",
   "patterns": [
     {
-      "begin": "/\\*",
-      "end": "\\*/",
-      "name": "comment.multiline.ceylon"
+      "include": "#comments"
     },
     {
-      "match": "//.*$",
-      "name": "comment.singleline.ceylon"
+      "name": "comment.singleline.ceylon",
+      "match": "//.*$"
     },
     {
-      "match": "^#!/.*$",
-      "name": "comment.shebang.ceylon"
+      "name": "comment.shebang.ceylon",
+      "match": "^#!/.*$"
     },
     {
-      "begin": "^\\s*(import)",
-      "end": "\\{",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.control.ceylon"
+      "name": "keyword.control.ceylon",
+      "match": "\\b(assembly|module|package|import|alias|class|interface|object|given|value|assign|void|function|new|of|extends|satisfies|adapts|abstracts|in|out|return|break|continue|throw|assert|dynamic|if|else|switch|case|for|while|try|catch|finally|then|let|this|outer|super|is|exists|nonempty)\\b"
+    },
+    {
+      "name": "keyword.other.ceylon",
+      "match": "\\b(doc|by|license|see|throws|tagged|shared|abstract|formal|default|actual|variable|late|native|deprecated|final|sealed|annotation|suppressWarnings|static)\\b"
+    },
+    {
+      "name": "entity.name.class.ceylon",
+      "match": "([A-Z][a-zA-Z0-9_]*|\\\\I[a-zA-Z0-9_]+)"
+    },
+    {
+      "name": "variable.other.ceylon",
+      "match": "([a-z][a-zA-Z0-9_]*|\\\\i[a-zA-Z0-9_]+)"
+    },
+    {
+      "name": "string.verbatim.ceylon",
+      "begin": "\"\"\"",
+      "end": "\"\"\""
+    },
+    {
+      "name": "string.ceylon",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "name": "constant.character.escape.ceylon",
+          "match": "\\\\."
         }
-      },
-      "endCaptures": {
-        "0": {
-          "name": "pontuation.import.ceylon"
+      ]
+    },
+    {
+      "name": "string.template.head.ceylon",
+      "begin": "\"",
+      "end": "\"|(``)",
+      "patterns": [
+        {
+          "name": "constant.character.escape.ceylon",
+          "match": "\\\\."
         }
-      },
-      "contentName": "variable.parameter.package.ceylon"
+      ]
     },
     {
-      "match": "\\b(assembly|module|package|import|alias|class|interface|object|given|value|assign|void|function|new|of|extends|satisfies|adapts|abstracts|in|out|return|break|continue|throw|assert|dynamic|if|else|switch|case|for|while|try|catch|finally|then|let|this|outer|super|is|exists|nonempty)\\b",
-      "name": "keyword.control.ceylon"
+      "name": "string.template.midOrtail.ceylon",
+      "begin": "``",
+      "end": "\"|``"
     },
     {
-      "match": "\\b(doc|by|license|see|throws|tagged|shared|abstract|formal|default|actual|variable|late|native|deprecated|final|sealed|annotation|suppressWarnings)\\b",
-      "name": "keyword.other.ceylon"
+      "name": "constant.numeric.binary.ceylon",
+      "match": "\\$(([01]+(_[01]+)+)|[01]+)"
     },
     {
-      "match": "([A-Z][a-zA-Z0-9_]*|\\\\I[a-zA-Z0-9_]+)",
-      "name": "entity.name.class.ceylon"
+      "name": "constant.numeric.hexa.ceylon",
+      "match": "#(([0-9ABCDEF]+(_[0-9ABCDEF]+)+)|[0-9ABCDEF]+)"
     },
     {
-      "match": "([a-z][a-zA-Z0-9_]*|\\\\i[a-zA-Z0-9_]+)",
-      "name": "variable.other.ceylon"
+      "name": "constant.numeric.floating.ceylon",
+      "match": "-?(([0-9]+(_[0-9]+)+)|[0-9]+)\\.(([0-9]+(_[0-9]+)+)|[0-9]+)(([eE]-?(([0-9]+(_[0-9]+)+)|[0-9]+))|[kmgtpKMGTP])?"
     },
     {
-      "begin": "(\"\"\"|\"|')",
-      "end": "\\1",
-      "name": "string.ceylon"
-    },
-    {
-      "match": "\\$(([01]+(_[01]+)+)|[01]+)",
-      "name": "constant.numeric.binary.ceylon"
-    },
-    {
-      "match": "#(([0-9ABCDEF]+(_[0-9ABCDEF]+)+)|[0-9ABCDEF]+)",
-      "name": "constant.numeric.hexa.ceylon"
-    },
-    {
-      "match": "-?(([0-9]+(_[0-9]+)+)|[0-9]+)\\.(([0-9]+(_[0-9]+)+)|[0-9]+)(([eE]-?(([0-9]+(_[0-9]+)+)|[0-9]+))|[kmgtpKMGTP])?",
-      "name": "constant.numeric.floating.ceylon"
-    },
-    {
-      "match": "-?(([0-9]+(_[0-9]+)+)|[0-9]+)[kmgtpKMGTP]?",
-      "name": "constant.numeric.decimal.ceylon"
+      "name": "constant.numeric.decimal.ceylon",
+      "match": "-?(([0-9]+(_[0-9]+)+)|[0-9]+)[kmgtpKMGTP]?"
     }
   ],
-  "scopeName": "source.ceylon"
+  "repository": {
+    "comments": {
+      "name": "comment.multiline.ceylon",
+      "begin": "/\\*",
+      "end": "\\*/",
+      "patterns": [
+        {
+          "include": "#comments"
+        }
+      ]
+    }
+  }
 }

@@ -1,17 +1,10 @@
 {
-  "fileTypes": [
-    "changes",
-    "Changelog",
-    "CHANGES",
-    "CHANGELOG"
-  ],
-  "foldingStartMarker": "(:?^[-]{30}|[ \\t]*\\*",
-  "foldingStopMarker": "(^$)",
   "name": "ChangeLogs",
+  "scopeName": "source.changelogs.rpm-spec",
   "patterns": [
     {
-      "match": "^[*+=-]{30}[+==-]*",
-      "name": "entity.section.name.changelogs"
+      "name": "entity.section.name.changelogs",
+      "match": "^[*+=-]{30}[+==-]*"
     },
     {
       "match": "^[ \\t]*- (.+)",
@@ -22,7 +15,7 @@
       }
     },
     {
-      "match": "^(?:\\* )?([a-zA-Z]{3} [a-zA-Z]{3}[ ]+\\d+ \\d+:\\d+:\\d+ [A-Z]+ \\d{4}) - (.*) (<.*@.*>) ([#_a-zA-Z0-9.-]+)$",
+      "match": "^(?:\\* )?([a-zA-Z]{3} [a-zA-Z]{3}[ ]+\\d+ \\d+:\\d+:\\d+ [A-Z]+ \\d{4}) - (.*) (\u003c.*@.*\u003e) ([#_a-zA-Z0-9.-]+)$",
       "captures": {
         "1": {
           "name": "constant.changelogs"
@@ -39,7 +32,7 @@
       }
     },
     {
-      "match": "^(?:\\* )?([a-zA-Z]{3} [a-zA-Z]{3}[ ]+\\d+(?: \\d+:\\d+:\\d+ [A-Z]+)? \\d{4}) (.*) (<.+@.+>)(?: -)? ([#a-zA-Z0-9.-]+)?$",
+      "match": "^(?:\\* )?([a-zA-Z]{3} [a-zA-Z]{3}[ ]+\\d+(?: \\d+:\\d+:\\d+ [A-Z]+)? \\d{4}) (.*) (\u003c.+@.+\u003e)(?: -)? ([#a-zA-Z0-9.-]+)?$",
       "captures": {
         "1": {
           "name": "constant.changelogs"
@@ -56,7 +49,7 @@
       }
     },
     {
-      "match": "^(?:\\* )?([a-zA-Z]{3} [a-zA-Z]{3}[ ]+\\d+(?: \\d+:\\d+:\\d+ [A-Z]+)? \\d{4}) (.*) (<.*@.*>)(?: -) (.*)$",
+      "match": "^(?:\\* )?([a-zA-Z]{3} [a-zA-Z]{3}[ ]+\\d+(?: \\d+:\\d+:\\d+ [A-Z]+)? \\d{4}) (.*) (\u003c.*@.*\u003e)(?: -) (.*)$",
       "captures": {
         "1": {
           "name": "constant.changelogs"
@@ -94,6 +87,5 @@
         }
       }
     }
-  ],
-  "scopeName": "source.changelogs.rpm-spec"
+  ]
 }

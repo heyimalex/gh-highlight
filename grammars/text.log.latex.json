@@ -1,86 +1,84 @@
 {
-  "firstLineMatch": "This is (pdf|pdfe)?TeXk?, Version ",
   "name": "LaTeX Log",
+  "scopeName": "text.log.latex",
   "patterns": [
     {
-      "match": ".*Warning:",
-      "name": "invalid.deprecated"
+      "name": "invalid.deprecated",
+      "match": ".*Warning:"
     },
     {
-      "match": "[^:]*:\\d*:.*",
-      "name": "invalid.deprecated"
+      "name": "invalid.deprecated",
+      "match": "[^:]*:\\d*:.*"
     },
     {
-      "match": ".*Error|^!.*",
-      "name": "invalid.illegal"
+      "name": "invalid.illegal",
+      "match": ".*Error|^!.*"
     },
     {
-      "match": ".*\\.sty",
-      "name": "entity.name.function"
+      "name": "entity.name.function",
+      "match": ".*\\.sty"
     },
     {
-      "match": ".*\\.cls",
-      "name": "entity.name.type.class"
+      "name": "entity.name.type.class",
+      "match": ".*\\.cls"
     },
     {
-      "match": ".*\\.cfg",
-      "name": "entity.name.tag.configuration"
+      "name": "entity.name.tag.configuration",
+      "match": ".*\\.cfg"
     },
     {
-      "match": ".*\\.def",
-      "name": "entity.name.tag.definition"
+      "name": "entity.name.tag.definition",
+      "match": ".*\\.def"
     },
     {
-      "match": ".*Info.*",
-      "name": "comment.block.documentation"
+      "name": "comment.block.documentation",
+      "match": ".*Info.*"
     },
     {
-      "match": ".*FiXme:",
-      "name": "meta.log.latex.fixme"
+      "name": "meta.log.latex.fixme",
+      "match": ".*FiXme:"
     },
     {
+      "name": "meta.log.latex.hyphenation",
       "begin": "(Overfull|Underfull)",
+      "end": "(\\[\\]\\n)",
+      "patterns": [
+        {
+          "name": "variable.parameter.hyphenation.latex2",
+          "match": "[0-9]+\\-\\-[0-9]+"
+        }
+      ],
       "captures": {
         "1": {
           "name": "keyword.control.hyphenation.latex"
         }
-      },
-      "end": "(\\[\\]\\n)",
-      "name": "meta.log.latex.hyphenation",
-      "patterns": [
-        {
-          "match": "[0-9]+\\-\\-[0-9]+",
-          "name": "variable.parameter.hyphenation.latex2"
-        }
-      ]
+      }
     },
     {
-      "begin": "(<)",
+      "name": "string.unquoted.other.filename.log.latex",
+      "begin": "(\u003c)",
+      "end": "(\u003e)",
+      "patterns": [
+        {
+          "name": "support.function.with-arg.latex",
+          "match": "(.*/.*\\.pdf)",
+          "captures": {
+            "1": {
+              "name": "entity.name.function.filename.latex"
+            }
+          }
+        }
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.log.latex"
         }
       },
-      "end": "(>)",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.log.latex"
         }
-      },
-      "name": "string.unquoted.other.filename.log.latex",
-      "patterns": [
-        {
-          "captures": {
-            "1": {
-              "name": "entity.name.function.filename.latex"
-            }
-          },
-          "match": "(.*/.*\\.pdf)",
-          "name": "support.function.with-arg.latex"
-        }
-      ]
+      }
     }
-  ],
-  "scopeName": "text.log.latex",
-  "uuid": "F68ACE95-7DB3-4DFB-AA8A-89988B116B5C"
+  ]
 }

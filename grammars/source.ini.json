@@ -1,54 +1,51 @@
 {
-  "fileTypes": [
-    "ini",
-    "conf"
-  ],
-  "keyEquivalent": "^~I",
   "name": "Ini",
+  "scopeName": "source.ini",
   "patterns": [
     {
       "begin": "(^[ \\t]+)?(?=#)",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.whitespace.comment.leading.ini"
-        }
-      },
       "end": "(?!\\G)",
       "patterns": [
         {
+          "name": "comment.line.number-sign.ini",
           "begin": "#",
+          "end": "\\n",
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.comment.ini"
             }
-          },
-          "end": "\\n",
-          "name": "comment.line.number-sign.ini"
+          }
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.whitespace.comment.leading.ini"
+        }
+      }
     },
     {
       "begin": "(^[ \\t]+)?(?=;)",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.whitespace.comment.leading.ini"
-        }
-      },
       "end": "(?!\\G)",
       "patterns": [
         {
+          "name": "comment.line.semicolon.ini",
           "begin": ";",
+          "end": "\\n",
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.comment.ini"
             }
-          },
-          "end": "\\n",
-          "name": "comment.line.semicolon.ini"
+          }
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.whitespace.comment.leading.ini"
+        }
+      }
     },
     {
+      "match": "\\b([a-zA-Z0-9_.-]+)\\b\\s*(=)",
       "captures": {
         "1": {
           "name": "keyword.other.definition.ini"
@@ -56,10 +53,11 @@
         "2": {
           "name": "punctuation.separator.key-value.ini"
         }
-      },
-      "match": "\\b([a-zA-Z0-9_.-]+)\\b\\s*(=)"
+      }
     },
     {
+      "name": "entity.name.section.group-title.ini",
+      "match": "^(\\[)(.*?)(\\])",
       "captures": {
         "1": {
           "name": "punctuation.definition.entity.ini"
@@ -67,47 +65,43 @@
         "3": {
           "name": "punctuation.definition.entity.ini"
         }
-      },
-      "match": "^(\\[)(.*?)(\\])",
-      "name": "entity.name.section.group-title.ini"
+      }
     },
     {
-      "begin": "'",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.ini"
-        }
-      },
-      "end": "'",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.ini"
-        }
-      },
       "name": "string.quoted.single.ini",
+      "begin": "'",
+      "end": "'",
       "patterns": [
         {
-          "match": "\\\\.",
-          "name": "constant.character.escape.ini"
+          "name": "constant.character.escape.ini",
+          "match": "\\\\."
         }
-      ]
-    },
-    {
-      "begin": "\"",
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.ini"
         }
       },
-      "end": "\"",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.ini"
         }
+      }
+    },
+    {
+      "name": "string.quoted.double.ini",
+      "begin": "\"",
+      "end": "\"",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.ini"
+        }
       },
-      "name": "string.quoted.double.ini"
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.ini"
+        }
+      }
     }
-  ],
-  "scopeName": "source.ini",
-  "uuid": "77DC23B6-8A90-11D9-BAA4-000A9584EC8C"
+  ]
 }

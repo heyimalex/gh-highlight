@@ -1,22 +1,98 @@
 {
   "name": "SRT Subtitle",
   "scopeName": "text.srt",
-  "fileTypes": [
-    "srt"
-  ],
   "patterns": [
     {
       "include": "#subtitle"
     }
   ],
   "repository": {
-    "subtitle": {
-      "begin": "\\b\\d+$",
-      "beginCaptures": {
-        "0": {
-          "name": "entity.name.section.srt"
+    "bold": {
+      "name": "markup.bold.srt",
+      "begin": "(?i)\u003cb\u003e",
+      "end": "(?i)\u003c/b\u003e",
+      "patterns": [
+        {
+          "include": "#sound"
+        },
+        {
+          "include": "#person"
+        },
+        {
+          "include": "#bold"
+        },
+        {
+          "include": "#italic"
+        },
+        {
+          "include": "#underline"
+        },
+        {
+          "include": "#font"
         }
-      },
+      ]
+    },
+    "font": {
+      "name": "markup.link.font.srt",
+      "begin": "(?i)\u003cfont\\b.*?\u003e",
+      "end": "(?i)\u003c/font\u003e",
+      "patterns": [
+        {
+          "include": "#sound"
+        },
+        {
+          "include": "#person"
+        },
+        {
+          "include": "#bold"
+        },
+        {
+          "include": "#italic"
+        },
+        {
+          "include": "#underline"
+        },
+        {
+          "include": "#font"
+        }
+      ]
+    },
+    "italic": {
+      "name": "markup.italic.srt",
+      "begin": "(?i)\u003ci\u003e",
+      "end": "(?i)\u003c/i\u003e",
+      "patterns": [
+        {
+          "include": "#sound"
+        },
+        {
+          "include": "#person"
+        },
+        {
+          "include": "#bold"
+        },
+        {
+          "include": "#italic"
+        },
+        {
+          "include": "#underline"
+        },
+        {
+          "include": "#font"
+        }
+      ]
+    },
+    "person": {
+      "name": "entity.name.tag.srt",
+      "match": "^\\w+:"
+    },
+    "sound": {
+      "name": "string.quoted.other.sound.srt",
+      "match": "\\[.*?\\]|\\(.*?\\)"
+    },
+    "subtitle": {
+      "name": "meta.subtitle.srt",
+      "begin": "\\b\\d+$",
       "end": "^\\s*$",
       "patterns": [
         {
@@ -41,10 +117,14 @@
           "include": "#font"
         }
       ],
-      "name": "meta.subtitle.srt"
+      "beginCaptures": {
+        "0": {
+          "name": "entity.name.section.srt"
+        }
+      }
     },
     "time": {
-      "match": "^(\\d{2}:\\d{2}:\\d{2},\\d{3})\\s*(-->)\\s*(\\d{2}:\\d{2}:\\d{2},\\d{3})$",
+      "match": "^(\\d{2}:\\d{2}:\\d{2},\\d{3})\\s*(--\u003e)\\s*(\\d{2}:\\d{2}:\\d{2},\\d{3})$",
       "captures": {
         "1": {
           "name": "constant.numeric.time.srt"
@@ -57,67 +137,10 @@
         }
       }
     },
-    "sound": {
-      "match": "\\[.*?\\]|\\(.*?\\)",
-      "name": "string.quoted.other.sound.srt"
-    },
-    "person": {
-      "match": "^\\w+:",
-      "name": "entity.name.tag.srt"
-    },
-    "bold": {
-      "begin": "(?i)<b>",
-      "end": "(?i)</b>",
-      "patterns": [
-        {
-          "include": "#sound"
-        },
-        {
-          "include": "#person"
-        },
-        {
-          "include": "#bold"
-        },
-        {
-          "include": "#italic"
-        },
-        {
-          "include": "#underline"
-        },
-        {
-          "include": "#font"
-        }
-      ],
-      "name": "markup.bold.srt"
-    },
-    "italic": {
-      "begin": "(?i)<i>",
-      "end": "(?i)</i>",
-      "patterns": [
-        {
-          "include": "#sound"
-        },
-        {
-          "include": "#person"
-        },
-        {
-          "include": "#bold"
-        },
-        {
-          "include": "#italic"
-        },
-        {
-          "include": "#underline"
-        },
-        {
-          "include": "#font"
-        }
-      ],
-      "name": "markup.italic.srt"
-    },
     "underline": {
-      "begin": "(?i)<u>",
-      "end": "(?i)</u>",
+      "name": "markup.underline.srt",
+      "begin": "(?i)\u003cu\u003e",
+      "end": "(?i)\u003c/u\u003e",
       "patterns": [
         {
           "include": "#sound"
@@ -137,33 +160,7 @@
         {
           "include": "#font"
         }
-      ],
-      "name": "markup.underline.srt"
-    },
-    "font": {
-      "begin": "(?i)<font\\b.*?>",
-      "end": "(?i)</font>",
-      "patterns": [
-        {
-          "include": "#sound"
-        },
-        {
-          "include": "#person"
-        },
-        {
-          "include": "#bold"
-        },
-        {
-          "include": "#italic"
-        },
-        {
-          "include": "#underline"
-        },
-        {
-          "include": "#font"
-        }
-      ],
-      "name": "markup.link.font.srt"
+      ]
     }
   }
 }

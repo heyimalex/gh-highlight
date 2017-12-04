@@ -1,63 +1,60 @@
 {
-  "foldingStartMarker": "(\\bEXTEND\\B)",
-  "foldingStopMarker": "(\\bEND\\b)",
   "name": "camlp4",
+  "scopeName": "source.camlp4.ocaml",
   "patterns": [
     {
-      "begin": "(\\[<)(?=.*?>])",
+      "name": "meta.camlp4-stream.ocaml",
+      "begin": "(\\[\u003c)(?=.*?\u003e])",
+      "end": "(?=\u003e])",
+      "patterns": [
+        {
+          "include": "#camlpppp-streams"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.camlp4-stream.ocaml"
         }
       },
-      "end": "(?=>])",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.camlp4-stream.ocaml"
         }
-      },
-      "name": "meta.camlp4-stream.ocaml",
-      "patterns": [
-        {
-          "include": "#camlpppp-streams"
-        }
-      ]
+      }
     },
     {
-      "match": "\\[<|>]",
-      "name": "punctuation.definition.camlp4-stream.ocaml"
+      "name": "punctuation.definition.camlp4-stream.ocaml",
+      "match": "\\[\u003c|\u003e]"
     },
     {
-      "match": "\\bparser\\b|<(<|:)|>>|\\$(:|\\${0,1})",
-      "name": "keyword.other.camlp4.ocaml"
+      "name": "keyword.other.camlp4.ocaml",
+      "match": "\\bparser\\b|\u003c(\u003c|:)|\u003e\u003e|\\$(:|\\${0,1})"
     }
   ],
   "repository": {
     "camlpppp-streams": {
       "patterns": [
         {
+          "name": "meta.camlp4-stream.element.ocaml",
           "begin": "(')",
+          "end": "(;)(?=\\s*')|(?=\\s*\u003e])",
+          "patterns": [
+            {
+              "include": "source.ocaml"
+            }
+          ],
           "beginCaptures": {
             "1": {
               "name": "punctuation.definition.camlp4.simple-element.ocaml"
             }
           },
-          "end": "(;)(?=\\s*')|(?=\\s*>])",
           "endCaptures": {
             "1": {
               "name": "punctuation.separator.camlp4.ocaml"
             }
-          },
-          "name": "meta.camlp4-stream.element.ocaml",
-          "patterns": [
-            {
-              "include": "source.ocaml"
-            }
-          ]
+          }
         }
       ]
     }
-  },
-  "scopeName": "source.camlp4.ocaml",
-  "uuid": "37538B6B-CEFA-4DAE-B1E4-1218DB82B37F"
+  }
 }

@@ -1,0 +1,1502 @@
+{
+  "name": "Marko",
+  "scopeName": "text.marko",
+  "patterns": [
+    {
+      "include": "#scriptlet"
+    },
+    {
+      "include": "#special-js-tags"
+    },
+    {
+      "include": "#js-code-block"
+    },
+    {
+      "include": "#component-style"
+    },
+    {
+      "include": "#comment-concise-line"
+    },
+    {
+      "include": "#comment-concise-block"
+    },
+    {
+      "include": "#comment-html"
+    },
+    {
+      "include": "#html-block-concise"
+    },
+    {
+      "include": "#html-line-concise"
+    },
+    {
+      "include": "#cdata"
+    },
+    {
+      "include": "#doctype"
+    },
+    {
+      "include": "#tag-script-concise"
+    },
+    {
+      "include": "#tag-style-concise"
+    },
+    {
+      "include": "#tag-concise"
+    },
+    {
+      "include": "#tag-html"
+    },
+    {
+      "include": "#placeholder-patterns"
+    }
+  ],
+  "repository": {
+    "attr-assignment-concise": {
+      "begin": "(?:\\s+|[,])(?:(ref)|([a-zA-Z][a-zA-Z]*)|(data-[a-zA-Z-]*)|([_a-zA-Z0-9][a-zA-Z0-9:_.-]*))\\s*([=])\\s*",
+      "end": "(?=([,;]|\\s|$))",
+      "patterns": [
+        {
+          "include": "#expression"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "support.function.marko-attribute"
+        },
+        "2": {
+          "name": "entity.other.attribute-name.html"
+        },
+        "3": {
+          "name": "entity.other.attribute-name.html"
+        },
+        "4": {
+          "name": "support.function.marko-attribute"
+        },
+        "5": {
+          "name": "punctuation.separator.key-value.html"
+        }
+      },
+      "applyEndPatternLast": true
+    },
+    "attr-assignment-html": {
+      "begin": "(?:\\s+|[,])(?:(ref)|([a-zA-Z][a-zA-Z]*)|(data-[a-zA-Z0-9-]*)|([_a-zA-Z0-9][a-zA-Z0-9:_.-]*))\\s*([=])\\s*",
+      "end": "(?=[,;]|\\s|/\u003e|\u003e)",
+      "patterns": [
+        {
+          "include": "#expression-no-gt"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "support.function.marko-attribute"
+        },
+        "2": {
+          "name": "entity.other.attribute-name.html"
+        },
+        "3": {
+          "name": "entity.other.attribute-name.html"
+        },
+        "4": {
+          "name": "support.function.marko-attribute"
+        },
+        "5": {
+          "name": "punctuation.separator.key-value.html"
+        }
+      },
+      "applyEndPatternLast": true
+    },
+    "attr-js-block": {
+      "begin": "\\s\\{",
+      "end": "\\}",
+      "patterns": [
+        {
+          "include": "#js"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.scope.begin.js"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.scope.end.js"
+        }
+      },
+      "applyEndPatternLast": true
+    },
+    "attr-no-value": {
+      "match": "\\s+(?:([a-zA-Z][a-zA-Z]*)|(data-[a-zA-Z0-9-]*)|([a-zA-Z0-9][a-zA-Z0-9:_.-]+))(?=\\s|/\u003e|\u003e|$)",
+      "captures": {
+        "1": {
+          "name": "entity.other.attribute-name.html"
+        },
+        "2": {
+          "name": "entity.other.attribute-name.html"
+        },
+        "3": {
+          "name": "support.function.marko-attribute"
+        }
+      }
+    },
+    "attr-semicolon": {
+      "begin": "([;])",
+      "end": "(?=\\n)",
+      "patterns": [
+        {
+          "include": "#comment-line"
+        },
+        {
+          "include": "#comment-block"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.terminator.statement.js"
+        }
+      },
+      "applyEndPatternLast": true
+    },
+    "attr-special": {
+      "match": "\\s+(else)\\b",
+      "captures": {
+        "1": {
+          "name": "support.function.marko-attribute"
+        }
+      }
+    },
+    "attr-stuff-concise": {
+      "patterns": [
+        {
+          "include": "#comment-line"
+        },
+        {
+          "include": "#comment-block"
+        },
+        {
+          "begin": "\\s[\\[]",
+          "end": "[\\]]",
+          "patterns": [
+            {
+              "include": "#attr-stuff-concise"
+            }
+          ]
+        },
+        {
+          "begin": "[,]\\s*$",
+          "end": "(?=\\s)"
+        },
+        {
+          "include": "#attr-with-arg"
+        },
+        {
+          "include": "#attr-assignment-concise"
+        },
+        {
+          "include": "#attr-no-value"
+        },
+        {
+          "include": "#placeholder"
+        },
+        {
+          "include": "#attr-js-block"
+        },
+        {
+          "include": "#expression"
+        },
+        {
+          "include": "#attr-semicolon"
+        }
+      ]
+    },
+    "attr-stuff-html": {
+      "patterns": [
+        {
+          "include": "#comment-block"
+        },
+        {
+          "include": "#attr-special"
+        },
+        {
+          "include": "#attr-with-arg"
+        },
+        {
+          "include": "#attr-assignment-html"
+        },
+        {
+          "include": "#attr-no-value"
+        },
+        {
+          "include": "#placeholder"
+        },
+        {
+          "include": "#attr-js-block"
+        },
+        {
+          "include": "#expression-no-gt"
+        },
+        {
+          "include": "#attr-semicolon"
+        }
+      ]
+    },
+    "attr-with-arg": {
+      "begin": "\\s+([_a-zA-Z0-9][a-zA-Z0-9:_.-]+)(\\()",
+      "end": "\\)",
+      "patterns": [
+        {
+          "include": "#expression"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "support.function.marko-attribute"
+        },
+        "2": {
+          "name": "meta.brace.round.js"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "meta.brace.round.js"
+        }
+      },
+      "applyEndPatternLast": true
+    },
+    "cdata": {
+      "name": "string.unquoted.cdata.xml",
+      "begin": "\u003c!\\[CDATA\\[",
+      "end": "]]\u003e",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.xml"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.xml"
+        }
+      }
+    },
+    "comment-block": {
+      "name": "comment.block.js",
+      "begin": "/\\*",
+      "end": "\\*/",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.begin.js"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.end.js"
+        }
+      }
+    },
+    "comment-concise-block": {
+      "name": "comment.block.js",
+      "begin": "^(\\s*)/\\*",
+      "end": "\\*/.*",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.begin.js"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.end.js"
+        }
+      }
+    },
+    "comment-concise-line": {
+      "name": "comment.line.double-slash.marko",
+      "begin": "^(\\s*)//",
+      "end": "$"
+    },
+    "comment-html": {
+      "name": "comment.block.html",
+      "begin": "\\s*\u003c!--",
+      "end": "--\u003e",
+      "captures": {
+        "0": {
+          "name": "punctuation.definition.comment.html"
+        }
+      }
+    },
+    "comment-line": {
+      "name": "comment.line.double-slash.js",
+      "begin": "(//)",
+      "end": "(?=\\n)",
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.comment.js"
+        }
+      }
+    },
+    "component-style": {
+      "patterns": [
+        {
+          "include": "#component-style-less"
+        },
+        {
+          "include": "#component-style-css"
+        }
+      ]
+    },
+    "component-style-css": {
+      "begin": "^(style)(?:\\.([a-z]+))?\\s+(\\{)",
+      "end": "\\}",
+      "patterns": [
+        {
+          "include": "source.css"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.marko.css"
+        },
+        "2": {
+          "name": "storage.modifier.marko.less"
+        },
+        "3": {
+          "name": "punctuation.section.scope.begin.css"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.scope.end.css"
+        }
+      },
+      "applyEndPatternLast": true
+    },
+    "component-style-less": {
+      "begin": "^(style)\\.(less)\\s+(\\{)",
+      "end": "\\}",
+      "patterns": [
+        {
+          "include": "source.css.less"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.marko.less"
+        },
+        "2": {
+          "name": "storage.modifier.marko.less"
+        },
+        "3": {
+          "name": "punctuation.section.scope.begin.less"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.scope.end.less"
+        }
+      },
+      "applyEndPatternLast": true
+    },
+    "doctype": {
+      "name": "meta.tag.sgml.html",
+      "begin": "\u003c!",
+      "end": "\u003e",
+      "patterns": [
+        {
+          "name": "meta.tag.sgml.doctype.html",
+          "begin": "(?i:DOCTYPE)",
+          "end": "(?=\u003e)",
+          "patterns": [
+            {
+              "name": "string.quoted.double.doctype.identifiers-and-DTDs.html",
+              "match": "\"[^\"\u003e]*\""
+            }
+          ],
+          "captures": {
+            "1": {
+              "name": "entity.name.tag.doctype.html"
+            }
+          }
+        }
+      ],
+      "captures": {
+        "0": {
+          "name": "punctuation.definition.marko-tag.html"
+        }
+      }
+    },
+    "expression": {
+      "patterns": [
+        {
+          "include": "#expression-common"
+        },
+        {
+          "include": "#expression-operator-gt"
+        }
+      ]
+    },
+    "expression-common": {
+      "patterns": [
+        {
+          "include": "#expression-string-single"
+        },
+        {
+          "include": "#expression-string-double"
+        },
+        {
+          "include": "#expression-string-template"
+        },
+        {
+          "include": "#expression-group-parens"
+        },
+        {
+          "include": "#expression-group-brackets"
+        },
+        {
+          "include": "#expression-group-braces"
+        },
+        {
+          "include": "#expression-constant"
+        },
+        {
+          "include": "#expression-hex"
+        },
+        {
+          "include": "#expression-numeric"
+        },
+        {
+          "include": "#expression-operator-unary"
+        },
+        {
+          "include": "#expression-operator-binary"
+        },
+        {
+          "include": "#expression-operator-special"
+        },
+        {
+          "match": "[.]([\\p{L}\\p{Nl}$_][\\p{L}\\p{Nl}$\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*)\\b"
+        },
+        {
+          "match": "\\b(out)[.](global)\\b",
+          "captures": {
+            "1": {
+              "name": "entity.name.type"
+            },
+            "2": {
+              "name": "entity.name.type"
+            }
+          }
+        },
+        {
+          "match": "\\b(this)[.](input|state)\\b",
+          "captures": {
+            "1": {
+              "name": "variable.language.js"
+            },
+            "2": {
+              "name": "entity.name.type"
+            }
+          }
+        },
+        {
+          "name": "entity.name.type",
+          "match": "\\b(input|state|component|JSON|out)\\b"
+        },
+        {
+          "name": "storage.type.var.js",
+          "match": "\\b(let|var|const)\\b"
+        },
+        {
+          "match": "\\b(require)[.](resolve)\\b",
+          "captures": {
+            "1": {
+              "name": "entity.name.type"
+            },
+            "2": {
+              "name": "entity.name.type"
+            }
+          }
+        },
+        {
+          "name": "entity.name.type",
+          "match": "\\b(console|JSON|event|window|setTimeout|setInterval|require)\\b"
+        },
+        {
+          "name": "variable.language.js",
+          "match": "\\b(this|arguments)\\b"
+        },
+        {
+          "include": "#expression-special-class"
+        }
+      ]
+    },
+    "expression-constant": {
+      "match": "(true)|(false)|(Infinity)|(NaN)|(null)|(undefined)",
+      "captures": {
+        "1": {
+          "name": "constant.language.boolean.true.js"
+        },
+        "2": {
+          "name": "constant.language.boolean.false.js"
+        },
+        "3": {
+          "name": "constant.language.infinity.js"
+        },
+        "4": {
+          "name": "constant.language.nan.js"
+        },
+        "5": {
+          "name": "constant.language.null.js"
+        },
+        "6": {
+          "name": "constant.language.undefined.js"
+        }
+      }
+    },
+    "expression-group-braces": {
+      "begin": "\\{",
+      "end": "\\}",
+      "patterns": [
+        {
+          "include": "#expression"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.scope.begin.js"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.scope.end.js"
+        }
+      },
+      "applyEndPatternLast": true
+    },
+    "expression-group-brackets": {
+      "begin": "\\[",
+      "end": "\\]",
+      "patterns": [
+        {
+          "include": "#expression"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "meta.brace.square.js"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "meta.brace.square.js"
+        }
+      },
+      "applyEndPatternLast": true
+    },
+    "expression-group-parens": {
+      "begin": "\\(",
+      "end": "\\)",
+      "patterns": [
+        {
+          "include": "#expression"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "meta.brace.round.js"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "meta.brace.round.js"
+        }
+      },
+      "applyEndPatternLast": true
+    },
+    "expression-hex": {
+      "name": "constant.numeric.hex.js",
+      "match": "\\b0[xX][0-9A-Fa-f]+\\b"
+    },
+    "expression-no-gt": {
+      "patterns": [
+        {
+          "include": "#expression-common"
+        }
+      ]
+    },
+    "expression-numeric": {
+      "name": "constant.numeric.js",
+      "match": "(?x)\n\t\t\t\t(?\u003c!\\w)\t\t\t\t\t\t\t\t\t# Ensure word boundry\n\t\t\t\t(?\u003e\n\t\t\t\t\t(\n\t\t\t\t\t\t(0|[1-9][0-9]*)(\\.[0-9]*)?\t\t# 0 or 1 or 1. or 1.0\n\t\t\t\t\t  | \\.[0-9]+\t\t\t\t\t\t# .1\n\t\t\t\t\t)\n\t\t\t\t\t([eE][+-]?[0-9]+)?\t\t\t\t\t# Exponent\n\t\t\t\t)\n\t\t\t\t(?!\\w)\t\t\t\t\t\t\t\t\t# Ensure word boundry\n\t\t\t"
+    },
+    "expression-operator-binary": {
+      "match": "(\\s+|\\b)(===|==|!==|!=|\u003c=|\u003c\u003c|\u0026\u0026|\\|\\||\u003c|\\+=|-=|\\*=|/=|%=|[=+*/%|\u0026~^:])(\\s+|\\b)",
+      "captures": {
+        "2": {
+          "name": "keyword.operator.js"
+        }
+      }
+    },
+    "expression-operator-gt": {
+      "match": "(\\s+|\\b)(\u003e=|\u003e\u003e|\u003e)(\\s+|\\b)",
+      "captures": {
+        "2": {
+          "name": "keyword.operator.js"
+        }
+      }
+    },
+    "expression-operator-special": {
+      "name": "keyword",
+      "match": "(?\u003c!\\.|\\$)\\b(delete|in|instanceof|new|typeof\\s*|void|with|from|to|step)\\b(?!\\$)"
+    },
+    "expression-operator-unary": {
+      "name": "keyword.operator.js",
+      "match": "\\b(!|\\+\\+)\\b|\\b\\-\\-(?\u003c!\\s)"
+    },
+    "expression-special-class": {
+      "name": "support.class.js",
+      "match": "(?\u003c!\\.|\\$)\\b(Array|Boolean|Date|Error|EvalError|Function|Number|Object|RangeError|ReferenceError|RegExp|String|SyntaxError|TypeError|URIError)\\b(?!\\$)"
+    },
+    "expression-string-double": {
+      "name": "string.quoted.double.js",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.js",
+          "match": "\\\\(x[0-9A-Fa-f]{2}|[0-2][0-7]{0,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)"
+        },
+        {
+          "include": "#placeholder-patterns"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.js"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.js"
+        }
+      }
+    },
+    "expression-string-escapes": {
+      "patterns": [
+        {
+          "name": "constant.character.escape.js",
+          "match": "\\\\(x[0-9A-Fa-f]{2}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)"
+        }
+      ]
+    },
+    "expression-string-single": {
+      "name": "string.quoted.single.js",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "include": "#expression-string-escapes"
+        },
+        {
+          "include": "#placeholder-patterns"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.js"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.js"
+        }
+      }
+    },
+    "expression-string-template": {
+      "name": "string.quoted.other.template.js",
+      "begin": "`",
+      "end": "`",
+      "patterns": [
+        {
+          "include": "#expression-string-escapes"
+        },
+        {
+          "name": "meta.embedded.line.js",
+          "contentName": "source.js",
+          "begin": "\\$\\{",
+          "end": "(\\})",
+          "patterns": [
+            {
+              "include": "#expression"
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.section.embedded.begin.js"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.embedded.end.js"
+            },
+            "1": {
+              "name": "source.js"
+            }
+          }
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.js"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.js"
+        }
+      }
+    },
+    "expression-ternary-if": {
+      "name": "meta.ternary-if.js",
+      "begin": "\\?",
+      "end": ":",
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ]
+    },
+    "html-block-concise": {
+      "name": "meta.section.marko-html-block",
+      "begin": "(\\s*)(-[-]+)\\n",
+      "end": "^(\\1\\2|(?!(\\1)))",
+      "patterns": [
+        {
+          "include": "#cdata"
+        },
+        {
+          "include": "#tag-html"
+        },
+        {
+          "include": "#comment-html"
+        },
+        {
+          "include": "#js-code-line"
+        },
+        {
+          "include": "#js-code-block"
+        },
+        {
+          "include": "#placeholder-patterns"
+        }
+      ],
+      "captures": {
+        "2": {
+          "name": "keyword.operator.marko"
+        }
+      }
+    },
+    "html-line-block-concise": {
+      "begin": "\\s*([-][-]+)\\n",
+      "end": "(?!\\2)|(\\2\\1)",
+      "patterns": [
+        {
+          "include": "#cdata"
+        },
+        {
+          "include": "#tag-html"
+        },
+        {
+          "include": "#comment-html"
+        },
+        {
+          "include": "#placeholder-patterns"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.operator.marko.blah"
+        }
+      },
+      "applyEndPatternLast": true
+    },
+    "html-line-concise": {
+      "begin": "\\s*([-][-]+)",
+      "end": "(?=\\n)",
+      "patterns": [
+        {
+          "include": "#cdata"
+        },
+        {
+          "include": "#tag-html"
+        },
+        {
+          "include": "#comment-html"
+        },
+        {
+          "include": "#placeholder-patterns"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.operator.marko"
+        }
+      }
+    },
+    "js": {
+      "patterns": [
+        {
+          "include": "#comment-line"
+        },
+        {
+          "include": "#comment-block"
+        },
+        {
+          "begin": "\\{",
+          "end": "\\}",
+          "patterns": [
+            {
+              "include": "#js"
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.section.scope.begin.js"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.scope.end.js"
+            }
+          },
+          "applyEndPatternLast": true
+        },
+        {
+          "begin": "\\(",
+          "end": "\\)",
+          "patterns": [
+            {
+              "include": "#js"
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.section.scope.begin.js"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.scope.end.js"
+            }
+          },
+          "applyEndPatternLast": true
+        },
+        {
+          "begin": "\\[",
+          "end": "\\]",
+          "patterns": [
+            {
+              "include": "#js"
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.section.scope.begin.js"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.scope.end.js"
+            }
+          },
+          "applyEndPatternLast": true
+        },
+        {
+          "match": "[.]([\\p{L}\\p{Nl}$_][\\p{L}\\p{Nl}$\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*)\\b"
+        },
+        {
+          "include": "#expression"
+        },
+        {
+          "name": "keyword.control.js",
+          "match": "\\b(break|case|catch|continue|default|do|else|export|finally|for|if|return|switch|throw|try|while|with|import|from|await|async)\\b"
+        },
+        {
+          "name": "storage.type.function.arrow.js",
+          "match": "(\\s+|\\b)(\\=\\\u003e)(\\s+|\\b)"
+        },
+        {
+          "name": "punctuation.terminator.statement.js",
+          "match": "\\;"
+        },
+        {
+          "name": "storage.type.function.js",
+          "match": "\\b(function)\\b"
+        },
+        {
+          "name": "entity.name.type.class.js",
+          "match": "\\b(class)\\b"
+        },
+        {
+          "name": "entity.other.inherited-class.js",
+          "match": "\\bextends\\b"
+        },
+        {
+          "name": "meta.method.js",
+          "begin": "([\\p{L}\\p{Nl}$_][\\p{L}\\p{Nl}$\\p{Mn}\\p{Mc}\\p{Nd}\\p{Pc}\\x{200C}\\x{200D}]*)\\s*(\\()(?=(?:[^\\(\\)]*)?\\)\\s*\\{)",
+          "end": "\\)",
+          "beginCaptures": {
+            "1": {
+              "name": "entity.name.function.js"
+            },
+            "2": {
+              "name": "punctuation.definition.parameters.begin.js"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.parameters.END.js"
+            }
+          }
+        }
+      ]
+    },
+    "js-code-block": {
+      "contentName": "source.js.embedded",
+      "begin": "^\\s*([$])\\s",
+      "end": "(?=\\n)",
+      "patterns": [
+        {
+          "include": "#js"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "storage.modifier.embedded.js"
+        }
+      },
+      "applyEndPatternLast": true
+    },
+    "open-tag-end": {
+      "begin": "(\u003e)",
+      "end": "(?=\u003c/)",
+      "patterns": [
+        {
+          "include": "#cdata"
+        },
+        {
+          "include": "#comment-html"
+        },
+        {
+          "include": "#scriptlet"
+        },
+        {
+          "include": "#tag-html"
+        },
+        {
+          "include": "#js-code-block"
+        },
+        {
+          "include": "#placeholder-patterns"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.end.open.html"
+        }
+      }
+    },
+    "open-tag-end-script": {
+      "begin": "(\u003e)",
+      "end": "(?=\u003c/)",
+      "patterns": [
+        {
+          "include": "#placeholder-patterns"
+        },
+        {
+          "include": "#js"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.end.open.html"
+        }
+      }
+    },
+    "open-tag-end-style": {
+      "begin": "(\u003e)",
+      "end": "(?=\u003c/)",
+      "patterns": [
+        {
+          "include": "#placeholder-patterns"
+        },
+        {
+          "include": "source.css"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.end.open.html"
+        }
+      }
+    },
+    "placeholder": {
+      "name": "meta.section.marko-placeholder",
+      "begin": "[$][!]?\\{",
+      "end": "\\}",
+      "patterns": [
+        {
+          "include": "#expression"
+        }
+      ],
+      "captures": {
+        "0": {
+          "name": "keyword.operator.marko"
+        }
+      },
+      "applyEndPatternLast": true
+    },
+    "placeholder-escaped": {
+      "match": "\\\\[$][!]?[{]"
+    },
+    "placeholder-escaped-escaped": {
+      "match": "\\\\\\\\(?=[$][!]?[{])"
+    },
+    "placeholder-patterns": {
+      "patterns": [
+        {
+          "include": "#placeholder-escaped-escaped"
+        },
+        {
+          "include": "#placeholder-escaped"
+        },
+        {
+          "include": "#placeholder"
+        }
+      ]
+    },
+    "scriptlet": {
+      "begin": "\u003c%",
+      "end": "%\u003e",
+      "patterns": [
+        {
+          "include": "#js"
+        }
+      ],
+      "captures": {
+        "0": {
+          "name": "keyword.operator.scriptlet.marko"
+        }
+      },
+      "applyEndPatternLast": true
+    },
+    "special-js-tags": {
+      "contentName": "source.js.embedded",
+      "begin": "^\\s*(?:(class)|(static)|(import))\\s",
+      "end": "(?=\\n)",
+      "patterns": [
+        {
+          "include": "#js"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.class.js"
+        },
+        "2": {
+          "name": "storage.modifier.marko"
+        },
+        "3": {
+          "name": "storage.modifier.marko"
+        }
+      },
+      "applyEndPatternLast": true
+    },
+    "tag-concise": {
+      "patterns": [
+        {
+          "include": "#tag-name-custom-concise"
+        },
+        {
+          "include": "#tag-name-concise"
+        }
+      ]
+    },
+    "tag-html": {
+      "patterns": [
+        {
+          "include": "#tag-name-open-tag-only-html"
+        },
+        {
+          "include": "#tag-name-script-html"
+        },
+        {
+          "include": "#tag-name-style-html"
+        },
+        {
+          "include": "#tag-name-shorthand-no-tag-name-html"
+        },
+        {
+          "include": "#tag-name-shorthand-html"
+        },
+        {
+          "include": "#tag-name-custom-html"
+        },
+        {
+          "include": "#tag-name-html"
+        }
+      ]
+    },
+    "tag-name-concise": {
+      "begin": "^\\s*(([a-zA-Z0-9_-]+)([.#][a-zA-Z0-9_.#-]*)?)(?=(\\s+(?![=])|$|\\())",
+      "end": "(?=\\n)",
+      "patterns": [
+        {
+          "include": "#html-line-block-concise"
+        },
+        {
+          "include": "#html-line-concise"
+        },
+        {
+          "include": "#attr-stuff-concise"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "entity.name.tag.concise"
+        },
+        "3": {
+          "name": "entity.other.attribute-name.shorthand"
+        }
+      },
+      "applyEndPatternLast": true
+    },
+    "tag-name-custom-concise": {
+      "begin": "^\\s*(for|if|unless|else-if|else|var|assign|macro|invoke|include|app|await|[a-zA-Z0-9_]+([:-])[a-zA-Z0-9_:-]*|[@][a-zA-Z0-9_-]+)(?=(\\s+(?![=])|$|[(]))",
+      "end": "(?=\\n)",
+      "patterns": [
+        {
+          "include": "#html-line-concise"
+        },
+        {
+          "include": "#attr-stuff-concise"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "support.function.marko-tag.concise"
+        }
+      },
+      "applyEndPatternLast": true
+    },
+    "tag-name-custom-html": {
+      "begin": "(\u003c)(for|if|unless|else-if|else|var|assign|macro|invoke|include|app|await|[a-zA-Z0-9_]+[-:][a-zA-Z0-9\\-_:]*|[@][a-zA-Z0-9_-]+)(?=(\u003e|/\u003e|\\s|\\())",
+      "end": "(\u003c/)(\\2)?(\u003e)|(/\u003e)",
+      "patterns": [
+        {
+          "include": "#attr-stuff-html"
+        },
+        {
+          "include": "#open-tag-end"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.open.html"
+        },
+        "2": {
+          "name": "support.function.marko-tag.open.html"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.close.html"
+        },
+        "2": {
+          "name": "support.function.marko-tag.close.html"
+        },
+        "3": {
+          "name": "punctuation.definition.tag.end.close.html"
+        },
+        "4": {
+          "name": "punctuation.definition.tag.end.self-close.html"
+        }
+      }
+    },
+    "tag-name-html": {
+      "begin": "(\u003c)([a-zA-Z0-9]+)(?=(\u003e|/\u003e|\\s|\\())",
+      "end": "(\u003c/)(\\2)?(\u003e)|(/\u003e)",
+      "patterns": [
+        {
+          "include": "#attr-stuff-html"
+        },
+        {
+          "include": "#open-tag-end"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.open.html"
+        },
+        "2": {
+          "name": "entity.name.tag.open.html"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.close.html"
+        },
+        "2": {
+          "name": "entity.name.tag.close.html"
+        },
+        "3": {
+          "name": "punctuation.definition.tag.end.close.html"
+        },
+        "4": {
+          "name": "punctuation.definition.tag.end.self-close.html"
+        }
+      }
+    },
+    "tag-name-open-tag-only-html": {
+      "begin": "(\u003c)(base|br|col|hr|embed|img|input|keygen|link|meta|param|source|track|wbr|lasso-img)(?=(\u003e|/\u003e|\\s|\\())",
+      "end": "(\u003e|/\u003e)",
+      "patterns": [
+        {
+          "include": "#attr-stuff-html"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.open.html"
+        },
+        "2": {
+          "name": "entity.name.tag.open.html"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.end.self-close.html"
+        }
+      }
+    },
+    "tag-name-script-html": {
+      "begin": "(\u003c)(script)(?=(\u003e|/\u003e|\\s|\\())",
+      "end": "(\u003c/)(script)?(\u003e)|/\u003e",
+      "patterns": [
+        {
+          "include": "#attr-stuff-html"
+        },
+        {
+          "include": "#open-tag-end-script"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.open.html"
+        },
+        "2": {
+          "name": "entity.name.tag.script.open.html"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.close.html"
+        },
+        "2": {
+          "name": "entity.name.tag.script.close.html"
+        },
+        "3": {
+          "name": "punctuation.definition.tag.end.close.html"
+        },
+        "4": {
+          "name": "punctuation.definition.tag.end.self-close.html"
+        }
+      }
+    },
+    "tag-name-shorthand-html": {
+      "begin": "(\u003c)(([a-zA-Z0-9_-]+)([#.][a-zA-Z0-9_#.:-]+))(?=(\u003e|/\u003e|\\s+(?![=])|\\())",
+      "end": "(\u003c/)((\\3)(\\4)?)?(\u003e)|(/\u003e)",
+      "patterns": [
+        {
+          "include": "#attr-stuff-html"
+        },
+        {
+          "include": "#open-tag-end"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.open.html"
+        },
+        "3": {
+          "name": "entity.name.tag.open.html"
+        },
+        "4": {
+          "name": "entity.other.attribute-name.shorthand"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.close.html"
+        },
+        "3": {
+          "name": "entity.name.tag.close.html"
+        },
+        "4": {
+          "name": "entity.other.attribute-name.shorthand"
+        },
+        "5": {
+          "name": "punctuation.definition.tag.end.close.html"
+        },
+        "6": {
+          "name": "punctuation.definition.tag.end.self-close.html"
+        }
+      }
+    },
+    "tag-name-shorthand-no-tag-name-html": {
+      "begin": "(\u003c)([#.][a-zA-Z0-9_#.:-]+)(?=(\u003e|/\u003e|\\s|\\())",
+      "end": "(\u003c/)(\\2|div)(\u003e)|(/\u003e)",
+      "patterns": [
+        {
+          "include": "#attr-stuff-html"
+        },
+        {
+          "include": "#open-tag-end"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.open.html"
+        },
+        "2": {
+          "name": "entity.other.attribute-name.shorthand"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.close.html"
+        },
+        "2": {
+          "name": "entity.name.tag.close.html"
+        },
+        "3": {
+          "name": "punctuation.definition.tag.end.close.html"
+        },
+        "4": {
+          "name": "punctuation.definition.tag.end.self-close.html"
+        }
+      }
+    },
+    "tag-name-style-html": {
+      "begin": "(\u003c)(style)(?=(\u003e|/\u003e|\\s|\\())",
+      "end": "(\u003c/)(style)?(\u003e)|(/\u003e)",
+      "patterns": [
+        {
+          "include": "#attr-stuff-html"
+        },
+        {
+          "include": "#open-tag-end-style"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.open.html"
+        },
+        "2": {
+          "name": "entity.name.tag.style.open.html"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.tag.begin.close.html"
+        },
+        "2": {
+          "name": "entity.name.tag.style.close.html"
+        },
+        "3": {
+          "name": "punctuation.definition.tag.end.close.html"
+        },
+        "4": {
+          "name": "punctuation.definition.tag.end.self-close.html"
+        }
+      }
+    },
+    "tag-script-body-block": {
+      "begin": "(\\s*-[-]+)",
+      "end": "(\\1)[.]*$",
+      "patterns": [
+        {
+          "include": "#js"
+        }
+      ]
+    },
+    "tag-script-body-line": {
+      "begin": "\\s+-[-]+\\s",
+      "end": "(?=\\n)",
+      "patterns": [
+        {
+          "include": "#js"
+        }
+      ]
+    },
+    "tag-script-concise": {
+      "begin": "^(\\s*)(script)(?=(\\s|$|\\())",
+      "end": "^(?!(\\1\\s)|\\s*$)",
+      "patterns": [
+        {
+          "include": "#attr-stuff-concise"
+        },
+        {
+          "include": "#tag-script-body-line"
+        },
+        {
+          "include": "#tag-script-body-block"
+        }
+      ],
+      "beginCaptures": {
+        "2": {
+          "name": "entity.name.tag.script.marko.concise"
+        }
+      },
+      "applyEndPatternLast": true
+    },
+    "tag-style-body-block": {
+      "begin": "(\\s*[-][-]+)",
+      "end": "(\\1)[.]*$",
+      "patterns": [
+        {
+          "include": "source.css"
+        }
+      ]
+    },
+    "tag-style-body-line": {
+      "begin": "\\s[-][-]+\\s",
+      "end": "(?=\\n)",
+      "patterns": [
+        {
+          "include": "source.css"
+        }
+      ]
+    },
+    "tag-style-concise": {
+      "name": "meta.tag.other.style",
+      "begin": "^(\\s*)(style)(?=(\\s|$|\\())",
+      "end": "^(?!(\\1\\s)|\\s*$)",
+      "patterns": [
+        {
+          "include": "#attr-stuff-concise"
+        },
+        {
+          "include": "#tag-style-body-line"
+        },
+        {
+          "include": "#tag-style-body-block"
+        }
+      ],
+      "beginCaptures": {
+        "2": {
+          "name": "entity.name.tag.style.marko.concise"
+        }
+      },
+      "applyEndPatternLast": true
+    }
+  }
+}

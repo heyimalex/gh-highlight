@@ -1,27 +1,21 @@
 {
-  "fileTypes": [
-    "yaws"
-  ],
-  "keyEquivalent": "^~E",
   "name": "HTML (Erlang)",
+  "scopeName": "text.html.erlang.yaws",
   "patterns": [
     {
-      "begin": "(^\\s*)?(?=<erl>)",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.whitespace.embedded.leading.html"
-        }
-      },
       "contentName": "meta.embedded.erlang",
+      "begin": "(^\\s*)?(?=\u003cerl\u003e)",
       "end": "(?!\\G)(\\s*\\n)?",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.whitespace.embedded.trailing.html"
-        }
-      },
       "patterns": [
         {
-          "begin": "(<)(erl)(>)",
+          "contentName": "source.erlang",
+          "begin": "(\u003c)(erl)(\u003e)",
+          "end": "((\u003c/))(erl)(\u003e)",
+          "patterns": [
+            {
+              "include": "source.erlang"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "meta.tag.template.html"
@@ -36,8 +30,6 @@
               "name": "punctuation.definition.tag.end.html"
             }
           },
-          "contentName": "source.erlang",
-          "end": "((</))(erl)(>)",
           "endCaptures": {
             "0": {
               "name": "meta.tag.template.html"
@@ -54,19 +46,22 @@
             "4": {
               "name": "punctuation.definition.tag.end.html"
             }
-          },
-          "patterns": [
-            {
-              "include": "source.erlang"
-            }
-          ]
+          }
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.whitespace.embedded.leading.html"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.whitespace.embedded.trailing.html"
+        }
+      }
     },
     {
       "include": "text.html.basic"
     }
-  ],
-  "scopeName": "text.html.erlang.yaws",
-  "uuid": "3FBFF015-B650-4734-848C-47B53ACD5E32"
+  ]
 }

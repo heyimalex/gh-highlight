@@ -1,25 +1,18 @@
 {
-  "fileTypes": [
-    "nc"
-  ],
   "name": "GCode",
+  "scopeName": "source.gcode",
   "patterns": [
     {
-      "comment": "Comment",
-      "match": "(\\()(.*)(\\))",
-      "name": "comment.number-sign.nc"
+      "name": "comment.number-sign.nc",
+      "match": "(\\()(.*)(\\))"
     },
     {
-      "comment": "keywords Attributes",
-      "match": "(G|F|S|M|T|O|%)[0-9]+",
-      "name": "keyword.nc"
+      "name": "keyword.nc",
+      "match": "(G|F|S|M|T|O|%)[0-9]+"
     },
     {
-      "comment": "Framework variable",
-      "match": "(X|Y|Z|I|J|K)([0-9]+(?:\\.[0-9]*)?)",
-      "name": "variable.language.MCPOST"
+      "name": "variable.language.MCPOST",
+      "match": "(X|Y|Z|I|J|K)([0-9]+(?:\\.[0-9]*)?)"
     }
-  ],
-  "scopeName": "source.gcode",
-  "uuid": "32ab95f2-a394-46ee-9e83-9d93b9de5f19"
+  ]
 }

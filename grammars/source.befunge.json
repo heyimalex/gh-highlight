@@ -1,38 +1,34 @@
 {
-  "fileTypes": [
-    "bf"
-  ],
   "name": "Befunge-93",
+  "scopeName": "source.befunge",
   "patterns": [
     {
-      "match": "[0-9]",
-      "name": "constant.numberic.bf"
+      "name": "constant.numberic.bf",
+      "match": "[0-9]"
     },
     {
-      "match": "[+\\-*/%!`]",
-      "name": "storage.type.bf"
+      "name": "storage.type.bf",
+      "match": "[+\\-*/%!`]"
     },
     {
-      "match": "[#<>^v?|_@]",
-      "name": "storage.type.bf"
+      "name": "storage.type.bf",
+      "match": "[#\u003c\u003e^v?|_@]"
     },
     {
-      "match": "[:$\"]",
-      "name": "stack.bf"
+      "name": "stack.bf",
+      "match": "[:$\"]"
     },
     {
-      "match": "[.,&~]",
-      "name": "function.io.bf"
+      "name": "function.io.bf",
+      "match": "[.,\u0026~]"
     },
     {
-      "match": "[pg]",
-      "name": "storage.type.bf"
+      "name": "storage.type.bf",
+      "match": "[pg]"
     },
     {
-      "match": "\"(.*?)\"",
-      "name": "comment.block.bf"
+      "name": "comment.block.bf",
+      "match": "\"(.*?)\""
     }
-  ],
-  "scopeName": "source.befunge",
-  "uuid": "e1f843db-e80f-4807-a297-c2e8f911c9e0"
+  ]
 }

@@ -1,13 +1,10 @@
 {
-  "fileTypes": [
-    "bmx"
-  ],
-  "keyEquivalent": "^~B",
   "name": "BlitzMax",
+  "scopeName": "source.blitzmax",
   "patterns": [
     {
-      "match": ";",
-      "name": "punctuation.terminator.line.blitzmax"
+      "name": "punctuation.terminator.line.blitzmax",
+      "match": ";"
     },
     {
       "include": "#bmax_comment_quote"
@@ -34,52 +31,33 @@
       "include": "#bmax_attributes"
     },
     {
-      "begin": "(?i)(?:(?:^|;)\\s*)(try)\\b",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.control.try.blitzmax"
-        }
-      },
-      "end": "(?i)\\b(end\\s?try)\\b",
-      "endCaptures": {
-        "1": {
-          "name": "keyword.control.try.blitzmax"
-        }
-      },
       "name": "meta.try.blitzmax",
+      "begin": "(?i)(?:(?:^|;)\\s*)(try)\\b",
+      "end": "(?i)\\b(end\\s?try)\\b",
       "patterns": [
         {
-          "match": "(?i)^\\s*(catch)",
-          "name": "keyword.control.try.catch.blitzmax"
+          "name": "keyword.control.try.catch.blitzmax",
+          "match": "(?i)^\\s*(catch)"
         },
         {
           "include": "$self"
         }
-      ]
-    },
-    {
-      "begin": "(?i)(?:(?:^|;)\\s*)(extern)(?:\\s+((\")[^\"]*(\"))|\\b)",
+      ],
       "beginCaptures": {
         "1": {
-          "name": "keyword.other.extern.blitzmax"
-        },
-        "2": {
-          "name": "string.quoted.double.blitzmax"
-        },
-        "3": {
-          "name": "punctuation.definition.string.begin.blitzmax"
-        },
-        "4": {
-          "name": "punctuation.definition.string.end.blitzmax"
+          "name": "keyword.control.try.blitzmax"
         }
       },
-      "end": "(?i)(?:(?:^|;)\\s*)\\b(end\\s?extern)\\b",
       "endCaptures": {
         "1": {
-          "name": "keyword.other.extern.blitzmax"
+          "name": "keyword.control.try.blitzmax"
         }
-      },
+      }
+    },
+    {
       "name": "meta.extern.blitzmax",
+      "begin": "(?i)(?:(?:^|;)\\s*)(extern)(?:\\s+((\")[^\"]*(\"))|\\b)",
+      "end": "(?i)(?:(?:^|;)\\s*)\\b(end\\s?extern)\\b",
       "patterns": [
         {
           "include": "#bmax_comment_quote"
@@ -118,6 +96,8 @@
           "include": "#bmax_preprocessor"
         },
         {
+          "name": "meta.function.extern.blitzmax",
+          "match": "(?i)(?:(?:^|;)\\s*)(function)\\s+([a-zA-Z_]\\w*)\\b",
           "captures": {
             "1": {
               "name": "storage.type.function.extern.blitzmax"
@@ -125,35 +105,16 @@
             "2": {
               "name": "entity.name.function.extern.blitzmax"
             }
-          },
-          "match": "(?i)(?:(?:^|;)\\s*)(function)\\s+([a-zA-Z_]\\w*)\\b",
-          "name": "meta.function.extern.blitzmax"
+          }
         },
         {
-          "begin": "(?i)(?:(?:^|;)\\s*)(type)\\s+([a-zA-Z_]\\w*)(?:\\s+(extends)\\s+([a-zA-Z_]\\w*))?",
-          "beginCaptures": {
-            "1": {
-              "name": "storage.type.class.extern.blitzmax"
-            },
-            "2": {
-              "name": "entity.name.type.extern.blitzmax"
-            },
-            "3": {
-              "name": "storage.modifier.extends.extern.blitzmax"
-            },
-            "4": {
-              "name": "entity.other.inherited-class.extern.blitzmax"
-            }
-          },
-          "end": "(?i)\\b(end\\s?type)\\b",
-          "endCaptures": {
-            "1": {
-              "name": "storage.type.class.extern.blitzmax"
-            }
-          },
           "name": "meta.type.extern.blitzmax",
+          "begin": "(?i)(?:(?:^|;)\\s*)(type)\\s+([a-zA-Z_]\\w*)(?:\\s+(extends)\\s+([a-zA-Z_]\\w*))?",
+          "end": "(?i)\\b(end\\s?type)\\b",
           "patterns": [
             {
+              "name": "meta.method.blitzmax",
+              "match": "(?i)(?:(?:^|;)\\s*)(method)\\s+([a-zA-Z_]\\w*)\\b",
               "captures": {
                 "1": {
                   "name": "storage.type.method.method.extern.blitzmax"
@@ -161,9 +122,7 @@
                 "2": {
                   "name": "entity.name.function.method.extern.blitzmax"
                 }
-              },
-              "match": "(?i)(?:(?:^|;)\\s*)(method)\\s+([a-zA-Z_]\\w*)\\b",
-              "name": "meta.method.blitzmax"
+              }
             },
             {
               "include": "#bmax_comment_quote"
@@ -198,14 +157,54 @@
             {
               "include": "#bmax_preprocessor"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "storage.type.class.extern.blitzmax"
+            },
+            "2": {
+              "name": "entity.name.type.extern.blitzmax"
+            },
+            "3": {
+              "name": "storage.modifier.extends.extern.blitzmax"
+            },
+            "4": {
+              "name": "entity.other.inherited-class.extern.blitzmax"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "storage.type.class.extern.blitzmax"
+            }
+          }
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.other.extern.blitzmax"
+        },
+        "2": {
+          "name": "string.quoted.double.blitzmax"
+        },
+        "3": {
+          "name": "punctuation.definition.string.begin.blitzmax"
+        },
+        "4": {
+          "name": "punctuation.definition.string.end.blitzmax"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "keyword.other.extern.blitzmax"
+        }
+      }
     },
     {
       "include": "#bmax_function"
     },
     {
+      "name": "meta.import.module.blitzmax",
+      "match": "(?i)\\b(import)\\s+((?:[a-zA-Z_]\\w*\\.?)+)",
       "captures": {
         "1": {
           "name": "keyword.other.import.blitzmax"
@@ -213,12 +212,18 @@
         "2": {
           "name": "string.unquoted.module.blitzmax"
         }
-      },
-      "match": "(?i)\\b(import)\\s+((?:[a-zA-Z_]\\w*\\.?)+)",
-      "name": "meta.import.module.blitzmax"
+      }
     },
     {
+      "name": "meta.import.file.blitzmax",
+      "contentName": "string.quoted.double.blitzmax",
       "begin": "(?i)\\b(import)\\s+((\"))",
+      "end": "(\")",
+      "patterns": [
+        {
+          "include": "#bmax_string_content"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "keyword.other.import.blitzmax"
@@ -230,8 +235,6 @@
           "name": "string.quoted.double.blitzmax"
         }
       },
-      "contentName": "string.quoted.double.blitzmax",
-      "end": "(\")",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.blitzmax"
@@ -239,15 +242,11 @@
         "1": {
           "name": "string.quoted.double.blitzmax"
         }
-      },
-      "name": "meta.import.file.blitzmax",
-      "patterns": [
-        {
-          "include": "#bmax_string_content"
-        }
-      ]
+      }
     },
     {
+      "name": "meta.framework.blitzmax",
+      "match": "(?i)\\b(framework)\\s+((?:[a-zA-Z_]\\w*\\.?)+)",
       "captures": {
         "1": {
           "name": "keyword.other.framework.blitzmax"
@@ -255,11 +254,11 @@
         "2": {
           "name": "string.unquoted.module.blitzmax"
         }
-      },
-      "match": "(?i)\\b(framework)\\s+((?:[a-zA-Z_]\\w*\\.?)+)",
-      "name": "meta.framework.blitzmax"
+      }
     },
     {
+      "name": "meta.module.blitzmax",
+      "match": "(?i)\\b(module)\\s+(([a-zA-Z_]\\w*\\.?)+)",
       "captures": {
         "1": {
           "name": "keyword.other.module.blitzmax"
@@ -267,12 +266,18 @@
         "2": {
           "name": "string.unquoted.module.blitzmax"
         }
-      },
-      "match": "(?i)\\b(module)\\s+(([a-zA-Z_]\\w*\\.?)+)",
-      "name": "meta.module.blitzmax"
+      }
     },
     {
+      "name": "meta.include.blitzmax",
+      "contentName": "string.quoted.double.blitzmax",
       "begin": "(?i)\\b(include)\\s+((\"))",
+      "end": "(\")",
+      "patterns": [
+        {
+          "include": "#bmax_string_content"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "keyword.other.include.blitzmax"
@@ -284,8 +289,6 @@
           "name": "string.quoted.double.blitzmax"
         }
       },
-      "contentName": "string.quoted.double.blitzmax",
-      "end": "(\")",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.blitzmax"
@@ -293,16 +296,18 @@
         "1": {
           "name": "string.quoted.double.blitzmax"
         }
-      },
-      "name": "meta.include.blitzmax",
+      }
+    },
+    {
+      "name": "meta.incbin.blitzmax",
+      "contentName": "string.quoted.double.blitzmax",
+      "begin": "(?i)\\b(incbin)\\s+((\"))",
+      "end": "(\")",
       "patterns": [
         {
           "include": "#bmax_string_content"
         }
-      ]
-    },
-    {
-      "begin": "(?i)\\b(incbin)\\s+((\"))",
+      ],
       "beginCaptures": {
         "1": {
           "name": "keyword.other.incbin.blitzmax"
@@ -314,8 +319,6 @@
           "name": "string.quoted.double.blitzmax"
         }
       },
-      "contentName": "string.quoted.double.blitzmax",
-      "end": "(\")",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.blitzmax"
@@ -323,16 +326,18 @@
         "1": {
           "name": "string.quoted.double.blitzmax"
         }
-      },
-      "name": "meta.incbin.blitzmax",
+      }
+    },
+    {
+      "name": "meta.moduleinfo.blitzmax",
+      "contentName": "string.quoted.double.blitzmax",
+      "begin": "(?i)\\b(moduleinfo)\\s+((\"))",
+      "end": "(\")",
       "patterns": [
         {
           "include": "#bmax_string_content"
         }
-      ]
-    },
-    {
-      "begin": "(?i)\\b(moduleinfo)\\s+((\"))",
+      ],
       "beginCaptures": {
         "1": {
           "name": "keyword.other.moduleinfo.blitzmax"
@@ -344,8 +349,6 @@
           "name": "string.quoted.double.blitzmax"
         }
       },
-      "contentName": "string.quoted.double.blitzmax",
-      "end": "(\")",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.blitzmax"
@@ -353,43 +356,26 @@
         "1": {
           "name": "string.quoted.double.blitzmax"
         }
-      },
-      "name": "meta.moduleinfo.blitzmax",
-      "patterns": [
-        {
-          "include": "#bmax_string_content"
-        }
-      ]
+      }
     },
     {
-      "begin": "(?i)(?:(?:^|;)\\s*)(type)\\s+([a-zA-Z_]\\w*)(?:\\s+(extends)\\s+([a-zA-Z_]\\w*))?(?:\\s+(final|abstract))?",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.type.class.blitzmax"
-        },
-        "2": {
-          "name": "entity.name.type.blitzmax"
-        },
-        "3": {
-          "name": "storage.modifier.extends.blitzmax"
-        },
-        "4": {
-          "name": "entity.other.inherited-class.blitzmax"
-        },
-        "5": {
-          "name": "storage.modifier.class.blitzmax"
-        }
-      },
-      "end": "(?i)\\b(end\\s?type)\\b",
-      "endCaptures": {
-        "1": {
-          "name": "storage.type.class.blitzmax"
-        }
-      },
       "name": "meta.type.blitzmax",
+      "begin": "(?i)(?:(?:^|;)\\s*)(type)\\s+([a-zA-Z_]\\w*)(?:\\s+(extends)\\s+([a-zA-Z_]\\w*))?(?:\\s+(final|abstract))?",
+      "end": "(?i)\\b(end\\s?type)\\b",
       "patterns": [
         {
+          "name": "meta.method.blitzmax",
           "begin": "(?i)(?:(?:^|;)\\s*)(method)\\s+([a-zA-Z_]\\w*)",
+          "end": "(?i)(?:\\)\\s+(abstract)\\s*)$|\\b(end\\s?method)\\b",
+          "patterns": [
+            {
+              "include": "$self"
+            },
+            {
+              "name": "storage.modifier.method.final.blitzmax",
+              "match": "(?i)\\bfinal\\b"
+            }
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.method.blitzmax"
@@ -398,7 +384,6 @@
               "name": "entity.name.function.method.blitzmax"
             }
           },
-          "end": "(?i)(?:\\)\\s+(abstract)\\s*)$|\\b(end\\s?method)\\b",
           "endCaptures": {
             "1": {
               "name": "storage.modifier.abstract.blitzmax"
@@ -406,17 +391,7 @@
             "2": {
               "name": "storage.type.method.blitzmax"
             }
-          },
-          "name": "meta.method.blitzmax",
-          "patterns": [
-            {
-              "include": "$self"
-            },
-            {
-              "match": "(?i)\\bfinal\\b",
-              "name": "storage.modifier.method.final.blitzmax"
-            }
-          ]
+          }
         },
         {
           "include": "#bmax_comment_quote"
@@ -463,144 +438,166 @@
         {
           "include": "#bmax_preprocessor"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.class.blitzmax"
+        },
+        "2": {
+          "name": "entity.name.type.blitzmax"
+        },
+        "3": {
+          "name": "storage.modifier.extends.blitzmax"
+        },
+        "4": {
+          "name": "entity.other.inherited-class.blitzmax"
+        },
+        "5": {
+          "name": "storage.modifier.class.blitzmax"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "storage.type.class.blitzmax"
+        }
+      }
     },
     {
-      "match": "(?i)\\b((end\\s?|else\\s?)?(if)|else|then)\\b",
-      "name": "keyword.control.if.blitzmax"
+      "name": "keyword.control.if.blitzmax",
+      "match": "(?i)\\b((end\\s?|else\\s?)?(if)|else|then)\\b"
     },
     {
       "include": "#bmax_control_keywords"
     },
     {
+      "name": "meta.control.while.blitzmax",
       "begin": "(?i)(?:(?:^|;)\\s*)(while)\\b",
+      "end": "(?i)(?:(?:^|;)\\s*)(end\\s?while|wend)\\b",
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "keyword.control.while.blitzmax"
         }
       },
-      "end": "(?i)(?:(?:^|;)\\s*)(end\\s?while|wend)\\b",
       "endCaptures": {
         "1": {
           "name": "keyword.control.while.end.blitzmax"
         }
-      },
-      "name": "meta.control.while.blitzmax",
+      }
+    },
+    {
+      "name": "meta.control.for.blitzmax",
+      "begin": "(?i)(?:(?:^|;)\\s*)(for)\\b",
+      "end": "(?i)(?:(?:^|;)\\s*)(next)\\b",
       "patterns": [
+        {
+          "name": "keyword.control.for.eachin.blitzmax",
+          "match": "(?i)\\beachin\\b"
+        },
+        {
+          "name": "keyword.control.for.to.blitzmax",
+          "match": "(?i)\\bto\\b"
+        },
+        {
+          "name": "keyword.control.for.until.blitzmax",
+          "match": "(?i)\\buntil\\b"
+        },
+        {
+          "name": "keyword.control.for.step.blitzmax",
+          "match": "(?i)\\bstep\\b"
+        },
         {
           "include": "$self"
         }
-      ]
-    },
-    {
-      "begin": "(?i)(?:(?:^|;)\\s*)(for)\\b",
+      ],
       "beginCaptures": {
         "1": {
           "name": "keyword.control.for.blitzmax"
         }
       },
-      "end": "(?i)(?:(?:^|;)\\s*)(next)\\b",
       "endCaptures": {
         "1": {
           "name": "keyword.control.for.end.blitzmax"
         }
-      },
-      "name": "meta.control.for.blitzmax",
+      }
+    },
+    {
+      "name": "meta.control.repeat.blitzmax",
+      "begin": "(?i)(?:(?:^|;)\\s*)(repeat)\\b",
+      "end": "(?i)(?:(?:^|;)\\s*)(until|forever)\\b",
       "patterns": [
-        {
-          "match": "(?i)\\beachin\\b",
-          "name": "keyword.control.for.eachin.blitzmax"
-        },
-        {
-          "match": "(?i)\\bto\\b",
-          "name": "keyword.control.for.to.blitzmax"
-        },
-        {
-          "match": "(?i)\\buntil\\b",
-          "name": "keyword.control.for.until.blitzmax"
-        },
-        {
-          "match": "(?i)\\bstep\\b",
-          "name": "keyword.control.for.step.blitzmax"
-        },
         {
           "include": "$self"
         }
-      ]
-    },
-    {
-      "begin": "(?i)(?:(?:^|;)\\s*)(repeat)\\b",
+      ],
       "beginCaptures": {
         "1": {
           "name": "keyword.control.repeat.blitzmax"
         }
       },
-      "end": "(?i)(?:(?:^|;)\\s*)(until|forever)\\b",
       "endCaptures": {
         "1": {
           "name": "keyword.control.repeat.end.blitzmax"
         }
-      },
-      "name": "meta.control.repeat.blitzmax",
+      }
+    },
+    {
+      "name": "meta.control.select.blitzmax",
+      "begin": "(?i)(?:(?:^|;)\\s*)(select)\\b",
+      "end": "(?i)(?:(?:^|;)\\s*)(end\\s?select)\\b",
       "patterns": [
+        {
+          "name": "meta.control.select.case.blitzmax",
+          "match": "(?i)(?:(?:^|;)\\s*)(case)\\b",
+          "captures": {
+            "1": {
+              "name": "keyword.control.select.case.blitzmax"
+            }
+          }
+        },
+        {
+          "name": "meta.control.select.default.blitzmax",
+          "match": "(?i)(?:(?:^|;)\\s*)(default)\\b",
+          "captures": {
+            "1": {
+              "name": "keyword.control.select.default.blitzmax"
+            }
+          }
+        },
         {
           "include": "$self"
         }
-      ]
-    },
-    {
-      "begin": "(?i)(?:(?:^|;)\\s*)(select)\\b",
+      ],
       "beginCaptures": {
         "1": {
           "name": "keyword.control.select.blitzmax"
         }
       },
-      "end": "(?i)(?:(?:^|;)\\s*)(end\\s?select)\\b",
       "endCaptures": {
         "1": {
           "name": "keyword.control.select.end.blitzmax"
         }
-      },
-      "name": "meta.control.select.blitzmax",
-      "patterns": [
-        {
-          "captures": {
-            "1": {
-              "name": "keyword.control.select.case.blitzmax"
-            }
-          },
-          "match": "(?i)(?:(?:^|;)\\s*)(case)\\b",
-          "name": "meta.control.select.case.blitzmax"
-        },
-        {
-          "captures": {
-            "1": {
-              "name": "keyword.control.select.default.blitzmax"
-            }
-          },
-          "match": "(?i)(?:(?:^|;)\\s*)(default)\\b",
-          "name": "meta.control.select.default.blitzmax"
-        },
-        {
-          "include": "$self"
-        }
-      ]
+      }
     },
     {
-      "match": "(?i)\\b(mod|shr|shl|sar|and|or|not)\\b",
-      "name": "keyword.operator.blitzmax"
+      "name": "keyword.operator.blitzmax",
+      "match": "(?i)\\b(mod|shr|shl|sar|and|or|not)\\b"
     },
     {
-      "match": ":?[\\^+\\-=&|><]",
-      "name": "keyword.operator.blitzmax"
+      "name": "keyword.operator.blitzmax",
+      "match": ":?[\\^+\\-=\u0026|\u003e\u003c]"
     },
     {
-      "match": "(?i)\\b(private|public)\\b",
-      "name": "keyword.other.scope.blitzmax"
+      "name": "keyword.other.scope.blitzmax",
+      "match": "(?i)\\b(private|public)\\b"
     },
     {
-      "match": "(?i)\\b(strict|superstrict)\\b",
-      "name": "keyword.other.strictness.blitzmax"
+      "name": "keyword.other.strictness.blitzmax",
+      "match": "(?i)\\b(strict|superstrict)\\b"
     },
     {
       "include": "#bmax_null"
@@ -615,12 +612,12 @@
       "include": "#bmax_string_quoted"
     },
     {
-      "match": "(?i)\\b(self)\\b",
-      "name": "variable.language.self.blitzmax"
+      "name": "variable.language.self.blitzmax",
+      "match": "(?i)\\b(self)\\b"
     },
     {
-      "match": "(?i)\\b(super)\\b",
-      "name": "variable.language.super.blitzmax"
+      "name": "variable.language.super.blitzmax",
+      "match": "(?i)\\b(super)\\b"
     },
     {
       "include": "#bmax_constructor"
@@ -634,49 +631,34 @@
   ],
   "repository": {
     "bmax_array": {
-      "begin": "(\\[)",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.operator.array.blitzmax"
-        }
-      },
-      "end": "(\\])",
-      "endCaptures": {
-        "1": {
-          "name": "keyword.operator.array.blitzmax"
-        }
-      },
       "name": "meta.array.blitzmax",
+      "begin": "(\\[)",
+      "end": "(\\])",
       "patterns": [
         {
           "include": "$self"
         }
-      ]
-    },
-    "bmax_attributes": {
-      "begin": "(\\{)",
+      ],
       "beginCaptures": {
         "1": {
-          "name": "storage.modifier.attributes.braces.blitzmax"
+          "name": "keyword.operator.array.blitzmax"
         }
       },
-      "end": "(\\})",
       "endCaptures": {
         "1": {
-          "name": "storage.modifier.attributes.braces.blitzmax"
+          "name": "keyword.operator.array.blitzmax"
         }
-      },
+      }
+    },
+    "bmax_attributes": {
       "name": "meta.attributes.blitzmax",
+      "begin": "(\\{)",
+      "end": "(\\})",
       "patterns": [
         {
-          "begin": "\\b([a-zA-Z_]\\w*)\\s*(=)\\s*",
-          "beginCaptures": {
-            "1": {
-              "name": "entity.other.attribute-name.blitzmax"
-            }
-          },
-          "end": "(?=\\s|\\}|[a-zA-Z_])",
           "name": "meta.attribute.blitzmax",
+          "begin": "\\b([a-zA-Z_]\\w*)\\s*(=)\\s*",
+          "end": "(?=\\s|\\}|[a-zA-Z_])",
           "patterns": [
             {
               "include": "#bmax_string_quoted"
@@ -684,27 +666,42 @@
             {
               "include": "#bmax_numbers"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "entity.other.attribute-name.blitzmax"
+            }
+          }
         },
         {
+          "name": "meta.attribute.blitzmax",
+          "match": "\\b([a-zA-Z_]\\w*)(?:\\s*((?!=)|(?=\\})))",
           "captures": {
             "1": {
               "name": "entity.other.attribute-name.blitzmax"
             }
-          },
-          "match": "\\b([a-zA-Z_]\\w*)(?:\\s*((?!=)|(?=\\})))",
-          "name": "meta.attribute.blitzmax"
+          }
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "storage.modifier.attributes.braces.blitzmax"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "storage.modifier.attributes.braces.blitzmax"
+        }
+      }
     },
     "bmax_boolean": {
-      "match": "(?i)\\b(true|false)\\b",
-      "name": "constant.language.boolean.blitzmax"
+      "name": "constant.language.boolean.blitzmax",
+      "match": "(?i)\\b(true|false)\\b"
     },
     "bmax_comment_block": {
-      "begin": "(?i)(?<=\\s|^|;)(?<!end|end\\s)rem\\b",
-      "end": "(?i)(?<=\\s|^|;)end\\s?rem\\b",
       "name": "comment.block.rem.blitzmax",
+      "begin": "(?i)(?\u003c=\\s|^|;)(?\u003c!end|end\\s)rem\\b",
+      "end": "(?i)(?\u003c=\\s|^|;)end\\s?rem\\b",
       "patterns": [
         {
           "include": "#bmax_url_content"
@@ -712,9 +709,9 @@
       ]
     },
     "bmax_comment_quote": {
+      "name": "comment.line.apostrophe.blitzmax",
       "begin": "'",
       "end": "$",
-      "name": "comment.line.apostrophe.blitzmax",
       "patterns": [
         {
           "include": "#bmax_url_content"
@@ -722,13 +719,13 @@
       ]
     },
     "bmax_constant": {
+      "name": "meta.constant.blitzmax",
+      "match": "(?i)\\b(const)\\b",
       "captures": {
         "1": {
           "name": "keyword.other.constant.blitzmax"
         }
-      },
-      "match": "(?i)\\b(const)\\b",
-      "name": "meta.constant.blitzmax"
+      }
     },
     "bmax_constants": {
       "patterns": [
@@ -744,6 +741,8 @@
       ]
     },
     "bmax_constructor": {
+      "name": "meta.call.constructor.blitzmax",
+      "match": "(?i)\\b(new)\\s+([a-zA-Z_]\\w*)\\b",
       "captures": {
         "1": {
           "name": "keyword.other.new.blitzmax"
@@ -751,16 +750,21 @@
         "2": {
           "name": "storage.type.class.blitzmax"
         }
-      },
-      "match": "(?i)\\b(new)\\s+([a-zA-Z_]\\w*)\\b",
-      "name": "meta.call.constructor.blitzmax"
+      }
     },
     "bmax_control_keywords": {
-      "match": "(?i)\\b(throw|return|exit|continue)\\b",
-      "name": "keyword.control.blitzmax"
+      "name": "keyword.control.blitzmax",
+      "match": "(?i)\\b(throw|return|exit|continue)\\b"
     },
     "bmax_function": {
+      "name": "meta.function.blitzmax",
       "begin": "(?i)(?:(?:^|;)\\s*)(function)\\s+([a-zA-Z_]\\w*)\\b",
+      "end": "(?i)\\b(end\\s?function)\\b",
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "storage.type.function.blitzmax"
@@ -769,66 +773,61 @@
           "name": "entity.name.function.blitzmax"
         }
       },
-      "end": "(?i)\\b(end\\s?function)\\b",
       "endCaptures": {
         "1": {
           "name": "storage.type.function.blitzmax"
         }
-      },
-      "name": "meta.function.blitzmax",
-      "patterns": [
-        {
-          "include": "$self"
-        }
-      ]
+      }
     },
     "bmax_global_variable": {
+      "name": "meta.variable.blitzmax",
+      "match": "(?i)\\b(global)\\b",
       "captures": {
         "1": {
           "name": "storage.modifier.global.blitzmax"
         }
-      },
-      "match": "(?i)\\b(global)\\b",
-      "name": "meta.variable.blitzmax"
+      }
     },
     "bmax_local_variable": {
+      "name": "meta.variable.blitzmax",
+      "match": "(?i)\\b(local)\\b",
       "captures": {
         "1": {
           "name": "keyword.other.variable.local.blitzmax"
         }
-      },
-      "match": "(?i)\\b(local)\\b",
-      "name": "meta.variable.blitzmax"
+      }
     },
     "bmax_null": {
-      "match": "(?i)\\bnull\\b",
-      "name": "constant.language.null.blitzmax"
+      "name": "constant.language.null.blitzmax",
+      "match": "(?i)\\bnull\\b"
     },
     "bmax_numbers": {
       "patterns": [
         {
-          "match": "(\\$[0-9a-fA-F]{1,16})",
-          "name": "constant.numeric.integer.hexadecimal.blitzmax"
+          "name": "constant.numeric.integer.hexadecimal.blitzmax",
+          "match": "(\\$[0-9a-fA-F]{1,16})"
         },
         {
-          "match": "(\\%[01]{1,128})",
-          "name": "constant.numeric.integer.binary.blitzmax"
+          "name": "constant.numeric.integer.binary.blitzmax",
+          "match": "(\\%[01]{1,128})"
         },
         {
-          "match": "(?x) (?<! % | \\$ ) (\n\t\t\t\t\t\t\t\\b ([0-9]+ \\. [0-9]+) |\n\t\t\t\t\t\t\t(\\. [0-9]+)\n\t\t\t\t\t\t)",
-          "name": "constant.numeric.float.blitzmax"
+          "name": "constant.numeric.float.blitzmax",
+          "match": "(?x) (?\u003c! % | \\$ ) (\n\t\t\t\t\t\t\t\\b ([0-9]+ \\. [0-9]+) |\n\t\t\t\t\t\t\t(\\. [0-9]+)\n\t\t\t\t\t\t)"
         },
         {
-          "match": "(?x)\\b(([0-9]+))",
-          "name": "constant.numeric.integer.blitzmax"
+          "name": "constant.numeric.integer.blitzmax",
+          "match": "(?x)\\b(([0-9]+))"
         }
       ]
     },
     "bmax_pi": {
-      "match": "(?i)\\bpi\\b",
-      "name": "constant.language.blitzmax"
+      "name": "constant.language.blitzmax",
+      "match": "(?i)\\bpi\\b"
     },
     "bmax_pointerops": {
+      "name": "meta.pointerops.blitzmax",
+      "match": "(?i)\\b(?:(ptr|var)|(varptr))\\b",
       "captures": {
         "1": {
           "name": "storage.modifier.blitzmax"
@@ -836,19 +835,17 @@
         "2": {
           "name": "keyword.operator.blitzmax"
         }
-      },
-      "match": "(?i)\\b(?:(ptr|var)|(varptr))\\b",
-      "name": "meta.pointerops.blitzmax"
+      }
     },
     "bmax_preprocessor": {
-      "match": "(?i)^\\s*\\?(not\\s+)?\\w*",
-      "name": "keyword.control.preprocessor.blitzmax"
+      "name": "keyword.control.preprocessor.blitzmax",
+      "match": "(?i)^\\s*\\?(not\\s+)?\\w*"
     },
     "bmax_string_content": {
       "patterns": [
         {
-          "match": "\\~[^\"]",
-          "name": "constant.character.escape.blitzmax"
+          "name": "constant.character.escape.blitzmax",
+          "match": "\\~[^\"]"
         },
         {
           "include": "#bmax_url_content"
@@ -856,35 +853,37 @@
       ]
     },
     "bmax_string_quoted": {
+      "name": "string.quoted.double.blitzmax",
       "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "include": "#bmax_string_content"
+        }
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.blitzmax"
         }
       },
-      "end": "\"",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.blitzmax"
         }
-      },
-      "name": "string.quoted.double.blitzmax",
-      "patterns": [
-        {
-          "include": "#bmax_string_content"
-        }
-      ]
+      }
     },
     "bmax_type_field": {
+      "name": "meta.variable.field.blitzmax",
+      "match": "(?i)\\b(field)\\b",
       "captures": {
         "1": {
           "name": "keyword.other.variable.field.blitzmax"
         }
-      },
-      "match": "(?i)\\b(field)\\b",
-      "name": "meta.variable.field.blitzmax"
+      }
     },
     "bmax_typename": {
+      "name": "meta.typename.blitzmax",
+      "match": "(?xi)(?: \\: \\s* ([a-zA-Z_]\\w*) | ([!#%]|@{1,2}|\\$[zw]?) )",
       "captures": {
         "1": {
           "name": "storage.type.blitzmax"
@@ -892,19 +891,15 @@
         "2": {
           "name": "storage.type.blitzmax"
         }
-      },
-      "match": "(?xi)(?: \\: \\s* ([a-zA-Z_]\\w*) | ([!#%]|@{1,2}|\\$[zw]?) )",
-      "name": "meta.typename.blitzmax"
+      }
     },
     "bmax_types": {
-      "match": "(?i)\\b(object|string|byte|short|int|long|float|double)\\b",
-      "name": "storage.type.blitzmax"
+      "name": "storage.type.blitzmax",
+      "match": "(?i)\\b(object|string|byte|short|int|long|float|double)\\b"
     },
     "bmax_url_content": {
-      "match": "[a-zA-Z_]\\w*://[^ \"'()\\[\\]]*(?=$|\\b)",
-      "name": "meta.url.blitzmax"
+      "name": "meta.url.blitzmax",
+      "match": "[a-zA-Z_]\\w*://[^ \"'()\\[\\]]*(?=$|\\b)"
     }
-  },
-  "scopeName": "source.blitzmax",
-  "uuid": "4BF45A32-1013-4E9B-979C-3CD5A20D81AD"
+  }
 }

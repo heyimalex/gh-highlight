@@ -1,14 +1,12 @@
 {
-  "fileTypes": [
-    "y"
-  ],
   "name": "Bison",
+  "scopeName": "source.bison",
   "patterns": [
     {
-      "begin": "^%\\{",
-      "contentName": "source.c",
-      "end": "%\\}",
       "name": "meta.prologue.bison",
+      "contentName": "source.c",
+      "begin": "^%\\{",
+      "end": "%\\}",
       "patterns": [
         {
           "include": "source.c"
@@ -16,17 +14,17 @@
       ]
     },
     {
+      "name": "meta.declarations.bison",
       "begin": "^(?!%%$)",
-      "end": "^(?=%%$)",
-      "name": "meta.declarations.bison"
+      "end": "^(?=%%$)"
     },
     {
       "begin": "^%%$",
       "end": "$.^",
       "patterns": [
         {
-          "begin": "^(?!%%$)",
           "contentName": "meta.rules.bison",
+          "begin": "^(?!%%$)",
           "end": "^(?=%%$)",
           "patterns": [
             {
@@ -35,14 +33,14 @@
           ]
         },
         {
-          "begin": "^%%$",
           "contentName": "meta.epilogue.bison",
+          "begin": "^%%$",
           "end": "$.^",
           "patterns": [
             {
+              "name": "source.c",
               "begin": "^",
               "end": "$.^",
-              "name": "source.c",
               "patterns": [
                 {
                   "include": "source.c"
@@ -53,7 +51,5 @@
         }
       ]
     }
-  ],
-  "scopeName": "source.bison",
-  "uuid": "1AA6D027-D1AF-4868-951D-1634BD88D910"
+  ]
 }

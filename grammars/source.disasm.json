@@ -1,31 +1,30 @@
 {
   "name": "GDB Disassembly",
+  "scopeName": "source.disasm",
   "patterns": [
     {
-      "match": ".+:([0-9]+)$",
-      "name": "string.filename"
+      "name": "string.filename",
+      "match": ".+:([0-9]+)$"
     },
     {
-      "match": "\\b0x[0-9a-f]+",
-      "name": "constant.other.hex.disasm"
+      "name": "constant.other.hex.disasm",
+      "match": "\\b0x[0-9a-f]+"
     },
     {
-      "match": "\\b[0-9]+",
-      "name": "constant.other.disasm"
+      "name": "constant.other.disasm",
+      "match": "\\b[0-9]+"
     },
     {
-      "match": "[\\w]+",
-      "name": "keyword.variable"
+      "name": "keyword.variable",
+      "match": "[\\w]+"
     },
     {
-      "match": " \\b([a-z\\.]+) ",
-      "name": "support.function.disasm"
+      "name": "support.function.disasm",
+      "match": " \\b([a-z\\.]+) "
     },
     {
-      "match": "(;|#)[^\\d].*$",
-      "name": "comment"
+      "name": "comment",
+      "match": "(;|#)[^\\d].*$"
     }
-  ],
-  "scopeName": "source.disasm",
-  "uuid": "932CA89E-7D79-4406-9F53-8BC58525560C"
+  ]
 }

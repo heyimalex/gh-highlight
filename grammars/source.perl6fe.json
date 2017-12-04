@@ -1,19 +1,15 @@
 {
-  "scopeName": "source.perl6fe",
   "name": "Perl 6 FE",
-  "fileTypes": [
-    "p6",
-    "pl6",
-    "pm6",
-    "t",
-    "t6",
-    "pod6",
-    "nqp"
-  ],
-  "firstLineMatch": "(?x) ^ \\s* (?: use \\s v6 | =begin \\s pod | =comment | \\#!(?: perl6|/.*perl6 (?! \\S)) | my\\s*class )",
+  "scopeName": "source.perl6fe",
   "patterns": [
     {
+      "contentName": "comment.block.finish.perl6fe",
       "begin": "^\\s*(=)(finish)",
+      "patterns": [
+        {
+          "include": "#comment-block-syntax"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "storage.modifier.block.finish.perl6fe"
@@ -21,19 +17,20 @@
         "2": {
           "name": "keyword.operator.block.finish.perl6fe"
         }
-      },
-      "contentName": "comment.block.finish.perl6fe",
-      "patterns": [
-        {
-          "include": "#comment-block-syntax"
-        }
-      ]
+      }
     },
     {
       "include": "#comment-block-delimited"
     },
     {
+      "contentName": "comment.block.paragraph.perl6fe",
       "begin": "^\\s*(=)(?:(para)|(for)\\s+(\\w+))",
+      "end": "(?=^\\s*$|^\\s*=\\w+.*$)",
+      "patterns": [
+        {
+          "include": "#comment-block-syntax"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "storage.modifier.block.paragraph.perl6fe"
@@ -44,19 +41,13 @@
         "3": {
           "name": "entity.other.attribute-name.paragraph.perl6fe"
         }
-      },
-      "end": "(?=^\\s*$|^\\s*=\\w+.*$)",
-      "contentName": "comment.block.paragraph.perl6fe",
-      "patterns": [
-        {
-          "include": "#comment-block-syntax"
-        }
-      ]
+      }
     },
     {
       "include": "#comment-block-abbreviated"
     },
     {
+      "name": "meta.documentation.block.declarator.perl6fe",
       "match": "^\\s*(#)([\\|\\=])(.*)\\n",
       "captures": {
         "1": {
@@ -68,243 +59,256 @@
         "3": {
           "name": "comment.inline.declarator.perl6fe"
         }
-      },
-      "name": "meta.documentation.block.declarator.perl6fe"
+      }
     },
     {
+      "name": "comment.multiline.hash-tick.triple_paren.perl6fe",
       "begin": "\\s*#`\\(\\(\\(",
       "end": "\\)\\)\\)",
-      "name": "comment.multiline.hash-tick.triple_paren.perl6fe",
       "patterns": [
         {
+          "name": "comment.internal.triple_paren.perl6fe",
           "begin": "\\(\\(\\(",
-          "end": "\\)\\)\\)",
-          "name": "comment.internal.triple_paren.perl6fe"
+          "end": "\\)\\)\\)"
         }
       ]
     },
     {
+      "name": "comment.multiline.hash-tick.triple_bracket.perl6fe",
       "begin": "\\s*#`\\[\\[\\[",
       "end": "\\]\\]\\]",
-      "name": "comment.multiline.hash-tick.triple_bracket.perl6fe",
       "patterns": [
         {
+          "name": "comment.internal.triple_bracket.perl6fe",
           "begin": "\\[\\[\\[",
-          "end": "\\]\\]\\]",
-          "name": "comment.internal.triple_bracket.perl6fe"
+          "end": "\\]\\]\\]"
         }
       ]
     },
     {
+      "name": "comment.multiline.hash-tick.triple_brace.perl6fe",
       "begin": "\\s*#`\\{\\{\\{",
       "end": "\\}\\}\\}",
-      "name": "comment.multiline.hash-tick.triple_brace.perl6fe",
       "patterns": [
         {
+          "name": "comment.internal.triple_brace.perl6fe",
           "begin": "\\{\\{\\{",
-          "end": "\\}\\}\\}",
-          "name": "comment.internal.triple_brace.perl6fe"
+          "end": "\\}\\}\\}"
         }
       ]
     },
     {
-      "begin": "\\s*#`<<<",
-      "end": ">>>",
       "name": "comment.multiline.hash-tick.triple_angle.perl6fe",
+      "begin": "\\s*#`\u003c\u003c\u003c",
+      "end": "\u003e\u003e\u003e",
       "patterns": [
         {
-          "begin": "<<<",
-          "end": ">>>",
-          "name": "comment.internal.triple_angle.perl6fe"
+          "name": "comment.internal.triple_angle.perl6fe",
+          "begin": "\u003c\u003c\u003c",
+          "end": "\u003e\u003e\u003e"
         }
       ]
     },
     {
-      "begin": "\\s*#`<<",
-      "end": ">>",
       "name": "comment.multiline.hash-tick.double_angle.perl6fe",
+      "begin": "\\s*#`\u003c\u003c",
+      "end": "\u003e\u003e",
       "patterns": [
         {
-          "begin": "<<",
-          "end": ">>",
-          "name": "comment.internal.double_angle.perl6fe"
+          "name": "comment.internal.double_angle.perl6fe",
+          "begin": "\u003c\u003c",
+          "end": "\u003e\u003e"
         }
       ]
     },
     {
+      "name": "comment.multiline.hash-tick.double_paren.perl6fe",
       "begin": "\\s*#`\\(\\(",
       "end": "\\)\\)",
-      "name": "comment.multiline.hash-tick.double_paren.perl6fe",
       "patterns": [
         {
+          "name": "comment.internal.double_paren.perl6fe",
           "begin": "\\(\\(",
-          "end": "\\)\\)",
-          "name": "comment.internal.double_paren.perl6fe"
+          "end": "\\)\\)"
         }
       ]
     },
     {
+      "name": "comment.multiline.hash-tick.double_bracket.perl6fe",
       "begin": "\\s*#`\\[\\[",
       "end": "\\]\\]",
-      "name": "comment.multiline.hash-tick.double_bracket.perl6fe",
       "patterns": [
         {
+          "name": "comment.internal.double_bracket.perl6fe",
           "begin": "\\[\\[",
-          "end": "\\]\\]",
-          "name": "comment.internal.double_bracket.perl6fe"
+          "end": "\\]\\]"
         }
       ]
     },
     {
+      "name": "comment.multiline.hash-tick.double_brace.perl6fe",
       "begin": "\\s*#`{{",
       "end": "}}",
-      "name": "comment.multiline.hash-tick.double_brace.perl6fe",
       "patterns": [
         {
+          "name": "comment.internal.double_brace.perl6fe",
           "begin": "{{",
-          "end": "}}",
-          "name": "comment.internal.double_brace.perl6fe"
+          "end": "}}"
         }
       ]
     },
     {
+      "name": "comment.multiline.hash-tick.brace.perl6fe",
       "begin": "\\s*#`{",
       "end": "}",
-      "name": "comment.multiline.hash-tick.brace.perl6fe",
       "patterns": [
         {
+          "name": "comment.internal.brace.perl6fe",
           "begin": "{",
-          "end": "}",
-          "name": "comment.internal.brace.perl6fe"
+          "end": "}"
         }
       ]
     },
     {
-      "begin": "\\s*#`<",
-      "end": ">",
       "name": "comment.multiline.hash-tick.angle.perl6fe",
+      "begin": "\\s*#`\u003c",
+      "end": "\u003e",
       "patterns": [
         {
-          "begin": "<",
-          "end": ">",
-          "name": "comment.internal.angle.perl6fe"
+          "name": "comment.internal.angle.perl6fe",
+          "begin": "\u003c",
+          "end": "\u003e"
         }
       ]
     },
     {
+      "name": "comment.multiline.hash-tick.paren.perl6fe",
       "begin": "\\s*#`\\(",
       "end": "\\)",
-      "name": "comment.multiline.hash-tick.paren.perl6fe",
       "patterns": [
         {
+          "name": "comment.internal.paren.perl6fe",
           "begin": "\\(",
-          "end": "\\)",
-          "name": "comment.internal.paren.perl6fe"
+          "end": "\\)"
         }
       ]
     },
     {
+      "name": "comment.multiline.hash-tick.bracket.perl6fe",
       "begin": "\\s*#`\\[",
       "end": "\\]",
-      "name": "comment.multiline.hash-tick.bracket.perl6fe",
       "patterns": [
         {
+          "name": "comment.internal.bracket.perl6fe",
           "begin": "\\[",
-          "end": "\\]",
-          "name": "comment.internal.bracket.perl6fe"
+          "end": "\\]"
         }
       ]
     },
     {
+      "name": "comment.multiline.hash-tick.left_double_right_double.perl6fe",
       "begin": "\\s*#`“",
       "end": "”",
-      "name": "comment.multiline.hash-tick.left_double_right_double.perl6fe",
       "patterns": [
         {
+          "name": "comment.internal.left_double_right_double.perl6fe",
           "begin": "“",
-          "end": "”",
-          "name": "comment.internal.left_double_right_double.perl6fe"
+          "end": "”"
         }
       ]
     },
     {
+      "name": "comment.multiline.hash-tick.left_double-low-q_right_double.perl6fe",
+      "begin": "\\s*#`„",
+      "end": "”|“",
+      "patterns": [
+        {
+          "name": "comment.internal.left_double-low-q_right_double.perl6fe",
+          "begin": "„",
+          "end": "”|“"
+        }
+      ]
+    },
+    {
+      "name": "comment.multiline.hash-tick.left_single_right_single.perl6fe",
       "begin": "\\s*#`‘",
       "end": "’",
-      "name": "comment.multiline.hash-tick.left_single_right_single.perl6fe",
       "patterns": [
         {
+          "name": "comment.internal.left_single_right_single.perl6fe",
           "begin": "‘",
-          "end": "’",
-          "name": "comment.internal.left_single_right_single.perl6fe"
+          "end": "’"
         }
       ]
     },
     {
+      "name": "comment.multiline.hash-tick.low-q_left_single.perl6fe",
+      "begin": "\\s*#`‚",
+      "end": "‘",
+      "patterns": [
+        {
+          "name": "comment.internal.low-q_left_single.perl6fe",
+          "begin": "‚",
+          "end": "‘"
+        }
+      ]
+    },
+    {
+      "name": "comment.multiline.hash-tick.fw_cornerbracket.perl6fe",
       "begin": "\\s*#`「",
       "end": "」",
-      "name": "comment.multiline.hash-tick.fw_cornerbracket.perl6fe",
       "patterns": [
         {
+          "name": "comment.internal.fw_cornerbracket.perl6fe",
           "begin": "「",
-          "end": "」",
-          "name": "comment.internal.fw_cornerbracket.perl6fe"
+          "end": "」"
         }
       ]
     },
     {
+      "name": "comment.multiline.hash-tick.hw_cornerbracket.perl6fe",
       "begin": "\\s*#`｢",
       "end": "｣",
-      "name": "comment.multiline.hash-tick.hw_cornerbracket.perl6fe",
       "patterns": [
         {
+          "name": "comment.internal.hw_cornerbracket.perl6fe",
           "begin": "｢",
-          "end": "｣",
-          "name": "comment.internal.hw_cornerbracket.perl6fe"
+          "end": "｣"
         }
       ]
     },
     {
+      "name": "comment.multiline.hash-tick.chevron.perl6fe",
       "begin": "\\s*#`«",
       "end": "»",
-      "name": "comment.multiline.hash-tick.chevron.perl6fe",
       "patterns": [
         {
+          "name": "comment.internal.chevron.perl6fe",
           "begin": "«",
-          "end": "»",
-          "name": "comment.internal.chevron.perl6fe"
+          "end": "»"
         }
       ]
     },
     {
+      "name": "comment.multiline.hash-tick.s-shaped-bag-delimiter.perl6fe",
       "begin": "\\s*#`⟅",
       "end": "⟆",
-      "name": "comment.multiline.hash-tick.s-shaped-bag-delimiter.perl6fe",
       "patterns": [
         {
+          "name": "comment.internal.s-shaped-bag-delimiter.perl6fe",
           "begin": "⟅",
-          "end": "⟆",
-          "name": "comment.internal.s-shaped-bag-delimiter.perl6fe"
+          "end": "⟆"
         }
       ]
     },
     {
-      "begin": "“",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.perl6fe"
-        }
-      },
-      "end": "”",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.perl6fe"
-        }
-      },
       "name": "string.quoted.left_double_right_double.perl6fe",
+      "begin": "“",
+      "end": "”",
       "patterns": [
         {
-          "match": "\\\\[“”abtnfre\\\\\\{\\}]",
-          "name": "constant.character.escape.perl6fe"
+          "name": "constant.character.escape.perl6fe",
+          "match": "\\\\[“”abtnfre\\\\\\{\\}]"
         },
         {
           "include": "#interpolation"
@@ -312,74 +316,125 @@
         {
           "include": "source.quoting.perl6fe#q_left_double_right_double_string_content"
         }
-      ]
-    },
-    {
-      "begin": "(?<=\\W|^)‘",
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.perl6fe"
         }
       },
-      "end": "’",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.perl6fe"
         }
-      },
-      "name": "string.quoted.single.left_single_right_single.perl6fe",
+      }
+    },
+    {
+      "name": "string.quoted.left_double-low-q_right_double.perl6fe",
+      "begin": "„",
+      "end": "”|“",
       "patterns": [
         {
-          "match": "\\\\[‘’\\\\]",
-          "name": "constant.character.escape.perl6fe"
+          "name": "constant.character.escape.perl6fe",
+          "match": "\\\\[„”|“abtnfre\\\\\\{\\}]"
+        },
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "source.quoting.perl6fe#q_left_double-low-q_right_double_string_content"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.perl6fe"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.perl6fe"
+        }
+      }
+    },
+    {
+      "name": "string.quoted.single.left_single_right_single.perl6fe",
+      "begin": "(?\u003c=\\W|^)‘",
+      "end": "’",
+      "patterns": [
+        {
+          "name": "constant.character.escape.perl6fe",
+          "match": "\\\\[‘’\\\\]"
         },
         {
           "include": "source.quoting.perl6fe#q_left_single_right_single_string_content"
         }
-      ]
-    },
-    {
-      "begin": "(?<=\\W|^)'",
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.perl6fe"
         }
       },
-      "end": "'",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.perl6fe"
         }
-      },
-      "name": "string.quoted.single.single.perl6fe",
+      }
+    },
+    {
+      "name": "string.quoted.single.low-q_left_single.perl6fe",
+      "begin": "(?\u003c=\\W|^)‚",
+      "end": "‘",
       "patterns": [
         {
-          "match": "\\\\['\\\\]",
-          "name": "constant.character.escape.perl6fe"
+          "name": "constant.character.escape.perl6fe",
+          "match": "\\\\[‚‘\\\\]"
+        },
+        {
+          "include": "source.quoting.perl6fe#q_low-q_left_single_string_content"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.perl6fe"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.perl6fe"
+        }
+      }
+    },
+    {
+      "name": "string.quoted.single.single.perl6fe",
+      "begin": "(?\u003c=\\W|^)'",
+      "end": "'",
+      "patterns": [
+        {
+          "name": "constant.character.escape.perl6fe",
+          "match": "\\\\['\\\\]"
         },
         {
           "include": "source.quoting.perl6fe#q_single_string_content"
         }
-      ]
-    },
-    {
-      "begin": "\"",
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.perl6fe"
         }
       },
-      "end": "\"",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.perl6fe"
         }
-      },
+      }
+    },
+    {
       "name": "string.quoted.double.perl6fe",
+      "begin": "\"",
+      "end": "\"",
       "patterns": [
         {
-          "match": "\\\\[\"abtnfre\\\\\\{\\}]",
-          "name": "constant.character.escape.perl6fe"
+          "name": "constant.character.escape.perl6fe",
+          "match": "\\\\[\"abtnfre\\\\\\{\\}]"
         },
         {
           "include": "#interpolation"
@@ -387,26 +442,26 @@
         {
           "include": "source.quoting.perl6fe#q_double_string_content"
         }
-      ]
-    },
-    {
-      "begin": "”",
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.perl6fe"
         }
       },
-      "end": "”",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.perl6fe"
         }
-      },
+      }
+    },
+    {
       "name": "string.quoted.right_double_right_double.perl6fe",
+      "begin": "”",
+      "end": "”",
       "patterns": [
         {
-          "match": "\\\\[”abtnfre\\\\\\{\\}]",
-          "name": "constant.character.escape.perl6fe"
+          "name": "constant.character.escape.perl6fe",
+          "match": "\\\\[”abtnfre\\\\\\{\\}]"
         },
         {
           "include": "#interpolation"
@@ -414,34 +469,46 @@
         {
           "include": "source.quoting.perl6fe#q_right_double_right_double_string_content"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.perl6fe"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.perl6fe"
+        }
+      }
     },
     {
       "begin": "(^[ \\t]+)?(?=#)",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.whitespace.comment.leading.perl6fe"
-        }
-      },
       "end": "(?!\\G)",
       "patterns": [
         {
+          "name": "comment.line.number-sign.perl6fe",
           "begin": "#",
+          "end": "\\n",
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.comment.perl6fe"
             }
-          },
-          "end": "\\n",
-          "name": "comment.line.number-sign.perl6fe"
+          }
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.whitespace.comment.leading.perl6fe"
+        }
+      }
     },
     {
-      "match": "(?x) \\x{2208}|\\(elem\\)|\\x{2209}|\\!\\(elem\\)| \\x{220B}|\\(cont\\)|\\x{220C}|\\!\\(cont\\)| \\x{2286}|\\(<=\\)  |\\x{2288}|\\!\\(<=\\)  | \\x{2282}|\\(<\\)   |\\x{2284}|\\!\\(<\\)   | \\x{2287}|\\(>=\\)  |\\x{2289}|\\!\\(>=\\)  | \\x{2283}|\\(>\\)   |\\x{2285}|\\!\\(>\\)   | \\x{227C}|\\(<\\+\\)|\\x{227D}|\\(>\\+\\)   | \\x{222A}|\\(\\|\\) |\\x{2229}|\\(&\\)      | \\x{2216}|\\(\\-\\) |\\x{2296}|\\(\\^\\)    | \\x{228D}|\\(\\.\\) |\\x{228E}|\\(\\+\\)",
-      "name": "keyword.operator.setbagmix.perl6fe"
+      "name": "keyword.operator.setbagmix.perl6fe",
+      "match": "(?x) \\x{2208}|\\(elem\\)|\\x{2209}|\\!\\(elem\\)| \\x{220B}|\\(cont\\)|\\x{220C}|\\!\\(cont\\)| \\x{2286}|\\(\u003c=\\)  |\\x{2288}|\\!\\(\u003c=\\)  | \\x{2282}|\\(\u003c\\)   |\\x{2284}|\\!\\(\u003c\\)   | \\x{2287}|\\(\u003e=\\)  |\\x{2289}|\\!\\(\u003e=\\)  | \\x{2283}|\\(\u003e\\)   |\\x{2285}|\\!\\(\u003e\\)   | \\x{227C}|\\(\u003c\\+\\)|\\x{227D}|\\(\u003e\\+\\)   | \\x{222A}|\\(\\|\\) |\\x{2229}|\\(\u0026\\)      | \\x{2216}|\\(\\-\\) |\\x{2296}|\\(\\^\\)    | \\x{228D}|\\(\\.\\) |\\x{228E}|\\(\\+\\)"
     },
     {
+      "name": "meta.class.perl6fe",
+      "match": "(?x) ( class|enum|grammar|knowhow|module| package|role|slang|subset|monitor|actor ) (\\s+) ( ( (?:::|')? (?: ([a-zA-Z_À-ÿ\\$]) ([a-zA-Z0-9_À-ÿ\\$]|[\\-'][a-zA-Z0-9_À-ÿ\\$])* ) )+ )",
       "captures": {
         "1": {
           "name": "storage.type.class.perl6fe"
@@ -449,15 +516,13 @@
         "3": {
           "name": "entity.name.type.class.perl6fe"
         }
-      },
-      "match": "(?x) ( class|enum|grammar|knowhow|module| package|role|slang|subset|monitor|actor ) (\\s+) ( ( (?:::|')? (?: ([a-zA-Z_À-ÿ\\$]) ([a-zA-Z0-9_À-ÿ\\$]|[\\-'][a-zA-Z0-9_À-ÿ\\$])* ) )+ )",
-      "name": "meta.class.perl6fe"
+      }
     },
     {
       "include": "#p5_regex"
     },
     {
-      "match": "(?x)\n(?<=\n  ^\n | ^\\s\n | [\\s\\(] [^\\p{Nd}\\p{L}]\n | ~~\\s|~~\\s\\s|match\\(\n)\n([/]) # Solidus\n(.*?) # Regex contents\n(?: (?<!\\\\)|(?<=\\\\\\\\) ) (/) # Ending",
+      "match": "(?x)\n(?\u003c=\n  ^\n | ^\\s\n | [\\s\\(] [^\\p{Nd}\\p{L}]\n | ~~\\s|~~\\s\\s|match\\(\n | match:\\s\n)\n([/]) # Solidus\n(.*?) # Regex contents\n(?: (?\u003c!\\\\)|(?\u003c=\\\\\\\\) ) (/) # Ending",
       "captures": {
         "1": {
           "name": "punctuation.definition.regexp.perl6fe"
@@ -479,7 +544,17 @@
       }
     },
     {
-      "begin": "(?x)\n(?<= ^|\\s )\n(?:\n  (m|rx|s|S)\n  (\n    (?:\n      (?<!:P5) # < This can maybe be removed because we\n      \\s*:\\w+\n      (?!\\s*:P5) # < include p5_regex above it\n    )*\n  )\n)\n\\s*\n([^\\#\\p{Ps}\\p{Pe}\\p{Pi}\\p{Pf}\\w'\\-<>\\-]) # Whatever",
+      "contentName": "string.regexp.perl6fe",
+      "begin": "(?x)\n(?\u003c= [=,(\\[]|when|=\u003e|~~) \\s*\n(?:\n  (m|rx|s)?\n  (\n    (?:\n      (?\u003c!:P5) # \u003c This can maybe be removed because we\n      \\s*:\\w+\n      (?!\\s*:P5) # \u003c include p5_regex above it\n    )*\n  )\n) # With the m or rx\n\\s*\n([/]) # Solidus",
+      "end": "(?x) (?: (?\u003c!\\\\)|(?\u003c=\\\\\\\\)|(?\u003c!')|(?\u003c=\\\\ ') ) (/)",
+      "patterns": [
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "source.regexp.perl6fe"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "string.regexp.construct.perl6fe"
@@ -491,13 +566,16 @@
           "name": "punctuation.definition.regexp.perl6fe"
         }
       },
-      "end": "(?x) (?: (?<!\\\\)|(?<=\\\\\\\\) ) (\\3)",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.regexp.perl6fe"
         }
-      },
-      "contentName": "string.regexp.perl6fe",
+      }
+    },
+    {
+      "contentName": "fstring.regexp.perl6fe",
+      "begin": "(?x)\n(?\u003c= ^|[=,(\\[~]|when|=\u003e ) \\s*\n(?:\n  (m|rx|s)\n  (\n    (?:\n      (?\u003c!:P5) # \u003c This can maybe be removed because we\n      \\s*:\\w+\n      (?!\\s*:P5) # \u003c include p5_regex above it\n    )*\n  )\n) # With the m or rx\n\\s*\n([{]) # Left curly brace",
+      "end": "(?x) (?: (?\u003c!\\\\)|(?\u003c=\\\\\\\\) ) (\\})",
       "patterns": [
         {
           "include": "#interpolation"
@@ -505,10 +583,7 @@
         {
           "include": "source.regexp.perl6fe"
         }
-      ]
-    },
-    {
-      "begin": "(?x)\n(?<= ^|[=,(\\[~]|when|=> ) \\s*\n(?:\n  (m|rx)\n  (\n    (?:\n      (?<!:P5) # < This can maybe be removed because we\n      \\s*:\\w+\n      (?!\\s*:P5) # < include p5_regex above it\n    )*\n  )\n) # With the m or rx\n\\s*\n([/]) # Solidus",
+      ],
       "beginCaptures": {
         "1": {
           "name": "string.regexp.construct.perl6fe"
@@ -520,13 +595,16 @@
           "name": "punctuation.definition.regexp.perl6fe"
         }
       },
-      "end": "(?x) (?: (?<!\\\\)|(?<=\\\\\\\\) ) (/)",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.regexp.perl6fe"
         }
-      },
+      }
+    },
+    {
       "contentName": "string.regexp.perl6fe",
+      "begin": "(?\u003c![\\w\\/])(m|rx)((?:\\s*:\\w+)*)\\s*(\\{)",
+      "end": "(?\u003c!\\\\)(\\})",
       "patterns": [
         {
           "include": "#interpolation"
@@ -534,10 +612,7 @@
         {
           "include": "source.regexp.perl6fe"
         }
-      ]
-    },
-    {
-      "begin": "(?<![\\w\\/])(m|rx)((?:\\s*:\\w+)*)\\s*(\\{)",
+      ],
       "beginCaptures": {
         "1": {
           "name": "string.regexp.construct.perl6fe"
@@ -549,13 +624,16 @@
           "name": "punctuation.definition.regexp.perl6fe"
         }
       },
-      "end": "(?<!\\\\)(\\})",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.regexp.perl6fe"
         }
-      },
+      }
+    },
+    {
       "contentName": "string.regexp.perl6fe",
+      "begin": "(?\u003c![\\w\\/])(m|rx)((?:\\s*:\\w+)*)\\s*(\\[)",
+      "end": "(?\u003c!\\\\)(\\])",
       "patterns": [
         {
           "include": "#interpolation"
@@ -563,10 +641,7 @@
         {
           "include": "source.regexp.perl6fe"
         }
-      ]
-    },
-    {
-      "begin": "(?<![\\w\\/])(m|rx)((?:\\s*:\\w+)*)\\s*(\\[)",
+      ],
       "beginCaptures": {
         "1": {
           "name": "string.regexp.construct.perl6fe"
@@ -578,93 +653,470 @@
           "name": "punctuation.definition.regexp.perl6fe"
         }
       },
-      "end": "(?<!\\\\)(\\])",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.regexp.perl6fe"
         }
-      },
-      "contentName": "string.regexp.perl6fe",
-      "patterns": [
-        {
-          "include": "#interpolation"
-        },
-        {
-          "include": "source.regexp.perl6fe"
-        }
-      ]
+      }
     },
     {
-      "begin": "(?<=\\W|^)｢",
+      "name": "string.quoted.single.perl6fe",
+      "begin": "(?\u003c=\\W|^)｢",
+      "end": "｣",
+      "patterns": [
+        {
+          "include": "source.quoting.perl6fe#q_hw_cornerbracket_string_content"
+        }
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.perl6fe"
         }
       },
-      "end": "｣",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.perl6fe"
         }
-      },
-      "name": "string.quoted.single.perl6fe",
-      "patterns": [
-        {
-          "include": "source.quoting.perl6fe#q_hw_cornerbracket_string_content"
-        }
-      ]
+      }
     },
     {
-      "include": "#shellquotes"
-    },
-    {
-      "begin": "(?x) (?: ( qq|qqx|qqw ) \\s* ( (?:\\s*:\\w+)*\\s*: (?: to|heredoc ) )\\s* | (qqto) \\s* ( (?:\\s*:\\w+)* )\\s* ) / (\\S+) /",
-      "beginCaptures": {
-        "1": {
-          "name": "string.quoted.construct.perl6fe"
-        },
-        "2": {
-          "name": "support.function.adverb.perl6fe"
-        },
-        "3": {
-          "name": "string.quoted.construct.perl6fe"
-        },
-        "4": {
-          "name": "support.function.adverb.perl6fe"
-        },
-        "5": {
-          "name": "entity.other.attribute-name.heredoc.delimiter.perl6fe"
-        }
-      },
-      "end": "\\s*\\5",
-      "endCaptures": {
-        "0": {
-          "name": "entity.other.attribute-name.heredoc.delimiter.perl6fe"
-        }
-      },
+      "contentName": "string.regexp.slash.perl6fe",
+      "begin": "(?x)\n(?\u003c= ^|\\s )\n(?:\n  (m|rx|s|S)\n  (\n    (?:\n      (?\u003c!:P5) # \u003c This can maybe be removed because we\n      \\s*:\\w+\n      (?!\\s*:P5) # \u003c include p5_regex above it\n    )*\n  )\n)\n\\s*\n(/)",
+      "end": "(?x) (?: (?\u003c!\\\\)|(?\u003c=\\\\\\\\) ) (/)",
       "patterns": [
         {
           "include": "#interpolation"
         },
         {
-          "begin": "(?<=/)",
+          "include": "source.regexp.perl6fe"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "string.regexp.construct.slash.perl6fe"
+        },
+        "2": {
+          "name": "entity.name.section.adverb.regexp.slash.perl6fe"
+        },
+        "3": {
+          "name": "punctuation.definition.regexp.slash.perl6fe"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.regexp.slash.perl6fe"
+        }
+      }
+    },
+    {
+      "contentName": "string.regexp.brace.perl6fe",
+      "begin": "(?x)\n(?\u003c= ^|\\s )\n(?:\n  (m|rx|s|S)\n  (\n    (?:\n      (?\u003c!:P5) # \u003c This can maybe be removed because we\n      \\s*:\\w+\n      (?!\\s*:P5) # \u003c include p5_regex above it\n    )*\n  )\n)\n\\s*\n({)",
+      "end": "(?x) (?: (?\u003c!\\\\)|(?\u003c=\\\\\\\\) ) (})",
+      "patterns": [
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "source.regexp.perl6fe"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "string.regexp.construct.brace.perl6fe"
+        },
+        "2": {
+          "name": "entity.name.section.adverb.regexp.brace.perl6fe"
+        },
+        "3": {
+          "name": "punctuation.definition.regexp.brace.perl6fe"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.regexp.brace.perl6fe"
+        }
+      }
+    },
+    {
+      "contentName": "string.regexp.angle.perl6fe",
+      "begin": "(?x)\n(?\u003c= ^|\\s )\n(?:\n  (m|rx|s|S)\n  (\n    (?:\n      (?\u003c!:P5) # \u003c This can maybe be removed because we\n      \\s*:\\w+\n      (?!\\s*:P5) # \u003c include p5_regex above it\n    )*\n  )\n)\n\\s*\n(\u003c)",
+      "end": "(?x) (?: (?\u003c!\\\\)|(?\u003c=\\\\\\\\) ) (\u003e)",
+      "patterns": [
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "source.regexp.perl6fe"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "string.regexp.construct.angle.perl6fe"
+        },
+        "2": {
+          "name": "entity.name.section.adverb.regexp.angle.perl6fe"
+        },
+        "3": {
+          "name": "punctuation.definition.regexp.angle.perl6fe"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.regexp.angle.perl6fe"
+        }
+      }
+    },
+    {
+      "contentName": "string.regexp.paren.perl6fe",
+      "begin": "(?x)\n(?\u003c= ^|\\s )\n(?:\n  (m|rx|s|S)\n  (\n    (?:\n      (?\u003c!:P5) # \u003c This can maybe be removed because we\n      \\s*:\\w+\n      (?!\\s*:P5) # \u003c include p5_regex above it\n    )*\n  )\n)\n\\s*\n(\\()",
+      "end": "(?x) (?: (?\u003c!\\\\)|(?\u003c=\\\\\\\\) ) (\\))",
+      "patterns": [
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "source.regexp.perl6fe"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "string.regexp.construct.paren.perl6fe"
+        },
+        "2": {
+          "name": "entity.name.section.adverb.regexp.paren.perl6fe"
+        },
+        "3": {
+          "name": "punctuation.definition.regexp.paren.perl6fe"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.regexp.paren.perl6fe"
+        }
+      }
+    },
+    {
+      "contentName": "string.regexp.bracket.perl6fe",
+      "begin": "(?x)\n(?\u003c= ^|\\s )\n(?:\n  (m|rx|s|S)\n  (\n    (?:\n      (?\u003c!:P5) # \u003c This can maybe be removed because we\n      \\s*:\\w+\n      (?!\\s*:P5) # \u003c include p5_regex above it\n    )*\n  )\n)\n\\s*\n(\\[)",
+      "end": "(?x) (?: (?\u003c!\\\\)|(?\u003c=\\\\\\\\) ) (\\])",
+      "patterns": [
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "source.regexp.perl6fe"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "string.regexp.construct.bracket.perl6fe"
+        },
+        "2": {
+          "name": "entity.name.section.adverb.regexp.bracket.perl6fe"
+        },
+        "3": {
+          "name": "punctuation.definition.regexp.bracket.perl6fe"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.regexp.bracket.perl6fe"
+        }
+      }
+    },
+    {
+      "contentName": "string.regexp.left_double_right_double.perl6fe",
+      "begin": "(?x)\n(?\u003c= ^|\\s )\n(?:\n  (m|rx|s|S)\n  (\n    (?:\n      (?\u003c!:P5) # \u003c This can maybe be removed because we\n      \\s*:\\w+\n      (?!\\s*:P5) # \u003c include p5_regex above it\n    )*\n  )\n)\n\\s*\n(“)",
+      "end": "(?x) (?: (?\u003c!\\\\)|(?\u003c=\\\\\\\\) ) (”)",
+      "patterns": [
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "source.regexp.perl6fe"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "string.regexp.construct.left_double_right_double.perl6fe"
+        },
+        "2": {
+          "name": "entity.name.section.adverb.regexp.left_double_right_double.perl6fe"
+        },
+        "3": {
+          "name": "punctuation.definition.regexp.left_double_right_double.perl6fe"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.regexp.left_double_right_double.perl6fe"
+        }
+      }
+    },
+    {
+      "contentName": "string.regexp.left_double-low-q_right_double.perl6fe",
+      "begin": "(?x)\n(?\u003c= ^|\\s )\n(?:\n  (m|rx|s|S)\n  (\n    (?:\n      (?\u003c!:P5) # \u003c This can maybe be removed because we\n      \\s*:\\w+\n      (?!\\s*:P5) # \u003c include p5_regex above it\n    )*\n  )\n)\n\\s*\n(„)",
+      "end": "(?x) (?: (?\u003c!\\\\)|(?\u003c=\\\\\\\\) ) (”|“)",
+      "patterns": [
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "source.regexp.perl6fe"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "string.regexp.construct.left_double-low-q_right_double.perl6fe"
+        },
+        "2": {
+          "name": "entity.name.section.adverb.regexp.left_double-low-q_right_double.perl6fe"
+        },
+        "3": {
+          "name": "punctuation.definition.regexp.left_double-low-q_right_double.perl6fe"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.regexp.left_double-low-q_right_double.perl6fe"
+        }
+      }
+    },
+    {
+      "contentName": "string.regexp.left_single_right_single.perl6fe",
+      "begin": "(?x)\n(?\u003c= ^|\\s )\n(?:\n  (m|rx|s|S)\n  (\n    (?:\n      (?\u003c!:P5) # \u003c This can maybe be removed because we\n      \\s*:\\w+\n      (?!\\s*:P5) # \u003c include p5_regex above it\n    )*\n  )\n)\n\\s*\n(‘)",
+      "end": "(?x) (?: (?\u003c!\\\\)|(?\u003c=\\\\\\\\) ) (’)",
+      "patterns": [
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "source.regexp.perl6fe"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "string.regexp.construct.left_single_right_single.perl6fe"
+        },
+        "2": {
+          "name": "entity.name.section.adverb.regexp.left_single_right_single.perl6fe"
+        },
+        "3": {
+          "name": "punctuation.definition.regexp.left_single_right_single.perl6fe"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.regexp.left_single_right_single.perl6fe"
+        }
+      }
+    },
+    {
+      "contentName": "string.regexp.low-q_left_single.perl6fe",
+      "begin": "(?x)\n(?\u003c= ^|\\s )\n(?:\n  (m|rx|s|S)\n  (\n    (?:\n      (?\u003c!:P5) # \u003c This can maybe be removed because we\n      \\s*:\\w+\n      (?!\\s*:P5) # \u003c include p5_regex above it\n    )*\n  )\n)\n\\s*\n(‚)",
+      "end": "(?x) (?: (?\u003c!\\\\)|(?\u003c=\\\\\\\\) ) (‘)",
+      "patterns": [
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "source.regexp.perl6fe"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "string.regexp.construct.low-q_left_single.perl6fe"
+        },
+        "2": {
+          "name": "entity.name.section.adverb.regexp.low-q_left_single.perl6fe"
+        },
+        "3": {
+          "name": "punctuation.definition.regexp.low-q_left_single.perl6fe"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.regexp.low-q_left_single.perl6fe"
+        }
+      }
+    },
+    {
+      "contentName": "string.regexp.fw_cornerbracket.perl6fe",
+      "begin": "(?x)\n(?\u003c= ^|\\s )\n(?:\n  (m|rx|s|S)\n  (\n    (?:\n      (?\u003c!:P5) # \u003c This can maybe be removed because we\n      \\s*:\\w+\n      (?!\\s*:P5) # \u003c include p5_regex above it\n    )*\n  )\n)\n\\s*\n(「)",
+      "end": "(?x) (?: (?\u003c!\\\\)|(?\u003c=\\\\\\\\) ) (」)",
+      "patterns": [
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "source.regexp.perl6fe"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "string.regexp.construct.fw_cornerbracket.perl6fe"
+        },
+        "2": {
+          "name": "entity.name.section.adverb.regexp.fw_cornerbracket.perl6fe"
+        },
+        "3": {
+          "name": "punctuation.definition.regexp.fw_cornerbracket.perl6fe"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.regexp.fw_cornerbracket.perl6fe"
+        }
+      }
+    },
+    {
+      "contentName": "string.regexp.hw_cornerbracket.perl6fe",
+      "begin": "(?x)\n(?\u003c= ^|\\s )\n(?:\n  (m|rx|s|S)\n  (\n    (?:\n      (?\u003c!:P5) # \u003c This can maybe be removed because we\n      \\s*:\\w+\n      (?!\\s*:P5) # \u003c include p5_regex above it\n    )*\n  )\n)\n\\s*\n(｢)",
+      "end": "(?x) (?: (?\u003c!\\\\)|(?\u003c=\\\\\\\\) ) (｣)",
+      "patterns": [
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "source.regexp.perl6fe"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "string.regexp.construct.hw_cornerbracket.perl6fe"
+        },
+        "2": {
+          "name": "entity.name.section.adverb.regexp.hw_cornerbracket.perl6fe"
+        },
+        "3": {
+          "name": "punctuation.definition.regexp.hw_cornerbracket.perl6fe"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.regexp.hw_cornerbracket.perl6fe"
+        }
+      }
+    },
+    {
+      "contentName": "string.regexp.chevron.perl6fe",
+      "begin": "(?x)\n(?\u003c= ^|\\s )\n(?:\n  (m|rx|s|S)\n  (\n    (?:\n      (?\u003c!:P5) # \u003c This can maybe be removed because we\n      \\s*:\\w+\n      (?!\\s*:P5) # \u003c include p5_regex above it\n    )*\n  )\n)\n\\s*\n(«)",
+      "end": "(?x) (?: (?\u003c!\\\\)|(?\u003c=\\\\\\\\) ) (»)",
+      "patterns": [
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "source.regexp.perl6fe"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "string.regexp.construct.chevron.perl6fe"
+        },
+        "2": {
+          "name": "entity.name.section.adverb.regexp.chevron.perl6fe"
+        },
+        "3": {
+          "name": "punctuation.definition.regexp.chevron.perl6fe"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.regexp.chevron.perl6fe"
+        }
+      }
+    },
+    {
+      "contentName": "string.regexp.s-shaped-bag-delimiter.perl6fe",
+      "begin": "(?x)\n(?\u003c= ^|\\s )\n(?:\n  (m|rx|s|S)\n  (\n    (?:\n      (?\u003c!:P5) # \u003c This can maybe be removed because we\n      \\s*:\\w+\n      (?!\\s*:P5) # \u003c include p5_regex above it\n    )*\n  )\n)\n\\s*\n(⟅)",
+      "end": "(?x) (?: (?\u003c!\\\\)|(?\u003c=\\\\\\\\) ) (⟆)",
+      "patterns": [
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "source.regexp.perl6fe"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "string.regexp.construct.s-shaped-bag-delimiter.perl6fe"
+        },
+        "2": {
+          "name": "entity.name.section.adverb.regexp.s-shaped-bag-delimiter.perl6fe"
+        },
+        "3": {
+          "name": "punctuation.definition.regexp.s-shaped-bag-delimiter.perl6fe"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.regexp.s-shaped-bag-delimiter.perl6fe"
+        }
+      }
+    },
+    {
+      "contentName": "string.regexp.any.perl6fe",
+      "begin": "(?x)\n(?\u003c= ^|\\s )\n(?:\n  (m|rx|s|S)\n  (\n    (?:\n      (?\u003c!:P5) # \u003c This can maybe be removed because we\n      \\s*:\\w+\n      (?!\\s*:P5) # \u003c include p5_regex above it\n    )*\n  )\n)\n\\s*\n([^#\\p{Ps}\\p{Pe}\\p{Pi}\\p{Pf}\\w'\\-\u003c\u003e\\-\\]\\)\\}\\{])",
+      "end": "(?x) (?: (?\u003c!\\\\)|(?\u003c=\\\\\\\\) ) (\\3)",
+      "patterns": [
+        {
+          "include": "#interpolation"
+        },
+        {
+          "include": "source.regexp.perl6fe"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "string.regexp.construct.any.perl6fe"
+        },
+        "2": {
+          "name": "entity.name.section.adverb.regexp.any.perl6fe"
+        },
+        "3": {
+          "name": "punctuation.definition.regexp.any.perl6fe"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.regexp.any.perl6fe"
+        }
+      }
+    },
+    {
+      "include": "#shellquotes"
+    },
+    {
+      "name": "string.quoted.heredoc.perl6fe",
+      "begin": "(?x) (?: ( qq|qqx|qqw ) \\s* ( (?:\\s*:\\w+)*\\s*: (?: to|heredoc ) )\\s* | (qqto) \\s* ( (?:\\s*:\\w+)* )\\s* ) / (\\S+) /",
+      "end": "\\s*\\5",
+      "patterns": [
+        {
+          "name": "meta.heredoc.continuation.perl6fe",
+          "begin": "(?\u003c=/)",
           "end": "\\n",
           "patterns": [
             {
               "include": "$self"
             }
-          ],
-          "name": "meta.heredoc.continuation.perl6fe"
+          ]
         },
         {
-          "match": "(?x) ^ (?: . | \\n )* $",
-          "name": "string.quoted.qq.heredoc.perl6fe"
+          "begin": "^",
+          "end": "$",
+          "patterns": [
+            {
+              "include": "#interpolation"
+            }
+          ]
+        },
+        {
+          "name": "string.quoted.qq.heredoc.perl6fe",
+          "match": "(?x) ^ (?: . | \\n )* $"
         }
       ],
-      "name": "meta.heredoc.perl6fe"
-    },
-    {
-      "begin": "(?x) (?: ( [qQ](?!/)|qw|qww|qx|qqx ) \\s* ( (?:\\s*:\\w+)*\\s*: (?: to|heredoc ) )\\s* | (qto|Qto) \\s* ( (?:\\s*:\\w+)* )\\s* ) / (\\S+) /",
       "beginCaptures": {
         "1": {
           "name": "string.quoted.construct.perl6fe"
@@ -682,29 +1134,54 @@
           "name": "entity.other.attribute-name.heredoc.delimiter.perl6fe"
         }
       },
-      "end": "\\s*\\5",
       "endCaptures": {
         "0": {
           "name": "entity.other.attribute-name.heredoc.delimiter.perl6fe"
         }
-      },
+      }
+    },
+    {
+      "name": "meta.heredoc.perl6fe",
+      "begin": "(?x) (?: ( [qQ](?!/)|qw|qww|qx|qqx ) \\s* ( (?:\\s*:\\w+)*\\s*: (?: to|heredoc ) )\\s* | (qto|Qto) \\s* ( (?:\\s*:\\w+)* )\\s* ) / (\\S+) /",
+      "end": "\\s*\\5",
       "patterns": [
         {
-          "begin": "(?<=/)",
+          "name": "meta.heredoc.continuation.perl6fe",
+          "begin": "(?\u003c=/)",
           "end": "\\n",
           "patterns": [
             {
               "include": "$self"
             }
-          ],
-          "name": "meta.heredoc.continuation.perl6fe"
+          ]
         },
         {
-          "match": "(?x) ^ (?: . | \\n )* $",
-          "name": "string.quoted.q.heredoc.perl6fe"
+          "name": "string.quoted.q.heredoc.perl6fe",
+          "match": "(?x) ^ (?: . | \\n )* $"
         }
       ],
-      "name": "meta.heredoc.perl6fe"
+      "beginCaptures": {
+        "1": {
+          "name": "string.quoted.construct.perl6fe"
+        },
+        "2": {
+          "name": "support.function.adverb.perl6fe"
+        },
+        "3": {
+          "name": "string.quoted.construct.perl6fe"
+        },
+        "4": {
+          "name": "support.function.adverb.perl6fe"
+        },
+        "5": {
+          "name": "entity.other.attribute-name.heredoc.delimiter.perl6fe"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "entity.other.attribute-name.heredoc.delimiter.perl6fe"
+        }
+      }
     },
     {
       "include": "source.quoting.perl6fe"
@@ -713,7 +1190,8 @@
       "include": "#variables"
     },
     {
-      "begin": "(?x) (?<![%$&@]|\\w) (?:  (multi|proto) \\s+ )? (macro|sub|submethod|method|multi|only|category) \\s+ (!)? (  [^\\s(){}]+ )",
+      "begin": "(?x) (?\u003c![%$\u0026@]|\\w) (?:  (multi|proto) \\s+ )? (macro|sub|submethod|method|multi|only|category) \\s+ (!)? (  [^\\s(){}]+ )",
+      "end": "(?=[\\(\\{\\s])",
       "beginCaptures": {
         "1": {
           "name": "storage.type.declarator.multi.perl6fe"
@@ -727,7 +1205,6 @@
         "4": {
           "patterns": [
             {
-              "match": "(?x) ( [\\p{Digit}\\p{Alpha}'\\-_]+ ) \\b (:)? (\\w+ \\b )? (\\S+  )?",
               "captures": {
                 "1": {
                   "name": "entity.name.function.perl6fe"
@@ -749,33 +1226,22 @@
             }
           ]
         }
-      },
-      "end": "(?=[\\(\\{\\s])"
+      }
     },
     {
-      "begin": "(?<![\\.:])(regex|rule|token)(?!\\s*=>|\\S)",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.type.declare.regexp.named.perl6fe"
-        }
-      },
-      "end": "(?<!\\\\)\\}",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.regexp.named.perl6fe"
-        }
-      },
       "name": "meta.regexp.named.perl6fe",
+      "begin": "(?\u003c![\\.:])(regex|rule|token)(?!\\s*=\u003e|\\S)",
+      "end": "(?\u003c!\\\\)\\}",
       "patterns": [
         {
-          "match": "TOP",
-          "name": "entity.name.function.regexp.named.TOP.perl6fe"
+          "name": "entity.name.function.regexp.named.TOP.perl6fe",
+          "match": "TOP"
         },
         {
-          "match": "[\\p{Digit}\\p{Alpha}'\\-_]+",
           "name": "entity.name.function.regexp.named.perl6fe"
         },
         {
+          "name": "meta.regexp.named.adverb.perl6fe",
           "match": "(:)(\\w+)",
           "captures": {
             "1": {
@@ -784,43 +1250,37 @@
             "2": {
               "name": "support.type.class.adverb.perl6fe"
             }
-          },
-          "name": "meta.regexp.named.adverb.perl6fe"
+          }
         },
         {
-          "begin": "<",
-          "end": "(?x) \\\\\\\\|(?<!\\\\) ( > ) (?=[\\s\\{])",
-          "contentName": "string.array.words.perl6fe"
+          "contentName": "string.array.words.perl6fe",
+          "begin": "\u003c",
+          "end": "(?x) \\\\\\\\|(?\u003c!\\\\) ( \u003e ) (?=[\\s\\{])"
         },
         {
+          "contentName": "string.array.words.chevron.perl6fe",
           "begin": "«",
-          "end": "(?x)  \\\\\\\\|(?<!\\\\) ( » ) (?=[\\s\\{])",
-          "contentName": "string.array.words.chevron.perl6fe"
+          "end": "(?x)  \\\\\\\\|(?\u003c!\\\\) ( » ) (?=[\\s\\{])"
         },
         {
-          "begin": "\\(",
-          "end": "(?<!\\\\)\\)",
-          "captures": {
-            "0": {
-              "name": "punctuation.definition.regexp.named.signature.perlfe"
-            }
-          },
           "name": "meta.regexp.named.signature.perl6fe",
+          "begin": "\\(",
+          "end": "(?\u003c!\\\\)\\)",
           "patterns": [
             {
               "include": "$self"
             }
-          ]
-        },
-        {
-          "begin": "\\{",
-          "end": "(?=\\})",
+          ],
           "captures": {
             "0": {
-              "name": "punctuation.definition.regex.named.perl6fe"
+              "name": "punctuation.definition.regexp.named.signature.perlfe"
             }
-          },
+          }
+        },
+        {
           "name": "meta.regexp.named.block.perl6fe",
+          "begin": "\\{",
+          "end": "(?=\\})",
           "patterns": [
             {
               "include": "#interpolation"
@@ -828,107 +1288,122 @@
             {
               "include": "source.regexp.perl6fe"
             }
-          ]
+          ],
+          "captures": {
+            "0": {
+              "name": "punctuation.definition.regex.named.perl6fe"
+            }
+          }
         }
-      ]
-    },
-    {
-      "match": "\\b(?<![\\-:])(self)(?!\\-)\\b",
-      "name": "variable.language.perl6fe"
-    },
-    {
-      "match": "\\b(?<![\\-:])(use|require|no|need)(?!\\-)\\b",
-      "name": "keyword.other.include.perl6fe"
-    },
-    {
-      "match": "(?x)\\b(?<![\\-:])( if|else|elsif|unless|with|orwith|without )(?!\\-)\\b",
-      "name": "keyword.control.conditional.perl6fe"
-    },
-    {
-      "match": "\\b(?<![\\-:])(let|my|our|state|temp|has|constant)(?!\\-)\\b",
-      "name": "storage.modifier.declarator.perl6fe"
-    },
-    {
-      "begin": "(?x) (?<= = | for ) \\s* ( < )",
+      ],
       "beginCaptures": {
         "1": {
-          "name": "span.keyword.operator.array.words.perl6fe"
+          "name": "storage.type.declare.regexp.named.perl6fe"
         }
       },
-      "end": "(?x)  \\\\\\\\|(?<!\\\\) ( > )",
       "endCaptures": {
-        "1": {
-          "name": "span.keyword.operator.array.words.perl6fe"
+        "0": {
+          "name": "punctuation.definition.regexp.named.perl6fe"
         }
-      },
+      }
+    },
+    {
+      "name": "variable.language.perl6fe",
+      "match": "\\b(?\u003c![\\-:])(self)(?!\\-)\\b"
+    },
+    {
+      "name": "keyword.other.include.perl6fe",
+      "match": "\\b(?\u003c![\\-:])(use|require|no|need)(?!\\-)\\b"
+    },
+    {
+      "name": "keyword.control.conditional.perl6fe",
+      "match": "(?x)\\b(?\u003c![\\-:])( if|else|elsif|unless|with|orwith|without )(?!\\-)\\b"
+    },
+    {
+      "name": "storage.modifier.declarator.perl6fe",
+      "match": "\\b(?\u003c![\\-:])(let|my|our|state|temp|has|constant)(?!\\-)\\b"
+    },
+    {
       "contentName": "string.array.words.perl6fe",
+      "begin": "(?x) (?\u003c= = | for ) \\s* ( \u003c )",
+      "end": "(?x)  \\\\\\\\|(?\u003c!\\\\) ( \u003e )",
       "patterns": [
         {
           "include": "source.quoting.perl6fe#q_bracket_string_content"
         }
-      ]
-    },
-    {
-      "match": "(?x) ( [+:\\-.*/] | \\|\\| )? (?<! = ) = (?! [>=~] )",
-      "name": "storage.modifier.assignment.perl6fe"
-    },
-    {
-      "begin": "(?x) (?<! \\+< | \\+\\s|\\+ ) \\s* (<) (?<! > ) (?= [^<]* (?: [^<] ) > )",
+      ],
       "beginCaptures": {
         "1": {
           "name": "span.keyword.operator.array.words.perl6fe"
         }
       },
-      "end": "(?x) \\\\\\\\|(?<!\\\\) ( > )",
       "endCaptures": {
         "1": {
           "name": "span.keyword.operator.array.words.perl6fe"
         }
+      }
+    },
+    {
+      "name": "storage.modifier.assignment.perl6fe",
+      "match": "(?x) (?: [+:\\-.*/] | \\|\\| )? (?\u003c! = ) = (?! [\u003e=~] )"
+    },
+    {
+      "contentName": "string.array.words.perl6fe",
+      "begin": "(?x) (?\u003c! \\+\u003c | \\+\\s|\\+ ) \\s* (\u003c) (?\u003c! \u003e ) (?= [^\u003c]* (?: [^\u003c] ) \u003e )",
+      "end": "(?x) \\\\\\\\|(?\u003c!\\\\) ( \u003e )",
+      "beginCaptures": {
+        "1": {
+          "name": "span.keyword.operator.array.words.perl6fe"
+        }
       },
-      "contentName": "string.array.words.perl6fe"
+      "endCaptures": {
+        "1": {
+          "name": "span.keyword.operator.array.words.perl6fe"
+        }
+      }
     },
     {
-      "match": "\\b(for|loop|repeat|while|until|gather|given)(?!\\-)\\b",
-      "name": "keyword.control.repeat.perl6fe"
+      "name": "keyword.control.repeat.perl6fe",
+      "match": "\\b(for|loop|repeat|while|until|gather|given)(?!\\-)\\b"
     },
     {
-      "match": "(?x)\n\\b (?<! [\\-:.] )\n(\n   take|do|when|next|last|redo|return|return-rw\n  |contend|maybe|defer|default|exit\n  |continue|break|goto|leave|supply\n  |async|lift|await|start|react|whenever|parse\n)\n(?! - ) \\b",
-      "name": "keyword.control.flowcontrol.perl6fe"
+      "name": "keyword.control.flowcontrol.perl6fe",
+      "match": "(?x)\n\\b (?\u003c! [\\-:.] )\n(\n   take|do|when|next|last|redo|return|return-rw\n  |contend|maybe|defer|default|exit|quietly\n  |continue|break|goto|leave|supply\n  |async|lift|await|start|react|whenever|parse\n)\n(?! - ) \\b"
     },
     {
-      "match": "(?x)\n\\b (?<! [\\-:] )\n(\n  make|made\n)\n(?! - ) \\b",
-      "name": "keyword.control.flowcontrol.regex.perl6fe"
+      "name": "keyword.control.flowcontrol.regex.perl6fe",
+      "match": "(?x)\n\\b (?\u003c! [\\-:] )\n(\n  make|made\n)\n(?! - ) \\b"
     },
     {
-      "match": "(?x)\\b(?<![\\-:]) (is|does|as|but|trusts|of|returns|handles|where|augment|supersede) (?!\\-)\\b (?!\\s*=>)",
-      "name": "storage.modifier.type.constraints.perl6fe"
+      "name": "storage.modifier.type.constraints.perl6fe",
+      "match": "(?x)\\b(?\u003c![\\-:]) (is|does|as|but|trusts|of|returns|handles|where|augment|supersede) (?!\\-)\\b (?!\\s*=\u003e)"
     },
     {
-      "match": "(?x)\\b(?<![\\-:])( BEGIN|CHECK|INIT |START|FIRST|ENTER |LEAVE|KEEP|UNDO |NEXT|LAST|PRE |POST|END|CATCH |CONTROL|TEMP|QUIT )(?!\\-)\\b",
-      "name": "keyword.control.closure.trait.perl6fe"
+      "name": "keyword.control.closure.trait.perl6fe",
+      "match": "(?x)\\b(?\u003c![\\-:])( BEGIN|CHECK|INIT |START|FIRST|ENTER |LEAVE|KEEP|UNDO |NEXT|LAST|PRE |POST|END|CATCH |CONTROL|TEMP|QUIT )(?!\\-)\\b"
     },
     {
-      "match": "\\b(?<![\\-:])(die|fail|try|warn)(?!\\-)\\b(?!\\s*=>)",
-      "name": "keyword.control.control-handlers.perl6fe"
+      "name": "keyword.control.control-handlers.perl6fe",
+      "match": "\\b(?\u003c![\\-:])(die|fail|try|warn)(?!\\-)\\b(?!\\s*=\u003e)"
     },
     {
-      "match": "(?x)\\b(?<![\\-:])( prec|irs|ofs|ors|export|raw|deep |binary|unary|reparsed|rw|parsed |cached|readonly|defequiv|will |ref|copy|inline|tighter|looser |equiv|assoc|required )(?!\\-)\\b  (?!\\s*=>)",
-      "name": "entity.name.type.trait.perl6fe"
+      "name": "entity.name.type.trait.perl6fe",
+      "match": "(?x)\\b(?\u003c![\\-:])( prec|irs|ofs|ors|export|raw|deep |binary|unary|reparsed|rw|parsed |cached|readonly|defequiv|will |ref|copy|inline|tighter|looser |equiv|assoc|required|pure )(?!\\-)\\b  (?!\\s*=\u003e)"
     },
     {
-      "match": "\\b(NaN|Inf)(?!\\-)\\b",
-      "name": "constant.numeric.perl6fe"
+      "name": "constant.numeric.perl6fe",
+      "match": "\\b(NaN|Inf)(?!\\-)\\b"
     },
     {
-      "match": "\\b(True|False)\\b",
-      "name": "constant.language.boolean.perl6fe"
+      "name": "constant.language.boolean.perl6fe",
+      "match": "\\b(True|False)\\b"
     },
     {
-      "match": "(?x)\\b(?<![\\-:])( fatal|internals|MONKEY\\-TYPING|nqp| strict|trace|worries|invocant|parameters|experimental| cur|soft|variables|attributes|v6(?:\\.\\w)*|lib|Test|NativeCall )(?!\\-) \\b (?!\\s*=>)",
-      "name": "constant.language.pragma.perl6fe"
+      "name": "constant.language.pragma.perl6fe",
+      "match": "(?x)\\b(?\u003c![\\-:])( fatal|internals| MONKEY\\-(?:TYPING|SEE\\-NO\\-EVAL|BRAINS|GUTS|BUSINESS|TRAP|SHINE|WRENCH|BARS)| nqp|QAST|strict|trace|worries|invocant|parameters|experimental| cur|soft|variables|attributes|v6(?:\\.\\w)*|lib|Test|NativeCall )(?!\\-) \\b (?!\\s*=\u003e)"
     },
     {
-      "match": "(?x)(?<![:\\-\\w]) (Backtrace|Exception|Failure|X) (?: \\:\\:[a-zA-Z]+ )* \\b",
+      "match": "(?x)(?\u003c![:\\-\\w]) (Backtrace|Exception|Failure|X) (?: \\:\\:[a-zA-Z]+ )* \\b",
       "captures": {
         "0": {
           "name": "support.type.exception.perl6fe"
@@ -936,7 +1411,7 @@
       }
     },
     {
-      "match": "(?x)\\b(?<!:)( AST|Any|Array|Associative|Attribute|Bag|BagHash|Baggy| Blob|Block|Bool|Callable|Capture|Channel|Code|Complex|Cool| CurrentThreadScheduler|Cursor|Date|DateTime|Dateish|Duration| Enum|FatRat|Grammar|Hash|IO|Instant|Iterable| Iterator|Junction|Label|List|Lock|Macro|Map|Match|Metamodel| Method|Mix|MixHash|Mixy|Mu|Nil|Numeric|ObjAt|Pair| Parameter|Pod|Positional|PositionalBindFailover|Proc|Promise| Proxy|QuantHash|Range|Rat|Rational|Real|Regex|Routine|Scheduler| Seq|Set|SetHash|Setty|Signature|Slip|Stash|Str|str|Stringy|Sub| Submethod|Supply|Tap|Temporal|Thread|ThreadPoolScheduler| Variable|Version|Whatever|WhateverCode|bool|size_t| Int|int|int1|int2|int4|int8|int16|int32|int64| Rat|rat|rat1|rat2|rat4|rat8|rat16|rat32|rat64| Buf|buf|buf1|buf2|buf4|buf8|buf16|buf32|buf64| UInt|uint|uint1|uint2|uint4|uint8|uint16|uint32|uint64| utf8|utf16|utf32|Num|num|num32|num64|IntStr|NumStr| RatStr|ComplexStr|CArray|Pointer|long|longlong )\\b (?!\\s*=>)",
+      "match": "(?x)\\b(?\u003c!:)(\n  AST|Any|Array|Associative|Attribute|Bag|BagHash|Baggy|\n  Blob|Block|Bool|Callable|Capture|Channel|Code|Complex|Cool|\n  CurrentThreadScheduler|Cursor|Date|DateTime|Dateish|Duration|\n  Enum|FatRat|Grammar|Hash|IO|Instant|Iterable|\n  Iterator|Junction|Label|List|Lock|Macro|Map|Match|Metamodel|\n  Method|Mix|MixHash|Mixy|Mu|Nil|Numeric|ObjAt|Pair|\n  Parameter|Pod|Positional|PositionalBindFailover|Proc|Promise|\n  Proxy|QuantHash|Range|Rat|Rational|Real|Regex|Routine|Scheduler|\n  Seq|Set|SetHash|Setty|Signature|Slip|Stash|Str|str|Stringy|Sub|\n  Submethod|Supply|Tap|Temporal|Thread|ThreadPoolScheduler|\n  Variable|Version|Whatever|WhateverCode|bool|size_t|\n  Int|int|int1|int2|int4|int8|int16|int32|int64|\n  Rat|rat|rat1|rat2|rat4|rat8|rat16|rat32|rat64|\n  Buf|buf|buf1|buf2|buf4|buf8|buf16|buf32|buf64|\n  UInt|uint|uint1|uint2|uint4|uint8|uint16|uint32|uint64|\n  utf8|utf16|utf32|Num|num|num32|num64|IntStr|NumStr|\n  RatStr|ComplexStr|CArray|Pointer|long|longlong|\n  # These are for types which have sub types\n  Order|More|Less|Same\n)\\b (?!\\s*=\u003e)",
       "captures": {
         "1": {
           "name": "support.type.perl6fe"
@@ -947,12 +1422,12 @@
       }
     },
     {
-      "match": "(?x) ( \\[ / \\] )",
-      "name": "keyword.operator.reduction.perl6fe"
+      "name": "keyword.operator.reduction.perl6fe",
+      "match": "(?x) ( \\[ / \\] )"
     },
     {
-      "match": "(?<=\\w)(\\:)([DU_])\\b",
       "name": "meta.adverb.definedness.perl6fe",
+      "match": "(?\u003c=\\w)(\\:)([DU_])\\b",
       "captures": {
         "1": {
           "name": "keyword.operator.adverb.perl6fe"
@@ -963,28 +1438,28 @@
       }
     },
     {
-      "match": "(?x)\\b( div|mod|gcd|lcm|x|xx|temp|let|but|cmp|leg| eq|ne|gt|ge|lt|le|before|after|eqv|min|max|ff|fff|not|so|Z| and|andthen|or|orelse )\\b(?!\\-)| \\b(X)(?!:)\\b",
-      "name": "keyword.operator.word.perl6fe"
+      "name": "keyword.operator.word.perl6fe",
+      "match": "(?x)\\b( div|mod|gcd|lcm|x|xx|temp|let|but|cmp|leg| eq|ne|gt|ge|lt|le|before|after|eqv|min|max|ff|fff|not|so|Z| and|andthen|or|orelse )\\b(?!\\-)| \\b(X)(?!:)\\b"
     },
     {
+      "name": "meta.operator.non.ligature.perl6fe",
       "match": "(=~=|≅)",
       "captures": {
         "1": {
           "name": "keyword.operator.approx-equal.perl6fe"
         }
-      },
-      "name": "meta.operator.non.ligature.perl6fe"
+      }
     },
     {
-      "match": "(?x) <== | <=> | => | --> | -> | \\+\\| | \\+\\+ | -- | \\*\\* | \\?\\?\\? | \\?\\? | \\!\\!\\! | \\!\\! | && | \\+\\^ | \\?\\^ | %% | \\+& | \\+< | \\+> | \\+\\^ | \\.\\.(?!\\.) | \\.\\.\\^ | \\^\\.\\. | \\^\\.\\.\\^ | \\?\\| | !=(?!\\=) | !==(?!\\=) | <=(?!>) | >= | === | == | =:= | ~~ | \\x{2245} | \\|\\| | \\^\\^ | \\/\\/ | := | ::= | \\.\\.\\.",
-      "name": "keyword.operator.multi-symbol.perl6fe"
+      "name": "keyword.operator.multi-symbol.perl6fe",
+      "match": "(?x) \u003c== | ==\u003e | \u003c=\u003e | =\u003e | --\u003e | -\u003e | \\+\\| | \\+\\+ | -- | \\*\\* | \\?\\?\\? | \\?\\? | \\!\\!\\! | \\!\\! | \u0026\u0026 | \\+\\^ | \\?\\^ | %% | \\+\u0026 | \\+\u003c | \\+\u003e | \\+\\^ | \\.\\.(?!\\.) | \\.\\.\\^ | \\^\\.\\. | \\^\\.\\.\\^ | \\?\\| | !=(?!\\=) | !==(?!\\=) | \u003c=(?!\u003e) | \u003e= | === | == | =:= | ~~ | \\x{2245} | \\|\\| | \\^\\^ | \\/\\/ | := | ::= | \\.\\.\\."
     },
     {
       "include": "#special_variables"
     },
     {
-      "match": "(?x)(?<=\\[) \\s* (\\*) \\s* ([\\-\\*%\\^\\+\\/]|div|mod|gcd|lcm) \\s* (\\d+) \\s* (?=\\])",
       "name": "meta.subscript.whatever.perl6fe",
+      "match": "(?x)(?\u003c=\\[) \\s* (\\*) \\s* ([\\-\\*%\\^\\+\\/]|div|mod|gcd|lcm) \\s* (\\d+) \\s* (?=\\])",
       "captures": {
         "1": {
           "name": "constant.language.whatever.perl6fe"
@@ -998,39 +1473,50 @@
       }
     },
     {
-      "match": "\\*\\s*(?=\\])",
-      "name": "constant.language.whatever.hack.perl6fe"
+      "name": "constant.language.whatever.hack.perl6fe",
+      "match": "\\*\\s*(?=\\])"
     },
     {
-      "match": "(?x)\\b(?<![\\-:\\\\])( :: )?( eager|hyper|substr|index|rindex|grep|map|sort|join|lines|hints |chmod|split|reduce|min|max|reverse|truncate|zip|cat|roundrobin |classify|first|sum|keys|values|pairs|defined|delete|exists |elems|end|kv|any|all|one|wrap|shape|key|value|name|pop|push |shift|splice|unshift|floor|ceiling|abs|exp|log|log10|rand|sign |sqrt|sin|cos|tan|round|strand|roots|cis|unpolar|polar|atan2 |pick|chop|chomp|lc|lcfirst|uc|ucfirst|capitalize|mkdir |normalize|pack|unpack|quotemeta|comb|samecase|sameaccent|chars |nfd|nfc|nfkd|nfkc|printf|sprintf|caller|evalfile|run|runinstead |nothing|want|bless|chr|ord|ords|gmtime|time|eof|localtime|gethost |getpw|chroot|getlogin|getpeername|kill|fork|wait|perl|graphs |codes|bytes|clone|print|open|read|write|readline|say|seek|close |opendir|readdir|slurp|spurt|shell|run|pos|fmt|vec|link|unlink |symlink|unique|pair|asin|atan|sec|cosec|cotan|asec|acosec|acotan |sinh|cosh|tanh|asinh|done|acos|acosh|atanh|sech|cosech|cotanh |sech|acosech|acotanh|asech|ok|nok|plan-ok|dies-ok|lives-ok|skip |todo|pass|flunk|force-todo|use-ok|isa-ok|diag|is-deeply|isnt |like|skip-rest|unlike|cmp-ok|eval-dies-ok|nok-error|cmp-ok |eval-lives-ok|approx|is-approx|throws-ok|version-lt|plan|EVAL |succ|pred|times|nonce|once|signature|new|connect|operator|undef |undefine|sleep|from|to|infix|postfix|prefix|circumfix|can-ok |postcircumfix|minmax|lazy|count|unwrap|getc|pi|tau|context|void |quasi|body|each|contains|rewinddir|subst|can|isa|flush|arity |assuming|rewind|callwith|callsame|nextwith|nextsame|attr|does-ok |eval-elsewhere|none|not|srand|so|trim|trim-start|trim-end|lastcall |WHAT|WHY|WHERE|HOW|WHICH|VAR|WHO|WHENCE|ACCEPTS|REJECTS|not |iterator|by|re|im|invert|flip|gist|flat|tree|is-prime |throws-like|trans|race|hyper|tap|emit|done-testing|quit|dd|note |prepend|categorize|antipairs|categorize-list|parse-base|base |starts-with|ends-with|put|append|tail|\\x{03C0}|\\x{03C4}|\\x{212F} |get|words|new-from-pairs|uniname|uninames|uniprop|uniprops |slurp-rest|throw|break|keep|match )(?!\\-)\\b(?!\\s*=>)",
+      "name": "support.function.perl6fe",
+      "match": "(?x)\\b(?\u003c![\\-\\\\])( :: )?(exists)(?!\\-)\\b(?!\\s*=\u003e)",
       "captures": {
         "1": {
           "name": "keyword.operator.colon.perl6fe"
         }
-      },
-      "name": "support.function.perl6fe"
+      }
     },
     {
-      "match": "(?x)\\b(?<![\\-:]|\\\\)(?<=\\.) (e|d|f|s|l|r|w|rw|x|rwx|z|abspath|basename|extension|dirname |watch|is-absolute|parts|volume|path|is-relative|parent|child |resolve|dir) (?!\\-)\\b(?!\\s*=>)",
-      "name": "support.function.perl6fe"
+      "name": "support.function.perl6fe",
+      "match": "(?x)\\b(?\u003c![\\-:\\\\])( :: )?( eager|hyper|substr|index|rindex|grep|map|sort|join|lines|hints |chmod|split|reduce|min|max|reverse|truncate|zip|cat|roundrobin |classify|first|sum|keys|values|pairs|defined|delete|exists |elems|end|kv|any|all|one|wrap|shape|key|value|name|pop|push |shift|splice|unshift|floor|ceiling|abs|exp|log|log10|rand|sign |sqrt|sin|cos|tan|round|strand|roots|cis|unpolar|polar|atan2 |pick|chop|chomp|lc|lcfirst|uc|ucfirst|capitalize|mkdir |normalize|pack|unpack|quotemeta|comb|samecase|sameaccent|chars |nfd|nfc|nfkd|nfkc|printf|sprintf|caller|evalfile|run|runinstead |nothing|want|bless|chr|ord|ords|gmtime|time|eof|localtime|gethost |getpw|chroot|getlogin|getpeername|kill|fork|wait|perl|graphs |codes|bytes|clone|print|open|read|write|readline|say|seek|close |opendir|readdir|slurp|spurt|shell|run|pos|fmt|vec|link|unlink |symlink|unique|pair|asin|atan|sec|cosec|cotan|asec|acosec|acotan |sinh|cosh|tanh|asinh|done|acos|acosh|atanh|sech|cosech|cotanh |sech|acosech|acotanh|asech|ok|nok|plan-ok|dies-ok|lives-ok|skip |todo|pass|flunk|force-todo|use-ok|isa-ok|diag|is-deeply|isnt |like|skip-rest|unlike|cmp-ok|eval-dies-ok|nok-error|cmp-ok |eval-lives-ok|approx|is-approx|throws-ok|version-lt|plan|EVAL |succ|pred|times|nonce|once|signature|new|connect|operator|undef |undefine|sleep|from|to|infix|postfix|prefix|circumfix|can-ok |postcircumfix|minmax|lazy|count|unwrap|getc|pi|tau|context|void |quasi|body|each|contains|rewinddir|subst|can|isa|flush|arity |assuming|rewind|callwith|callsame|nextwith|nextsame|attr|does-ok |eval-elsewhere|none|not|srand|so|trim|trim-start|trim-end|lastcall |WHAT|WHY|WHERE|HOW|WHICH|VAR|WHO|WHENCE|ACCEPTS|REJECTS|not |iterator|by|re|im|invert|flip|gist|flat|tree|is-prime |throws-like|trans|race|hyper|tap|emit|done-testing|quit|dd|note |prepend|categorize|antipairs|categorize-list|parse-base|base |starts-with|ends-with|put|append|tail|\\x{03C0}|\\x{03C4}|\\x{212F} |get|words|new-from-pairs|uniname|uninames|uniprop|uniprops |slurp-rest|throw|break|keep|match|trim-leading|trim-trailing |is-lazy|pull-one|push-exactly|push-at-least|push-all|push-until-lazy |sink-all|skip-at-least|skip-at-least-pull-one )(?!\\-)\\b(?!\\s*=\u003e)",
+      "captures": {
+        "1": {
+          "name": "keyword.operator.colon.perl6fe"
+        }
+      }
+    },
+    {
+      "name": "support.function.perl6fe",
+      "match": "(?x)\\b(?\u003c![\\-:]|\\\\)(?\u003c=\\.) (e|d|f|s|l|r|w|rw|x|rwx|z|abspath|basename|extension|dirname |watch|is-absolute|parts|volume|path|is-relative|parent|child |resolve|dir) (?!\\-)\\b(?!\\s*=\u003e)"
     },
     {
       "include": "#numbers"
     },
     {
-      "match": "(?x) (?<!\\(|\\*)\\%| [\\^\\+><\\*\\!\\?~\\/\\|]| (?<!\\$)\\.| (?<!:):(?!:)| (?<=\\s)\\-(?=[\\s\\(\\{\\[])| (?<!\\w)[o\\x{2218}](?!\\w)",
-      "name": "keyword.operator.generic.perl6fe"
+      "name": "keyword.operator.generic.perl6fe",
+      "match": "(?x) (?\u003c!\\(|\\*)\\%| [\\^\\+\u003e\u003c\\*\\!\\?~\\/\\|]| (?\u003c!\\$)\\.| (?\u003c!:):(?!:)| (?\u003c=\\s)\\-(?=[\\s\\(\\{\\[])| (?\u003c!\\w)[o\\x{2218}](?!\\w)"
     },
     {
-      "match": "(?x) (?<=^|\\W|\\s) ([\\w'\\-]+) \\s* (?= =>)",
-      "name": "string.pair.key.perl6fe"
+      "name": "string.pair.key.perl6fe",
+      "match": "(?x) (?\u003c=^|\\W|\\s) ([\\w'\\-]+) \\s* (?= =\u003e)"
     },
     {
-      "match": "(?x) \\b (?<!\\d) ([a-zA-Z_\\x{c0}-\\x{ff}\\$]) ( [a-zA-Z0-9_\\x{c0}-\\x{ff}\\$]| [\\-'][a-zA-Z_\\x{c0}-\\x{ff}\\$][a-zA-Z0-9_\\x{c0}-\\x{ff}\\$] )*",
-      "name": "routine.name.perl6fe"
+      "name": "routine.name.perl6fe",
+      "match": "(?x) \\b (?\u003c!\\d) ([a-zA-Z_\\x{c0}-\\x{ff}\\$]) ( [a-zA-Z0-9_\\x{c0}-\\x{ff}\\$]| [\\-'][a-zA-Z_\\x{c0}-\\x{ff}\\$][a-zA-Z0-9_\\x{c0}-\\x{ff}\\$] )*"
     },
     {
-      "begin": "(?<=\\:)(\\d+)(<)",
+      "contentName": "constant.numeric.perl6fe",
+      "begin": "(?\u003c=\\:)(\\d+)(\u003c)",
+      "end": "\u003e",
       "beginCaptures": {
         "1": {
           "name": "support.type.radix.perl6fe"
@@ -1039,57 +1525,101 @@
           "name": "punctuation.definition.radix.perl6fe"
         }
       },
-      "end": ">",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.radix.perl6fe"
         }
-      },
-      "contentName": "constant.numeric.perl6fe"
+      }
     },
     {
+      "name": "meta.block.perl6fe",
       "begin": "\\{",
+      "end": "\\}",
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.block.perl6fe"
         }
       },
-      "end": "\\}",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.block.perl6fe"
         }
-      },
-      "name": "meta.block.perl6fe",
-      "patterns": [
-        {
-          "include": "$self"
-        }
-      ]
+      }
     }
   ],
   "repository": {
-    "numbers": {
+    "comment-block-abbreviated": {
       "patterns": [
         {
-          "match": "(?x)\n(?<= ^ | [=,;^\\s{\\[(/] | \\.\\. )\n[-−+]?\n0[bodx]\\w+",
-          "name": "constant.numeric.radix.perl6fe"
+          "contentName": "entity.name.section.head.abbreviated.perl6fe",
+          "begin": "^\\s*(=)(head\\w*)\\s+(.+?)\\s*$",
+          "end": "(?=^\\s*$|^\\s*=\\w+.*$)",
+          "patterns": [
+            {
+              "include": "#comment-block-syntax"
+            }
+          ],
+          "captures": {
+            "1": {
+              "name": "storage.modifier.block.abbreviated.perl6fe"
+            },
+            "2": {
+              "name": "entity.other.attribute-name.block.abbreviated.perl6fe"
+            },
+            "3": {
+              "name": "entity.name.section.abbreviated.perl6fe",
+              "patterns": [
+                {
+                  "include": "#comment-block-syntax"
+                }
+              ]
+            }
+          }
         },
         {
-          "match": "(?x)\n          (?<= ^ | [×÷*=,:;^\\s{\\[(/] | \\.\\. )\n          (?: [+-−] )?\n(?:\n    (?: \\d+ (?: [\\_\\d]+ \\d )? )\n    (?: \\.  \\d+ (?: [\\_\\d]+ \\d )? )?\n)\n(?:  e  (?:-|−)? \\d+ (?: [\\_\\d]+ \\d )? )?",
-          "name": "constant.numeric.perl6fe"
-        },
-        {
-          "match": "(?x)\n          (?<= ^ | [×÷*=,:;^\\s{\\[(/] | \\.\\. )\n          (?: [+-−] )?\n(?:\n    (?: \\.  \\d+ (?: [\\_\\d]+ \\d )? )\n)\n(?:  e  (?:-|−)? \\d+ (?: [\\_\\d]+ \\d )? )?",
-          "name": "constant.numeric.perl6fe"
+          "contentName": "comment.block.abbreviated.perl6fe",
+          "begin": "^\\s*(=)(\\w+)\\s+(.+?)\\s*$",
+          "end": "(?=^\\s*$|^\\s*=\\w+.*$)",
+          "patterns": [
+            {
+              "include": "#comment-block-syntax"
+            }
+          ],
+          "captures": {
+            "1": {
+              "name": "storage.modifier.block.abbreviated.perl6fe"
+            },
+            "2": {
+              "name": "entity.other.attribute-name.block.abbreviated.perl6fe"
+            },
+            "3": {
+              "name": "entity.name.section.abbreviated.perl6fe",
+              "patterns": [
+                {
+                  "include": "#comment-block-syntax"
+                }
+              ]
+            }
+          }
         }
       ]
     },
     "comment-block-delimited": {
       "patterns": [
         {
+          "contentName": "comment.block.delimited.perl6fe",
           "begin": "^\\s*(=)(begin)\\s+(\\w+)",
           "end": "^\\s*(=)(end)\\s+(\\w+)",
+          "patterns": [
+            {
+              "include": "#comment-block-syntax"
+            }
+          ],
           "captures": {
             "1": {
               "name": "storage.modifier.block.delimited.perl6fe"
@@ -1100,393 +1630,7 @@
             "3": {
               "name": "entity.other.attribute-name.block.delimited.perl6fe"
             }
-          },
-          "contentName": "comment.block.delimited.perl6fe",
-          "patterns": [
-            {
-              "include": "#comment-block-syntax"
-            }
-          ]
-        }
-      ]
-    },
-    "comment-block-abbreviated": {
-      "patterns": [
-        {
-          "begin": "^\\s*(=)(head\\w*)\\s+(.+?)\\s*$",
-          "end": "(?=^\\s*$|^\\s*=\\w+.*$)",
-          "captures": {
-            "1": {
-              "name": "storage.modifier.block.abbreviated.perl6fe"
-            },
-            "2": {
-              "name": "entity.other.attribute-name.block.abbreviated.perl6fe"
-            },
-            "3": {
-              "name": "entity.name.section.abbreviated.perl6fe",
-              "patterns": [
-                {
-                  "include": "#comment-block-syntax"
-                }
-              ]
-            }
-          },
-          "contentName": "entity.name.section.head.abbreviated.perl6fe",
-          "patterns": [
-            {
-              "include": "#comment-block-syntax"
-            }
-          ]
-        },
-        {
-          "begin": "^\\s*(=)(\\w+)\\s+(.+?)\\s*$",
-          "end": "(?=^\\s*$|^\\s*=\\w+.*$)",
-          "captures": {
-            "1": {
-              "name": "storage.modifier.block.abbreviated.perl6fe"
-            },
-            "2": {
-              "name": "entity.other.attribute-name.block.abbreviated.perl6fe"
-            },
-            "3": {
-              "name": "entity.name.section.abbreviated.perl6fe",
-              "patterns": [
-                {
-                  "include": "#comment-block-syntax"
-                }
-              ]
-            }
-          },
-          "contentName": "comment.block.abbreviated.perl6fe",
-          "patterns": [
-            {
-              "include": "#comment-block-syntax"
-            }
-          ]
-        }
-      ]
-    },
-    "shellquotes": {
-      "patterns": [
-        {
-          "begin": "([qQ]x)\\s*({{)",
-          "beginCaptures": {
-            "1": {
-              "name": "string.quoted.q.shell.operator.perl6fe"
-            },
-            "2": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "end": "}}",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "name": "meta.shell.quote.single.perl6fe",
-          "patterns": [
-            {
-              "include": "source.quoting.perl6fe#q_single_string_content"
-            }
-          ]
-        },
-        {
-          "begin": "([qQ]x)\\s*({)",
-          "beginCaptures": {
-            "1": {
-              "name": "string.quoted.q.shell.operator.perl6fe"
-            },
-            "2": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "end": "}",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "name": "meta.shell.quote.single.perl6fe",
-          "patterns": [
-            {
-              "include": "source.quoting.perl6fe#q_single_string_content"
-            }
-          ]
-        },
-        {
-          "begin": "([qQ]x)\\s*(\\[\\[)",
-          "beginCaptures": {
-            "1": {
-              "name": "string.quoted.q.shell.operator.perl6fe"
-            },
-            "2": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "end": "\\]\\]",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "name": "meta.shell.quote.single.perl6fe",
-          "patterns": [
-            {
-              "include": "source.quoting.perl6fe#q_single_string_content"
-            }
-          ]
-        },
-        {
-          "begin": "([Qq]x)\\s*(\\[)",
-          "beginCaptures": {
-            "1": {
-              "name": "string.quoted.q.shell.operator.perl6fe"
-            },
-            "2": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "end": "\\]",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "name": "meta.shell.quote.single.perl6fe",
-          "patterns": [
-            {
-              "include": "source.quoting.perl6fe#q_single_string_content"
-            }
-          ]
-        },
-        {
-          "begin": "([Qq]x)\\s*(\\|)",
-          "beginCaptures": {
-            "1": {
-              "name": "string.quoted.q.shell.operator.perl6fe"
-            },
-            "2": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "end": "\\|",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "name": "meta.shell.quote.single.perl6fe",
-          "patterns": [
-            {
-              "include": "source.quoting.perl6fe#q_single_string_content"
-            }
-          ]
-        },
-        {
-          "begin": "([Qq]x)\\s*(\\/)",
-          "beginCaptures": {
-            "1": {
-              "name": "string.quoted.q.shell.operator.perl6fe"
-            },
-            "2": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "end": "(?<!\\\\)\\/",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "name": "meta.shell.quote.single.perl6fe",
-          "patterns": [
-            {
-              "match": "\\\\\\/",
-              "name": "constant.character.escape.perl6fe"
-            },
-            {
-              "include": "source.quoting.perl6fe#q_single_string_content"
-            }
-          ]
-        },
-        {
-          "begin": "(qqx)\\s*({{)",
-          "beginCaptures": {
-            "1": {
-              "name": "string.quoted.q.shell.operator.perl6fe"
-            },
-            "2": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "end": "}}",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "name": "meta.shell.quote.double.perl6fe",
-          "patterns": [
-            {
-              "include": "#interpolation"
-            },
-            {
-              "include": "#variables"
-            },
-            {
-              "include": "source.shell"
-            }
-          ]
-        },
-        {
-          "begin": "(qqx)\\s*({)",
-          "beginCaptures": {
-            "1": {
-              "name": "string.quoted.q.shell.operator.perl6fe"
-            },
-            "2": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "end": "}",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "name": "meta.shell.quote.double.perl6fe",
-          "patterns": [
-            {
-              "include": "#interpolation"
-            },
-            {
-              "include": "#variables"
-            },
-            {
-              "include": "source.shell"
-            }
-          ]
-        },
-        {
-          "begin": "(qqx)\\s*(\\[\\[)",
-          "beginCaptures": {
-            "1": {
-              "name": "string.quoted.q.shell.operator.perl6fe"
-            },
-            "2": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "end": "\\]\\]",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "name": "meta.shell.quote.double.perl6fe",
-          "patterns": [
-            {
-              "include": "#interpolation"
-            },
-            {
-              "include": "#variables"
-            },
-            {
-              "include": "source.shell"
-            }
-          ]
-        },
-        {
-          "begin": "(qqx)\\s*(\\[)",
-          "beginCaptures": {
-            "1": {
-              "name": "string.quoted.q.shell.operator.perl6fe"
-            },
-            "2": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "end": "\\]",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "name": "meta.shell.quote.double.perl6fe",
-          "patterns": [
-            {
-              "include": "#interpolation"
-            },
-            {
-              "include": "#variables"
-            },
-            {
-              "include": "source.shell"
-            }
-          ]
-        },
-        {
-          "begin": "(qqx)\\s*(\\|)",
-          "beginCaptures": {
-            "1": {
-              "name": "string.quoted.q.shell.operator.perl6fe"
-            },
-            "2": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "end": "\\|",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "name": "meta.shell.quote.double.perl6fe",
-          "patterns": [
-            {
-              "include": "#interpolation"
-            },
-            {
-              "include": "#variables"
-            },
-            {
-              "include": "source.shell"
-            }
-          ]
-        },
-        {
-          "begin": "(qqx)\\s*(\\/)",
-          "beginCaptures": {
-            "1": {
-              "name": "string.quoted.q.shell.operator.perl6fe"
-            },
-            "2": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "end": "(?<!\\\\)\\/",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.section.embedded.shell.begin.perl6fe"
-            }
-          },
-          "name": "meta.shell.quote.double.perl6fe",
-          "patterns": [
-            {
-              "match": "\\\\\\/",
-              "name": "constant.character.escape.perl6fe"
-            },
-            {
-              "include": "#interpolation"
-            },
-            {
-              "include": "#variables"
-            },
-            {
-              "include": "source.shell"
-            }
-          ]
+          }
         }
       ]
     },
@@ -1499,23 +1643,10 @@
           "include": "#comment-block-abbreviated"
         },
         {
-          "begin": "(?x) (U) (<<<)",
-          "beginCaptures": {
-            "1": {
-              "name": "support.function.pod.code.perl6fe"
-            },
-            "2": {
-              "name": "punctuation.section.embedded.pod.code.perl6fe"
-            }
-          },
-          "end": "(?x) (>>>)",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.embedded.pod.code.perl6fe"
-            }
-          },
+          "name": "meta.pod.c.perl6fe",
           "contentName": "markup.underline.perl6fe",
-          "name": "meta.pod.c.perl6fe",
+          "begin": "(?x) (U) (\u003c\u003c\u003c)",
+          "end": "(?x) (\u003e\u003e\u003e)",
           "patterns": [
             {
               "include": "#comment-block-syntax"
@@ -1523,10 +1654,7 @@
             {
               "include": "source.quoting.perl6fe#q_triple_angle_string_content"
             }
-          ]
-        },
-        {
-          "begin": "(?x) (I) (<<<)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "support.function.pod.code.perl6fe"
@@ -1535,14 +1663,17 @@
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
           },
-          "end": "(?x) (>>>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.pod.c.perl6fe",
           "contentName": "markup.italic.perl6fe",
-          "name": "meta.pod.c.perl6fe",
+          "begin": "(?x) (I) (\u003c\u003c\u003c)",
+          "end": "(?x) (\u003e\u003e\u003e)",
           "patterns": [
             {
               "include": "#comment-block-syntax"
@@ -1550,10 +1681,7 @@
             {
               "include": "source.quoting.perl6fe#q_triple_angle_string_content"
             }
-          ]
-        },
-        {
-          "begin": "(?x) (B) (<<<)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "support.function.pod.code.perl6fe"
@@ -1562,14 +1690,17 @@
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
           },
-          "end": "(?x) (>>>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.pod.c.perl6fe",
           "contentName": "markup.bold.perl6fe",
-          "name": "meta.pod.c.perl6fe",
+          "begin": "(?x) (B) (\u003c\u003c\u003c)",
+          "end": "(?x) (\u003e\u003e\u003e)",
           "patterns": [
             {
               "include": "#comment-block-syntax"
@@ -1577,10 +1708,7 @@
             {
               "include": "source.quoting.perl6fe#q_triple_angle_string_content"
             }
-          ]
-        },
-        {
-          "begin": "(?x) ([A-Z]) (<<<)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "support.function.pod.code.perl6fe"
@@ -1589,14 +1717,17 @@
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
           },
-          "end": "(?x) (>>>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.pod.c.perl6fe",
           "contentName": "markup.raw.code.perl6fe",
-          "name": "meta.pod.c.perl6fe",
+          "begin": "(?x) ([A-Z]) (\u003c\u003c\u003c)",
+          "end": "(?x) (\u003e\u003e\u003e)",
           "patterns": [
             {
               "include": "#comment-block-syntax"
@@ -1604,10 +1735,7 @@
             {
               "include": "source.quoting.perl6fe#q_triple_angle_string_content"
             }
-          ]
-        },
-        {
-          "begin": "(?x) (U) (<<)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "support.function.pod.code.perl6fe"
@@ -1616,14 +1744,17 @@
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
           },
-          "end": "(?x) (>>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.pod.c.perl6fe",
           "contentName": "markup.underline.perl6fe",
-          "name": "meta.pod.c.perl6fe",
+          "begin": "(?x) (U) (\u003c\u003c)",
+          "end": "(?x) (\u003e\u003e)",
           "patterns": [
             {
               "include": "#comment-block-syntax"
@@ -1631,10 +1762,7 @@
             {
               "include": "source.quoting.perl6fe#q_double_angle_string_content"
             }
-          ]
-        },
-        {
-          "begin": "(?x) (I) (<<)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "support.function.pod.code.perl6fe"
@@ -1643,14 +1771,17 @@
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
           },
-          "end": "(?x) (>>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.pod.c.perl6fe",
           "contentName": "markup.italic.perl6fe",
-          "name": "meta.pod.c.perl6fe",
+          "begin": "(?x) (I) (\u003c\u003c)",
+          "end": "(?x) (\u003e\u003e)",
           "patterns": [
             {
               "include": "#comment-block-syntax"
@@ -1658,10 +1789,7 @@
             {
               "include": "source.quoting.perl6fe#q_double_angle_string_content"
             }
-          ]
-        },
-        {
-          "begin": "(?x) (B) (<<)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "support.function.pod.code.perl6fe"
@@ -1670,14 +1798,17 @@
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
           },
-          "end": "(?x) (>>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.pod.c.perl6fe",
           "contentName": "markup.bold.perl6fe",
-          "name": "meta.pod.c.perl6fe",
+          "begin": "(?x) (B) (\u003c\u003c)",
+          "end": "(?x) (\u003e\u003e)",
           "patterns": [
             {
               "include": "#comment-block-syntax"
@@ -1685,10 +1816,7 @@
             {
               "include": "source.quoting.perl6fe#q_double_angle_string_content"
             }
-          ]
-        },
-        {
-          "begin": "(?x) ([A-Z]) (<<)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "support.function.pod.code.perl6fe"
@@ -1697,14 +1825,17 @@
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
           },
-          "end": "(?x) (>>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.pod.c.perl6fe",
           "contentName": "markup.raw.code.perl6fe",
-          "name": "meta.pod.c.perl6fe",
+          "begin": "(?x) ([A-Z]) (\u003c\u003c)",
+          "end": "(?x) (\u003e\u003e)",
           "patterns": [
             {
               "include": "#comment-block-syntax"
@@ -1712,10 +1843,7 @@
             {
               "include": "source.quoting.perl6fe#q_double_angle_string_content"
             }
-          ]
-        },
-        {
-          "begin": "(?x) (U) (<)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "support.function.pod.code.perl6fe"
@@ -1724,14 +1852,17 @@
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
           },
-          "end": "(?x) (>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.pod.c.perl6fe",
           "contentName": "markup.underline.perl6fe",
-          "name": "meta.pod.c.perl6fe",
+          "begin": "(?x) (U) (\u003c)",
+          "end": "(?x) (\u003e)",
           "patterns": [
             {
               "include": "#comment-block-syntax"
@@ -1739,10 +1870,7 @@
             {
               "include": "source.quoting.perl6fe#q_angle_string_content"
             }
-          ]
-        },
-        {
-          "begin": "(?x) (I) (<)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "support.function.pod.code.perl6fe"
@@ -1751,14 +1879,17 @@
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
           },
-          "end": "(?x) (>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.pod.c.perl6fe",
           "contentName": "markup.italic.perl6fe",
-          "name": "meta.pod.c.perl6fe",
+          "begin": "(?x) (I) (\u003c)",
+          "end": "(?x) (\u003e)",
           "patterns": [
             {
               "include": "#comment-block-syntax"
@@ -1766,10 +1897,7 @@
             {
               "include": "source.quoting.perl6fe#q_angle_string_content"
             }
-          ]
-        },
-        {
-          "begin": "(?x) (B) (<)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "support.function.pod.code.perl6fe"
@@ -1778,14 +1906,17 @@
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
           },
-          "end": "(?x) (>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.pod.c.perl6fe",
           "contentName": "markup.bold.perl6fe",
-          "name": "meta.pod.c.perl6fe",
+          "begin": "(?x) (B) (\u003c)",
+          "end": "(?x) (\u003e)",
           "patterns": [
             {
               "include": "#comment-block-syntax"
@@ -1793,10 +1924,7 @@
             {
               "include": "source.quoting.perl6fe#q_angle_string_content"
             }
-          ]
-        },
-        {
-          "begin": "(?x) ([A-Z]) (<)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "support.function.pod.code.perl6fe"
@@ -1805,14 +1933,17 @@
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
           },
-          "end": "(?x) (>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
-          },
-          "contentName": "markup.raw.code.perl6fe",
+          }
+        },
+        {
           "name": "meta.pod.c.perl6fe",
+          "contentName": "markup.raw.code.perl6fe",
+          "begin": "(?x) ([A-Z]) (\u003c)",
+          "end": "(?x) (\u003e)",
           "patterns": [
             {
               "include": "#comment-block-syntax"
@@ -1820,26 +1951,26 @@
             {
               "include": "source.quoting.perl6fe#q_angle_string_content"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "support.function.pod.code.perl6fe"
+            },
+            "2": {
+              "name": "punctuation.section.embedded.pod.code.perl6fe"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.section.embedded.pod.code.perl6fe"
+            }
+          }
         },
         {
+          "name": "meta.pod.c.perl6fe",
+          "contentName": "markup.underline.perl6fe",
           "begin": "(?x) (U) («)",
-          "beginCaptures": {
-            "1": {
-              "name": "support.function.pod.code.perl6fe"
-            },
-            "2": {
-              "name": "punctuation.section.embedded.pod.code.perl6fe"
-            }
-          },
           "end": "(?x) (»)",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.embedded.pod.code.perl6fe"
-            }
-          },
-          "contentName": "markup.underline.perl6fe",
-          "name": "meta.pod.c.perl6fe",
           "patterns": [
             {
               "include": "#comment-block-syntax"
@@ -1847,10 +1978,7 @@
             {
               "include": "source.quoting.perl6fe#q_chevron_string_content"
             }
-          ]
-        },
-        {
-          "begin": "(?x) (I) («)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "support.function.pod.code.perl6fe"
@@ -1859,14 +1987,17 @@
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
           },
-          "end": "(?x) (»)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.pod.c.perl6fe",
           "contentName": "markup.italic.perl6fe",
-          "name": "meta.pod.c.perl6fe",
+          "begin": "(?x) (I) («)",
+          "end": "(?x) (»)",
           "patterns": [
             {
               "include": "#comment-block-syntax"
@@ -1874,10 +2005,7 @@
             {
               "include": "source.quoting.perl6fe#q_chevron_string_content"
             }
-          ]
-        },
-        {
-          "begin": "(?x) (B) («)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "support.function.pod.code.perl6fe"
@@ -1886,14 +2014,17 @@
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
           },
-          "end": "(?x) (»)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.pod.c.perl6fe",
           "contentName": "markup.bold.perl6fe",
-          "name": "meta.pod.c.perl6fe",
+          "begin": "(?x) (B) («)",
+          "end": "(?x) (»)",
           "patterns": [
             {
               "include": "#comment-block-syntax"
@@ -1901,10 +2032,7 @@
             {
               "include": "source.quoting.perl6fe#q_chevron_string_content"
             }
-          ]
-        },
-        {
-          "begin": "(?x) ([A-Z]) («)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "support.function.pod.code.perl6fe"
@@ -1913,14 +2041,17 @@
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
           },
-          "end": "(?x) (»)",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
-          },
-          "contentName": "markup.raw.code.perl6fe",
+          }
+        },
+        {
           "name": "meta.pod.c.perl6fe",
+          "contentName": "markup.raw.code.perl6fe",
+          "begin": "(?x) ([A-Z]) («)",
+          "end": "(?x) (»)",
           "patterns": [
             {
               "include": "#comment-block-syntax"
@@ -1928,231 +2059,27 @@
             {
               "include": "source.quoting.perl6fe#q_chevron_string_content"
             }
-          ]
-        }
-      ]
-    },
-    "p5_regex": {
-      "patterns": [
-        {
-          "begin": "(?x)(?<![\\w\\/])(m|rx) \\s*((?:\\s*:\\w+)*)?(:P5)((?:\\s*:\\w+)*)?\\s* (\\{)",
+          ],
           "beginCaptures": {
             "1": {
-              "name": "string.regexp.construct.perl6fe"
+              "name": "support.function.pod.code.perl6fe"
             },
             "2": {
-              "name": "entity.name.section.adverb.regexp.perl6fe"
-            },
-            "3": {
-              "name": "entity.name.section.p5.adverb.regexp.perl6fe"
-            },
-            "4": {
-              "name": "entity.name.section.adverb.regexp.perl6fe"
-            },
-            "5": {
-              "name": "punctuation.definition.regexp.perl6fe"
+              "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
           },
-          "end": "(?<!\\\\)(\\})([gmixXsuUAJ]+)?",
           "endCaptures": {
             "1": {
-              "name": "punctuation.definition.regexp.perl6fe"
-            },
-            "2": {
-              "name": "invalid.illegal.p5.regexp.modifier.perl6fe"
+              "name": "punctuation.section.embedded.pod.code.perl6fe"
             }
-          },
-          "contentName": "string.regexp.p5.perl6fe",
-          "patterns": [
-            {
-              "include": "#p5_escaped_char"
-            },
-            {
-              "include": "source.quoting.perl6fe#q_brace_string_content"
-            }
-          ]
-        },
-        {
-          "begin": "(?x)(?<![\\w\\/])(m|rx) \\s*((?:\\s*:\\w+)*)?(:P5)((?:\\s*:\\w+)*)?\\s* (\\[)",
-          "beginCaptures": {
-            "1": {
-              "name": "string.regexp.construct.perl6fe"
-            },
-            "2": {
-              "name": "entity.name.section.adverb.regexp.perl6fe"
-            },
-            "3": {
-              "name": "entity.name.section.p5.adverb.regexp.perl6fe"
-            },
-            "4": {
-              "name": "entity.name.section.adverb.regexp.perl6fe"
-            },
-            "5": {
-              "name": "punctuation.definition.regexp.perl6fe"
-            }
-          },
-          "end": "(?<!\\\\)(\\])([gmixXsuUAJ]+)?",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.definition.regexp.perl6fe"
-            },
-            "2": {
-              "name": "invalid.illegal.p5.regexp.modifier.perl6fe"
-            }
-          },
-          "contentName": "string.regexp.p5.perl6fe",
-          "patterns": [
-            {
-              "include": "#p5_escaped_char"
-            },
-            {
-              "include": "source.quoting.perl6fe#q_bracket_string_content"
-            }
-          ]
-        },
-        {
-          "begin": "(?x)(?<![\\w\\/])(m|rx) \\s*((?:\\s*:\\w+)*)?(:P5)((?:\\s*:\\w+)*)?\\s* (\\/)",
-          "beginCaptures": {
-            "1": {
-              "name": "string.regexp.construct.perl6fe"
-            },
-            "2": {
-              "name": "entity.name.section.adverb.regexp.perl6fe"
-            },
-            "3": {
-              "name": "entity.name.section.p5.adverb.regexp.perl6fe"
-            },
-            "4": {
-              "name": "entity.name.section.adverb.regexp.perl6fe"
-            },
-            "5": {
-              "name": "punctuation.definition.regexp.perl6fe"
-            }
-          },
-          "end": "(?<!\\\\)(\\/)([gmixXsuUAJ]+)?",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.definition.regexp.perl6fe"
-            },
-            "2": {
-              "name": "invalid.illegal.p5.regexp.modifier.perl6fe"
-            }
-          },
-          "contentName": "string.regexp.p5.perl6fe",
-          "patterns": [
-            {
-              "include": "#p5_escaped_char"
-            },
-            {
-              "include": "source.quoting.perl6fe#q_slash_string_content"
-            }
-          ]
-        }
-      ]
-    },
-    "p5_escaped_char": {
-      "patterns": [
-        {
-          "match": "\\\\\\d+",
-          "name": "constant.character.escape.perl"
-        },
-        {
-          "match": "\\\\c[^\\s\\\\]",
-          "name": "constant.character.escape.perl"
-        },
-        {
-          "match": "\\\\g(?:\\{(?:\\w*|-\\d+)\\}|\\d+)",
-          "name": "constant.character.escape.perl"
-        },
-        {
-          "match": "\\\\k(?:\\{\\w*\\}|<\\w*>|'\\w*')",
-          "name": "constant.character.escape.perl"
-        },
-        {
-          "match": "\\\\N\\{[^\\}]*\\}",
-          "name": "constant.character.escape.perl"
-        },
-        {
-          "match": "\\\\o\\{\\d*\\}",
-          "name": "constant.character.escape.perl"
-        },
-        {
-          "match": "\\\\(?:p|P)(?:\\{\\w*\\}|P)",
-          "name": "constant.character.escape.perl"
-        },
-        {
-          "match": "\\\\x(?:[0-9a-zA-Z]{2}|\\{\\w*\\})?",
-          "name": "constant.character.escape.perl"
-        },
-        {
-          "match": "\\\\.",
-          "name": "constant.character.escape.perl"
-        }
-      ]
-    },
-    "special_variables": {
-      "patterns": [
-        {
-          "match": "(?x) [\\$\\@](?=[\\s,;\\{\\[\\(])| (?<=[\\(\\,])\\s*%(?![\\w\\*\\!\\?\\.\\^:=~])| \\$_| \\$\\/| \\$\\!(?!\\w)| \\$\\d(?!\\w)",
-          "name": "keyword.other.special-method.perl6fe"
-        }
-      ]
-    },
-    "regexp-variables": {
-      "patterns": [
-        {
-          "begin": "\\$(?=\\<)",
-          "beginCaptures": {
-            "0": {
-              "name": "variable.other.identifier.sigil.regexp.perl6"
-            }
-          },
-          "end": "(?![\\w\\<\\>])",
-          "name": "meta.match.variable.perl6fe",
-          "patterns": [
-            {
-              "match": "(\\<)([\\w\\-]+)(\\>)",
-              "captures": {
-                "1": {
-                  "name": "support.class.match.name.delimiter.regexp.perl6fe"
-                },
-                "2": {
-                  "name": "variable.other.identifier.regexp.perl6"
-                },
-                "3": {
-                  "name": "support.class.match.name.delimiter.regexp.perl6fe"
-                }
-              }
-            }
-          ]
-        }
-      ]
-    },
-    "variables": {
-      "patterns": [
-        {
-          "include": "#regexp-variables"
-        },
-        {
-          "match": "(?x)\n(\\$|@|%|&)\n(\\.|\\*|:|!|\\^|~|=|\\?)?\n(\n    (?:[\\p{Alpha}_])             # Must start with Alpha or underscore\n    (?:\n       [\\p{Digit}\\p{Alpha}_]  # have alphanum/underscore or a ' or -\n    |                           # followed by an alphanum or underscore\n       [\\-'] [\\p{Digit}\\p{Alpha}_]\n    )*\n)",
-          "captures": {
-            "1": {
-              "name": "variable.other.identifier.sigil.perl6fe"
-            },
-            "2": {
-              "name": "support.class.twigil.perl6fe"
-            },
-            "3": {
-              "name": "variable.other.identifier.perl6fe"
-            }
-          },
-          "name": "meta.variable.container.perl6fe"
+          }
         }
       ]
     },
     "hex_escapes": {
       "patterns": [
         {
+          "name": "punctuation.hex.perl6fe",
           "match": "(?x) (\\\\x) ( \\[ ) ( [\\dA-Fa-f]+ ) ( \\] )",
           "captures": {
             "1": {
@@ -2167,15 +2094,14 @@
             "4": {
               "name": "keyword.operator.bracket.close.perl6fe"
             }
-          },
-          "name": "punctuation.hex.perl6fe"
+          }
         }
       ]
     },
     "interpolation": {
       "patterns": [
         {
-          "match": "(?x)\n(?<!\\\\)\n(\\$|@|%|&)\n(?!\\$)\n(\\.|\\*|:|!|\\^|~|=|\\?)?  # Twigils\n([\\p{Alpha}_])             # Must start with Alpha or underscore\n(\n   [\\p{Digit}\\p{Alpha}_]  # have alphanum/underscore or a ' or -\n|                           # followed by an alphanum or underscore\n   [\\-'] [\\p{Digit}\\p{Alpha}_]\n)*\n( \\[ .* \\] )?             # postcircumfix [ ]\n## methods\n(?:\n  (?:\n    ( \\. )\n    (\n       [\\p{Alpha}]\n        (?:\n          [\\p{Digit}\\p{Alpha}_]  # have alphanum/underscore or a ' or -\n        |                           # followed by an alphanum or underscore\n          [\\-'] [\\p{Digit}\\p{Alpha}_]\n        )*\n\n    )\n  )?\n  ( \\( .*?  \\) )\n)?",
+          "name": "variable.other.identifier.interpolated.perl6fe",
           "captures": {
             "1": {
               "name": "variable.other.identifier.sigil.perl6fe"
@@ -2186,13 +2112,13 @@
             "5": {
               "patterns": [
                 {
-                  "begin": "<",
+                  "begin": "\u003c",
+                  "end": "\u003e",
                   "beginCaptures": {
                     "0": {
                       "name": "keyword.operator.chevron.open.perl6fe"
                     }
                   },
-                  "end": ">",
                   "endCaptures": {
                     "0": {
                       "name": "keyword.operator.chevron.close.perl6fe"
@@ -2201,22 +2127,22 @@
                 },
                 {
                   "begin": "\\[",
+                  "end": "\\]",
+                  "patterns": [
+                    {
+                      "include": "$self"
+                    }
+                  ],
                   "beginCaptures": {
                     "0": {
                       "name": "keyword.operator.bracket.open.perl6fe"
                     }
                   },
-                  "end": "\\]",
                   "endCaptures": {
                     "0": {
                       "name": "keyword.operator.bracket.close.perl6fe"
                     }
-                  },
-                  "patterns": [
-                    {
-                      "include": "$self"
-                    }
-                  ]
+                  }
                 }
               ]
             },
@@ -2227,24 +2153,23 @@
               "name": "support.function.perl6fe"
             },
             "8": {
-              "begin": "(",
-              "beginCaptures": {
-                "0": "keyword.operator.paren.open.perl6fe"
-              },
-              "end": ")",
-              "endCaptures": {
-                "0": {
-                  "name": "keyword.operator.paren.close.perl6fe"
-                }
-              },
               "patterns": [
                 {
                   "include": "$self"
                 }
-              ]
+              ],
+              "beginCaptures": {
+                "0": {
+                  "name": "keyword.operator.paren.open.perl6fe"
+                }
+              },
+              "endCaptures": {
+                "0": {
+                  "name": "keyword.operator.paren.close.perl6fe"
+                }
+              }
             }
-          },
-          "name": "variable.other.identifier.interpolated.perl6fe"
+          }
         },
         {
           "include": "#hex_escapes"
@@ -2253,24 +2178,198 @@
           "include": "#regexp-variables"
         },
         {
-          "begin": "(\\{)",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.section.embedded.begin.perl6fe"
-            }
-          },
+          "name": "meta.interpolation.perl6fe",
+          "begin": "(?x) (?\u003c! m|rx|m:i|rx:i) (\\{)",
           "end": "(\\})",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.embedded.end.perl6fe"
-            }
-          },
           "patterns": [
             {
               "include": "$self"
             }
           ],
-          "name": "meta.interpolation.perl6fe"
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.section.embedded.begin.perl6fe"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.section.embedded.end.perl6fe"
+            }
+          }
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.radix.perl6fe",
+          "match": "(?x)\n(?\u003c= ^ | [=,;^\\s{\\[(/] | \\.\\. )\n[-−+]?\n0[bodx]\\w+"
+        },
+        {
+          "name": "constant.numeric.perl6fe",
+          "match": "(?x)\n          (?\u003c= ^ | [×÷*=,:;^\\s{\\[(/] | \\.\\. | … )\n          (?: \\^? [+\\-−] )?\n(?:\n    (?: \\d+ (?: [\\_\\d]+ \\d )? )\n    (?: \\.  \\d+ (?: [\\_\\d]+ \\d )? )?\n)\n(?:  e  (?:-|−)? \\d+ (?: [\\_\\d]+ \\d )? )?"
+        },
+        {
+          "name": "constant.numeric.perl6fe",
+          "match": "(?x)\n          (?\u003c= ^ | [×÷*=,:;^\\s{\\[(/] | \\.\\. )\n          (?: [+-−] )?\n(?:\n    (?: \\.  \\d+ (?: [\\_\\d]+ \\d )? )\n)\n(?:  e  (?:-|−)? \\d+ (?: [\\_\\d]+ \\d )? )?"
+        }
+      ]
+    },
+    "p5_escaped_char": {
+      "patterns": [
+        {
+          "name": "constant.character.escape.perl",
+          "match": "\\\\\\d+"
+        },
+        {
+          "name": "constant.character.escape.perl",
+          "match": "\\\\c[^\\s\\\\]"
+        },
+        {
+          "name": "constant.character.escape.perl",
+          "match": "\\\\g(?:\\{(?:\\w*|-\\d+)\\}|\\d+)"
+        },
+        {
+          "name": "constant.character.escape.perl",
+          "match": "\\\\k(?:\\{\\w*\\}|\u003c\\w*\u003e|'\\w*')"
+        },
+        {
+          "name": "constant.character.escape.perl",
+          "match": "\\\\N\\{[^\\}]*\\}"
+        },
+        {
+          "name": "constant.character.escape.perl",
+          "match": "\\\\o\\{\\d*\\}"
+        },
+        {
+          "name": "constant.character.escape.perl",
+          "match": "\\\\(?:p|P)(?:\\{\\w*\\}|P)"
+        },
+        {
+          "name": "constant.character.escape.perl",
+          "match": "\\\\x(?:[0-9a-zA-Z]{2}|\\{\\w*\\})?"
+        },
+        {
+          "name": "constant.character.escape.perl",
+          "match": "\\\\."
+        }
+      ]
+    },
+    "p5_regex": {
+      "patterns": [
+        {
+          "contentName": "string.regexp.p5.perl6fe",
+          "begin": "(?x)(?\u003c![\\w\\/])(m|rx) \\s*((?:\\s*:\\w+)*)?(:P5)((?:\\s*:\\w+)*)?\\s* (\\{)",
+          "end": "(?\u003c!\\\\)(\\})([gmixXsuUAJ]+)?",
+          "patterns": [
+            {
+              "include": "#p5_escaped_char"
+            },
+            {
+              "include": "source.quoting.perl6fe#q_brace_string_content"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "string.regexp.construct.perl6fe"
+            },
+            "2": {
+              "name": "entity.name.section.adverb.regexp.perl6fe"
+            },
+            "3": {
+              "name": "entity.name.section.p5.adverb.regexp.perl6fe"
+            },
+            "4": {
+              "name": "entity.name.section.adverb.regexp.perl6fe"
+            },
+            "5": {
+              "name": "punctuation.definition.regexp.perl6fe"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.regexp.perl6fe"
+            },
+            "2": {
+              "name": "invalid.illegal.p5.regexp.modifier.perl6fe"
+            }
+          }
+        },
+        {
+          "contentName": "string.regexp.p5.perl6fe",
+          "begin": "(?x)(?\u003c![\\w\\/])(m|rx) \\s*((?:\\s*:\\w+)*)?(:P5)((?:\\s*:\\w+)*)?\\s* (\\[)",
+          "end": "(?\u003c!\\\\)(\\])([gmixXsuUAJ]+)?",
+          "patterns": [
+            {
+              "include": "#p5_escaped_char"
+            },
+            {
+              "include": "source.quoting.perl6fe#q_bracket_string_content"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "string.regexp.construct.perl6fe"
+            },
+            "2": {
+              "name": "entity.name.section.adverb.regexp.perl6fe"
+            },
+            "3": {
+              "name": "entity.name.section.p5.adverb.regexp.perl6fe"
+            },
+            "4": {
+              "name": "entity.name.section.adverb.regexp.perl6fe"
+            },
+            "5": {
+              "name": "punctuation.definition.regexp.perl6fe"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.regexp.perl6fe"
+            },
+            "2": {
+              "name": "invalid.illegal.p5.regexp.modifier.perl6fe"
+            }
+          }
+        },
+        {
+          "contentName": "string.regexp.p5.perl6fe",
+          "begin": "(?x)(?\u003c![\\w\\/])(m|rx) \\s*((?:\\s*:\\w+)*)?(:P5)((?:\\s*:\\w+)*)?\\s* (\\/)",
+          "end": "(?\u003c!\\\\)(\\/)([gmixXsuUAJ]+)?",
+          "patterns": [
+            {
+              "include": "#p5_escaped_char"
+            },
+            {
+              "include": "source.quoting.perl6fe#q_slash_string_content"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "string.regexp.construct.perl6fe"
+            },
+            "2": {
+              "name": "entity.name.section.adverb.regexp.perl6fe"
+            },
+            "3": {
+              "name": "entity.name.section.p5.adverb.regexp.perl6fe"
+            },
+            "4": {
+              "name": "entity.name.section.adverb.regexp.perl6fe"
+            },
+            "5": {
+              "name": "punctuation.definition.regexp.perl6fe"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.regexp.perl6fe"
+            },
+            "2": {
+              "name": "invalid.illegal.p5.regexp.modifier.perl6fe"
+            }
+          }
         }
       ]
     },
@@ -2280,6 +2379,389 @@
       "patterns": [
         {
           "include": "#q_right_double_right_double_string_content"
+        }
+      ]
+    },
+    "regexp-variables": {
+      "patterns": [
+        {
+          "name": "meta.match.variable.perl6fe",
+          "begin": "\\$(?=\\\u003c)",
+          "end": "(?![\\w\\\u003c\\\u003e])",
+          "patterns": [
+            {
+              "match": "(\\\u003c)([\\w\\-]+)(\\\u003e)",
+              "captures": {
+                "1": {
+                  "name": "support.class.match.name.delimiter.regexp.perl6fe"
+                },
+                "2": {
+                  "name": "variable.other.identifier.regexp.perl6"
+                },
+                "3": {
+                  "name": "support.class.match.name.delimiter.regexp.perl6fe"
+                }
+              }
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "variable.other.identifier.sigil.regexp.perl6"
+            }
+          }
+        }
+      ]
+    },
+    "shellquotes": {
+      "patterns": [
+        {
+          "name": "meta.shell.quote.single.perl6fe",
+          "begin": "([qQ]x)\\s*({{)",
+          "end": "}}",
+          "patterns": [
+            {
+              "include": "source.quoting.perl6fe#q_single_string_content"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "string.quoted.q.shell.operator.perl6fe"
+            },
+            "2": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          }
+        },
+        {
+          "name": "meta.shell.quote.single.perl6fe",
+          "begin": "([qQ]x)\\s*({)",
+          "end": "}",
+          "patterns": [
+            {
+              "include": "source.quoting.perl6fe#q_single_string_content"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "string.quoted.q.shell.operator.perl6fe"
+            },
+            "2": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          }
+        },
+        {
+          "name": "meta.shell.quote.single.perl6fe",
+          "begin": "([qQ]x)\\s*(\\[\\[)",
+          "end": "\\]\\]",
+          "patterns": [
+            {
+              "include": "source.quoting.perl6fe#q_single_string_content"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "string.quoted.q.shell.operator.perl6fe"
+            },
+            "2": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          }
+        },
+        {
+          "name": "meta.shell.quote.single.perl6fe",
+          "begin": "([Qq]x)\\s*(\\[)",
+          "end": "\\]",
+          "patterns": [
+            {
+              "include": "source.quoting.perl6fe#q_single_string_content"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "string.quoted.q.shell.operator.perl6fe"
+            },
+            "2": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          }
+        },
+        {
+          "name": "meta.shell.quote.single.perl6fe",
+          "begin": "([Qq]x)\\s*(\\|)",
+          "end": "\\|",
+          "patterns": [
+            {
+              "include": "source.quoting.perl6fe#q_single_string_content"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "string.quoted.q.shell.operator.perl6fe"
+            },
+            "2": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          }
+        },
+        {
+          "name": "meta.shell.quote.single.perl6fe",
+          "begin": "([Qq]x)\\s*(\\/)",
+          "end": "(?\u003c!\\\\)\\/",
+          "patterns": [
+            {
+              "name": "constant.character.escape.perl6fe",
+              "match": "\\\\\\/"
+            },
+            {
+              "include": "source.quoting.perl6fe#q_single_string_content"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "string.quoted.q.shell.operator.perl6fe"
+            },
+            "2": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          }
+        },
+        {
+          "name": "meta.shell.quote.double.perl6fe",
+          "begin": "(qqx)\\s*({{)",
+          "end": "}}",
+          "patterns": [
+            {
+              "include": "#interpolation"
+            },
+            {
+              "include": "#variables"
+            },
+            {
+              "include": "source.shell"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "string.quoted.q.shell.operator.perl6fe"
+            },
+            "2": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          }
+        },
+        {
+          "name": "meta.shell.quote.double.perl6fe",
+          "begin": "(qqx)\\s*({)",
+          "end": "}",
+          "patterns": [
+            {
+              "include": "#interpolation"
+            },
+            {
+              "include": "#variables"
+            },
+            {
+              "include": "source.shell"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "string.quoted.q.shell.operator.perl6fe"
+            },
+            "2": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          }
+        },
+        {
+          "name": "meta.shell.quote.double.perl6fe",
+          "begin": "(qqx)\\s*(\\[\\[)",
+          "end": "\\]\\]",
+          "patterns": [
+            {
+              "include": "#interpolation"
+            },
+            {
+              "include": "#variables"
+            },
+            {
+              "include": "source.shell"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "string.quoted.q.shell.operator.perl6fe"
+            },
+            "2": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          }
+        },
+        {
+          "name": "meta.shell.quote.double.perl6fe",
+          "begin": "(qqx)\\s*(\\[)",
+          "end": "\\]",
+          "patterns": [
+            {
+              "include": "#interpolation"
+            },
+            {
+              "include": "#variables"
+            },
+            {
+              "include": "source.shell"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "string.quoted.q.shell.operator.perl6fe"
+            },
+            "2": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          }
+        },
+        {
+          "name": "meta.shell.quote.double.perl6fe",
+          "begin": "(qqx)\\s*(\\|)",
+          "end": "\\|",
+          "patterns": [
+            {
+              "include": "#interpolation"
+            },
+            {
+              "include": "#variables"
+            },
+            {
+              "include": "source.shell"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "string.quoted.q.shell.operator.perl6fe"
+            },
+            "2": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          }
+        },
+        {
+          "name": "meta.shell.quote.double.perl6fe",
+          "begin": "(qqx)\\s*(\\/)",
+          "end": "(?\u003c!\\\\)\\/",
+          "patterns": [
+            {
+              "name": "constant.character.escape.perl6fe",
+              "match": "\\\\\\/"
+            },
+            {
+              "include": "#interpolation"
+            },
+            {
+              "include": "#variables"
+            },
+            {
+              "include": "source.shell"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "string.quoted.q.shell.operator.perl6fe"
+            },
+            "2": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.embedded.shell.begin.perl6fe"
+            }
+          }
+        }
+      ]
+    },
+    "special_variables": {
+      "patterns": [
+        {
+          "name": "keyword.other.special-method.perl6fe",
+          "match": "(?x) [\\$\\@](?=[\\s,;\\{\\[\\(])| (?\u003c=[\\(\\,])\\s*%(?![\\w\\*\\!\\?\\.\\^:=~])| \\$_| \\$\\/| \\$\\!(?!\\w)| \\$\\d(?!\\w)"
+        }
+      ]
+    },
+    "variables": {
+      "patterns": [
+        {
+          "include": "#regexp-variables"
+        },
+        {
+          "name": "meta.variable.container.perl6fe",
+          "captures": {
+            "1": {
+              "name": "variable.other.identifier.sigil.perl6fe"
+            },
+            "2": {
+              "name": "support.class.twigil.perl6fe"
+            },
+            "3": {
+              "name": "variable.other.identifier.perl6fe"
+            }
+          }
         }
       ]
     }

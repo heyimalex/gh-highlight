@@ -1,44 +1,40 @@
 {
-  "fileTypes": [
-    "src"
-  ],
   "name": "text.alloy",
+  "scopeName": "source.alloy",
   "patterns": [
     {
-      "match": "\\b(run|check)\\b",
-      "name": "keyword.control.alloy"
+      "name": "keyword.control.alloy",
+      "match": "\\b(run|check)\\b"
     },
     {
-      "match": "\\b(implies|or|and|let|else)\\b",
-      "name": "keyword.operator.alloy"
+      "name": "keyword.operator.alloy",
+      "match": "\\b(implies|or|and|let|else)\\b"
     },
     {
-      "match": "\\b(fact|abstract|sig|extends|some|one|lone|set|all|no|none|open|module|not|in|pred|assert|for|but exactly|disj)\\b",
-      "name": "keyword.other.alloy"
+      "name": "keyword.other.alloy",
+      "match": "\\b(fact|abstract|sig|extends|some|one|lone|set|all|no|none|open|module|not|in|pred|assert|for|but exactly|disj)\\b"
     },
     {
-      "match": "\\/\\/.*",
-      "name": "comment.line.double-slash.alloy"
+      "name": "comment.line.double-slash.alloy",
+      "match": "\\/\\/.*"
     },
     {
-      "match": "\\/\\*(.)*\\*\\/|\\s\\*\\s(.)*\\n|\\*/|\\/\\*(.)*",
-      "name": "comment.block.empty.alloy"
+      "name": "comment.block.empty.alloy",
+      "match": "\\/\\*(.)*\\*\\/|\\s\\*\\s(.)*\\n|\\*/|\\/\\*(.)*"
     },
     {
-      "match": "\\b(fact|sig|module|pred|fun|enum)\\b",
-      "name": "storage.type.alloy"
+      "name": "storage.type.alloy",
+      "match": "\\b(fact|sig|module|pred|fun|enum)\\b"
     },
     {
+      "name": "entity.name.function.predicate.alloy",
       "begin": "pred \\w*\\[(.)*]{",
       "end": "}",
-      "name": "entity.name.function.predicate.alloy",
       "patterns": [
         {
           "include": "$self"
         }
       ]
     }
-  ],
-  "scopeName": "source.alloy",
-  "uuid": "4E96158C-0507-4FFC-87D7-76A2E89DE7FB"
+  ]
 }

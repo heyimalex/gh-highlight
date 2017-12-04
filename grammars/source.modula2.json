@@ -1,11 +1,9 @@
 {
-  "fileTypes": [
-    "mod",
-    "def"
-  ],
   "name": "Modula-2",
+  "scopeName": "source.modula2",
   "patterns": [
     {
+      "match": "\\b(PROCEDURE|DEFINITION MODULE|IMPLEMENTATION MODULE|MODULE)\\b\\s+(\\w+(\\.\\w+)?)",
       "captures": {
         "1": {
           "name": "storage.type.function.modula2"
@@ -13,11 +11,10 @@
         "2": {
           "name": "entity.name.function.modula2"
         }
-      },
-      "comment": "Reconocimiento de las palabras de inicio.",
-      "match": "\\b(PROCEDURE|DEFINITION MODULE|IMPLEMENTATION MODULE|MODULE)\\b\\s+(\\w+(\\.\\w+)?)"
+      }
     },
     {
+      "match": "\\b(END)\\b\\s+(\\w+(\\.\\w+)?)",
       "captures": {
         "1": {
           "name": "keyword.control.modula2"
@@ -25,11 +22,11 @@
         "2": {
           "name": "entity.name.function.end.modula2"
         }
-      },
-      "comment": "Reconocimiento de las palabras de fin.",
-      "match": "\\b(END)\\b\\s+(\\w+(\\.\\w+)?)"
+      }
     },
     {
+      "name": "meta.function.modula2",
+      "match": "\\b(ABS|ADDRES|ADR|BITSET|BOOLEAN|BYTE|CAP|CARDINAL|CHAR|CHR|DEC|DISPOSE|EXCL|FALSE|FLOAT|HALT|HIGH|INC|INCL|INTEGER|LONGCARD|LONGINT|LONGREAL|LONGWORD|NEW|NULLPROC|ODD|ORD|PROC|REAL|SHORTADDR|SHORTCARD|SHORTINT|SIZE|TRUE|TRUNC|VAL|VSIZE|WORD)\\b",
       "captures": {
         "1": {
           "name": "storage.type.function.modula2"
@@ -37,67 +34,61 @@
         "2": {
           "name": "entity.name.function.modula2"
         }
-      },
-      "comment": "Definicion de identificadores predefinidos.",
-      "match": "\\b(ABS|ADDRES|ADR|BITSET|BOOLEAN|BYTE|CAP|CARDINAL|CHAR|CHR|DEC|DISPOSE|EXCL|FALSE|FLOAT|HALT|HIGH|INC|INCL|INTEGER|LONGCARD|LONGINT|LONGREAL|LONGWORD|NEW|NULLPROC|ODD|ORD|PROC|REAL|SHORTADDR|SHORTCARD|SHORTINT|SIZE|TRUE|TRUNC|VAL|VSIZE|WORD)\\b",
-      "name": "meta.function.modula2"
+      }
     },
     {
-      "comment": "Definicion de palabras reservadas.",
-      "match": "\\b(AND|ARRAY|BEGIN|BY|CASE|CONST|DIV|DO|ELSE|ELSIF|END|EXIT|EXPORT|FOR|FORWARD|FROM|GOTO|IF|IMPORT|IN|LABEL|LOOP|MOD|NOT|OF|OR|POINTER|QUALIFIED|RECORD|REPEAT|RETURN|SET|THEN|TO|DOWNTO|TYPE|UNTIL|VAR|WHILE|WITH|NIL)\\b",
-      "name": "keyword.control.modula2"
+      "name": "keyword.control.modula2",
+      "match": "\\b(AND|ARRAY|BEGIN|BY|CASE|CONST|DIV|DO|ELSE|ELSIF|END|EXIT|EXPORT|FOR|FORWARD|FROM|GOTO|IF|IMPORT|IN|LABEL|LOOP|MOD|NOT|OF|OR|POINTER|QUALIFIED|RECORD|REPEAT|RETURN|SET|THEN|TO|DOWNTO|TYPE|UNTIL|VAR|WHILE|WITH|NIL)\\b"
     },
     {
       "include": "#block_comment"
     },
     {
+      "name": "string.quoted.double.modula2",
       "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.modula2",
+          "match": "\\."
+        }
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.modula2"
         }
       },
-      "end": "\"",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.modula2"
         }
-      },
-      "name": "string.quoted.double.modula2",
-      "patterns": [
-        {
-          "match": "\\.",
-          "name": "constant.character.escape.modula2"
-        }
-      ]
+      }
     },
     {
-      "match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b",
-      "name": "constant.numeric.modula2"
+      "name": "constant.numeric.modula2",
+      "match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b"
     },
     {
-      "match": "(\\(|\\)|\\+|-|\\*|/|:|;|\\.|\\^|=|:=|<|>|#)",
-      "name": "variable.parameter.function.modula2"
+      "name": "variable.parameter.function.modula2",
+      "match": "(\\(|\\)|\\+|-|\\*|/|:|;|\\.|\\^|=|:=|\u003c|\u003e|#)"
     }
   ],
   "repository": {
     "block_comment": {
-      "applyEndPatternLast": 1,
+      "name": "comment.block.modula2.one",
       "begin": "\\(\\*",
-      "captures": {
-        "0": {
-          "name": "punctuation.definition.comment.modula2"
-        }
-      },
+      "end": "\\*\\)",
       "patterns": [
         {
           "include": "#block_comment"
         }
       ],
-      "end": "\\*\\)",
-      "name": "comment.block.modula2.one"
+      "captures": {
+        "0": {
+          "name": "punctuation.definition.comment.modula2"
+        }
+      },
+      "applyEndPatternLast": true
     }
-  },
-  "scopeName": "source.modula2",
-  "uuid": "c01a654e-2960-44f2-aeae-5909f5043d35"
+  }
 }

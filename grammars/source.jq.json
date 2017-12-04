@@ -1,12 +1,6 @@
 {
-  "scopeName": "source.jq",
-  "fileTypes": [
-    "jq"
-  ],
-  "firstLineMatch": "^\\bjsoniq\\s+version\\b.*",
-  "foldingStartMarker": "^\\s*(<[^!?%/](?!.+?(/>|</.+?>))|<[!%]--(?!.+?--%?>)|<%[!]?(?!.+?%>))|(declare|.*\\{\\s*(//.*)?$)",
-  "foldingStopMarker": "^\\s*(</[^>]+>|[/%]>|-->)\\s*$|(.*\\}\\s*;?\\s*|.*;)",
   "name": "JSONiq",
+  "scopeName": "source.jq",
   "patterns": [
     {
       "begin": "^(?=xquery\\s+version\\s+)",
@@ -18,14 +12,14 @@
       ]
     },
     {
+      "name": "constant.jsoniq",
       "begin": "\\(#",
-      "end": "#\\)",
-      "name": "constant.jsoniq"
+      "end": "#\\)"
     },
     {
+      "name": "comment.doc.jsoniq",
       "begin": "\\(:~",
       "end": ":\\)",
-      "name": "comment.doc.jsoniq",
       "patterns": [
         {
           "name": "constant.language.jsoniq",
@@ -46,70 +40,69 @@
       "include": "#CharRef"
     },
     {
-      "begin": "<\\?",
-      "end": "\\?>",
-      "name": "comment.jsoniq"
+      "name": "comment.jsoniq",
+      "begin": "\u003c\\?",
+      "end": "\\?\u003e"
     },
     {
+      "name": "comment.jsoniq",
       "begin": "\\(:",
-      "end": ":\\)",
-      "name": "comment.jsoniq"
+      "end": ":\\)"
     },
     {
+      "name": "string.jsoniq",
       "begin": "\"",
       "end": "\"",
-      "name": "string.jsoniq",
       "patterns": [
         {
-          "match": "(?x:                # turn on extended mode\n                     \\\\                # a literal backslash\n                     (?:               # ...followed by...\n                       [\"\\\\/bfnrt]     # one of these characters\n                       |               # ...or...\n                       u               # a u\n                       [0-9a-fA-F]{4}  # and four hex digits\n                     )\n                   )",
-          "name": "constant.character.escape.jsoniq"
+          "name": "constant.character.escape.jsoniq",
+          "match": "(?x:                # turn on extended mode\n                     \\\\                # a literal backslash\n                     (?:               # ...followed by...\n                       [\"\\\\/bfnrt]     # one of these characters\n                       |               # ...or...\n                       u               # a u\n                       [0-9a-fA-F]{4}  # and four hex digits\n                     )\n                   )"
         },
         {
-          "match": "\\\\.",
-          "name": "invalid.illegal.unrecognized-string-escape.jsoniq"
+          "name": "invalid.illegal.unrecognized-string-escape.jsoniq",
+          "match": "\\\\."
         }
       ]
     },
     {
-      "match": "%([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*)",
-      "name": "meta.declaration.annotation.jsoniq"
+      "name": "meta.declaration.annotation.jsoniq",
+      "match": "%([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*)"
     },
     {
-      "match": "@(\\* | ([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*))",
-      "name": "support.type.jsoniq"
+      "name": "support.type.jsoniq",
+      "match": "@(\\* | ([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*))"
     },
     {
-      "match": "\\$([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-_a-zA-Z0-9]*)",
-      "name": "meta.definition.variable.name.jsoniq"
+      "name": "meta.definition.variable.name.jsoniq",
+      "match": "\\$([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-_a-zA-Z0-9]*)"
     },
     {
-      "match": "\\b(\\.[0-9]+|[0-9]+(\\.[0-9]*)?)[Ee][+#x002D]?[0-9]+\\b",
-      "name": "constant.numeric.jsoniq"
+      "name": "constant.numeric.jsoniq",
+      "match": "\\b(\\.[0-9]+|[0-9]+(\\.[0-9]*)?)[Ee][+#x002D]?[0-9]+\\b"
     },
     {
-      "match": "\\b(\\.[0-9]+|[0-9]+\\.[0-9]*)\\b",
-      "name": "constant.numeric.jsoniq"
+      "name": "constant.numeric.jsoniq",
+      "match": "\\b(\\.[0-9]+|[0-9]+\\.[0-9]*)\\b"
     },
     {
-      "match": "\\b[0-9]+\\b",
-      "name": "constant.numeric.jsoniq"
+      "name": "constant.numeric.jsoniq",
+      "match": "\\b[0-9]+\\b"
     },
     {
-      "match": "\\b(NaN|after|allowing|ancestor|ancestor-or-self|and|append|array|as|ascending|at|attribute|base-uri|before|boundary-space|break|by|case|cast|castable|catch|child|collation|comment|constraint|construction|contains|context|continue|copy|copy-namespaces|count|decimal-format|decimal-separator|declare|default|delete|descendant|descendant-or-self|descending|digit|div|document|document-node|element|else|empty|empty-sequence|encoding|end|eq|every|except|exit|external|false|first|following|following-sibling|for|from|ft-option|function|ge|greatest|group|grouping-separator|gt|idiv|if|import|in|index|infinity|insert|instance|integrity|intersect|into|is|item|json|json-item|jsoniq|last|lax|le|least|let|loop|lt|minus-sign|mod|modify|module|namespace|namespace-node|ne|next|node|nodes|not|null|object|of|only|option|or|order|ordered|ordering|paragraphs|parent|pattern-separator|per-mille|percent|preceding|preceding-sibling|previous|processing-instruction|rename|replace|return|returning|revalidation|satisfies|schema|schema-attribute|schema-element|score|select|self|sentences|sliding|some|stable|start|strict|switch|text|then|times|to|treat|true|try|tumbling|type|typeswitch|union|unordered|updating|validate|value|variable|version|when|where|while|window|with|words|xquery|zero-digit)(?!(:|\\-))\\b",
-      "name": "keyword.jsoniq"
+      "name": "keyword.jsoniq",
+      "match": "\\b(NaN|after|allowing|ancestor|ancestor-or-self|and|append|array|as|ascending|at|attribute|base-uri|before|boundary-space|break|by|case|cast|castable|catch|child|collation|comment|constraint|construction|contains|context|continue|copy|copy-namespaces|count|decimal-format|decimal-separator|declare|default|delete|descendant|descendant-or-self|descending|digit|div|document|document-node|element|else|empty|empty-sequence|encoding|end|eq|every|except|exit|external|false|first|following|following-sibling|for|from|ft-option|function|ge|greatest|group|grouping-separator|gt|idiv|if|import|in|index|infinity|insert|instance|integrity|intersect|into|is|item|json|json-item|jsoniq|last|lax|le|least|let|loop|lt|minus-sign|mod|modify|module|namespace|namespace-node|ne|next|node|nodes|not|null|object|of|only|option|or|order|ordered|ordering|paragraphs|parent|pattern-separator|per-mille|percent|preceding|preceding-sibling|previous|processing-instruction|rename|replace|return|returning|revalidation|satisfies|schema|schema-attribute|schema-element|score|select|self|sentences|sliding|some|stable|start|strict|switch|text|then|times|to|treat|true|try|tumbling|type|typeswitch|union|unordered|updating|validate|value|variable|version|when|where|while|window|with|words|xquery|zero-digit)(?!(:|\\-))\\b"
     },
     {
-      "comment": "EQName",
-      "match": "([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-_a-zA-Z0-9]*)(?=\\s*\\()",
-      "name": "support.function.jsoniq"
+      "name": "support.function.jsoniq",
+      "match": "([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-_a-zA-Z0-9]*)(?=\\s*\\()"
     },
     {
-      "match": "\\(",
-      "name": "lparen.jsoniq"
+      "name": "lparen.jsoniq",
+      "match": "\\("
     },
     {
-      "match": "\\)",
-      "name": "rparent.jsoniq"
+      "name": "rparent.jsoniq",
+      "match": "\\)"
     },
     {
       "include": "#OpenTag"
@@ -119,100 +112,100 @@
     }
   ],
   "repository": {
-    "OpenTag": {
-      "begin": "<([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-_a-zA-Z0-9]*)",
-      "end": "(\\/>|>)",
-      "name": "punctuation.definition.tag.jsoniq",
-      "patterns": [
-        {
-          "match": "([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-_a-zA-Z0-9]*)",
-          "name": "entity.other.attribute-name.jsoniq"
-        },
-        {
-          "match": "=",
-          "name": "source.jq"
-        },
-        {
-          "begin": "'",
-          "end": "'(?!')",
-          "name": "string.jsoniq",
-          "patterns": [
-            {
-              "match": "''",
-              "name": "constant.jsoniq"
-            },
-            {
-              "include": "#PredefinedEntityRef"
-            },
-            {
-              "include": "#CharRef"
-            },
-            {
-              "match": "({{|}})",
-              "name": "constant.jsoniq"
-            },
-            {
-              "include": "#EnclosedExpr"
-            }
-          ]
-        },
-        {
-          "begin": "\"",
-          "end": "\"(?!\")",
-          "name": "string.jsoniq",
-          "patterns": [
-            {
-              "match": "\"\"",
-              "name": "constant.jsoniq"
-            },
-            {
-              "include": "#PredefinedEntityRef"
-            },
-            {
-              "include": "#CharRef"
-            },
-            {
-              "match": "({{|}})",
-              "name": "string.jsoniq"
-            },
-            {
-              "include": "#EnclosedExpr"
-            }
-          ]
-        }
-      ]
-    },
-    "CloseTag": {
-      "match": "<\\/([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-_a-zA-Z0-9]*)\\s*>",
-      "name": "punctuation.definition.tag.jsoniq"
-    },
-    "XMLComment": {
-      "begin": "<!--",
-      "end": "-->",
-      "name": "comment.jsoniq"
-    },
     "CDATA": {
-      "begin": "<!\\[CDATA\\[",
-      "end": "\\]\\]>",
-      "name": "constant.language.jsoniq"
-    },
-    "PredefinedEntityRef": {
-      "match": "&(lt|gt|amp|quot|apos);",
-      "name": "constant.language.escape.jsoniq"
+      "name": "constant.language.jsoniq",
+      "begin": "\u003c!\\[CDATA\\[",
+      "end": "\\]\\]\u003e"
     },
     "CharRef": {
-      "match": "&#([0-9]+|x[0-9A-Fa-f]+);",
-      "name": "constant.language.escape.jsoniq"
+      "name": "constant.language.escape.jsoniq",
+      "match": "\u0026#([0-9]+|x[0-9A-Fa-f]+);"
+    },
+    "CloseTag": {
+      "name": "punctuation.definition.tag.jsoniq",
+      "match": "\u003c\\/([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-_a-zA-Z0-9]*)\\s*\u003e"
     },
     "EnclosedExpr": {
+      "name": "source.jq",
       "begin": "{",
       "end": "}",
-      "name": "source.jq",
       "patterns": [
         {
           "include": "$self"
         }
       ]
+    },
+    "OpenTag": {
+      "name": "punctuation.definition.tag.jsoniq",
+      "begin": "\u003c([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-_a-zA-Z0-9]*)",
+      "end": "(\\/\u003e|\u003e)",
+      "patterns": [
+        {
+          "name": "entity.other.attribute-name.jsoniq",
+          "match": "([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-_a-zA-Z0-9]*)"
+        },
+        {
+          "name": "source.jq",
+          "match": "="
+        },
+        {
+          "name": "string.jsoniq",
+          "begin": "'",
+          "end": "'(?!')",
+          "patterns": [
+            {
+              "name": "constant.jsoniq",
+              "match": "''"
+            },
+            {
+              "include": "#PredefinedEntityRef"
+            },
+            {
+              "include": "#CharRef"
+            },
+            {
+              "name": "constant.jsoniq",
+              "match": "({{|}})"
+            },
+            {
+              "include": "#EnclosedExpr"
+            }
+          ]
+        },
+        {
+          "name": "string.jsoniq",
+          "begin": "\"",
+          "end": "\"(?!\")",
+          "patterns": [
+            {
+              "name": "constant.jsoniq",
+              "match": "\"\""
+            },
+            {
+              "include": "#PredefinedEntityRef"
+            },
+            {
+              "include": "#CharRef"
+            },
+            {
+              "name": "string.jsoniq",
+              "match": "({{|}})"
+            },
+            {
+              "include": "#EnclosedExpr"
+            }
+          ]
+        }
+      ]
+    },
+    "PredefinedEntityRef": {
+      "name": "constant.language.escape.jsoniq",
+      "match": "\u0026(lt|gt|amp|quot|apos);"
+    },
+    "XMLComment": {
+      "name": "comment.jsoniq",
+      "begin": "\u003c!--",
+      "end": "--\u003e"
     }
   }
 }

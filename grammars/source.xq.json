@@ -1,16 +1,6 @@
 {
-  "scopeName": "source.xq",
-  "fileTypes": [
-    "xq",
-    "xql",
-    "xqm",
-    "xqy",
-    "xquery"
-  ],
-  "firstLineMatch": "^\\bxquery\\s+version\\b.*",
-  "foldingStartMarker": "^\\s*(<[^!?%/](?!.+?(/>|</.+?>))|<[!%]--(?!.+?--%?>)|<%[!]?(?!.+?%>))|(declare|.*\\{\\s*(//.*)?$)",
-  "foldingStopMarker": "^\\s*(</[^>]+>|[/%]>|-->)\\s*$|(.*\\}\\s*;?\\s*|.*;)",
   "name": "XQuery",
+  "scopeName": "source.xq",
   "patterns": [
     {
       "begin": "^(?=jsoniq\\s+version\\s+)",
@@ -22,14 +12,14 @@
       ]
     },
     {
+      "name": "constant.xquery",
       "begin": "\\(#",
-      "end": "#\\)",
-      "name": "constant.xquery"
+      "end": "#\\)"
     },
     {
+      "name": "comment.doc.xquery",
       "begin": "\\(:~",
       "end": ":\\)",
-      "name": "comment.doc.xquery",
       "patterns": [
         {
           "name": "constant.language.xquery",
@@ -50,23 +40,23 @@
       "include": "#CharRef"
     },
     {
-      "begin": "<\\?",
-      "end": "\\?>",
-      "name": "comment.xquery"
+      "name": "comment.xquery",
+      "begin": "\u003c\\?",
+      "end": "\\?\u003e"
     },
     {
+      "name": "comment.xquery",
       "begin": "\\(:",
-      "end": ":\\)",
-      "name": "comment.xquery"
+      "end": ":\\)"
     },
     {
+      "name": "string.xquery",
       "begin": "\"",
       "end": "\"(?!\")",
-      "name": "string.xquery",
       "patterns": [
         {
-          "match": "\"\"",
-          "name": "constant.xquery"
+          "name": "constant.xquery",
+          "match": "\"\""
         },
         {
           "include": "#PredefinedEntityRef"
@@ -77,13 +67,13 @@
       ]
     },
     {
+      "name": "string.xquery",
       "begin": "'",
       "end": "'(?!')",
-      "name": "string.xquery",
       "patterns": [
         {
-          "match": "''",
-          "name": "constant.xquery"
+          "name": "constant.xquery",
+          "match": "''"
         },
         {
           "include": "#PredefinedEntityRef"
@@ -94,45 +84,44 @@
       ]
     },
     {
-      "match": "%([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*)",
-      "name": "meta.declaration.annotation.xquery"
+      "name": "meta.declaration.annotation.xquery",
+      "match": "%([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*)"
     },
     {
-      "match": "@(\\* | ([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*))",
-      "name": "support.type.xquery"
+      "name": "support.type.xquery",
+      "match": "@(\\* | ([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*))"
     },
     {
-      "match": "\\$([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*)",
-      "name": "meta.definition.variable.name.xquery"
+      "name": "meta.definition.variable.name.xquery",
+      "match": "\\$([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*)"
     },
     {
-      "match": "\\b(\\.[0-9]+|[0-9]+(\\.[0-9]*)?)[Ee][+#x002D]?[0-9]+\\b",
-      "name": "constant.numeric.jsoniq"
+      "name": "constant.numeric.jsoniq",
+      "match": "\\b(\\.[0-9]+|[0-9]+(\\.[0-9]*)?)[Ee][+#x002D]?[0-9]+\\b"
     },
     {
-      "match": "\\b(\\.[0-9]+|[0-9]+\\.[0-9]*)\\b",
-      "name": "constant.numeric.jsoniq"
+      "name": "constant.numeric.jsoniq",
+      "match": "\\b(\\.[0-9]+|[0-9]+\\.[0-9]*)\\b"
     },
     {
-      "match": "\\b[0-9]+\\b",
-      "name": "constant.numeric.jsoniq"
+      "name": "constant.numeric.jsoniq",
+      "match": "\\b[0-9]+\\b"
     },
     {
-      "match": "\\b(NaN|after|allowing|ancestor|ancestor-or-self|and|append|array|as|ascending|at|attribute|base-uri|before|boundary-space|break|by|case|cast|castable|catch|child|collation|comment|constraint|construction|contains|context|continue|copy|copy-namespaces|count|decimal-format|decimal-separator|declare|default|delete|descendant|descendant-or-self|descending|digit|div|document|document-node|element|else|empty|empty-sequence|encoding|end|eq|every|except|exit|external|false|first|following|following-sibling|for|from|ft-option|function|ge|greatest|group|grouping-separator|gt|idiv|if|import|in|index|infinity|insert|instance|integrity|intersect|into|is|item|json|json-item|jsoniq|last|lax|le|least|let|loop|lt|minus-sign|mod|modify|module|namespace|namespace-node|ne|next|node|nodes|not|null|object|of|only|option|or|order|ordered|ordering|paragraphs|parent|pattern-separator|per-mille|percent|preceding|preceding-sibling|previous|processing-instruction|rename|replace|return|returning|revalidation|satisfies|schema|schema-attribute|schema-element|score|select|self|sentences|sliding|some|stable|start|strict|switch|text|then|times|to|treat|true|try|tumbling|type|typeswitch|union|unordered|updating|validate|value|variable|version|when|where|while|window|with|words|xquery|zero-digit)(?!(:|\\-))\\b",
-      "name": "keyword.xquery"
+      "name": "keyword.xquery",
+      "match": "\\b(NaN|after|allowing|ancestor|ancestor-or-self|and|append|array|as|ascending|at|attribute|base-uri|before|boundary-space|break|by|case|cast|castable|catch|child|collation|comment|constraint|construction|contains|context|continue|copy|copy-namespaces|count|decimal-format|decimal-separator|declare|default|delete|descendant|descendant-or-self|descending|digit|div|document|document-node|element|else|empty|empty-sequence|encoding|end|eq|every|except|exit|external|false|first|following|following-sibling|for|from|ft-option|function|ge|greatest|group|grouping-separator|gt|idiv|if|import|in|index|infinity|insert|instance|integrity|intersect|into|is|item|json|json-item|jsoniq|last|lax|le|least|let|loop|lt|minus-sign|mod|modify|module|namespace|namespace-node|ne|next|node|nodes|not|null|object|of|only|option|or|order|ordered|ordering|paragraphs|parent|pattern-separator|per-mille|percent|preceding|preceding-sibling|previous|processing-instruction|rename|replace|return|returning|revalidation|satisfies|schema|schema-attribute|schema-element|score|select|self|sentences|sliding|some|stable|start|strict|switch|text|then|times|to|treat|true|try|tumbling|type|typeswitch|union|unordered|updating|validate|value|variable|version|when|where|while|window|with|words|xquery|zero-digit)(?!(:|\\-))\\b"
     },
     {
-      "comment": "EQName",
-      "match": "([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-_a-zA-Z0-9]*)(?=\\s*\\()",
-      "name": "support.function.xquery"
+      "name": "support.function.xquery",
+      "match": "([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-_a-zA-Z0-9]*)(?=\\s*\\()"
     },
     {
-      "match": "\\(",
-      "name": "lparen.xquery"
+      "name": "lparen.xquery",
+      "match": "\\("
     },
     {
-      "match": "\\)",
-      "name": "rparent.xquery"
+      "name": "rparent.xquery",
+      "match": "\\)"
     },
     {
       "include": "#OpenTag"
@@ -142,100 +131,100 @@
     }
   ],
   "repository": {
-    "OpenTag": {
-      "begin": "<([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-_a-zA-Z0-9]*)",
-      "end": "(\\/>|>)",
-      "name": "punctuation.definition.tag.xquery",
-      "patterns": [
-        {
-          "match": "([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-_a-zA-Z0-9]*)",
-          "name": "entity.other.attribute-name.xquery"
-        },
-        {
-          "match": "=",
-          "name": "source.jq"
-        },
-        {
-          "begin": "'",
-          "end": "'(?!')",
-          "name": "string.xquery",
-          "patterns": [
-            {
-              "match": "''",
-              "name": "constant.xquery"
-            },
-            {
-              "include": "#PredefinedEntityRef"
-            },
-            {
-              "include": "#CharRef"
-            },
-            {
-              "match": "({{|}})",
-              "name": "string.xquery"
-            },
-            {
-              "include": "#EnclosedExpr"
-            }
-          ]
-        },
-        {
-          "begin": "\"",
-          "end": "\"(?!\")",
-          "name": "string.xquery",
-          "patterns": [
-            {
-              "match": "\"\"",
-              "name": "constant.xquery"
-            },
-            {
-              "include": "#PredefinedEntityRef"
-            },
-            {
-              "include": "#CharRef"
-            },
-            {
-              "match": "({{|}})",
-              "name": "constant.xquery"
-            },
-            {
-              "include": "#EnclosedExpr"
-            }
-          ]
-        }
-      ]
-    },
-    "CloseTag": {
-      "match": "<\\/([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-_a-zA-Z0-9]*)>",
-      "name": "punctuation.definition.tag.xquery"
-    },
-    "XMLComment": {
-      "begin": "<!--",
-      "end": "-->",
-      "name": "comment.xquery"
-    },
     "CDATA": {
-      "begin": "<!\\[CDATA\\[",
-      "end": "\\]\\]>",
-      "name": "constant.language.xquery"
-    },
-    "PredefinedEntityRef": {
-      "match": "&(lt|gt|amp|quot|apos);",
-      "name": "constant.language.escape.xquery"
+      "name": "constant.language.xquery",
+      "begin": "\u003c!\\[CDATA\\[",
+      "end": "\\]\\]\u003e"
     },
     "CharRef": {
-      "match": "&#([0-9]+|x[0-9A-Fa-f]+);",
-      "name": "constant.language.escape.xquery"
+      "name": "constant.language.escape.xquery",
+      "match": "\u0026#([0-9]+|x[0-9A-Fa-f]+);"
+    },
+    "CloseTag": {
+      "name": "punctuation.definition.tag.xquery",
+      "match": "\u003c\\/([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-_a-zA-Z0-9]*)\u003e"
     },
     "EnclosedExpr": {
+      "name": "source.xq",
       "begin": "{",
       "end": "}",
-      "name": "source.xq",
       "patterns": [
         {
           "include": "$self"
         }
       ]
+    },
+    "OpenTag": {
+      "name": "punctuation.definition.tag.xquery",
+      "begin": "\u003c([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-_a-zA-Z0-9]*)",
+      "end": "(\\/\u003e|\u003e)",
+      "patterns": [
+        {
+          "name": "entity.other.attribute-name.xquery",
+          "match": "([\\-_a-zA-Z0-9][\\-\\._a-zA-Z0-9]*:)?([\\-_a-zA-Z0-9][\\-_a-zA-Z0-9]*)"
+        },
+        {
+          "name": "source.jq",
+          "match": "="
+        },
+        {
+          "name": "string.xquery",
+          "begin": "'",
+          "end": "'(?!')",
+          "patterns": [
+            {
+              "name": "constant.xquery",
+              "match": "''"
+            },
+            {
+              "include": "#PredefinedEntityRef"
+            },
+            {
+              "include": "#CharRef"
+            },
+            {
+              "name": "string.xquery",
+              "match": "({{|}})"
+            },
+            {
+              "include": "#EnclosedExpr"
+            }
+          ]
+        },
+        {
+          "name": "string.xquery",
+          "begin": "\"",
+          "end": "\"(?!\")",
+          "patterns": [
+            {
+              "name": "constant.xquery",
+              "match": "\"\""
+            },
+            {
+              "include": "#PredefinedEntityRef"
+            },
+            {
+              "include": "#CharRef"
+            },
+            {
+              "name": "constant.xquery",
+              "match": "({{|}})"
+            },
+            {
+              "include": "#EnclosedExpr"
+            }
+          ]
+        }
+      ]
+    },
+    "PredefinedEntityRef": {
+      "name": "constant.language.escape.xquery",
+      "match": "\u0026(lt|gt|amp|quot|apos);"
+    },
+    "XMLComment": {
+      "name": "comment.xquery",
+      "begin": "\u003c!--",
+      "end": "--\u003e"
     }
   }
 }

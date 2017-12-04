@@ -1,27 +1,23 @@
 {
-  "fileTypes": [
-    "patch",
-    "diff",
-    "rej"
-  ],
-  "firstLineMatch": "(?x)^\n\t\t(===\\ modified\\ file\n\t\t|==== \\s* // .+ \\s - \\s .+ \\s+ ====\n\t\t|Index:\\ \n\t\t|---\\ [^%\\n]\n\t\t|\\*\\*\\*.*\\d{4}\\s*$\n\t\t|\\d+(,\\d+)* (a|d|c) \\d+(,\\d+)* $\n\t\t|diff\\ --git\\ \n\t\t|commit\\ [0-9a-f]{40}$\n\t\t)",
-  "keyEquivalent": "^~D",
   "name": "Diff",
+  "scopeName": "source.diff",
   "patterns": [
     {
+      "name": "meta.separator.diff",
+      "match": "^((\\*{15})|(={67})|(-{3}))$\\n?",
       "captures": {
         "1": {
           "name": "punctuation.definition.separator.diff"
         }
-      },
-      "match": "^((\\*{15})|(={67})|(-{3}))$\\n?",
-      "name": "meta.separator.diff"
+      }
     },
     {
-      "match": "^\\d+(,\\d+)*(a|d|c)\\d+(,\\d+)*$\\n?",
-      "name": "meta.diff.range.normal"
+      "name": "meta.diff.range.normal",
+      "match": "^\\d+(,\\d+)*(a|d|c)\\d+(,\\d+)*$\\n?"
     },
     {
+      "name": "meta.diff.range.unified",
+      "match": "^(@@)\\s*(.+?)\\s*(@@)($\\n?)?",
       "captures": {
         "1": {
           "name": "punctuation.definition.range.diff"
@@ -32,11 +28,11 @@
         "3": {
           "name": "punctuation.definition.range.diff"
         }
-      },
-      "match": "^(@@)\\s*(.+?)\\s*(@@)($\\n?)?",
-      "name": "meta.diff.range.unified"
+      }
     },
     {
+      "name": "meta.diff.range.context",
+      "match": "^(((\\-{3}) .+ (\\-{4}))|((\\*{3}) .+ (\\*{4})))$\\n?",
       "captures": {
         "3": {
           "name": "punctuation.definition.range.diff"
@@ -50,19 +46,19 @@
         "7": {
           "name": "punctuation.definition.range.diff"
         }
-      },
-      "match": "^(((\\-{3}) .+ (\\-{4}))|((\\*{3}) .+ (\\*{4})))$\\n?",
-      "name": "meta.diff.range.context"
+      }
     },
     {
-      "match": "^diff --git a/.*$\\n?",
-      "name": "meta.diff.header.git"
+      "name": "meta.diff.header.git",
+      "match": "^diff --git a/.*$\\n?"
     },
     {
-      "match": "^diff (-|\\S+\\s+\\S+).*$\\n?",
-      "name": "meta.diff.header.command"
+      "name": "meta.diff.header.command",
+      "match": "^diff (-|\\S+\\s+\\S+).*$\\n?"
     },
     {
+      "name": "meta.diff.header.from-file",
+      "match": "(^(((-{3}) .+)|((\\*{3}) .+))$\\n?|^(={4}) .+(?= - ))",
       "captures": {
         "4": {
           "name": "punctuation.definition.from-file.diff"
@@ -73,11 +69,11 @@
         "7": {
           "name": "punctuation.definition.from-file.diff"
         }
-      },
-      "match": "(^(((-{3}) .+)|((\\*{3}) .+))$\\n?|^(={4}) .+(?= - ))",
-      "name": "meta.diff.header.from-file"
+      }
     },
     {
+      "name": "meta.diff.header.to-file",
+      "match": "(^(\\+{3}) .+$\\n?| (-) .* (={4})$\\n?)",
       "captures": {
         "2": {
           "name": "punctuation.definition.to-file.diff"
@@ -88,11 +84,11 @@
         "4": {
           "name": "punctuation.definition.to-file.diff"
         }
-      },
-      "match": "(^(\\+{3}) .+$\\n?| (-) .* (={4})$\\n?)",
-      "name": "meta.diff.header.to-file"
+      }
     },
     {
+      "name": "markup.inserted.diff",
+      "match": "^(((\u003e)( .*)?)|((\\+).*))$\\n?",
       "captures": {
         "3": {
           "name": "punctuation.definition.inserted.diff"
@@ -100,20 +96,20 @@
         "6": {
           "name": "punctuation.definition.inserted.diff"
         }
-      },
-      "match": "^(((>)( .*)?)|((\\+).*))$\\n?",
-      "name": "markup.inserted.diff"
+      }
     },
     {
+      "name": "markup.changed.diff",
+      "match": "^(!).*$\\n?",
       "captures": {
         "1": {
           "name": "punctuation.definition.changed.diff"
         }
-      },
-      "match": "^(!).*$\\n?",
-      "name": "markup.changed.diff"
+      }
     },
     {
+      "name": "markup.deleted.diff",
+      "match": "^(((\u003c)( .*)?)|((-).*))$\\n?",
       "captures": {
         "3": {
           "name": "punctuation.definition.deleted.diff"
@@ -121,26 +117,25 @@
         "6": {
           "name": "punctuation.definition.deleted.diff"
         }
-      },
-      "match": "^(((<)( .*)?)|((-).*))$\\n?",
-      "name": "markup.deleted.diff"
+      }
     },
     {
+      "name": "comment.line.number-sign.diff",
       "begin": "^(#)",
+      "end": "\\n",
       "captures": {
         "1": {
           "name": "punctuation.definition.comment.diff"
         }
-      },
-      "comment": "Git produces unified diffs with embedded comments\"",
-      "end": "\\n",
-      "name": "comment.line.number-sign.diff"
+      }
     },
     {
-      "match": "^index [0-9a-f]{7,40}\\.\\.[0-9a-f]{7,40}.*$\\n?",
-      "name": "meta.diff.index.git"
+      "name": "meta.diff.index.git",
+      "match": "^index [0-9a-f]{7,40}\\.\\.[0-9a-f]{7,40}.*$\\n?"
     },
     {
+      "name": "meta.diff.index",
+      "match": "^Index(:) (.+)$\\n?",
       "captures": {
         "1": {
           "name": "punctuation.separator.key-value.diff"
@@ -148,15 +143,11 @@
         "2": {
           "name": "meta.toc-list.file-name.diff"
         }
-      },
-      "match": "^Index(:) (.+)$\\n?",
-      "name": "meta.diff.index"
+      }
     },
     {
-      "match": "^Only in .*: .*$\\n?",
-      "name": "meta.diff.only-in"
+      "name": "meta.diff.only-in",
+      "match": "^Only in .*: .*$\\n?"
     }
-  ],
-  "scopeName": "source.diff",
-  "uuid": "7E848FF4-708E-11D9-97B4-0011242E4184"
+  ]
 }

@@ -1,12 +1,6 @@
 {
   "name": "OpenEdge ABL",
   "scopeName": "source.abl",
-  "fileTypes": [
-    "w",
-    "p",
-    "i"
-  ],
-  "uuid": "075bb86e-03ea-4fea-bac0-e11b9dc73e03",
   "patterns": [
     {
       "name": "comment.block.source.abl",
@@ -14,8 +8,8 @@
       "end": "\\*/(?![^/]*?\\*/)"
     },
     {
-      "match": "('(?:'|.)*?')",
-      "name": "string.single.source.abl"
+      "name": "string.single.source.abl",
+      "match": "('(?:'|.)*?')"
     },
     {
       "name": "string.double.source.abl",
@@ -28,13 +22,13 @@
       "patterns": [
         {
           "name": "constant.character.escape.abl",
-          "match": "(~(x\\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)|\\\"\\\")"
+          "match": "(~(x[[:xdigit:]]{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)|\\\"\\\")"
         }
       ]
     },
     {
       "name": "constant.numeric.source.abl",
-      "match": "(?<!\\w)((0(x|X)[0-9a-fA-F]+)|([0-9]+(\\.[0-9]+)?))"
+      "match": "(?\u003c!\\w)((0(x|X)[0-9a-fA-F]+)|([0-9]+(\\.[0-9]+)?))"
     },
     {
       "name": "constant.language.source.abl",
@@ -42,7 +36,7 @@
     },
     {
       "name": "keyword.operator.source.abl",
-      "match": "(?i)(\\b(or|and|not|is)\\b|(=|\\+| - |/|<|>|,|\\.))"
+      "match": "(?i)(\\b(or|and|not|is)\\b|(=|\\+| - |/|\u003c|\u003e|,|\\.))"
     },
     {
       "name": "keyword.option.source.abl",
@@ -69,7 +63,7 @@
     },
     {
       "name": "keyword.control.source.abl",
-      "match": "(?i)(\\b(if|avail(able)?|down|where|else( if)?|each|first|last|while|find( first|last)?|then( do( transaction)?)?|next|page|quit)\\b|(?<!-)(\\bend\\b(?!\\s+procedure)))"
+      "match": "(?i)(\\b(if|avail(able)?|down|where|else( if)?|each|first|last|while|find( first|last)?|then( do( transaction)?)?|next|page|quit)\\b|(?\u003c!-)(\\bend\\b(?!\\s+procedure)))"
     },
     {
       "name": "storage.type.define.abl",
@@ -77,7 +71,7 @@
     },
     {
       "name": "storage.type.source.abl",
-      "match": "(?i)\\b(?<!&)(char(acter)?|(?<!-)handle|dataset(-handle)?|field|(?<!-)index|log(ical)?|int(eger|64)?|dec(imal)?|stream|temp-table|frame [a-z]+)(?!\\s*\\()\\b"
+      "match": "(?i)\\b(?\u003c!\u0026)(char(acter)?|(?\u003c!-)handle|dataset(-handle)?|field|(?\u003c!-)index|log(ical)?|int(eger|64)?|dec(imal)?|stream|temp-table|frame [a-z]+)(?!\\s*\\()\\b"
     },
     {
       "name": "storage.type.function.abl",

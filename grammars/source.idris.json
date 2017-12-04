@@ -1,10 +1,10 @@
 {
-  "fileTypes": [
-    "idr"
-  ],
   "name": "Idris",
+  "scopeName": "source.idris",
   "patterns": [
     {
+      "name": "keyword.operator.function.infix.idris",
+      "match": "(`)[\\w']*?(`)",
       "captures": {
         "1": {
           "name": "punctuation.definition.entity.idris"
@@ -12,107 +12,94 @@
         "2": {
           "name": "punctuation.definition.entity.idris"
         }
-      },
-      "comment": "Infix function application",
-      "match": "(`)[\\w']*?(`)",
-      "name": "keyword.operator.function.infix.idris"
+      }
     },
     {
-      "captures": {
-        "1": {
-          "name": "keyword.other.idris"
-        }
-      },
+      "name": "meta.declaration.module.idris",
       "match": "^(module)\\s+([a-zA-Z._']+)$",
-      "name": "meta.declaration.module.idris"
-    },
-    {
       "captures": {
         "1": {
           "name": "keyword.other.idris"
         }
-      },
+      }
+    },
+    {
+      "name": "meta.import.idris",
       "match": "^(import)\\s+([a-zA-Z._']+)$",
-      "name": "meta.import.idris"
-    },
-    {
-      "match": "\\b([0-9]+\\.[0-9]+([eE][+-]?[0-9]+)?|[0-9]+[eE][+-]?[0-9]+)\\b",
-      "name": "constant.numeric.float.idris"
-    },
-    {
-      "match": "\\b([0-9]+|0([xX][0-9a-fA-F]+|[oO][0-7]+))\\b",
-      "name": "constant.numeric.idris"
-    },
-    {
-      "match": "^\\b(public|abstract|private)\\b",
-      "name": "storage.modifier.export.idris"
-    },
-    {
-      "match": "\\b(total|partial)\\b",
-      "name": "storage.modifier.totality.idris"
-    },
-    {
-      "match": "^\\b(implicit)\\b",
-      "name": "storage.modifier.idris"
-    },
-    {
-      "begin": "\\\"",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.idris"
+      "captures": {
+        "1": {
+          "name": "keyword.other.idris"
         }
-      },
-      "end": "\\\"",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.idris"
-        }
-      },
+      }
+    },
+    {
+      "name": "constant.numeric.float.idris",
+      "match": "\\b([0-9]+\\.[0-9]+([eE][+-]?[0-9]+)?|[0-9]+[eE][+-]?[0-9]+)\\b"
+    },
+    {
+      "name": "constant.numeric.idris",
+      "match": "\\b([0-9]+|0([xX][0-9a-fA-F]+|[oO][0-7]+))\\b"
+    },
+    {
+      "name": "storage.modifier.export.idris",
+      "match": "^\\b(public|abstract|private)\\b"
+    },
+    {
+      "name": "storage.modifier.totality.idris",
+      "match": "\\b(total|partial)\\b"
+    },
+    {
+      "name": "storage.modifier.idris",
+      "match": "^\\b(implicit)\\b"
+    },
+    {
       "name": "string.quoted.double.idris",
+      "begin": "\\\"",
+      "end": "\\\"",
       "patterns": [
         {
           "include": "#escape_characters"
         }
-      ]
-    },
-    {
-      "begin": "(?<!\\w)\\'",
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.idris"
         }
       },
-      "end": "\\'",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.idris"
         }
-      },
+      }
+    },
+    {
       "name": "string.quoted.single.idris",
+      "begin": "(?\u003c!\\w)\\'",
+      "end": "\\'",
       "patterns": [
         {
           "include": "#escape_characters"
         },
         {
-          "match": "\\n",
-          "name": "invalid.illegal.idris"
+          "name": "invalid.illegal.idris",
+          "match": "\\n"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.idris"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.idris"
+        }
+      }
     },
     {
-      "begin": "\\b(class)\\b",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.other.idris"
-        }
-      },
-      "end": "\\b(where)\\b|$",
-      "endCaptures": {
-        "1": {
-          "name": "keyword.other.idris"
-        }
-      },
       "name": "meta.declaration.class.idris",
+      "begin": "\\b(class)\\b",
+      "end": "\\b(where)\\b|$",
       "patterns": [
         {
           "include": "#prelude_class"
@@ -120,22 +107,22 @@
         {
           "include": "#prelude_type"
         }
-      ]
-    },
-    {
-      "begin": "\\b(instance)\\b",
+      ],
       "beginCaptures": {
         "1": {
           "name": "keyword.other.idris"
         }
       },
-      "end": "\\b(where)\\b|$",
       "endCaptures": {
         "1": {
           "name": "keyword.other.idris"
         }
-      },
+      }
+    },
+    {
       "name": "meta.declaration.instance.idris",
+      "begin": "\\b(instance)\\b",
+      "end": "\\b(where)\\b|$",
       "patterns": [
         {
           "include": "#prelude_class"
@@ -149,10 +136,27 @@
         {
           "include": "#type_signature"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.other.idris"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "keyword.other.idris"
+        }
+      }
     },
     {
+      "name": "meta.declaration.data.idris",
       "begin": "\\b(data)\\s+([\\w']+)\\s*(:)?",
+      "end": "\\b(where)\\b|(=)",
+      "patterns": [
+        {
+          "include": "#type_signature"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "keyword.other.idris"
@@ -164,7 +168,6 @@
           "name": "keyword.operator.colon.idris"
         }
       },
-      "end": "\\b(where)\\b|(=)",
       "endCaptures": {
         "1": {
           "name": "keyword.other.idris"
@@ -172,13 +175,7 @@
         "2": {
           "name": "keyword.operator.idris"
         }
-      },
-      "name": "meta.declaration.data.idris",
-      "patterns": [
-        {
-          "include": "#type_signature"
-        }
-      ]
+      }
     },
     {
       "include": "#function_signature"
@@ -199,53 +196,53 @@
       "include": "#prelude"
     },
     {
-      "match": "\\b[A-Z][A-Za-z_'0-9]*",
-      "name": "constant.other.idris"
+      "name": "constant.other.idris",
+      "match": "\\b[A-Z][A-Za-z_'0-9]*"
     },
     {
-      "match": "[|&!%$?~+:\\-.=</>\\\\*]+",
-      "name": "keyword.operator.idris"
+      "name": "keyword.operator.idris",
+      "match": "[|\u0026!%$?~+:\\-.=\u003c/\u003e\\\\*]+"
     },
     {
-      "match": ",",
-      "name": "punctuation.separator.comma.idris"
+      "name": "punctuation.separator.comma.idris",
+      "match": ","
     }
   ],
   "repository": {
     "block_comment": {
-      "begin": "\\{-(?!#)",
-      "captures": {
-        "0": {
-          "name": "punctuation.definition.comment.idris"
-        }
-      },
-      "end": "-\\}",
       "name": "comment.block.idris",
+      "begin": "\\{-(?!#)",
+      "end": "-\\}",
       "patterns": [
         {
           "include": "#block_comment"
         }
-      ]
+      ],
+      "captures": {
+        "0": {
+          "name": "punctuation.definition.comment.idris"
+        }
+      }
     },
     "comments": {
       "patterns": [
         {
+          "name": "comment.line.double-dash.idris",
+          "match": "(--).*$\\n?",
           "captures": {
             "1": {
               "name": "punctuation.definition.comment.idris"
             }
-          },
-          "match": "(--).*$\\n?",
-          "name": "comment.line.double-dash.idris"
+          }
         },
         {
+          "name": "comment.line.triple-bar.idris",
+          "match": "(\\|\\|\\|).*$\\n?",
           "captures": {
             "1": {
               "name": "punctuation.definition.comment.idris"
             }
-          },
-          "match": "(\\|\\|\\|).*$\\n?",
-          "name": "comment.line.triple-bar.idris"
+          }
         },
         {
           "include": "#block_comment"
@@ -255,6 +252,8 @@
     "context_signature": {
       "patterns": [
         {
+          "name": "meta.context-signature.idris",
+          "match": "([\\w._']+)((\\s+[\\w_']+)+)\\s*(=\u003e)",
           "captures": {
             "1": {
               "name": "entity.other.inherited-class.idris"
@@ -265,30 +264,16 @@
             "4": {
               "name": "keyword.operator.double-arrow.idris"
             }
-          },
-          "match": "([\\w._']+)((\\s+[\\w_']+)+)\\s*(=>)",
-          "name": "meta.context-signature.idris"
+          }
         },
         {
-          "begin": "(\\()((?=.*\\)\\s*=>)|(?=[^)]*$))",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.context.begin.idris"
-            }
-          },
-          "comment": "For things like '(Eq a, Show b) =>' It begins with '(' either followed by ') =>' on the same line, or anything but ')' until the end of line.",
-          "end": "(\\))\\s*(=>)",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.context.end.idris"
-            },
-            "2": {
-              "name": "keyword.operator.double-arrow.idris"
-            }
-          },
           "name": "meta.context-signature.idris",
+          "begin": "(\\()((?=.*\\)\\s*=\u003e)|(?=[^)]*$))",
+          "end": "(\\))\\s*(=\u003e)",
           "patterns": [
             {
+              "name": "meta.class-constraint.idris",
+              "match": "([\\w']+)\\s+([\\w']+)",
               "captures": {
                 "1": {
                   "name": "entity.other.inherited-class.idris"
@@ -296,17 +281,30 @@
                 "2": {
                   "name": "entity.other.attribute-name.idris"
                 }
-              },
-              "match": "([\\w']+)\\s+([\\w']+)",
-              "name": "meta.class-constraint.idris"
+              }
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.context.begin.idris"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.context.end.idris"
+            },
+            "2": {
+              "name": "keyword.operator.double-arrow.idris"
+            }
+          }
         }
       ]
     },
     "directive": {
       "patterns": [
         {
+          "name": "meta.directive.language-extension.idris",
+          "match": "^%(language)\\s+(.*)$",
           "captures": {
             "1": {
               "name": "keyword.other.directive.idris"
@@ -314,11 +312,11 @@
             "2": {
               "name": "keyword.other.language-extension.idris"
             }
-          },
-          "match": "^%(language)\\s+(.*)$",
-          "name": "meta.directive.language-extension.idris"
+          }
         },
         {
+          "name": "meta.directive.totality.idris",
+          "match": "^%(default)\\s+(total|partial)$",
           "captures": {
             "1": {
               "name": "keyword.other.directive.idris"
@@ -326,11 +324,11 @@
             "2": {
               "name": "keyword.other.totality.idris"
             }
-          },
-          "match": "^%(default)\\s+(total|partial)$",
-          "name": "meta.directive.totality.idris"
+          }
         },
         {
+          "name": "meta.directive.type-provider.idris",
+          "match": "^%(provide)\\s+.*\\s+(with)\\s+.*$",
           "captures": {
             "1": {
               "name": "keyword.other.directive.idris"
@@ -338,11 +336,11 @@
             "2": {
               "name": "keyword.other.idris"
             }
-          },
-          "match": "^%(provide)\\s+.*\\s+(with)\\s+.*$",
-          "name": "meta.directive.type-provider.idris"
+          }
         },
         {
+          "name": "meta.directive.export.idris",
+          "match": "^%(access)\\s+(public|abstract|private)$",
           "captures": {
             "1": {
               "name": "keyword.other.directive.idris"
@@ -350,39 +348,44 @@
             "2": {
               "name": "storage.modifier.export.idris"
             }
-          },
-          "match": "^%(access)\\s+(public|abstract|private)$",
-          "name": "meta.directive.export.idris"
+          }
         },
         {
+          "name": "meta.directive.idris",
+          "match": "^%([\\w]+)\\b",
           "captures": {
             "1": {
               "name": "keyword.other.directive.idris"
             }
-          },
-          "match": "^%([\\w]+)\\b",
-          "name": "meta.directive.idris"
+          }
         }
       ]
     },
     "escape_characters": {
       "patterns": [
         {
-          "match": "\\\\(NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\\\\\\"'\\&])",
-          "name": "constant.character.escape.ascii.idris"
+          "name": "constant.character.escape.ascii.idris",
+          "match": "\\\\(NUL|SOH|STX|ETX|EOT|ENQ|ACK|BEL|BS|HT|LF|VT|FF|CR|SO|SI|DLE|DC1|DC2|DC3|DC4|NAK|SYN|ETB|CAN|EM|SUB|ESC|FS|GS|RS|US|SP|DEL|[abfnrtv\\\\\\\"'\\\u0026])"
         },
         {
-          "match": "\\\\o[0-7]+|\\\\x[0-9A-Fa-f]+|\\\\[0-9]+",
-          "name": "constant.character.escape.octal.idris"
+          "name": "constant.character.escape.octal.idris",
+          "match": "\\\\o[0-7]+|\\\\x[0-9A-Fa-f]+|\\\\[0-9]+"
         },
         {
-          "match": "\\^[A-Z@\\[\\]\\\\\\^_]",
-          "name": "constant.character.escape.control.idris"
+          "name": "constant.character.escape.control.idris",
+          "match": "\\^[A-Z@\\[\\]\\\\\\^_]"
         }
       ]
     },
     "function_signature": {
-      "begin": "(([\\w']+)|\\(([|!%$+\\-.,=</>:]+)\\))\\s*(:)(?!:)",
+      "name": "meta.function.type-signature.idris",
+      "begin": "(([\\w']+)|\\(([|!%$+\\-.,=\u003c/\u003e:]+)\\))\\s*(:)(?!:)",
+      "end": "(;|(?\u003c=[^\\s\u003e])\\s*(?!-\u003e)\\s*$)",
+      "patterns": [
+        {
+          "include": "#type_signature"
+        }
+      ],
       "beginCaptures": {
         "2": {
           "name": "entity.name.function.idris"
@@ -393,69 +396,65 @@
         "4": {
           "name": "keyword.operator.colon.idris"
         }
-      },
-      "comment": "The end patterm is a bit tricky. It's either ';' or something, at the end of the line, but not '->', because a type signature can be multiline. Though, it doesn't help, if you break the signature before arrows.",
-      "end": "(;|(?<=[^\\s>])\\s*(?!->)\\s*$)",
-      "name": "meta.function.type-signature.idris",
-      "patterns": [
-        {
-          "include": "#type_signature"
-        }
-      ]
+      }
     },
     "language_const": {
       "patterns": [
         {
-          "match": "\\(\\)",
-          "name": "constant.language.unit.idris"
+          "name": "constant.language.unit.idris",
+          "match": "\\(\\)"
         },
         {
-          "match": "_\\|_",
-          "name": "constant.language.bottom.idris"
+          "name": "constant.language.bottom.idris",
+          "match": "_\\|_"
         },
         {
-          "match": "\\b_\\b",
-          "name": "constant.language.underscore.idris"
+          "name": "constant.language.underscore.idris",
+          "match": "\\b_\\b"
         }
       ]
     },
     "language_keyword": {
       "patterns": [
         {
-          "comment": "I'm not sure that these are all keywords, but don't know where to check it",
-          "match": "\\b(infix[lr]?|let|where|of|with)\\b",
-          "name": "keyword.other.idris"
+          "name": "keyword.other.idris",
+          "match": "\\b(infix[lr]?|let|where|of|with)\\b"
         },
         {
-          "match": "\\b(do|if|then|else|case|in)\\b",
-          "name": "keyword.control.idris"
+          "name": "keyword.control.idris",
+          "match": "\\b(do|if|then|else|case|in)\\b"
         }
       ]
     },
     "parameter_type": {
-      "comment": "Parameter types in a type signature",
       "patterns": [
         {
           "include": "#prelude_type"
         },
         {
-          "begin": "\\(([\\w']+)\\s*:(?!:)",
-          "beginCaptures": {
-            "1": {
-              "name": "entity.name.tag.idris"
-            }
-          },
-          "comment": "(x : Nat)",
-          "end": "\\)",
           "name": "meta.parameter.named.idris",
+          "begin": "\\(([\\w']+)\\s*:(?!:)",
+          "end": "\\)",
           "patterns": [
             {
               "include": "#prelude_type"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "entity.name.tag.idris"
+            }
+          }
         },
         {
+          "name": "meta.parameter.implicit.idris",
           "begin": "\\{((auto|default .+)\\s+)?([\\w']+)\\s*:(?!:)",
+          "end": "\\}",
+          "patterns": [
+            {
+              "include": "#prelude_type"
+            }
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.modifier.idris"
@@ -463,15 +462,7 @@
             "3": {
               "name": "entity.name.tag.idris"
             }
-          },
-          "comment": "{auto p : a = b}",
-          "end": "\\}",
-          "name": "meta.parameter.implicit.idris",
-          "patterns": [
-            {
-              "include": "#prelude_type"
-            }
-          ]
+          }
         }
       ]
     },
@@ -492,27 +483,24 @@
       ]
     },
     "prelude_class": {
-      "comment": "These should be more or less all classes defined in Prelude (checked)",
-      "match": "\\b(Eq|Ord|Num|MinBound|MaxBound|Integral|Applicative|Alternative|Cast|Foldable|Functor|Monad|Traversable|Uninhabited|Semigroup|VerifiedSemigroup|Monoid|VerifiedMonoid|Group|VerifiedGroup|AbelianGroup|VerifiedAbelianGroup|Ring|VerifiedRing|RingWithUnity|VerifiedRingWithUnity|JoinSemilattice|VerifiedJoinSemilattice|MeetSemilattice|VerifiedMeetSemilattice|BoundedJoinSemilattice|VerifiedBoundedJoinSemilattice|BoundedMeetSemilattice|VerifiedBoundedMeetSemilattice|Lattice|VerifiedLattice|BoundedLattice|VerifiedBoundedLattice)\\b",
-      "name": "support.class.prelude.idris"
+      "name": "support.class.prelude.idris",
+      "match": "\\b(Eq|Ord|Num|MinBound|MaxBound|Integral|Applicative|Alternative|Cast|Foldable|Functor|Monad|Traversable|Uninhabited|Semigroup|VerifiedSemigroup|Monoid|VerifiedMonoid|Group|VerifiedGroup|AbelianGroup|VerifiedAbelianGroup|Ring|VerifiedRing|RingWithUnity|VerifiedRingWithUnity|JoinSemilattice|VerifiedJoinSemilattice|MeetSemilattice|VerifiedMeetSemilattice|BoundedJoinSemilattice|VerifiedBoundedJoinSemilattice|BoundedMeetSemilattice|VerifiedBoundedMeetSemilattice|Lattice|VerifiedLattice|BoundedLattice|VerifiedBoundedLattice)\\b"
     },
     "prelude_const": {
       "patterns": [
         {
-          "match": "\\b(Just|Nothing|Left|Right|True|False|LT|EQ|GT)\\b",
-          "name": "support.constant.prelude.idris"
+          "name": "support.constant.prelude.idris",
+          "match": "\\b(Just|Nothing|Left|Right|True|False|LT|EQ|GT)\\b"
         }
       ]
     },
     "prelude_function": {
-      "comment": "TODO review it; these are just Haskell prelude functions",
-      "match": "\\b(abs|acos|acosh|all|and|any|appendFile|applyM|asTypeOf|asin|asinh|atan|atan2|atanh|break|catch|ceiling|compare|concat|concatMap|const|cos|cosh|curry|cycle|decodeFloat|div|divMod|drop|dropWhile|elem|encodeFloat|enumFrom|enumFromThen|enumFromThenTo|enumFromTo|error|even|exp|exponent|fail|filter|flip|floatDigits|floatRadix|floatRange|floor|fmap|foldl|foldl1|foldr|foldr1|fromEnum|fromInteger|fromIntegral|fromRational|fst|gcd|getChar|getContents|getLine|head|id|init|interact|ioError|isDenormalized|isIEEE|isInfinite|isNaN|isNegativeZero|iterate|last|lcm|length|lex|lines|log|logBase|lookup|map|mapM|mapM_|max|maxBound|maximum|maybe|min|minBound|minimum|mod|negate|not|notElem|null|odd|or|otherwise|pi|pred|print|product|properFraction|putChar|putStr|putStrLn|quot|quotRem|read|readFile|readIO|readList|readLn|readParen|reads|readsPrec|realToFrac|recip|rem|repeat|replicate|return|reverse|round|scaleFloat|scanl|scanl1|scanr|scanr1|seq|sequence|sequence_|show|showChar|showList|showParen|showString|shows|showsPrec|significand|signum|sin|sinh|snd|span|splitAt|sqrt|subtract|succ|sum|tail|take|takeWhile|tan|tanh|toEnum|toInteger|toRational|truncate|uncurry|undefined|unlines|until|unwords|unzip|unzip3|userError|words|writeFile|zip|zip3|zipWith|zipWith3)\\b",
-      "name": "support.function.prelude.idris"
+      "name": "support.function.prelude.idris",
+      "match": "\\b(abs|acos|acosh|all|and|any|appendFile|applyM|asTypeOf|asin|asinh|atan|atan2|atanh|break|catch|ceiling|compare|concat|concatMap|const|cos|cosh|curry|cycle|decodeFloat|div|divMod|drop|dropWhile|elem|encodeFloat|enumFrom|enumFromThen|enumFromThenTo|enumFromTo|error|even|exp|exponent|fail|filter|flip|floatDigits|floatRadix|floatRange|floor|fmap|foldl|foldl1|foldr|foldr1|fromEnum|fromInteger|fromIntegral|fromRational|fst|gcd|getChar|getContents|getLine|head|id|init|interact|ioError|isDenormalized|isIEEE|isInfinite|isNaN|isNegativeZero|iterate|last|lcm|length|lex|lines|log|logBase|lookup|map|mapM|mapM_|max|maxBound|maximum|maybe|min|minBound|minimum|mod|negate|not|notElem|null|odd|or|otherwise|pi|pred|print|product|properFraction|putChar|putStr|putStrLn|quot|quotRem|read|readFile|readIO|readList|readLn|readParen|reads|readsPrec|realToFrac|recip|rem|repeat|replicate|return|reverse|round|scaleFloat|scanl|scanl1|scanr|scanr1|seq|sequence|sequence_|show|showChar|showList|showParen|showString|shows|showsPrec|significand|signum|sin|sinh|snd|span|splitAt|sqrt|subtract|succ|sum|tail|take|takeWhile|tan|tanh|toEnum|toInteger|toRational|truncate|uncurry|undefined|unlines|until|unwords|unzip|unzip3|userError|words|writeFile|zip|zip3|zipWith|zipWith3)\\b"
     },
     "prelude_type": {
-      "comment": "These should be more or less all types defined in Prelude and some synonyms (checked)",
-      "match": "\\b(Type|Exists|World|IO|IntTy|FTy|Foreign|File|Mode|Dec|Bool|so|Ordering|Either|Fin|IsJust|List|Maybe|Nat|LTE|GTE|GT|LT|Stream|StrM|Vect|Not|Lazy|Inf|FalseElim)\\b",
-      "name": "support.type.prelude.idris"
+      "name": "support.type.prelude.idris",
+      "match": "\\b(Type|Exists|World|IO|IntTy|FTy|Foreign|File|Mode|Dec|Bool|so|Ordering|Either|Fin|IsJust|List|Maybe|Nat|LTE|GTE|GT|LT|Stream|StrM|Vect|Not|Lazy|Inf|FalseElim)\\b"
     },
     "type_signature": {
       "patterns": [
@@ -526,12 +514,10 @@
           "include": "#language_const"
         },
         {
-          "match": "->",
-          "name": "keyword.operator.arrow.idris"
+          "name": "keyword.operator.arrow.idris",
+          "match": "-\u003e"
         }
       ]
     }
-  },
-  "scopeName": "source.idris",
-  "uuid": "8957eeb1-b492-4497-85b8-b86e511e87eb"
+  }
 }

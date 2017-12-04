@@ -9,6 +9,36 @@
     }
   ],
   "repository": {
+    "box": {
+      "begin": "(\\w+)[ \t]*(\\{)",
+      "end": "\\}",
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "meta.box.definition.ideal"
+        },
+        "1": {
+          "name": "entity.function.box.name.ideal"
+        },
+        "2": {
+          "name": "punctuation.definition.bracket.curly.ideal"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.bracket.curly.ideal"
+        }
+      }
+    },
+    "comment": {
+      "name": "comment.block.ideal",
+      "begin": "/\\*",
+      "end": "\\*/"
+    },
     "external": {
       "patterns": [
         {
@@ -16,7 +46,7 @@
         },
         {
           "begin": "^(?=[.'][ \t]*(?:\\w|\\\\))",
-          "end": "(?<!\\\\)$|(\\\\\".*)$",
+          "end": "(?\u003c!\\\\)$|(\\\\\".*)$",
           "patterns": [
             {
               "include": "text.roff"
@@ -34,42 +64,50 @@
         }
       ]
     },
-    "tags": {
-      "begin": "^([.'])[ \t]*(IS)\\b\\s*(\\\\[\"#].*$)?",
-      "end": "^([.'])[ \t]*(IE)\\b",
-      "contentName": "source.embedded.ideal",
+    "function-call": {
+      "name": "meta.function-call.ideal",
+      "begin": "(\\w+)(\\()",
+      "end": "(?=\\))",
       "patterns": [
         {
           "include": "$self"
         }
       ],
       "beginCaptures": {
-        "0": {
-          "name": "meta.function.begin.ideal.section.macro.roff"
-        },
         "1": {
-          "name": "punctuation.definition.macro.roff"
+          "name": "entity.function.name.ideal"
         },
         "2": {
-          "name": "entity.function.name.roff"
-        },
-        "3": {
-          "patterns": [
-            {
-              "include": "text.roff#escapes"
-            }
-          ]
+          "name": "punctuation.definition.bracket.round.ideal"
         }
-      },
-      "endCaptures": {
-        "0": {
-          "name": "meta.function.end.ideal.section.macro.roff"
+      }
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.operator.$1.ideal",
+          "match": "\\b(at|box|conn|construct|to|put|using|opaque(?:\\s+exterior)?)\\b(?:\\s+(?:\\w+)\\s*(:)\\s*?)?",
+          "captures": {
+            "2": {
+              "name": "punctuation.separator.dictionary.key-value.ideal"
+            }
+          }
         },
+        {
+          "name": "entity.function.box.name.ideal",
+          "match": "\\b(left|right|spline)\\b"
+        }
+      ]
+    },
+    "libfile": {
+      "name": "meta.libfile.include.ideal",
+      "match": "((\\.{3})libfile)\\b",
+      "captures": {
         "1": {
-          "name": "punctuation.definition.macro.roff"
+          "name": "keyword.control.directive.include.ideal"
         },
         "2": {
-          "name": "entity.function.name.roff"
+          "name": "punctuation.definition.directive.include.ideal"
         }
       }
     },
@@ -107,86 +145,9 @@
         }
       ]
     },
-    "box": {
-      "begin": "(\\w+)[ \t]*(\\{)",
-      "end": "\\}",
-      "beginCaptures": {
-        "0": {
-          "name": "meta.box.definition.ideal"
-        },
-        "1": {
-          "name": "entity.function.box.name.ideal"
-        },
-        "2": {
-          "name": "punctuation.definition.bracket.curly.ideal"
-        }
-      },
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.bracket.curly.ideal"
-        }
-      },
-      "patterns": [
-        {
-          "include": "$self"
-        }
-      ]
-    },
-    "comment": {
-      "name": "comment.block.ideal",
-      "begin": "/\\*",
-      "end": "\\*/"
-    },
-    "function-call": {
-      "name": "meta.function-call.ideal",
-      "begin": "(\\w+)(\\()",
-      "end": "(?=\\))",
-      "beginCaptures": {
-        "1": {
-          "name": "entity.function.name.ideal"
-        },
-        "2": {
-          "name": "punctuation.definition.bracket.round.ideal"
-        }
-      },
-      "patterns": [
-        {
-          "include": "$self"
-        }
-      ]
-    },
-    "libfile": {
-      "name": "meta.libfile.include.ideal",
-      "match": "((\\.{3})libfile)\\b",
-      "captures": {
-        "1": {
-          "name": "keyword.control.directive.include.ideal"
-        },
-        "2": {
-          "name": "punctuation.definition.directive.include.ideal"
-        }
-      }
-    },
-    "keywords": {
-      "patterns": [
-        {
-          "name": "keyword.operator.$1.ideal",
-          "match": "\\b(at|box|conn|construct|to|put|using|opaque(?:\\s+exterior)?)\\b(?:\\s+(?:\\w+)\\s*(:)\\s*?)?",
-          "captures": {
-            "2": {
-              "name": "punctuation.separator.dictionary.key-value.ideal"
-            }
-          }
-        },
-        {
-          "name": "entity.function.box.name.ideal",
-          "match": "\\b(left|right|spline)\\b"
-        }
-      ]
-    },
     "number": {
       "name": "constant.numeric.ideal",
-      "match": "(?<![A-Za-z])\\d+(?:\\.\\d+)?"
+      "match": "(?\u003c![A-Za-z])\\d+(?:\\.\\d+)?"
     },
     "operators": {
       "patterns": [
@@ -229,6 +190,11 @@
         {
           "begin": "\\(",
           "end": "\\)",
+          "patterns": [
+            {
+              "include": "$self"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.bracket.round.ideal"
@@ -238,16 +204,16 @@
             "0": {
               "name": "punctuation.definition.bracket.round.ideal"
             }
-          },
-          "patterns": [
-            {
-              "include": "$self"
-            }
-          ]
+          }
         },
         {
           "begin": "\\[",
           "end": "\\]",
+          "patterns": [
+            {
+              "include": "$self"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.bracket.square.ideal"
@@ -257,16 +223,16 @@
             "0": {
               "name": "punctuation.definition.bracket.square.ideal"
             }
-          },
-          "patterns": [
-            {
-              "include": "$self"
-            }
-          ]
+          }
         },
         {
           "begin": "\\{",
           "end": "\\}",
+          "patterns": [
+            {
+              "include": "$self"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.bracket.curly.ideal"
@@ -276,16 +242,11 @@
             "0": {
               "name": "punctuation.definition.bracket.curly.ideal"
             }
-          },
-          "patterns": [
-            {
-              "include": "$self"
-            }
-          ]
+          }
         },
         {
-          "begin": "<",
-          "end": ">",
+          "begin": "\u003c",
+          "end": "\u003e",
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.bracket.angle.ideal"
@@ -320,6 +281,11 @@
           "name": "string.quoted.double.ideal",
           "begin": "\"",
           "end": "\"",
+          "patterns": [
+            {
+              "include": "#escapes"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.string.begin.ideal"
@@ -329,14 +295,48 @@
             "0": {
               "name": "punctuation.definition.string.end.ideal"
             }
-          },
+          }
+        }
+      ]
+    },
+    "tags": {
+      "contentName": "source.embedded.ideal",
+      "begin": "^([.'])[ \t]*(IS)\\b\\s*(\\\\[\"#].*$)?",
+      "end": "^([.'])[ \t]*(IE)\\b",
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "meta.function.begin.ideal.section.macro.roff"
+        },
+        "1": {
+          "name": "punctuation.definition.macro.roff"
+        },
+        "2": {
+          "name": "entity.function.name.roff"
+        },
+        "3": {
           "patterns": [
             {
-              "include": "#escapes"
+              "include": "text.roff#escapes"
             }
           ]
         }
-      ]
+      },
+      "endCaptures": {
+        "0": {
+          "name": "meta.function.end.ideal.section.macro.roff"
+        },
+        "1": {
+          "name": "punctuation.definition.macro.roff"
+        },
+        "2": {
+          "name": "entity.function.name.roff"
+        }
+      }
     },
     "variables": {
       "begin": "\\b(var)\\b",

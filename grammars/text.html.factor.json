@@ -1,17 +1,11 @@
 {
-  "fileTypes": [
-    "furnace",
-    "fhtml"
-  ],
-  "foldingStartMarker": "(?x)\n\t\t(<(?i:head|body|table|thead|tbody|tfoot|tr|div|select|fieldset|style|script|ul|ol|form|dl)\\b.*?>\n\t\t|<!--(?!.*-->)\n\t\t|\\{\\s*($|\\?>\\s*$|//|/\\*(.*\\*/\\s*$|(?!.*?\\*/)))\n\t\t)",
-  "foldingStopMarker": "(?x)\n\t\t(</(?i:head|body|table|thead|tbody|tfoot|tr|div|select|fieldset|style|script|ul|ol|form|dl)>\n\t\t|^\\s*-->\n\t\t|(^|\\s)\\}\n\t\t)",
-  "keyEquivalent": "^~F",
   "name": "HTML (Factor)",
+  "scopeName": "text.html.factor",
   "patterns": [
     {
-      "begin": "<%\\s",
-      "end": "(?<=\\s)%>",
       "name": "source.factor.embedded.html",
+      "begin": "\u003c%\\s",
+      "end": "(?\u003c=\\s)%\u003e",
       "patterns": [
         {
           "include": "source.factor"
@@ -21,7 +15,5 @@
     {
       "include": "text.html.basic"
     }
-  ],
-  "scopeName": "text.html.factor",
-  "uuid": "141517D7-73E0-4475-A481-71102575A175"
+  ]
 }

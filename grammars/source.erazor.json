@@ -1,12 +1,6 @@
 {
-  "fileTypes": [
-    "erazor",
-    "ehtml",
-    "erazor.html"
-  ],
-  "foldingStartMarker": "\\{\\s*$",
-  "foldingStopMarker": "^\\s*\\}",
   "name": "Erazor (HTML)",
+  "scopeName": "source.erazor",
   "patterns": [
     {
       "include": "#controlblock"
@@ -28,10 +22,74 @@
     }
   ],
   "repository": {
+    "codeblock": {
+      "name": "source.erazor",
+      "begin": "\\{",
+      "end": "\\}",
+      "patterns": [
+        {
+          "include": "#codeblock"
+        },
+        {
+          "include": "source.haxe.2"
+        }
+      ]
+    },
+    "controlblock": {
+      "name": "source.erazor",
+      "begin": "(@(if|else|while|for))(\\()",
+      "end": "\\)",
+      "patterns": [
+        {
+          "include": "source.haxe.2"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.haxe.flow-control.2"
+        }
+      }
+    },
+    "else": {
+      "patterns": [
+        {
+          "name": "source.erazor",
+          "match": "\\}(else)\\{",
+          "captures": {
+            "1": {
+              "name": "keyword.control.haxe.flow-control.2"
+            }
+          }
+        }
+      ]
+    },
+    "function": {
+      "name": "source.erazor",
+      "begin": "(@([a-zA-Z.]+)?)(\\()",
+      "end": "\\)",
+      "patterns": [
+        {
+          "include": "source.haxe.2"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "entity.name.function.erazor"
+        }
+      }
+    },
     "scriptblock": {
+      "name": "source.hscript",
       "begin": "@\\{",
       "end": "\\}",
-      "name": "source.hscript",
+      "patterns": [
+        {
+          "include": "#codeblock"
+        },
+        {
+          "include": "source.haxe.2"
+        }
+      ],
       "beginCaptures": {
         "0": {
           "name": "entity.name.tag.erazor"
@@ -41,64 +99,13 @@
         "0": {
           "name": "entity.name.tag.erazor"
         }
-      },
-      "patterns": [
-        {
-          "include": "#codeblock"
-        },
-        {
-          "include": "source.haxe.2"
-        }
-      ]
-    },
-    "function": {
-      "begin": "(@([a-zA-Z.]+)?)(\\()",
-      "end": "\\)",
-      "name": "source.erazor",
-      "beginCaptures": {
-        "1": {
-          "name": "entity.name.function.erazor"
-        }
-      },
-      "patterns": [
-        {
-          "include": "source.haxe.2"
-        }
-      ]
-    },
-    "controlblock": {
-      "begin": "(@(if|else|while|for))(\\()",
-      "end": "\\)",
-      "name": "source.erazor",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.control.haxe.flow-control.2"
-        }
-      },
-      "patterns": [
-        {
-          "include": "source.haxe.2"
-        }
-      ]
-    },
-    "codeblock": {
-      "begin": "\\{",
-      "end": "\\}",
-      "name": "source.erazor",
-      "patterns": [
-        {
-          "include": "#codeblock"
-        },
-        {
-          "include": "source.haxe.2"
-        }
-      ]
+      }
     },
     "variables": {
       "patterns": [
         {
-          "match": "(@[A-Za-z0-9_.]+)",
           "name": "source.erazor",
+          "match": "(@[A-Za-z0-9_.]+)",
           "captures": {
             "1": {
               "name": "entity.name.variable.erazor"
@@ -106,21 +113,6 @@
           }
         }
       ]
-    },
-    "else": {
-      "patterns": [
-        {
-          "match": "\\}(else)\\{",
-          "name": "source.erazor",
-          "captures": {
-            "1": {
-              "name": "keyword.control.haxe.flow-control.2"
-            }
-          }
-        }
-      ]
     }
-  },
-  "scopeName": "source.erazor",
-  "uuid": "93706aaa-9b66-4e9e-bb64-31a8ffcfb00e"
+  }
 }

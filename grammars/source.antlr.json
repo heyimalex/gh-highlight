@@ -1,9 +1,6 @@
 {
-  "fileTypes": [
-    "g"
-  ],
-  "keyEquivalent": "^~A",
   "name": "ANTLR",
+  "scopeName": "source.antlr",
   "patterns": [
     {
       "include": "#strings"
@@ -12,29 +9,14 @@
       "include": "#comments"
     },
     {
-      "begin": "\\boptions\\b",
-      "beginCaptures": {
-        "0": {
-          "name": "keyword.other.options.antlr"
-        }
-      },
-      "end": "(?<=\\})",
       "name": "meta.options.antlr",
+      "begin": "\\boptions\\b",
+      "end": "(?\u003c=\\})",
       "patterns": [
         {
-          "begin": "\\{",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.section.options.begin.antlr"
-            }
-          },
-          "end": "\\}",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.section.options.end.antlr"
-            }
-          },
           "name": "meta.options-block.antlr",
+          "begin": "\\{",
+          "end": "\\}",
           "patterns": [
             {
               "include": "#strings"
@@ -43,23 +25,58 @@
               "include": "#comments"
             },
             {
-              "match": "\\b\\d+\\b",
-              "name": "constant.numeric.antlr"
+              "name": "constant.numeric.antlr",
+              "match": "\\b\\d+\\b"
             },
             {
-              "match": "\\b(k|charVocabulary|filter|greedy|paraphrase|exportVocab|buildAST|defaultErrorHandler|language|namespace|namespaceStd|namespaceAntlr|genHashLines)\\b",
-              "name": "variable.other.option.antlr"
+              "name": "variable.other.option.antlr",
+              "match": "\\b(k|charVocabulary|filter|greedy|paraphrase|exportVocab|buildAST|defaultErrorHandler|language|namespace|namespaceStd|namespaceAntlr|genHashLines)\\b"
             },
             {
-              "match": "\\b(true|false)\\b",
-              "name": "constant.language.boolean.antlr"
+              "name": "constant.language.boolean.antlr",
+              "match": "\\b(true|false)\\b"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.section.options.begin.antlr"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.options.end.antlr"
+            }
+          }
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.other.options.antlr"
+        }
+      }
     },
     {
+      "name": "meta.definition.class.antlr",
       "begin": "^(class)\\b\\s+(\\w+)",
+      "end": ";",
+      "patterns": [
+        {
+          "name": "meta.definition.class.extends.antlr",
+          "begin": "\\b(extends)\\b\\s+",
+          "end": "(?=;)",
+          "patterns": [
+            {
+              "name": "support.class.antlr",
+              "match": "\\b(Parser|Lexer|TreeWalker)\\b"
+            }
+          ],
+          "captures": {
+            "1": {
+              "name": "storage.modifier.antlr"
+            }
+          }
+        }
+      ],
       "captures": {
         "1": {
           "name": "storage.type.antlr"
@@ -67,37 +84,19 @@
         "2": {
           "name": "entity.name.type.class.antlr"
         }
-      },
-      "end": ";",
-      "name": "meta.definition.class.antlr",
-      "patterns": [
-        {
-          "begin": "\\b(extends)\\b\\s+",
-          "captures": {
-            "1": {
-              "name": "storage.modifier.antlr"
-            }
-          },
-          "end": "(?=;)",
-          "name": "meta.definition.class.extends.antlr",
-          "patterns": [
-            {
-              "match": "\\b(Parser|Lexer|TreeWalker)\\b",
-              "name": "support.class.antlr"
-            }
-          ]
-        }
-      ]
+      }
     },
     {
-      "match": "^protected\\b",
-      "name": "storage.modifier.antlr"
+      "name": "storage.modifier.antlr",
+      "match": "^protected\\b"
     },
     {
-      "match": "^[[:upper:]_][[:upper:][:digit:]_]*\\b",
-      "name": "entity.name.type.token.antlr"
+      "name": "entity.name.type.token.antlr",
+      "match": "^[[:upper:]_][[:upper:][:digit:]_]*\\b"
     },
     {
+      "name": "meta.rule.antlr",
+      "match": "^(\\w+)(?:\\s+(returns\\b))?",
       "captures": {
         "1": {
           "name": "entity.name.function.rule.antlr"
@@ -105,13 +104,11 @@
         "2": {
           "name": "keyword.control.antlr"
         }
-      },
-      "match": "^(\\w+)(?:\\s+(returns\\b))?",
-      "name": "meta.rule.antlr"
+      }
     },
     {
-      "match": "\\b[[:upper:]_][[:upper:][:digit:]_]*\\b",
-      "name": "constant.other.token.antlr"
+      "name": "constant.other.token.antlr",
+      "match": "\\b[[:upper:]_][[:upper:][:digit:]_]*\\b"
     },
     {
       "include": "#nested-curly"
@@ -121,180 +118,178 @@
     "comments": {
       "patterns": [
         {
+          "name": "comment.block.antlr",
           "begin": "/\\*",
+          "end": "\\*/",
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.comment.begin.antlr"
             }
           },
-          "end": "\\*/",
           "endCaptures": {
             "0": {
               "name": "punctuation.definition.comment.end.antlr"
             }
-          },
-          "name": "comment.block.antlr"
+          }
         },
         {
           "begin": "(^[ \\t]+)?(?=//)",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.whitespace.comment.leading.antlr"
-            }
-          },
           "end": "(?!\\G)",
           "patterns": [
             {
+              "name": "comment.line.double-slash.antlr",
               "begin": "//",
+              "end": "\\n",
               "beginCaptures": {
                 "0": {
                   "name": "punctuation.definition.comment.antlr"
                 }
-              },
-              "end": "\\n",
-              "name": "comment.line.double-slash.antlr"
+              }
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.whitespace.comment.leading.antlr"
+            }
+          }
         }
       ]
     },
     "nested-curly": {
+      "name": "source.embedded.java-or-c.antlr",
       "begin": "\\{",
+      "end": "\\}",
+      "patterns": [
+        {
+          "name": "keyword.control.java-or-c",
+          "match": "\\b(break|case|continue|default|do|else|for|goto|if|_Pragma|return|switch|while)\\b"
+        },
+        {
+          "name": "storage.type.java-or-c",
+          "match": "\\b(asm|__asm__|auto|bool|_Bool|char|_Complex|double|enum|float|_Imaginary|int|long|short|signed|struct|typedef|union|unsigned|void)\\b"
+        },
+        {
+          "name": "storage.modifier.java-or-c",
+          "match": "\\b(const|extern|register|restrict|static|volatile|inline)\\b"
+        },
+        {
+          "name": "constant.language.java-or-c",
+          "match": "\\b(NULL|true|false|TRUE|FALSE)\\b"
+        },
+        {
+          "name": "keyword.operator.sizeof.java-or-c",
+          "match": "\\b(sizeof)\\b"
+        },
+        {
+          "name": "constant.numeric.java-or-c",
+          "match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b"
+        },
+        {
+          "name": "string.quoted.double.java-or-c",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.antlr",
+              "match": "\\\\."
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.java-or-c"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.java-or-c"
+            }
+          }
+        },
+        {
+          "name": "string.quoted.single.java-or-c",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.antlr",
+              "match": "\\\\."
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.java-or-c"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.java-or-c"
+            }
+          }
+        },
+        {
+          "name": "support.constant.eof-char.antlr",
+          "match": "\\bEOF_CHAR\\b"
+        },
+        {
+          "include": "#comments"
+        }
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.section.group.begin.antlr"
         }
       },
-      "end": "\\}",
       "endCaptures": {
         "0": {
           "name": "punctuation.section.group.end.antlr"
         }
-      },
-      "name": "source.embedded.java-or-c.antlr",
-      "patterns": [
-        {
-          "match": "\\b(break|case|continue|default|do|else|for|goto|if|_Pragma|return|switch|while)\\b",
-          "name": "keyword.control.java-or-c"
-        },
-        {
-          "match": "\\b(asm|__asm__|auto|bool|_Bool|char|_Complex|double|enum|float|_Imaginary|int|long|short|signed|struct|typedef|union|unsigned|void)\\b",
-          "name": "storage.type.java-or-c"
-        },
-        {
-          "match": "\\b(const|extern|register|restrict|static|volatile|inline)\\b",
-          "name": "storage.modifier.java-or-c"
-        },
-        {
-          "match": "\\b(NULL|true|false|TRUE|FALSE)\\b",
-          "name": "constant.language.java-or-c"
-        },
-        {
-          "match": "\\b(sizeof)\\b",
-          "name": "keyword.operator.sizeof.java-or-c"
-        },
-        {
-          "match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b",
-          "name": "constant.numeric.java-or-c"
-        },
-        {
-          "begin": "\"",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.begin.java-or-c"
-            }
-          },
-          "end": "\"",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.end.java-or-c"
-            }
-          },
-          "name": "string.quoted.double.java-or-c",
-          "patterns": [
-            {
-              "match": "\\\\.",
-              "name": "constant.character.escape.antlr"
-            }
-          ]
-        },
-        {
-          "begin": "'",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.begin.java-or-c"
-            }
-          },
-          "end": "'",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.end.java-or-c"
-            }
-          },
-          "name": "string.quoted.single.java-or-c",
-          "patterns": [
-            {
-              "match": "\\\\.",
-              "name": "constant.character.escape.antlr"
-            }
-          ]
-        },
-        {
-          "match": "\\bEOF_CHAR\\b",
-          "name": "support.constant.eof-char.antlr"
-        },
-        {
-          "include": "#comments"
-        }
-      ]
+      }
     },
     "strings": {
       "patterns": [
         {
+          "name": "string.quoted.double.antlr",
           "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.antlr",
+              "match": "\\\\(u[0-9A-Fa-f]{4}|.)"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.string.begin.antlr"
             }
           },
-          "end": "\"",
           "endCaptures": {
             "0": {
               "name": "punctuation.definition.string.end.antlr"
             }
-          },
-          "name": "string.quoted.double.antlr",
-          "patterns": [
-            {
-              "match": "\\\\(u\\h{4}|.)",
-              "name": "constant.character.escape.antlr"
-            }
-          ]
+          }
         },
         {
+          "name": "string.quoted.single.antlr",
           "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.antlr",
+              "match": "\\\\(u[0-9A-Fa-f]{4}|.)"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.string.begin.antlr"
             }
           },
-          "end": "'",
           "endCaptures": {
             "0": {
               "name": "punctuation.definition.string.end.antlr"
             }
-          },
-          "name": "string.quoted.single.antlr",
-          "patterns": [
-            {
-              "match": "\\\\(u\\h{4}|.)",
-              "name": "constant.character.escape.antlr"
-            }
-          ]
+          }
         }
       ]
     }
-  },
-  "scopeName": "source.antlr",
-  "uuid": "ACABDECD-4F22-47D9-A5F4-DBA957A2A1CC"
+  }
 }

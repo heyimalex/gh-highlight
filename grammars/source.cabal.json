@@ -1,11 +1,9 @@
 {
-  "scopeName": "source.cabal",
-  "fileTypes": [
-    "cabal"
-  ],
   "name": "Cabal",
+  "scopeName": "source.cabal",
   "patterns": [
     {
+      "name": "version",
       "match": "(version)\\W*:\\W*([\\d.]+)",
       "captures": {
         "1": {
@@ -14,24 +12,24 @@
         "2": {
           "name": "constant.numeric"
         }
-      },
-      "name": "version"
+      }
     },
     {
+      "name": "cabal-keyword",
       "match": "(\\S+):[^/]",
       "captures": {
         "1": {
           "name": "keyword.other"
         }
-      },
-      "name": "cabal-keyword"
+      }
     },
     {
-      "match": "&&",
-      "name": "keyword.other"
+      "name": "keyword.other",
+      "match": "\u0026\u0026"
     },
     {
-      "match": "([><=]+)\\s*([\\d.]+)",
+      "name": "cabal-keyword",
+      "match": "([\u003e\u003c=]+)\\s*([\\d.]+)",
       "captures": {
         "1": {
           "name": "keyword.other"
@@ -39,10 +37,10 @@
         "2": {
           "name": "constant.numeric"
         }
-      },
-      "name": "cabal-keyword"
+      }
     },
     {
+      "name": "module-type",
       "match": "(benchmark|executable|flag|source-repository|test-suite)\\s+(\\S+)",
       "captures": {
         "1": {
@@ -51,16 +49,15 @@
         "2": {
           "name": "support.other"
         }
-      },
-      "name": "module-type"
+      }
     },
     {
-      "match": "library",
-      "name": "entity.name.function"
+      "name": "entity.name.function",
+      "match": "library"
     },
     {
-      "match": "--.*\\n",
-      "name": "comment"
+      "name": "comment",
+      "match": "--.*\\n"
     }
   ]
 }

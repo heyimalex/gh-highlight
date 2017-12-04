@@ -1,11 +1,6 @@
 {
   "name": "Pic",
   "scopeName": "source.pic",
-  "fileTypes": [
-    "chem",
-    "pic"
-  ],
-  "firstLineMatch": "^#[!/].*\\bpic2plot\\b",
   "patterns": [
     {
       "include": "#binary"
@@ -24,58 +19,6 @@
     }
   ],
   "repository": {
-    "main": {
-      "patterns": [
-        {
-          "include": "#comment"
-        },
-        {
-          "include": "#keywords"
-        },
-        {
-          "include": "#backref"
-        },
-        {
-          "include": "#macros"
-        },
-        {
-          "include": "#string"
-        },
-        {
-          "include": "#number"
-        },
-        {
-          "include": "#escaped-newline"
-        },
-        {
-          "include": "#operators"
-        },
-        {
-          "include": "#brackets"
-        },
-        {
-          "include": "#punctuation"
-        },
-        {
-          "include": "#primitives"
-        },
-        {
-          "include": "#attributes"
-        },
-        {
-          "include": "#globals"
-        },
-        {
-          "include": "#function-call"
-        },
-        {
-          "include": "#label"
-        },
-        {
-          "include": "#name"
-        }
-      ]
-    },
     "attributes": {
       "name": "variable.other.property.$1.pic",
       "match": "(?x)\\b\n(cw|dashed|diameter|diam|dotted|down|height|ht|invisible\n|invis|left|radius|rad|right|same|up|width|wid)\\b"
@@ -200,8 +143,8 @@
                   "include": "#punctuation"
                 },
                 {
-                  "match": "\\.",
-                  "name": "punctuation.delimiter.period.full-stop.chem.pic"
+                  "name": "punctuation.delimiter.period.full-stop.chem.pic",
+                  "match": "\\."
                 }
               ]
             }
@@ -273,11 +216,6 @@
           "name": "meta.format.dformat.pic",
           "begin": "^style\\b",
           "end": "$",
-          "beginCaptures": {
-            "0": {
-              "name": "keyword.function.pic"
-            }
-          },
           "patterns": [
             {
               "include": "#boolean"
@@ -289,20 +227,20 @@
             {
               "include": "#number"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "keyword.function.pic"
+            }
+          }
         },
         {
           "name": "meta.record.dformat.pic",
           "begin": "^\\S.*$\\n?",
           "end": "^(?=\\S)",
-          "beginCaptures": {
-            "0": {
-              "name": "markup.bold.heading.dformat.pic"
-            }
-          },
           "patterns": [
             {
-              "match": "^([ \t]+[^:\\s]+:)?(?:(?<=:)|[ \t]+)(\\S+)\\s+(.*)$",
+              "match": "^([ \t]+[^:\\s]+:)?(?:(?\u003c=:)|[ \t]+)(\\S+)\\s+(.*)$",
               "captures": {
                 "0": {
                   "name": "markup.list.unnumbered.dformat.pic"
@@ -317,8 +255,8 @@
                 "2": {
                   "patterns": [
                     {
-                      "match": "-",
-                      "name": "punctuation.separator.dash.dformat.pic"
+                      "name": "punctuation.separator.dash.dformat.pic",
+                      "match": "-"
                     },
                     {
                       "include": "#number"
@@ -328,8 +266,14 @@
                 "3": {
                   "patterns": [
                     {
+                      "contentName": "source.embedded.eqn.roff",
                       "begin": "@",
                       "end": "@",
+                      "patterns": [
+                        {
+                          "include": "text.roff#eqn"
+                        }
+                      ],
                       "beginCaptures": {
                         "0": {
                           "name": "punctuation.definition.section.begin.eqn"
@@ -339,19 +283,18 @@
                         "0": {
                           "name": "punctuation.definition.section.end.eqn"
                         }
-                      },
-                      "patterns": [
-                        {
-                          "include": "text.roff#eqn"
-                        }
-                      ],
-                      "contentName": "source.embedded.eqn.roff"
+                      }
                     }
                   ]
                 }
               }
             }
-          ]
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "markup.bold.heading.dformat.pic"
+            }
+          }
         }
       ]
     },
@@ -370,7 +313,7 @@
     },
     "embedded-roff": {
       "begin": "^(?=[.'][ \t]*(?:\\w|\\\\))",
-      "end": "(?<!\\\\)$|(\\\\\".*)$",
+      "end": "(?\u003c!\\\\)$|(\\\\\".*)$",
       "patterns": [
         {
           "include": "text.roff"
@@ -429,16 +372,16 @@
     "grap": {
       "patterns": [
         {
-          "match": "\\bpid\\b",
-          "name": "variable.language.process-id.pic.grap"
+          "name": "variable.language.process-id.pic.grap",
+          "match": "\\bpid\\b"
         },
         {
-          "match": "\\bthen\\b",
-          "name": "keyword.control.then.pic.grap"
+          "name": "keyword.control.then.pic.grap",
+          "match": "\\bthen\\b"
         },
         {
-          "match": "\\b(in|out|through)\\b",
-          "name": "keyword.operator.pic.grap"
+          "name": "keyword.operator.pic.grap",
+          "match": "\\b(in|out|through)\\b"
         },
         {
           "include": "#comment"
@@ -607,33 +550,99 @@
         }
       ]
     },
+    "main": {
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#keywords"
+        },
+        {
+          "include": "#backref"
+        },
+        {
+          "include": "#macros"
+        },
+        {
+          "include": "#string"
+        },
+        {
+          "include": "#number"
+        },
+        {
+          "include": "#escaped-newline"
+        },
+        {
+          "include": "#operators"
+        },
+        {
+          "include": "#brackets"
+        },
+        {
+          "include": "#punctuation"
+        },
+        {
+          "include": "#primitives"
+        },
+        {
+          "include": "#attributes"
+        },
+        {
+          "include": "#globals"
+        },
+        {
+          "include": "#function-call"
+        },
+        {
+          "include": "#label"
+        },
+        {
+          "include": "#name"
+        }
+      ]
+    },
     "name": {
       "name": "variable.other.pic",
       "match": "(?!\\d)\\w+"
     },
     "number": {
       "name": "constant.numeric.pic",
-      "match": "(?:(?<!\\d)[-+])?(?:\\d+(?:\\.\\d+)?|\\.\\d+|\\.(?=[Ee]))(?:[Ee][-+]?\\d+)?"
+      "match": "(?:(?\u003c!\\d)[-+])?(?:\\d+(?:\\.\\d+)?|\\.\\d+|\\.(?=[Ee]))(?:[Ee][-+]?\\d+)?"
     },
     "operators": {
       "patterns": [
         {
-          "match": "<->|<-|->",
-          "name": "keyword.operator.arrow.pic"
+          "name": "keyword.operator.arrow.pic",
+          "match": "\u003c-\u003e|\u003c-|-\u003e"
         },
         {
-          "match": "[=><]=?|!=|&&|\\|\\|",
-          "name": "keyword.operator.comparison.pic"
+          "name": "keyword.operator.comparison.pic",
+          "match": "[=\u003e\u003c]=?|!=|\u0026\u0026|\\|\\|"
         },
         {
-          "match": ":?=",
-          "name": "keyword.operator.assignment.pic"
+          "name": "keyword.operator.assignment.pic",
+          "match": ":?="
         },
         {
-          "match": "[-/+*%^]",
-          "name": "keyword.operator.arithmetic.pic"
+          "name": "keyword.operator.arithmetic.pic",
+          "match": "[-/+*%^]"
         }
       ]
+    },
+    "pic-line": {
+      "begin": "^(pic)\\b",
+      "end": "$",
+      "patterns": [
+        {
+          "include": "#main"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.dformat.pic"
+        }
+      }
     },
     "primitives": {
       "name": "keyword.function.pic",
@@ -644,49 +653,35 @@
         }
       }
     },
-    "pic-line": {
-      "begin": "^(pic)\\b",
-      "end": "$",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.control.dformat.pic"
-        }
-      },
-      "patterns": [
-        {
-          "include": "#main"
-        }
-      ]
-    },
     "punctuation": {
       "patterns": [
         {
-          "match": "\\}",
-          "name": "punctuation.definition.bracket.curly.pic"
+          "name": "punctuation.definition.bracket.curly.pic",
+          "match": "\\}"
         },
         {
-          "match": "\\)",
-          "name": "punctuation.definition.bracket.round.pic"
+          "name": "punctuation.definition.bracket.round.pic",
+          "match": "\\)"
         },
         {
-          "match": "\\]",
-          "name": "punctuation.definition.bracket.square.pic"
+          "name": "punctuation.definition.bracket.square.pic",
+          "match": "\\]"
         },
         {
-          "match": ";",
-          "name": "punctuation.terminator.statement.pic"
+          "name": "punctuation.terminator.statement.pic",
+          "match": ";"
         },
         {
-          "match": ",",
-          "name": "punctuation.separator.comma.pic"
+          "name": "punctuation.separator.comma.pic",
+          "match": ","
         },
         {
-          "match": "<|>",
-          "name": "punctuation.definition.bracket.angle.pic"
+          "name": "punctuation.definition.bracket.angle.pic",
+          "match": "\u003c|\u003e"
         },
         {
-          "match": "\\.(?!\\d)",
-          "name": "punctuation.delimiter.period.full-stop.pic"
+          "name": "punctuation.delimiter.period.full-stop.pic",
+          "match": "\\.(?!\\d)"
         }
       ]
     },
@@ -694,16 +689,6 @@
       "name": "string.quoted.double.pic",
       "begin": "\"",
       "end": "\"",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.pic"
-        }
-      },
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.pic"
-        }
-      },
       "patterns": [
         {
           "name": "constant.character.escape.pic",
@@ -726,13 +711,23 @@
             }
           }
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.pic"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.pic"
+        }
+      }
     },
     "tags": {
       "patterns": [
         {
           "name": "invalid.deprecated.function.picture.macro.roff",
-          "match": "^([.'])[ \t]*(PS)[ \t]*(<)(.*)(?=$|\\\\\")",
+          "match": "^([.'])[ \t]*(PS)[ \t]*(\u003c)(.*)(?=$|\\\\\")",
           "captures": {
             "1": {
               "name": "punctuation.definition.macro.roff"
@@ -753,9 +748,9 @@
           }
         },
         {
+          "contentName": "source.embedded.pic",
           "begin": "^([.'])[ \t]*(PS)\\b([\\d \t]*(?:#.*)?)?(\\\\[#\"].*)?$",
           "end": "^([.'])[ \t]*(P[EF])\\b",
-          "contentName": "source.embedded.pic",
           "patterns": [
             {
               "include": "$self"
@@ -799,9 +794,9 @@
           }
         },
         {
+          "contentName": "source.embedded.chem.pic",
           "begin": "^([.'])[ \t]*(cstart)\\b\\s*(\\S.*)?",
           "end": "^([.'])[ \t]*(cend)\\b",
-          "contentName": "source.embedded.chem.pic",
           "patterns": [
             {
               "include": "#chem"
@@ -834,9 +829,9 @@
           }
         },
         {
+          "contentName": "source.embedded.dformat.pic",
           "begin": "^([.'])[ \t]*(begin[ \t]+dformat)\\b",
           "end": "^([.'])[ \t]*(end)\\b",
-          "contentName": "source.embedded.dformat.pic",
           "patterns": [
             {
               "include": "#dformat"
@@ -866,9 +861,9 @@
           }
         },
         {
+          "contentName": "source.embedded.grap.pic",
           "begin": "^([.'])[ \t]*(G1)\\b(\\s*\\d+)?(\\s*\\\\\".*$)?",
           "end": "^([.'])[ \t]*(G2)\\b",
-          "contentName": "source.embedded.grap.pic",
           "patterns": [
             {
               "include": "#grap"

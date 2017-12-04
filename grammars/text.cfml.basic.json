@@ -1,8 +1,30 @@
 {
   "name": "CFML (do not use)",
+  "scopeName": "text.cfml.basic",
   "patterns": [
     {
-      "begin": "(?:^\\s+)?(<)((?i:cfscript))(?![^>]*/>)",
+      "begin": "(?:^\\s+)?(\u003c)((?i:cfscript))(?![^\u003e]*/\u003e)",
+      "end": "(\u003c/)((?i:cfscript))(\u003e)(?:\\s*\\n)?",
+      "patterns": [
+        {
+          "contentName": "source.cfscript.embedded.cfml",
+          "begin": "(\u003e)",
+          "end": "(?=\u003c/(?i:cfscript))",
+          "patterns": [
+            {
+              "include": "source.cfscript"
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "meta.tag.block.cf.script.cfml"
+            },
+            "1": {
+              "name": "punctuation.definition.tag.end.cfml"
+            }
+          }
+        }
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.block.cf.script.cfml"
@@ -16,31 +38,20 @@
         "3": {
           "name": "punctuation.definition.tag.end.cfml"
         }
-      },
-      "end": "(</)((?i:cfscript))(>)(?:\\s*\\n)?",
-      "patterns": [
-        {
-          "begin": "(>)",
-          "beginCaptures": {
-            "0": {
-              "name": "meta.tag.block.cf.script.cfml"
-            },
-            "1": {
-              "name": "punctuation.definition.tag.end.cfml"
-            }
-          },
-          "contentName": "source.cfscript.embedded.cfml",
-          "end": "(?=</(?i:cfscript))",
-          "patterns": [
-            {
-              "include": "source.cfscript"
-            }
-          ]
-        }
-      ]
+      }
     },
     {
-      "begin": "(</?)((?i:cffunction))\\b",
+      "name": "meta.tag.block.cf.function.cfml",
+      "begin": "(\u003c/?)((?i:cffunction))\\b",
+      "end": "(\u003e)",
+      "patterns": [
+        {
+          "include": "#func-name-attribute"
+        },
+        {
+          "include": "#tag-stuff"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.tag.begin.cfml"
@@ -49,24 +60,25 @@
           "name": "entity.name.tag.cf.function.cfml"
         }
       },
-      "end": "(>)",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.tag.end.cfml"
         }
-      },
-      "name": "meta.tag.block.cf.function.cfml",
-      "patterns": [
-        {
-          "include": "#func-name-attribute"
-        },
-        {
-          "include": "#tag-stuff"
-        }
-      ]
+      }
     },
     {
-      "begin": "(<)(?i:(cfset|cfreturn))\\b",
+      "name": "meta.tag.inline.cf.any.cfml",
+      "contentName": "source.cfscript.embedded.cfml",
+      "begin": "(\u003c)(?i:(cfset|cfreturn))\\b",
+      "end": "((?:\\s?/)?\u003e)",
+      "patterns": [
+        {
+          "include": "#cfcomments"
+        },
+        {
+          "include": "source.cfscript"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.tag.begin.cfml"
@@ -75,25 +87,21 @@
           "name": "entity.name.tag.cf.inline.declaration.cfml"
         }
       },
-      "end": "((?:\\s?/)?>)",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.tag.end.cfml"
         }
-      },
-      "name": "meta.tag.inline.cf.any.cfml",
-      "contentName": "source.cfscript.embedded.cfml",
-      "patterns": [
-        {
-          "include": "#cfcomments"
-        },
-        {
-          "include": "source.cfscript"
-        }
-      ]
+      }
     },
     {
-      "begin": "(?x)\n\t\t\t\t(<)\n\t\t\t\t\t(?i:\n\t\t\t\t\t\t(cf(queryparam|location|forward|import|param|break|abort|flush\n\t\t\t\t\t\t\t|setting|test|dump|content|include|catch|continue\n\t\t\t\t\t\t\t|file|log|object|invoke|throw|property|htmlhead\n\t\t\t\t\t\t\t|header|argument|exit|trace)\n\t\t\t\t\t\t)\n\t\t\t\t\t\t\\b\n\t\t\t\t\t)\n\t\t\t",
+      "name": "meta.tag.inline.cf.any.cfml",
+      "begin": "(?x)\n\t\t\t\t(\u003c)\n\t\t\t\t\t(?i:\n\t\t\t\t\t\t(cf(queryparam|location|forward|import|param|break|abort|flush\n\t\t\t\t\t\t\t|setting|test|dump|content|include|catch|continue\n\t\t\t\t\t\t\t|file|log|object|invoke|throw|property|htmlhead\n\t\t\t\t\t\t\t|header|argument|exit|trace)\n\t\t\t\t\t\t)\n\t\t\t\t\t\t\\b\n\t\t\t\t\t)\n\t\t\t",
+      "end": "((?:\\s?/)?\u003e)",
+      "patterns": [
+        {
+          "include": "#tag-stuff"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.tag.begin.cfml"
@@ -102,21 +110,83 @@
           "name": "entity.name.tag.cf.inline.other.cfml"
         }
       },
-      "end": "((?:\\s?/)?>)",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.tag.end.cfml"
         }
-      },
-      "name": "meta.tag.inline.cf.any.cfml",
-      "patterns": [
-        {
-          "include": "#tag-stuff"
-        }
-      ]
+      }
     },
     {
-      "begin": "(?:^\\s+)?(<)((?i:cfquery))\\b(?![^>]*/>)",
+      "begin": "(?:^\\s+)?(\u003c)((?i:cfquery))\\b(?![^\u003e]*/\u003e)",
+      "end": "(\u003c/)((?i:cfquery))(\u003e)(?:\\s*\\n)?",
+      "patterns": [
+        {
+          "name": "meta.tag.block.cf.output.cfml",
+          "begin": "(?\u003c=cfquery)\\s",
+          "end": "(?=\u003e)",
+          "patterns": [
+            {
+              "include": "#qry-name-attribute"
+            },
+            {
+              "include": "#tag-stuff"
+            }
+          ]
+        },
+        {
+          "contentName": "source.sql.embedded.cfml",
+          "begin": "(\u003e)",
+          "end": "(?=\u003c/(?i:cfquery))",
+          "patterns": [
+            {
+              "include": "#string-double-quoted"
+            },
+            {
+              "include": "#string-single-quoted"
+            },
+            {
+              "include": "#embedded-tags"
+            },
+            {
+              "name": "meta.tag.inline.cf.query-param.cfml",
+              "begin": "(\u003c/?)((?i:(?:cfqueryparam))\\b)",
+              "end": "((?:\\s?/)?\u003e)",
+              "patterns": [
+                {
+                  "include": "#tag-stuff"
+                }
+              ],
+              "beginCaptures": {
+                "1": {
+                  "name": "punctuation.definition.tag.begin.cfml"
+                },
+                "2": {
+                  "name": "entity.name.tag.cf.inline.param.cfml"
+                }
+              },
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.definition.tag.end.cfml"
+                }
+              }
+            },
+            {
+              "include": "#nest-hash"
+            },
+            {
+              "include": "source.sql"
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "meta.tag.block.cf.query.cfml"
+            },
+            "1": {
+              "name": "punctuation.definition.tag.end.cfml"
+            }
+          }
+        }
+      ],
       "captures": {
         "0": {
           "name": "meta.tag.block.cf.query.cfml"
@@ -130,82 +200,20 @@
         "3": {
           "name": "punctuation.definition.tag.end.cfml"
         }
-      },
-      "end": "(</)((?i:cfquery))(>)(?:\\s*\\n)?",
-      "patterns": [
-        {
-          "begin": "(?<=cfquery)\\s",
-          "end": "(?=>)",
-          "name": "meta.tag.block.cf.output.cfml",
-          "patterns": [
-            {
-              "include": "#qry-name-attribute"
-            },
-            {
-              "include": "#tag-stuff"
-            }
-          ]
-        },
-        {
-          "begin": "(>)",
-          "beginCaptures": {
-            "0": {
-              "name": "meta.tag.block.cf.query.cfml"
-            },
-            "1": {
-              "name": "punctuation.definition.tag.end.cfml"
-            }
-          },
-          "contentName": "source.sql.embedded.cfml",
-          "end": "(?=</(?i:cfquery))",
-          "patterns": [
-            {
-              "include": "#string-double-quoted"
-            },
-            {
-              "include": "#string-single-quoted"
-            },
-            {
-              "include": "#embedded-tags"
-            },
-            {
-              "begin": "(</?)((?i:(?:cfqueryparam))\\b)",
-              "beginCaptures": {
-                "1": {
-                  "name": "punctuation.definition.tag.begin.cfml"
-                },
-                "2": {
-                  "name": "entity.name.tag.cf.inline.param.cfml"
-                }
-              },
-              "end": "((?:\\s?/)?>)",
-              "endCaptures": {
-                "1": {
-                  "name": "punctuation.definition.tag.end.cfml"
-                }
-              },
-              "name": "meta.tag.inline.cf.query-param.cfml",
-              "patterns": [
-                {
-                  "include": "#tag-stuff"
-                }
-              ]
-            },
-            {
-              "include": "#nest-hash"
-            },
-            {
-              "include": "source.sql"
-            }
-          ]
-        }
-      ]
+      }
     },
     {
       "include": "#embedded-tags"
     },
     {
-      "begin": "(?x)\n\t\t\t\t(</?)\n\t\t\t\t(?i:\n\t\t\t\t\t(cf((output)|(savecontent)|([\\w\\-_.]+)))\n\t\t\t\t)\n\t\t\t\t\\b\n\t\t\t",
+      "name": "meta.tag.block.cf.other.cfml",
+      "begin": "(?x)\n\t\t\t\t(\u003c/?)\n\t\t\t\t(?i:\n\t\t\t\t\t(cf((output)|(savecontent)|([\\w\\-_.]+)))\n\t\t\t\t)\n\t\t\t\t\\b\n\t\t\t",
+      "end": "(\u003e)",
+      "patterns": [
+        {
+          "include": "#tag-stuff"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.tag.begin.cfml"
@@ -214,21 +222,191 @@
           "name": "entity.name.tag.cf.block.other.cfml"
         }
       },
-      "end": "(>)",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.tag.end.cfml"
         }
-      },
-      "name": "meta.tag.block.cf.other.cfml",
-      "patterns": [
-        {
-          "include": "#tag-stuff"
-        }
-      ]
+      }
     }
   ],
   "repository": {
+    "cfcomments": {
+      "patterns": [
+        {
+          "name": "comment.line.cfml",
+          "match": "\u003c!---.*?---\u003e"
+        },
+        {
+          "name": "comment.block.cfml",
+          "begin": "\u003c!---",
+          "end": "---\u003e",
+          "patterns": [
+            {
+              "include": "#cfcomments"
+            }
+          ],
+          "captures": {
+            "0": {
+              "name": "punctuation.definition.comment.cfml"
+            }
+          }
+        }
+      ]
+    },
+    "cfmail": {
+      "begin": "(?:^\\s+)?(\u003c)((?i:cfmail))\\b(?![^\u003e]*/\u003e)",
+      "end": "(\u003c/)((?i:cfmail))(\u003e)(?:\\s*\\n)?",
+      "patterns": [
+        {
+          "name": "meta.tag.block.cf.mail.cfml",
+          "begin": "(?\u003c=cfmail)\\s",
+          "end": "(?=\u003e)",
+          "patterns": [
+            {
+              "include": "#tag-stuff"
+            }
+          ]
+        },
+        {
+          "contentName": "meta.scope.between-mail-tags.cfml",
+          "begin": "(\u003e)",
+          "end": "(?=\u003c/(?i:cfmail))",
+          "patterns": [
+            {
+              "include": "#nest-hash"
+            },
+            {
+              "include": "text.html.cfm"
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "meta.tag.block.cf.mail.cfml"
+            },
+            "1": {
+              "name": "punctuation.definition.tag.end.cfml"
+            }
+          }
+        }
+      ],
+      "captures": {
+        "0": {
+          "name": "meta.tag.block.cf.mail.cfml"
+        },
+        "1": {
+          "name": "punctuation.definition.tag.begin.cfml"
+        },
+        "2": {
+          "name": "entity.name.tag.cf.mail.cfml"
+        },
+        "3": {
+          "name": "punctuation.definition.tag.end.cfml"
+        }
+      }
+    },
+    "cfoutput": {
+      "begin": "(?:^\\s+)?(\u003c)((?i:cfoutput))\\b(?![^\u003e]*/\u003e)",
+      "end": "(\u003c/)((?i:cfoutput))(\u003e)(?:\\s*\\n)?",
+      "patterns": [
+        {
+          "name": "meta.tag.block.cf.output.cfml",
+          "begin": "(?\u003c=cfoutput)\\s",
+          "end": "(?=\u003e)",
+          "patterns": [
+            {
+              "include": "#tag-stuff"
+            }
+          ]
+        },
+        {
+          "contentName": "meta.scope.between-output-tags.cfml",
+          "begin": "(\u003e)",
+          "end": "(?=\u003c/(?i:cfoutput))",
+          "patterns": [
+            {
+              "include": "#nest-hash"
+            },
+            {
+              "include": "text.html.cfm"
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "meta.tag.block.cf.output.cfml"
+            },
+            "1": {
+              "name": "punctuation.definition.tag.end.cfml"
+            }
+          }
+        }
+      ],
+      "captures": {
+        "0": {
+          "name": "meta.tag.block.cf.output.cfml"
+        },
+        "1": {
+          "name": "punctuation.definition.tag.begin.cfml"
+        },
+        "2": {
+          "name": "entity.name.tag.cf.output.cfml"
+        },
+        "3": {
+          "name": "punctuation.definition.tag.end.cfml"
+        }
+      }
+    },
+    "conditionals": {
+      "patterns": [
+        {
+          "name": "meta.tag.block.cf.conditional.cfml",
+          "contentName": "source.cfscript.embedded.cfml",
+          "begin": "(\u003c/?)((?i:cfif))\\b",
+          "end": "(\u003e)",
+          "patterns": [
+            {
+              "include": "source.cfscript"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.tag.begin.cfml"
+            },
+            "2": {
+              "name": "entity.name.tag.cf.conditional.cfml"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.tag.end.cfml"
+            }
+          }
+        },
+        {
+          "name": "meta.tag.inline.cf.conditional.cfml",
+          "contentName": "source.cfscript.embedded.cfml",
+          "begin": "(\u003c/?)(?i:(cfelseif|cfelse))",
+          "end": "(\u003e)",
+          "patterns": [
+            {
+              "include": "source.cfscript"
+            }
+          ],
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.tag.begin.cfml"
+            },
+            "2": {
+              "name": "entity.name.tag.cf.conditional.cfml"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.tag.end.cfml"
+            }
+          }
+        }
+      ]
+    },
     "embedded-tags": {
       "patterns": [
         {
@@ -251,43 +429,37 @@
         }
       ]
     },
-    "flow-control": {
+    "entities": {
       "patterns": [
         {
-          "begin": "(?x)\n\t\t\t\t\t\t(</?)\n\t\t\t\t\t\t(?i:\n\t\t\t\t\t\t\t(cfloop)|(cfswitch)|(cf(?:default)?case)\n\t\t\t\t\t\t)\n\t\t\t\t\t\t\\b\n\t\t\t\t\t",
-          "beginCaptures": {
+          "name": "constant.character.entity.cfml",
+          "match": "(\u0026)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)",
+          "captures": {
             "1": {
-              "name": "punctuation.definition.tag.begin.cfml"
-            },
-            "2": {
-              "name": "entity.name.tag.cf.flow-control.loop.cfml"
+              "name": "punctuation.definition.entity.cfml"
             },
             "3": {
-              "name": "entity.name.tag.cf.flow-control.switch.cfml"
-            },
-            "4": {
-              "name": "entity.name.tag.cf.flow-control.case.cfml"
+              "name": "punctuation.definition.entity.cfml"
             }
-          },
-          "end": "(>)",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.definition.tag.end.cfml"
-            }
-          },
-          "name": "meta.tag.block.cf.flow-control.cfml",
-          "patterns": [
-            {
-              "include": "#tag-stuff"
-            }
-          ]
+          }
+        },
+        {
+          "name": "invalid.illegal.bad-ampersand.cfml",
+          "match": "\u0026"
         }
       ]
     },
     "exception-handling": {
       "patterns": [
         {
-          "begin": "(?x)\n\t\t\t\t\t\t(</?)\n\t\t\t\t\t\t(?i:\n\t\t\t\t\t\t\t(cftry)|(cfcatch)|(cflock)|(cffinally|cferror|cfrethrow|cfthrow)\n\t\t\t\t\t\t)\n\t\t\t\t\t\t\\b\n\t\t\t\t\t",
+          "name": "meta.tag.block.cf.exceptions.cfml",
+          "begin": "(?x)\n\t\t\t\t\t\t(\u003c/?)\n\t\t\t\t\t\t(?i:\n\t\t\t\t\t\t\t(cftry)|(cfcatch)|(cflock)|(cffinally|cferror|cfrethrow|cfthrow)\n\t\t\t\t\t\t)\n\t\t\t\t\t\t\\b\n\t\t\t\t\t",
+          "end": "(\u003e)",
+          "patterns": [
+            {
+              "include": "#tag-stuff"
+            }
+          ],
           "beginCaptures": {
             "1": {
               "name": "punctuation.definition.tag.begin.cfml"
@@ -305,177 +477,95 @@
               "name": "entity.name.tag.cf.exception.other.cfml"
             }
           },
-          "end": "(>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.tag.end.cfml"
             }
-          },
-          "name": "meta.tag.block.cf.exceptions.cfml",
+          }
+        }
+      ]
+    },
+    "flow-control": {
+      "patterns": [
+        {
+          "name": "meta.tag.block.cf.flow-control.cfml",
+          "begin": "(?x)\n\t\t\t\t\t\t(\u003c/?)\n\t\t\t\t\t\t(?i:\n\t\t\t\t\t\t\t(cfloop)|(cfswitch)|(cf(?:default)?case)\n\t\t\t\t\t\t)\n\t\t\t\t\t\t\\b\n\t\t\t\t\t",
+          "end": "(\u003e)",
           "patterns": [
             {
               "include": "#tag-stuff"
             }
-          ]
-        }
-      ]
-    },
-    "conditionals": {
-      "patterns": [
-        {
-          "begin": "(</?)((?i:cfif))\\b",
+          ],
           "beginCaptures": {
             "1": {
               "name": "punctuation.definition.tag.begin.cfml"
             },
             "2": {
-              "name": "entity.name.tag.cf.conditional.cfml"
+              "name": "entity.name.tag.cf.flow-control.loop.cfml"
+            },
+            "3": {
+              "name": "entity.name.tag.cf.flow-control.switch.cfml"
+            },
+            "4": {
+              "name": "entity.name.tag.cf.flow-control.case.cfml"
             }
           },
-          "end": "(>)",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.tag.end.cfml"
             }
-          },
-          "name": "meta.tag.block.cf.conditional.cfml",
-          "contentName": "source.cfscript.embedded.cfml",
-          "patterns": [
-            {
-              "include": "source.cfscript"
-            }
-          ]
-        },
-        {
-          "begin": "(</?)(?i:(cfelseif|cfelse))",
-          "captures": {
-            "1": {
-              "name": "punctuation.definition.tag.begin.cfml"
-            },
-            "2": {
-              "name": "entity.name.tag.cf.conditional.cfml"
-            }
-          },
-          "end": "(>)",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.definition.tag.end.cfml"
-            }
-          },
-          "name": "meta.tag.inline.cf.conditional.cfml",
-          "contentName": "source.cfscript.embedded.cfml",
-          "patterns": [
-            {
-              "include": "source.cfscript"
-            }
-          ]
-        }
-      ]
-    },
-    "cfoutput": {
-      "begin": "(?:^\\s+)?(<)((?i:cfoutput))\\b(?![^>]*/>)",
-      "captures": {
-        "0": {
-          "name": "meta.tag.block.cf.output.cfml"
-        },
-        "1": {
-          "name": "punctuation.definition.tag.begin.cfml"
-        },
-        "2": {
-          "name": "entity.name.tag.cf.output.cfml"
-        },
-        "3": {
-          "name": "punctuation.definition.tag.end.cfml"
-        }
-      },
-      "end": "(</)((?i:cfoutput))(>)(?:\\s*\\n)?",
-      "patterns": [
-        {
-          "begin": "(?<=cfoutput)\\s",
-          "end": "(?=>)",
-          "name": "meta.tag.block.cf.output.cfml",
-          "patterns": [
-            {
-              "include": "#tag-stuff"
-            }
-          ]
-        },
-        {
-          "begin": "(>)",
-          "beginCaptures": {
-            "0": {
-              "name": "meta.tag.block.cf.output.cfml"
-            },
-            "1": {
-              "name": "punctuation.definition.tag.end.cfml"
-            }
-          },
-          "end": "(?=</(?i:cfoutput))",
-          "contentName": "meta.scope.between-output-tags.cfml",
-          "patterns": [
-            {
-              "include": "#nest-hash"
-            },
-            {
-              "include": "text.html.cfm"
-            }
-          ]
-        }
-      ]
-    },
-    "cfmail": {
-      "begin": "(?:^\\s+)?(<)((?i:cfmail))\\b(?![^>]*/>)",
-      "captures": {
-        "0": {
-          "name": "meta.tag.block.cf.mail.cfml"
-        },
-        "1": {
-          "name": "punctuation.definition.tag.begin.cfml"
-        },
-        "2": {
-          "name": "entity.name.tag.cf.mail.cfml"
-        },
-        "3": {
-          "name": "punctuation.definition.tag.end.cfml"
-        }
-      },
-      "end": "(</)((?i:cfmail))(>)(?:\\s*\\n)?",
-      "patterns": [
-        {
-          "begin": "(?<=cfmail)\\s",
-          "end": "(?=>)",
-          "name": "meta.tag.block.cf.mail.cfml",
-          "patterns": [
-            {
-              "include": "#tag-stuff"
-            }
-          ]
-        },
-        {
-          "begin": "(>)",
-          "beginCaptures": {
-            "0": {
-              "name": "meta.tag.block.cf.mail.cfml"
-            },
-            "1": {
-              "name": "punctuation.definition.tag.end.cfml"
-            }
-          },
-          "end": "(?=</(?i:cfmail))",
-          "contentName": "meta.scope.between-mail-tags.cfml",
-          "patterns": [
-            {
-              "include": "#nest-hash"
-            },
-            {
-              "include": "text.html.cfm"
-            }
-          ]
+          }
         }
       ]
     },
     "func-name-attribute": {
+      "name": "meta.attribute-with-value.name.cfml",
       "begin": "\\b(name)\\b\\s*(=)",
+      "end": "(?\u003c='|\")",
+      "patterns": [
+        {
+          "name": "string.quoted.double.cfml",
+          "contentName": "meta.toc-list.function.cfml",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "include": "#entities"
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.cfml"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.cfml"
+            }
+          }
+        },
+        {
+          "name": "string.quoted.single.cfml",
+          "contentName": "meta.toc-list.function.cfml",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "include": "#entities"
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.cfml"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.cfml"
+            }
+          }
+        }
+      ],
       "captures": {
         "1": {
           "name": "entity.other.attribute-name.cfml"
@@ -483,56 +573,89 @@
         "2": {
           "name": "punctuation.separator.key-value.cfml"
         }
-      },
-      "end": "(?<='|\")",
-      "name": "meta.attribute-with-value.name.cfml",
+      }
+    },
+    "nest-hash": {
       "patterns": [
         {
-          "begin": "\"",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.begin.cfml"
-            }
-          },
-          "contentName": "meta.toc-list.function.cfml",
-          "end": "\"",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.end.cfml"
-            }
-          },
-          "name": "string.quoted.double.cfml",
-          "patterns": [
-            {
-              "include": "#entities"
-            }
-          ]
+          "name": "string.escaped.hash.cfml",
+          "match": "##"
         },
         {
-          "begin": "'",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.begin.cfml"
-            }
-          },
-          "contentName": "meta.toc-list.function.cfml",
-          "end": "'",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.end.cfml"
-            }
-          },
-          "name": "string.quoted.single.cfml",
+          "name": "invalid.illegal.unescaped.hash.cfml",
+          "match": "(?x)\n\t\t\t\t\t\t\t(\\#)\n\t\t\t\t\t\t\t(?!\t\t# zero width negative lookahead assertion\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\t([\\w$]+\t# assertion for plain variables or function names including currency symbol \"$\"\n\t\t\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\t\t\t(\\[.*\\])\t\t\t\t# asserts a match for anything in square brackets\n\t\t\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t\t\t(\\(.*\\))\t\t\t\t# or anything in parens\n\t\t\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t\t\t(\\.[\\w$]+)\t\t\t\t# or zero or more \"dot\" notated variables\n\t\t\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t\t\t(\\s*[\\+\\-\\*\\/\u0026]\\s*[\\w$]+)\t# or simple arithmentic operators + concatenation\n\t\t\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t\t\t(\\s*\u0026\\s*[\"|'].+[\"|']) \t# or concatenation with a quoted string\n\t\t\t\t\t\t\t\t\t\t)*\t\t# asserts preceeding square brackets, parens, dot notated vars or arithmetic zero or more times\n\t\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t(\\(.*\\))\t # asserts a match for anything in parens\n\t\t\t\t\t\t\t\t)\\#\t\t# asserts closing hash\n\t\t\t\t\t\t\t)"
+        },
+        {
+          "name": "meta.name.interpolated.hash.cfml",
+          "contentName": "source.cfscript.embedded.cfml",
+          "begin": "(?x)\n\t\t\t\t\t\t\t(\\#)\n\t\t\t\t\t\t\t(?=\t\t# zero width negative lookahead assertion\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\t([\\w$]+\t# assertion for plain variables or function names including currency symbol \"$\"\n\t\t\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\t\t\t(\\[.*\\])\t\t\t\t# asserts a match for anything in square brackets\n\t\t\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t\t\t(\\(.*\\))\t\t\t\t# or anything in parens\n\t\t\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t\t\t(\\.[\\w$]+)\t\t\t\t# or zero or more \"dot\" notated variables\n\t\t\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t\t\t(\\s*[\\+\\-\\*\\/\u0026]\\s*[\\w$]+)\t# or simple arithmentic operators + concatenation\n\t\t\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t\t\t(\\s*\u0026\\s*[\"|'].+[\"|']) \t# or concatenation with a quoted string\n\t\t\t\t\t\t\t\t\t\t)*\t\t# asserts preceeding square brackets, parens, dot notated vars or arithmetic zero or more times\n\t\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t(\\(.*\\))\t # asserts a match for anything in parens\n\t\t\t\t\t\t\t\t)\\#\t\t# asserts closing hash\n\t\t\t\t\t\t\t)",
+          "end": "(#)",
           "patterns": [
             {
-              "include": "#entities"
+              "include": "source.cfscript"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.hash.begin.cfml"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.hash.end.cfml"
+            }
+          }
         }
       ]
     },
     "qry-name-attribute": {
+      "name": "meta.attribute-with-value.name.cfml",
       "begin": "\\b(name)\\b\\s*(=)",
+      "end": "(?\u003c='|\")",
+      "patterns": [
+        {
+          "name": "string.quoted.double.cfml",
+          "contentName": "meta.toc-list.query.cfml",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "include": "#entities"
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.cfml"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.cfml"
+            }
+          }
+        },
+        {
+          "name": "string.quoted.single.cfml",
+          "contentName": "meta.toc-list.query.name.cfml",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "include": "#entities"
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.cfml"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.cfml"
+            }
+          }
+        }
+      ],
       "captures": {
         "1": {
           "name": "entity.other.attribute-name.cfml"
@@ -540,76 +663,57 @@
         "2": {
           "name": "punctuation.separator.key-value.cfml"
         }
-      },
-      "end": "(?<='|\")",
-      "name": "meta.attribute-with-value.name.cfml",
-      "patterns": [
-        {
-          "begin": "\"",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.begin.cfml"
-            }
-          },
-          "contentName": "meta.toc-list.query.cfml",
-          "end": "\"",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.end.cfml"
-            }
-          },
-          "name": "string.quoted.double.cfml",
-          "patterns": [
-            {
-              "include": "#entities"
-            }
-          ]
-        },
-        {
-          "begin": "'",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.begin.cfml"
-            }
-          },
-          "contentName": "meta.toc-list.query.name.cfml",
-          "end": "'",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.end.cfml"
-            }
-          },
-          "name": "string.quoted.single.cfml",
-          "patterns": [
-            {
-              "include": "#entities"
-            }
-          ]
-        }
-      ]
+      }
     },
-    "cfcomments": {
+    "string-double-quoted": {
+      "name": "string.quoted.double.cfml",
+      "begin": "\"",
+      "end": "\"",
       "patterns": [
         {
-          "match": "<!---.*?--->",
-          "name": "comment.line.cfml"
+          "include": "#nest-hash"
         },
         {
-          "begin": "<!---",
-          "captures": {
-            "0": {
-              "name": "punctuation.definition.comment.cfml"
-            }
-          },
-          "end": "--->",
-          "name": "comment.block.cfml",
-          "patterns": [
-            {
-              "include": "#cfcomments"
-            }
-          ]
+          "include": "#entities"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.cfml"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.cfml"
+        }
+      }
+    },
+    "string-single-quoted": {
+      "name": "string.quoted.single.cfml",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "include": "#nest-hash"
+        },
+        {
+          "include": "#entities"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.cfml"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.cfml"
+        }
+      }
+    },
+    "tag-generic-attribute": {
+      "name": "entity.other.attribute-name.cfml",
+      "match": "\\b([a-zA-Z\\-:]+)"
     },
     "tag-stuff": {
       "patterns": [
@@ -626,111 +730,6 @@
           "include": "#string-single-quoted"
         }
       ]
-    },
-    "tag-generic-attribute": {
-      "match": "\\b([a-zA-Z\\-:]+)",
-      "name": "entity.other.attribute-name.cfml"
-    },
-    "string-double-quoted": {
-      "begin": "\"",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.cfml"
-        }
-      },
-      "end": "\"",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.cfml"
-        }
-      },
-      "name": "string.quoted.double.cfml",
-      "patterns": [
-        {
-          "include": "#nest-hash"
-        },
-        {
-          "include": "#entities"
-        }
-      ]
-    },
-    "string-single-quoted": {
-      "begin": "'",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.cfml"
-        }
-      },
-      "end": "'",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.cfml"
-        }
-      },
-      "name": "string.quoted.single.cfml",
-      "patterns": [
-        {
-          "include": "#nest-hash"
-        },
-        {
-          "include": "#entities"
-        }
-      ]
-    },
-    "entities": {
-      "patterns": [
-        {
-          "captures": {
-            "1": {
-              "name": "punctuation.definition.entity.cfml"
-            },
-            "3": {
-              "name": "punctuation.definition.entity.cfml"
-            }
-          },
-          "match": "(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)",
-          "name": "constant.character.entity.cfml"
-        },
-        {
-          "match": "&",
-          "name": "invalid.illegal.bad-ampersand.cfml"
-        }
-      ]
-    },
-    "nest-hash": {
-      "patterns": [
-        {
-          "match": "##",
-          "name": "string.escaped.hash.cfml"
-        },
-        {
-          "match": "(?x)\n\t\t\t\t\t\t\t(\\#)\n\t\t\t\t\t\t\t(?!\t\t# zero width negative lookahead assertion\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\t([\\w$]+\t# assertion for plain variables or function names including currency symbol \"$\"\n\t\t\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\t\t\t(\\[.*\\])\t\t\t\t# asserts a match for anything in square brackets\n\t\t\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t\t\t(\\(.*\\))\t\t\t\t# or anything in parens\n\t\t\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t\t\t(\\.[\\w$]+)\t\t\t\t# or zero or more \"dot\" notated variables\n\t\t\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t\t\t(\\s*[\\+\\-\\*\\/&]\\s*[\\w$]+)\t# or simple arithmentic operators + concatenation\n\t\t\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t\t\t(\\s*&\\s*[\"|'].+[\"|']) \t# or concatenation with a quoted string\n\t\t\t\t\t\t\t\t\t\t)*\t\t# asserts preceeding square brackets, parens, dot notated vars or arithmetic zero or more times\n\t\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t(\\(.*\\))\t # asserts a match for anything in parens\n\t\t\t\t\t\t\t\t)\\#\t\t# asserts closing hash\n\t\t\t\t\t\t\t)",
-          "name": "invalid.illegal.unescaped.hash.cfml"
-        },
-        {
-          "begin": "(?x)\n\t\t\t\t\t\t\t(\\#)\n\t\t\t\t\t\t\t(?=\t\t# zero width negative lookahead assertion\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\t([\\w$]+\t# assertion for plain variables or function names including currency symbol \"$\"\n\t\t\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t\t\t\t(\\[.*\\])\t\t\t\t# asserts a match for anything in square brackets\n\t\t\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t\t\t(\\(.*\\))\t\t\t\t# or anything in parens\n\t\t\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t\t\t(\\.[\\w$]+)\t\t\t\t# or zero or more \"dot\" notated variables\n\t\t\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t\t\t(\\s*[\\+\\-\\*\\/&]\\s*[\\w$]+)\t# or simple arithmentic operators + concatenation\n\t\t\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t\t\t(\\s*&\\s*[\"|'].+[\"|']) \t# or concatenation with a quoted string\n\t\t\t\t\t\t\t\t\t\t)*\t\t# asserts preceeding square brackets, parens, dot notated vars or arithmetic zero or more times\n\t\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\t\t\t|\n\t\t\t\t\t\t\t\t\t(\\(.*\\))\t # asserts a match for anything in parens\n\t\t\t\t\t\t\t\t)\\#\t\t# asserts closing hash\n\t\t\t\t\t\t\t)",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.definition.hash.begin.cfml"
-            }
-          },
-          "end": "(#)",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.definition.hash.end.cfml"
-            }
-          },
-          "contentName": "source.cfscript.embedded.cfml",
-          "name": "meta.name.interpolated.hash.cfml",
-          "patterns": [
-            {
-              "include": "source.cfscript"
-            }
-          ]
-        }
-      ]
     }
-  },
-  "scopeName": "text.cfml.basic",
-  "uuid": "C48DE6D0-4226-11E1-B86C-0800200C9A66"
+  }
 }

@@ -1,39 +1,27 @@
 {
-  "fileTypes": [
-    "dmf"
-  ],
   "name": "Dream Maker Interface",
+  "scopeName": "source.dmf",
   "patterns": [
     {
-      "match": "((#?\\b[0-9a-fA-F]*)|\\b(([0-9]+(,|x)?[0-9]*)|(\\.[0-9]+)))\\b",
-      "name": "constant.numeric.dm"
+      "name": "constant.numeric.dm",
+      "match": "((#?\\b[0-9a-fA-F]*)|\\b(([0-9]+(,|x)?[0-9]*)|(\\.[0-9]+)))\\b"
     },
     {
-      "match": "(^(macro|menu)|(\\b(window|elem)))\\b",
-      "name": "storage.type.dm"
+      "name": "storage.type.dm",
+      "match": "(^(macro|menu)|(\\b(window|elem)))\\b"
     },
     {
-      "match": "\\b(true|false|none)\\b",
-      "name": "variable.language.dm"
+      "name": "variable.language.dm",
+      "match": "\\b(true|false|none)\\b"
     },
     {
-      "match": "\\b([A-Z_]+)\\b",
-      "name": "constant.language.dm"
+      "name": "constant.language.dm",
+      "match": "\\b([A-Z_]+)\\b"
     },
     {
-      "begin": "\"",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.dm"
-        }
-      },
-      "end": "\"",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.dm"
-        }
-      },
       "name": "string.quoted.double.dm",
+      "begin": "\"",
+      "end": "\"",
       "patterns": [
         {
           "include": "#string_escaped_char"
@@ -41,30 +29,57 @@
         {
           "include": "#string_embedded_expression"
         }
-      ]
-    },
-    {
-      "begin": "'",
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.dm"
         }
       },
-      "end": "'",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.dm"
         }
-      },
+      }
+    },
+    {
       "name": "string.quoted.single.dm",
+      "begin": "'",
+      "end": "'",
       "patterns": [
         {
           "include": "#string_escaped_char"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.dm"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.dm"
+        }
+      }
     },
     {
-      "begin": "(?x)\n    \t\t(?:  ^                                 # begin-of-line\n    \t\t  |\n    \t\t     (?: (?= \\s )           (?<!else|new|return) (?<=\\w)      #  or word + space before name\n    \t\t       | (?= \\s*[A-Za-z_] ) (?<!&&)       (?<=[*&>])   #  or type modifier before name\n    \t\t     )\n    \t\t)\n    \t\t(\\s*) (?!(while|for|do|if|else|switch|catch|enumerate|return|r?iterate)\\s*\\()\n    \t\t(\n    \t\t\t(?: [A-Za-z_][A-Za-z0-9_]*+ | :: )++ |                  # actual name\n    \t\t\t(?: (?<=operator) (?: [-*&<>=+!]+ | \\(\\) | \\[\\] ) )  # if it is a C++ operator\n    \t\t)\n    \t\t \\s*(?=\\()",
+      "name": "meta.function.dm",
+      "begin": "(?x)\n    \t\t(?:  ^                                 # begin-of-line\n    \t\t  |\n    \t\t     (?: (?= \\s )           (?\u003c!else|new|return) (?\u003c=\\w)      #  or word + space before name\n    \t\t       | (?= \\s*[A-Za-z_] ) (?\u003c!\u0026\u0026)       (?\u003c=[*\u0026\u003e])   #  or type modifier before name\n    \t\t     )\n    \t\t)\n    \t\t(\\s*) (?!(while|for|do|if|else|switch|catch|enumerate|return|r?iterate)\\s*\\()\n    \t\t(\n    \t\t\t(?: [A-Za-z_][A-Za-z0-9_]*+ | :: )++ |                  # actual name\n    \t\t\t(?: (?\u003c=operator) (?: [-*\u0026\u003c\u003e=+!]+ | \\(\\) | \\[\\] ) )  # if it is a C++ operator\n    \t\t)\n    \t\t \\s*(?=\\()",
+      "end": "(?\u003c=\\})|(?=#)|(;)?",
+      "patterns": [
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#parens"
+        },
+        {
+          "name": "storage.modifier.dm",
+          "match": "\\bconst\\b"
+        },
+        {
+          "include": "#block"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "punctuation.whitespace.function.leading.dm"
@@ -75,25 +90,7 @@
         "4": {
           "name": "punctuation.definition.parameters.dm"
         }
-      },
-      "end": "(?<=\\})|(?=#)|(;)?",
-      "name": "meta.function.dm",
-      "patterns": [
-        {
-          "include": "#comments"
-        },
-        {
-          "include": "#parens"
-        },
-        {
-          "match": "\\bconst\\b",
-          "name": "storage.modifier.dm"
-        },
-        {
-          "include": "#block"
-        }
-      ]
+      }
     }
-  ],
-  "scopeName": "source.dmf"
+  ]
 }

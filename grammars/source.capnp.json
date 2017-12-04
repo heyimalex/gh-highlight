@@ -1,11 +1,9 @@
 {
-  "fileTypes": [
-    "capnp"
-  ],
-  "keyEquivalent": "^~C",
   "name": "Cap’n Proto",
+  "scopeName": "source.capnp",
   "patterns": [
     {
+      "match": "\\b(struct)(?:\\s+([A-Za-z]+))?",
       "captures": {
         "1": {
           "name": "keyword.other.struct.capnp"
@@ -13,70 +11,70 @@
         "2": {
           "name": "entity.name.type.capnp"
         }
-      },
-      "match": "\\b(struct)(?:\\s+([A-Za-z]+))?"
+      }
     },
     {
-      "match": "\\b(using|import|union|enum|const|interface|annotation)\\b",
-      "name": "keyword.other.capnp"
+      "name": "keyword.other.capnp",
+      "match": "\\b(using|import|union|enum|const|interface|annotation)\\b"
     },
     {
-      "match": ":(Void|Bool|U?Int(8|16|32|64)|Float(32|64)|Text|Data|List\\([.a-zA-Z0-9()]*\\)|Object|union|group)",
-      "name": "storage.type.builtin.capnp"
+      "name": "storage.type.builtin.capnp",
+      "match": ":(Void|Bool|U?Int(8|16|32|64)|Float(32|64)|Text|Data|List\\([.a-zA-Z0-9()]*\\)|Object|union|group)"
     },
     {
-      "match": ":[.a-zA-Z0-9()]+",
-      "name": "storage.type.custom.capnp"
+      "name": "storage.type.custom.capnp",
+      "match": ":[.a-zA-Z0-9()]+"
     },
     {
-      "match": "\\b(true|false|void)\\b",
-      "name": "constant.language.capnp"
+      "name": "constant.language.capnp",
+      "match": "\\b(true|false|void)\\b"
     },
     {
-      "match": "\\b(0x\\h+|\\d+(\\.\\d+)?)\\b",
-      "name": "constant.numeric.capnp"
+      "name": "constant.numeric.capnp",
+      "match": "\\b(0x[0-9A-Fa-f]+|\\d+(\\.\\d+)?)\\b"
     },
     {
-      "match": "@0x\\h+",
-      "name": "constant.numeric.unique-id.capnp"
+      "name": "constant.numeric.unique-id.capnp",
+      "match": "@0x[0-9A-Fa-f]+"
     },
     {
-      "match": "@\\d+",
-      "name": "constant.numeric.ordinal.capnp"
+      "name": "constant.numeric.ordinal.capnp",
+      "match": "@\\d+"
     },
     {
+      "name": "string.quoted.double.capnp",
       "begin": "\"",
       "end": "\"",
-      "name": "string.quoted.double.capnp",
       "patterns": [
         {
-          "match": "\\.",
-          "name": "constant.character.escape.capnp"
+          "name": "constant.character.escape.capnp",
+          "match": "\\."
         }
       ]
     },
     {
       "begin": "(^[ \\t]+)?(?=#)",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.whitespace.comment.leading.capnp"
-        }
-      },
       "end": "(?!\\G)",
       "patterns": [
         {
+          "name": "comment.line.number-sign.capnp",
           "begin": "#",
+          "end": "\\n",
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.comment.capnp"
             }
-          },
-          "end": "\\n",
-          "name": "comment.line.number-sign.capnp"
+          }
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.whitespace.comment.leading.capnp"
+        }
+      }
     },
     {
+      "match": "(\\{)(\\})",
       "captures": {
         "1": {
           "name": "punctuation.section.block.begin.capnp"
@@ -84,10 +82,7 @@
         "2": {
           "name": "punctuation.section.block.end.capnp"
         }
-      },
-      "match": "(\\{)(\\})"
+      }
     }
-  ],
-  "scopeName": "source.capnp",
-  "uuid": "57EA0128-2507-456B-AFF2-BEAFEB5A6B6E"
+  ]
 }

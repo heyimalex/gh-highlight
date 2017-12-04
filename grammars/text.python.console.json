@@ -1,13 +1,9 @@
 {
-  "scopeName": "text.python.console",
   "name": "Python Console",
-  "fileTypes": [
-    "doctest",
-    "pycon"
-  ],
+  "scopeName": "text.python.console",
   "patterns": [
     {
-      "match": "^(>{3}|\\.{3}|In \\[\\d+\\]:) (.+)$",
+      "match": "^(\u003e{3}|\\.{3}|In \\[\\d+\\]:) (.+)$",
       "captures": {
         "1": {
           "name": "punctuation.separator.prompt.python.console"

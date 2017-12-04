@@ -1,9 +1,6 @@
 {
-  "scopeName": "config.xcompose",
   "name": "XCompose",
-  "fileTypes": [
-    "XCompose"
-  ],
+  "scopeName": "config.xcompose",
   "patterns": [
     {
       "include": "#comment"
@@ -31,26 +28,16 @@
     }
   ],
   "repository": {
-    "comment": {
-      "match": "#.*",
-      "name": "comment.block.xcompose"
+    "colon": {
+      "name": "entity.function.xcompose",
+      "match": ":"
     },
-    "multikey": {
-      "match": "(?x) ( < ) ( Multi_key ) ( > )",
-      "captures": {
-        "1": {
-          "name": "entity.function.xcompose"
-        },
-        "2": {
-          "name": "declaror.class.xcompose"
-        },
-        "3": {
-          "name": "entity.function.xcompose"
-        }
-      }
+    "comment": {
+      "name": "comment.block.xcompose",
+      "match": "#.*"
     },
     "key": {
-      "match": "(?x) ( < ) ( \\S+ ) ( > )",
+      "match": "(?x) ( \u003c ) ( \\S+ ) ( \u003e )",
       "captures": {
         "1": {
           "name": "entity.function.xcompose"
@@ -63,21 +50,31 @@
         }
       }
     },
-    "quoted": {
-      "match": "\".*\"",
-      "name": "string.quoted.double.xcompose"
-    },
-    "colon": {
-      "match": ":",
-      "name": "entity.function.xcompose"
-    },
     "keyword": {
-      "match": "\binclude\b",
-      "name": "entity.function.xcompose"
+      "name": "entity.function.xcompose",
+      "match": "\u0008include\u0008"
+    },
+    "multikey": {
+      "match": "(?x) ( \u003c ) ( Multi_key ) ( \u003e )",
+      "captures": {
+        "1": {
+          "name": "entity.function.xcompose"
+        },
+        "2": {
+          "name": "declaror.class.xcompose"
+        },
+        "3": {
+          "name": "entity.function.xcompose"
+        }
+      }
+    },
+    "quoted": {
+      "name": "string.quoted.double.xcompose",
+      "match": "\".*\""
     },
     "unicode": {
-      "match": "U[0-9A-Fa-f]+",
-      "name": "storage.modifier.unicode.xcompose"
+      "name": "storage.modifier.unicode.xcompose",
+      "match": "U[0-9A-Fa-f]+"
     }
   }
 }

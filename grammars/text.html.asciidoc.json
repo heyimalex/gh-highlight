@@ -1,15 +1,6 @@
 {
-  "comment": "\n\t\tA very early hack. Mostly ripped from other syntaxes.\n\t\tOnly the very basic stuff is working.\n\t",
-  "fileTypes": [
-    "asc",
-    "ad",
-    "adoc",
-    "asciidoc"
-  ],
-  "foldingStartMarker": "(?x)\n\t\t(([/+-.*_=]){4,}\n\t\t|<!--(?!.*-->)\n\t\t)",
-  "foldingStopMarker": "(?x)\n\t\t(([/+-.*_=]){4,}\n\t\t|^\\s*-->\n\t\t)",
-  "keyEquivalent": "^~A",
   "name": "AsciiDoc",
+  "scopeName": "text.html.asciidoc",
   "patterns": [
     {
       "include": "#heading_inline"
@@ -21,23 +12,23 @@
       "include": "#heading-blockattr"
     },
     {
+      "name": "comment.block.passthrough.macro.doubledollar.asciidoc",
       "begin": "\\$\\$(?!\\$)",
-      "end": "\\$\\$(?!\\$)",
-      "name": "comment.block.passthrough.macro.doubledollar.asciidoc"
+      "end": "\\$\\$(?!\\$)"
     },
     {
+      "name": "comment.block.passthrough.macro.tripeplus.asciidoc",
       "begin": "\\+\\+\\+(?!\\+)",
-      "end": "\\+\\+\\+(?!\\+)",
-      "name": "comment.block.passthrough.macro.tripeplus.asciidoc"
+      "end": "\\+\\+\\+(?!\\+)"
     },
     {
-      "match": "(//).*$\\n?",
-      "name": "comment.line.double-slash.asciidoc"
+      "name": "comment.line.double-slash.asciidoc",
+      "match": "(//).*$\\n?"
     },
     {
-      "begin": "(?x)^\n\t\t\t\t(?=\t([/+-.*_=]{4,})\\s*$\n\t\t\t\t|\t([ \\t]{1,})\n\t\t\t\t|\t[=]{1,6}\\s*+\n\t\t\t\t|\t[ ]{0,3}(?<marker>[-*_])([ ]{0,2}\\k<marker>){2,}[ \\t]*+$\n\t\t\t\t)",
-      "end": "(?x)^\n\t\t\t\t(?!\t\\1\n\t\t\t\t|\t([ \\t]{1,})\n\t\t\t\t|\t[=]{1,6}\\s*+\n\t\t\t\t|\t[ ]{0,3}(?<marker>[-*_])([ ]{0,2}\\k<marker>){2,}[ \\t]*+$\n\t\t\t\t)",
       "name": "meta.block-level.asciidoc",
+      "begin": "(?x)^\n\t\t\t\t(?=\t([/+-.*_=]{4,})\\s*$\n\t\t\t\t|\t([ \\t]{1,})\n\t\t\t\t|\t[=]{1,6}\\s*+\n\t\t\t\t|\t[ ]{0,3}(?\u003cmarker\u003e[-*_])([ ]{0,2}\\k\u003cmarker\u003e){2,}[ \\t]*+$\n\t\t\t\t)",
+      "end": "(?x)^\n\t\t\t\t(?!\t\\1\n\t\t\t\t|\t([ \\t]{1,})\n\t\t\t\t|\t[=]{1,6}\\s*+\n\t\t\t\t|\t[ ]{0,3}(?\u003cmarker\u003e[-*_])([ ]{0,2}\\k\u003cmarker\u003e){2,}[ \\t]*+$\n\t\t\t\t)",
       "patterns": [
         {
           "include": "#block_quote"
@@ -57,50 +48,49 @@
       ]
     },
     {
-      "begin": "^[ ]{0,3}([*+-])(?=\\s)",
-      "captures": {
-        "1": {
-          "name": "punctuation.definition.list_item.asciidoc"
-        }
-      },
-      "end": "^(?=\\S)",
       "name": "markup.list.unnumbered.asciidoc",
+      "begin": "^[ ]{0,3}([*+-])(?=\\s)",
+      "end": "^(?=\\S)",
       "patterns": [
         {
           "include": "#list-paragraph"
         }
-      ]
-    },
-    {
-      "begin": "^[ ]{0,3}[0-9]+(\\.)(?=\\s)",
+      ],
       "captures": {
         "1": {
           "name": "punctuation.definition.list_item.asciidoc"
         }
-      },
-      "end": "^(?=\\S)",
+      }
+    },
+    {
       "name": "markup.list.numbered.asciidoc",
+      "begin": "^[ ]{0,3}[0-9]+(\\.)(?=\\s)",
+      "end": "^(?=\\S)",
       "patterns": [
         {
           "include": "#list-paragraph"
         }
-      ]
+      ],
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.list_item.asciidoc"
+        }
+      }
     },
     {
+      "name": "comment.block.asciidoc",
       "begin": "^([/+-.*_=]){4,}\\s*$",
-      "end": "^\\1{4,}\\s*$",
-      "name": "comment.block.asciidoc"
+      "end": "^\\1{4,}\\s*$"
     },
     {
+      "name": "meta.disable-asciidoc",
       "begin": "^([/+.]){4,}\\s*$",
-      "comment": "\n\t\t\t\tasciidoc formatting is disabled inside certain blocks.\n\t\t\t",
-      "end": "^[/+.]{4,}\\s*$",
-      "name": "meta.disable-asciidoc"
+      "end": "^[/+.]{4,}\\s*$"
     },
     {
-      "begin": "^(?=\\S)(?![=-]{3,}(?=$))(?!\\.\\S+)",
-      "end": "^(?:\\s*$|(?=[ ]{0,3}>.))|(?=[ \\t]*\\n)(?<=^===|^====|=====|^---|^----|-----)[ \\t]*\\n",
       "name": "meta.paragraph.asciidoc",
+      "begin": "^(?=\\S)(?![=-]{3,}(?=$))(?!\\.\\S+)",
+      "end": "^(?:\\s*$|(?=[ ]{0,3}\u003e.))|(?=[ \\t]*\\n)(?\u003c=^===|^====|=====|^---|^----|-----)[ \\t]*\\n",
       "patterns": [
         {
           "include": "#inline"
@@ -109,131 +99,130 @@
           "include": "text.html.basic"
         },
         {
-          "captures": {
-            "1": {
-              "name": "punctuation.definition.heading.asciidoc"
-            }
-          },
+          "name": "markup.heading.0.asciidoc",
           "match": "^(={3,})(?=[ \\t]*$)",
-          "name": "markup.heading.0.asciidoc"
-        },
-        {
           "captures": {
             "1": {
               "name": "punctuation.definition.heading.asciidoc"
             }
-          },
+          }
+        },
+        {
+          "name": "markup.heading.1.asciidoc",
           "match": "^(-{3,})(?=[ \\t]*$)",
-          "name": "markup.heading.1.asciidoc"
-        },
-        {
           "captures": {
             "1": {
               "name": "punctuation.definition.heading.asciidoc"
             }
-          },
+          }
+        },
+        {
+          "name": "markup.heading.2.asciidoc",
           "match": "^(~{3,})(?=[ \\t]*$)",
-          "name": "markup.heading.2.asciidoc"
-        },
-        {
           "captures": {
             "1": {
               "name": "punctuation.definition.heading.asciidoc"
             }
-          },
+          }
+        },
+        {
+          "name": "markup.heading.3.asciidoc",
           "match": "^(\\^{3,})(?=[ \\t]*$)",
-          "name": "markup.heading.3.asciidoc"
-        },
-        {
           "captures": {
             "1": {
               "name": "punctuation.definition.heading.asciidoc"
             }
-          },
+          }
+        },
+        {
+          "name": "markup.heading.4.asciidoc",
           "match": "^(\\+{3,})(?=[ \\t]*$)",
-          "name": "markup.heading.4.asciidoc"
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.heading.asciidoc"
+            }
+          }
         }
       ]
     }
   ],
   "repository": {
     "attribute-entry": {
-      "match": "^:[-_. A-Za-z0-9]+:\\s*(.*)\\s*$",
-      "name": "variable.other"
+      "name": "variable.other",
+      "match": "^:[-_. A-Za-z0-9]+:\\s*(.*)\\s*$"
     },
     "attribute-reference": {
-      "match": "{[-_. A-Za-z0-9]+}",
-      "name": "variable.other"
+      "name": "variable.other",
+      "match": "{[-_. A-Za-z0-9]+}"
     },
     "attribute-reference-predefined": {
-      "match": "{(?i:amp|asciidoc-dir|asciidoc-file|asciidoc-version|author|authored|authorinitials|backend-docbook|backend-xhtml11|backend-html4|docbook-article|xhtml11-article|html4-article|docbook-book|xhtml11-book|html4-book|docbook-manpage|xhtml11-manpage|html4-manpage|backend|backslash|basebackend|brvbar|date|docdate|doctime|docname|docfile|docdir|doctitle|doctype-article|doctype-book|doctype-manpage|doctype|email|empty|encoding|filetype|firstname|gt|id|indir|infile|lastname|level|listindex|localdate|localtime|lt|manname|manpurpose|mantitle|manvolnum|middlename|nbsp|outdir|outfile|reftext|revision|sectnum|showcomments|title|two_colons|two_semicolons|user-dir|verbose)}",
-      "name": "support.variable"
+      "name": "support.variable",
+      "match": "{(?i:amp|asciidoc-dir|asciidoc-file|asciidoc-version|author|authored|authorinitials|backend-docbook|backend-xhtml11|backend-html4|docbook-article|xhtml11-article|html4-article|docbook-book|xhtml11-book|html4-book|docbook-manpage|xhtml11-manpage|html4-manpage|backend|backslash|basebackend|brvbar|date|docdate|doctime|docname|docfile|docdir|doctitle|doctype-article|doctype-book|doctype-manpage|doctype|email|empty|encoding|filetype|firstname|gt|id|indir|infile|lastname|level|listindex|localdate|localtime|lt|manname|manpurpose|mantitle|manvolnum|middlename|nbsp|outdir|outfile|reftext|revision|sectnum|showcomments|title|two_colons|two_semicolons|user-dir|verbose)}"
     },
     "block_quote": {
+      "name": "comment.block.asciidoc",
       "begin": "^([/+-.*_=]){4,}\\s*$",
-      "end": "^\\1{4,}\\s*$",
-      "name": "comment.block.asciidoc"
+      "end": "^\\1{4,}\\s*$"
     },
     "block_raw": {
-      "match": "\\G([ ]{4}|\\t).*$\\n?",
-      "name": "markup.raw.block.asciidoc"
+      "name": "markup.raw.block.asciidoc",
+      "match": "\\G([ ]{4}|\\t).*$\\n?"
     },
     "bracket": {
-      "comment": "\n\t\t\t\tasciidoc will convert this for us. We match it so that the\n\t\t\t\tHTML grammar will not mark it up as invalid.\n\t\t\t",
-      "match": "<(?![a-z/?\\$!])",
-      "name": "meta.other.valid-bracket.asciidoc"
+      "name": "meta.other.valid-bracket.asciidoc",
+      "match": "\u003c(?![a-z/?\\$!])"
     },
     "character-replacements": {
-      "match": "\\(C\\)|\\(R\\)|\\(TM\\)|--(?!-)|\\.\\.\\.(?!\\.)|->|<-|=>|<=",
-      "name": "constant.character.asciidoc"
+      "name": "constant.character.asciidoc",
+      "match": "\\(C\\)|\\(R\\)|\\(TM\\)|--(?!-)|\\.\\.\\.(?!\\.)|-\u003e|\u003c-|=\u003e|\u003c="
     },
     "escape": {
-      "match": "\\\\[-`*_#+.!(){}\\[\\]\\\\>:]",
-      "name": "constant.character.escape.asciidoc"
+      "name": "constant.character.escape.asciidoc",
+      "match": "\\\\[-`*_#+.!(){}\\[\\]\\\\\u003e:]"
     },
     "heading": {
-      "captures": {
-        "1": {
-          "name": "punctuation.definition.heading.asciidoc"
-        }
-      },
+      "name": "markup.heading.asciidoc",
       "contentName": "entity.name.section.asciidoc",
       "match": "(?m)^(\\S+)$([=-~^+])+\\s*$",
-      "name": "markup.heading.asciidoc"
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.heading.asciidoc"
+        }
+      }
     },
     "heading-block": {
+      "name": "markup.heading.asciidoc",
+      "match": "^\\.(\\w.*)$",
       "captures": {
         "1": {
           "name": "punctuation.definition.heading.asciidoc"
         }
-      },
-      "match": "^\\.(\\w.*)$",
-      "name": "markup.heading.asciidoc"
+      }
     },
     "heading-blockattr": {
+      "name": "markup.heading.asciidoc",
+      "match": "^\\[\\[?(\\w.*)\\]$",
       "captures": {
         "1": {
           "name": "punctuation.definition.heading.asciidoc"
         }
-      },
-      "match": "^\\[\\[?(\\w.*)\\]$",
-      "name": "markup.heading.asciidoc"
+      }
     },
     "heading_inline": {
-      "begin": "\\G(={1,6})(?!=)\\s*(?=\\S)",
-      "captures": {
-        "1": {
-          "name": "punctuation.definition.heading.asciidoc"
-        }
-      },
-      "contentName": "entity.name.section.asciidoc",
-      "end": "\\s*(=*)$\\n?",
       "name": "markup.heading.asciidoc",
+      "contentName": "entity.name.section.asciidoc",
+      "begin": "\\G(={1,6})(?!=)\\s*(?=\\S)",
+      "end": "\\s*(=*)$\\n?",
       "patterns": [
         {
           "include": "#inline"
         }
-      ]
+      ],
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.heading.asciidoc"
+        }
+      }
     },
     "inline": {
       "patterns": [
@@ -336,23 +325,23 @@
       ]
     },
     "line-break": {
-      "match": "(?<=\\S)\\s+\\+$",
-      "name": "constant.character.escape.asciidoc"
+      "name": "constant.character.escape.asciidoc",
+      "match": "(?\u003c=\\S)\\s+\\+$"
     },
     "line-page-break": {
-      "match": "^<{3,}$",
-      "name": "constant.character.escape.asciidoc"
+      "name": "constant.character.escape.asciidoc",
+      "match": "^\u003c{3,}$"
     },
     "line-ruler": {
-      "match": "^'{3,}$",
-      "name": "constant.character.escape.asciidoc"
+      "name": "constant.character.escape.asciidoc",
+      "match": "^'{3,}$"
     },
     "list-paragraph": {
       "patterns": [
         {
+          "name": "meta.paragraph.list.asciidoc",
           "begin": "\\G\\s+(?=\\S)",
           "end": "^\\s*$",
-          "name": "meta.paragraph.list.asciidoc",
           "patterns": [
             {
               "include": "#inline"
@@ -362,14 +351,16 @@
       ]
     },
     "passthrough-macro-doubledollar-inline": {
-      "match": "(?:\\[.*\\])?\\$\\$(?!\\$).+\\$\\$(?!\\$)",
-      "name": "comment.block.passthrough.asciidoc"
+      "name": "comment.block.passthrough.asciidoc",
+      "match": "(?:\\[.*\\])?\\$\\$(?!\\$).+\\$\\$(?!\\$)"
     },
     "passthrough-macro-trippleplus-inline": {
-      "match": "(?:\\[.*\\])?\\+\\+\\+(?!\\+).+\\+\\+\\+(?!\\+)",
-      "name": "comment.block.passthrough.asciidoc"
+      "name": "comment.block.passthrough.asciidoc",
+      "match": "(?:\\[.*\\])?\\+\\+\\+(?!\\+).+\\+\\+\\+(?!\\+)"
     },
     "raw": {
+      "name": "markup.raw.inline.asciidoc",
+      "match": "(`+)([^`]|(?!(?\u003c!`)\\1(?!`))`)*+(\\1)",
       "captures": {
         "1": {
           "name": "punctuation.definition.raw.asciidoc"
@@ -377,116 +368,111 @@
         "3": {
           "name": "punctuation.definition.raw.asciidoc"
         }
-      },
-      "match": "(`+)([^`]|(?!(?<!`)\\1(?!`))`)*+(\\1)",
-      "name": "markup.raw.inline.asciidoc"
+      }
     },
     "separator": {
-      "match": "\\G[ ]{0,3}([-*_])([ ]{0,2}\\1){2,}[ \\t]*$\\n?",
-      "name": "meta.separator.asciidoc"
+      "name": "meta.separator.asciidoc",
+      "match": "\\G[ ]{0,3}([-*_])([ ]{0,2}\\1){2,}[ \\t]*$\\n?"
     },
     "text-anchor": {
-      "match": "(?:\\[\\[.*?\\]\\])|(?:\\banchor:[^\\[\\s]+(?:\\[.*?\\])?)",
-      "name": "markup.underline.link.anchor.asciidoc"
+      "name": "markup.underline.link.anchor.asciidoc",
+      "match": "(?:\\[\\[.*?\\]\\])|(?:\\banchor:[^\\[\\s]+(?:\\[.*?\\])?)"
     },
     "text-bold": {
-      "begin": "(?<!\\w)(\\*)(?=\\S)",
+      "name": "markup.bold.asciidoc",
+      "begin": "(?\u003c!\\w)(\\*)(?=\\S)",
+      "end": "(?\u003c=\\S)(\\1)(?!\\w)",
       "captures": {
         "1": {
           "name": "punctuation.definition.bold.asciidoc"
         }
-      },
-      "end": "(?<=\\S)(\\1)(?!\\w)",
-      "name": "markup.bold.asciidoc"
+      }
     },
     "text-bold-unconstrained": {
+      "name": "markup.bold.asciidoc",
       "begin": "(\\*\\*)(?=\\S)",
+      "end": "(?\u003c=\\S)(\\1)",
       "captures": {
         "1": {
           "name": "punctuation.definition.bold.asciidoc"
         }
-      },
-      "end": "(?<=\\S)(\\1)",
-      "name": "markup.bold.asciidoc"
+      }
     },
     "text-footnote": {
-      "match": "\\bfootnote(?:ref)?:\\[.*?\\]",
-      "name": "string.quoted.single.asciidoc"
+      "name": "string.quoted.single.asciidoc",
+      "match": "\\bfootnote(?:ref)?:\\[.*?\\]"
     },
     "text-image": {
-      "match": "\\b(?:image|link):[^\\[\\s]+(?:\\[.*?\\])?",
-      "name": "markup.underline.link.image.asciidoc"
+      "name": "markup.underline.link.image.asciidoc",
+      "match": "\\b(?:image|link):[^\\[\\s]+(?:\\[.*?\\])?"
     },
     "text-indexterm": {
-      "match": "(?:\\bindexterm2?:\\[.*?\\])|(?:\\(\\(\\(?.*?\\)?\\)\\))",
-      "name": "string.quoted.single.asciidoc"
+      "name": "string.quoted.single.asciidoc",
+      "match": "(?:\\bindexterm2?:\\[.*?\\])|(?:\\(\\(\\(?.*?\\)?\\)\\))"
     },
     "text-italic": {
-      "begin": "(?<!\\w)('|_)(?=\\S)",
+      "name": "markup.italic.asciidoc",
+      "begin": "(?\u003c!\\w)('|_)(?=\\S)",
+      "end": "(?\u003c=\\S)(\\1)((?!\\1)|(?=\\1\\1))(?!\\w)",
       "captures": {
         "1": {
           "name": "punctuation.definition.italic.asciidoc"
         }
-      },
-      "end": "(?<=\\S)(\\1)((?!\\1)|(?=\\1\\1))(?!\\w)",
-      "name": "markup.italic.asciidoc"
+      }
     },
     "text-italic-unconstrained": {
+      "name": "markup.italic.asciidoc",
       "begin": "(__)(?=\\S)",
+      "end": "(?\u003c=\\S)(\\1)",
       "captures": {
         "1": {
           "name": "punctuation.definition.italic.asciidoc"
         }
-      },
-      "end": "(?<=\\S)(\\1)",
-      "name": "markup.italic.asciidoc"
+      }
     },
     "text-link": {
-      "match": "\\b(?:http|mailto):[^\\[\\s]+(?:\\[.*?\\])?",
-      "name": "markup.underline.link.inet.asciidoc"
+      "name": "markup.underline.link.inet.asciidoc",
+      "match": "\\b(?:http|mailto):[^\\[\\s]+(?:\\[.*?\\])?"
     },
     "text-macro": {
-      "match": "\\S+::[^\\[\\s]+(?:\\[.*?\\])?",
-      "name": "string.quoted.single.asciidoc"
+      "name": "string.quoted.single.asciidoc",
+      "match": "\\S+::[^\\[\\s]+(?:\\[.*?\\])?"
     },
     "text-mail-link": {
-      "match": "\\b[^@\\s]+@[^@\\s]+\\b",
-      "name": "markup.underline.link.email.asciidoc"
+      "name": "markup.underline.link.email.asciidoc",
+      "match": "\\b[^@\\s]+@[^@\\s]+\\b"
     },
     "text-monospace": {
-      "match": "(?<!\\w)([\\+`]).*(\\1)(?!\\w)",
-      "name": "string.interpolated.asciidoc"
+      "name": "string.interpolated.asciidoc",
+      "match": "(?\u003c!\\w)([\\+`]).*(\\1)(?!\\w)"
     },
     "text-monospace-unconstrained": {
-      "match": "(\\+\\+).*(\\1)",
-      "name": "string.interpolated.asciidoc"
+      "name": "string.interpolated.asciidoc",
+      "match": "(\\+\\+).*(\\1)"
     },
     "text-quote-double": {
-      "match": "(?<!\\w)(?:\\[.*\\])?``(?!`).*''(?!')(?!\\w)",
-      "name": "string.quoted.double.asciidoc"
+      "name": "string.quoted.double.asciidoc",
+      "match": "(?\u003c!\\w)(?:\\[.*\\])?``(?!`).*''(?!')(?!\\w)"
     },
     "text-quote-other": {
-      "match": "(?<!\\w)(?:\\[.*\\])?([~^]).*(\\1)(?!\\w)",
-      "name": "string.quoted.single.asciidoc"
+      "name": "string.quoted.single.asciidoc",
+      "match": "(?\u003c!\\w)(?:\\[.*\\])?([~^]).*(\\1)(?!\\w)"
     },
     "text-quote-single": {
-      "comment": "TODO: Sub- and Superscript are really unconstrained",
-      "match": "(?<!\\w)(?:\\[.*\\])?`(?!`).*'(?!')(?!\\w)",
-      "name": "string.quoted.single.asciidoc"
+      "name": "string.quoted.single.asciidoc",
+      "match": "(?\u003c!\\w)(?:\\[.*\\])?`(?!`).*'(?!')(?!\\w)"
     },
     "text-unquoted": {
-      "match": "(?<!\\w)(#).*(\\1)(?!\\w)",
-      "name": "string.unquoted.asciidoc"
+      "name": "string.unquoted.asciidoc",
+      "match": "(?\u003c!\\w)(#).*(\\1)(?!\\w)"
     },
     "text-unquoted-unconstrained": {
-      "match": "(##).*(\\1)",
-      "name": "string.unquoted.asciidoc"
+      "name": "string.unquoted.asciidoc",
+      "match": "(##).*(\\1)"
     },
     "text-xref": {
-      "match": "(?:<<.*?>>)|(?:\\bxref:[^\\[\\s]+(?:\\[.*?\\])?)",
-      "name": "markup.underline.link.xref.asciidoc"
+      "name": "markup.underline.link.xref.asciidoc",
+      "match": "(?:\u003c\u003c.*?\u003e\u003e)|(?:\\bxref:[^\\[\\s]+(?:\\[.*?\\])?)"
     }
-  },
-  "scopeName": "text.html.asciidoc",
-  "uuid": "090F38B8-2CEB-4956-A627-E24C7AA16ED6"
+  }
 }

@@ -1,13 +1,9 @@
 {
-  "fileTypes": [
-
-  ],
-  "firstLineMatch": "^#!py",
   "name": "Salt pydsl (Python)",
+  "scopeName": "source.python.salt",
   "patterns": [
     {
       "include": "source.python"
     }
-  ],
-  "scopeName": "source.python.salt"
+  ]
 }

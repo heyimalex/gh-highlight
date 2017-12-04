@@ -1,17 +1,22 @@
 {
-  "fileTypes": [
-    "ebnf"
-  ],
-  "foldingStartMarker": "\\(\\*",
-  "foldingStopMarker": "\\*\\)",
-  "keyEquivalent": "^~E",
   "name": "EBNF",
+  "scopeName": "source.ebnf",
   "patterns": [
     {
       "include": "#comment"
     },
     {
+      "name": "meta.syntax-rule.ebnf",
       "begin": "\\s*(\\b(?:\\w|\\s|[\\-_0-9])+\\b)\\s*(=)",
+      "end": ";",
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#subrules"
+        }
+      ],
       "captures": {
         "1": {
           "name": "entity.name.function.ebnf"
@@ -20,60 +25,50 @@
           "name": "keyword.operator.definition.ebnf"
         }
       },
-      "end": ";",
       "endCaptures": {
         "0": {
           "name": "punctuation.terminator.syntax-rule.ebnf"
         }
-      },
-      "name": "meta.syntax-rule.ebnf",
-      "patterns": [
-        {
-          "include": "#comment"
-        },
-        {
-          "include": "#subrules"
-        }
-      ]
+      }
     }
   ],
   "repository": {
     "comment": {
+      "name": "comment.block.ebnf",
       "begin": "\\(\\*(?!\\))",
-      "end": "\\*\\)",
-      "name": "comment.block.ebnf"
+      "end": "\\*\\)"
     },
     "double-quote-string": {
+      "name": "string.quoted.double.ebnf",
       "begin": "\"",
-      "end": "\"",
-      "name": "string.quoted.double.ebnf"
+      "end": "\""
     },
     "group": {
       "begin": "\\(",
+      "end": "\\)",
+      "patterns": [
+        {
+          "include": "#subrules"
+        }
+      ],
       "beginCaptures": {
         "0": {
           "name": "keyword.other.group.begin.ebnf"
         }
       },
-      "end": "\\)",
       "endCaptures": {
         "0": {
           "name": "keyword.other.group.end.ebnf"
         }
-      },
-      "patterns": [
-        {
-          "include": "#subrules"
-        }
-      ]
+      }
     },
     "invalid": {
-      "match": "\\(\\s*[*:/]\\s*\\)",
-      "name": "invalid.illegal.ebnf"
+      "name": "invalid.illegal.ebnf",
+      "match": "\\(\\s*[*:/]\\s*\\)"
     },
     "non-terminal": {
-      "match": "\\w[\\w\\-_0-9]*\\w",
-      "name": "variable.other.non-terminal.ebnf"
+      "name": "variable.other.non-terminal.ebnf",
+      "match": "\\w[\\w\\-_0-9]*\\w"
     },
     "operator": {
       "patterns": [
@@ -89,56 +84,57 @@
       ]
     },
     "operator-alternative": {
-      "match": "\\|",
-      "name": "keyword.operator.alternative.ebnf"
+      "name": "keyword.operator.alternative.ebnf",
+      "match": "\\|"
     },
     "operator-concatenation": {
-      "match": ",",
-      "name": "keyword.operator.concatenation.ebnf"
+      "name": "keyword.operator.concatenation.ebnf",
+      "match": ","
     },
     "operator-exception": {
-      "match": "-",
-      "name": "keyword.operator.exception.ebnf"
+      "name": "keyword.operator.exception.ebnf",
+      "match": "-"
     },
     "optional": {
       "begin": "\\[",
+      "end": "\\]",
+      "patterns": [
+        {
+          "include": "#subrules"
+        }
+      ],
       "beginCaptures": {
         "0": {
           "name": "keyword.other.optional.begin.ebnf"
         }
       },
-      "end": "\\]",
       "endCaptures": {
         "0": {
           "name": "keyword.other.optional.end.ebnf"
         }
-      },
+      }
+    },
+    "repetition": {
+      "begin": "{",
+      "end": "}",
       "patterns": [
         {
           "include": "#subrules"
         }
-      ]
-    },
-    "repetition": {
-      "begin": "{",
+      ],
       "beginCaptures": {
         "0": {
           "name": "keyword.other.repetition.begin.ebnf"
         }
       },
-      "end": "}",
       "endCaptures": {
         "0": {
           "name": "keyword.other.repetition.end.ebnf"
         }
-      },
-      "patterns": [
-        {
-          "include": "#subrules"
-        }
-      ]
+      }
     },
     "repetition-numbered": {
+      "match": "(\\d+)\\s*(\\*)",
       "captures": {
         "1": {
           "name": "constant.numeric.integer.ebnf"
@@ -146,28 +142,27 @@
         "2": {
           "name": "keyword.operator.repetition.ebnf"
         }
-      },
-      "match": "(\\d+)\\s*(\\*)"
+      }
     },
     "single-quote-string": {
+      "name": "string.quoted.single.ebnf",
       "begin": "'",
-      "end": "'",
-      "name": "string.quoted.single.ebnf"
+      "end": "'"
     },
     "special-sequence": {
+      "name": "entity.other.attribute-name.ebnf",
       "begin": "\\?",
+      "end": "\\?",
       "beginCaptures": {
         "0": {
           "name": "keyword.other.special-sequence.begin.ebnf"
         }
       },
-      "end": "\\?",
       "endCaptures": {
         "0": {
           "name": "keyword.other.special-sequence.end.ebnf"
         }
-      },
-      "name": "entity.other.attribute-name.ebnf"
+      }
     },
     "subrules": {
       "patterns": [
@@ -203,7 +198,5 @@
         }
       ]
     }
-  },
-  "scopeName": "source.ebnf",
-  "uuid": "D9954069-097B-4361-818D-EF4986D442E7"
+  }
 }

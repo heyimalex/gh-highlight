@@ -1,11 +1,6 @@
 {
-  "fileTypes": [
-    "mm",
-    "M",
-    "h"
-  ],
-  "keyEquivalent": "^~O",
   "name": "Objective-C++",
+  "scopeName": "source.objc++",
   "patterns": [
     {
       "include": "source.c++"
@@ -13,7 +8,5 @@
     {
       "include": "source.objc"
     }
-  ],
-  "scopeName": "source.objc++",
-  "uuid": "FDAB1813-6B1C-11D9-BCAC-000D93589AF6"
+  ]
 }

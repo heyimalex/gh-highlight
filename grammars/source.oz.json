@@ -1,50 +1,47 @@
 {
-  "fileTypes": [
-    "oz"
-  ],
-  "foldingStartMarker": "/\\*\\*|\\{\\s*$",
-  "foldingStopMarker": "\\*\\*/|^\\s*\\}",
-  "keyEquivalent": "^~O",
   "name": "Oz",
+  "scopeName": "source.oz",
   "patterns": [
     {
-      "match": "(%).*$\\n?",
-      "name": "comment.line.percentage.oz"
+      "name": "comment.line.percentage.oz",
+      "match": "(%).*$\\n?"
     },
     {
+      "name": "comment.block.documentation.oz",
       "begin": "/\\*",
-      "end": "\\*/",
-      "name": "comment.block.documentation.oz"
+      "end": "\\*/"
     },
     {
-      "match": "(?x)\\b(\n                andthen|at|attr|case|catch|class|choice|cond|\n                declare|define|do|dis|else|elsecase|elseif|\n                end|export|feat|finally|for|from|fun|functor|\n                if|in|import|lex|local|lock|meth|mode|not|of|\n                or|orelse|parser|prepare|proc|prod|prop|raise|require|\n                scanner|skip|syn|then|thread|token|try)\\b\n            |\n                ^\\s*\\[\\]",
-      "name": "keyword.control.oz"
+      "name": "keyword.control.oz",
+      "match": "(?x)\\b(\n                andthen|at|attr|case|catch|class|choice|cond|\n                declare|define|do|dis|else|elsecase|elseif|\n                end|export|feat|finally|for|from|fun|functor|\n                if|in|import|lex|local|lock|meth|mode|not|of|\n                or|orelse|parser|prepare|proc|prod|prop|raise|require|\n                scanner|skip|syn|then|thread|token|try)\\b\n            |\n                ^\\s*\\[\\]"
     },
     {
-      "match": "=|:=",
-      "name": "keyword.operator.assignement.oz"
+      "name": "keyword.operator.assignement.oz",
+      "match": "=|:="
     },
     {
-      "match": "<|=<|==|\\\\=|>=|>",
-      "name": "keyword.operator.comparison.oz"
+      "name": "keyword.operator.comparison.oz",
+      "match": "\u003c|=\u003c|==|\\\\=|\u003e=|\u003e"
     },
     {
-      "match": "(\\*|\\+|\\-|/|~)|\\b(div|mod)\\b",
-      "name": "keyword.operator.arithmetic.oz"
+      "name": "keyword.operator.arithmetic.oz",
+      "match": "(\\*|\\+|\\-|/|~)|\\b(div|mod)\\b"
     },
     {
-      "match": "\\b(\\d+)\\b",
-      "name": "constant.numeric.oz"
+      "name": "constant.numeric.oz",
+      "match": "\\b(\\d+)\\b"
     },
     {
-      "match": "\\b(nil|true|false)\\b",
-      "name": "constant.language.oz"
+      "name": "constant.language.oz",
+      "match": "\\b(nil|true|false)\\b"
     },
     {
-      "match": "\\b\\|\\b",
-      "name": "keyword.operator.list.oz"
+      "name": "keyword.operator.list.oz",
+      "match": "\\b\\|\\b"
     },
     {
+      "name": "meta.function.oz",
+      "match": "(?x)\n\t\t\t         \\b(fun|proc)\\b\\s+\n\t\t\t         \\{(\\w+)\n\t\t\t            ((?:\\s\\w+)*)\n\t\t\t         \\}",
       "captures": {
         "1": {
           "name": "keyword.control.proc.oz"
@@ -55,30 +52,26 @@
         "3": {
           "name": "variable.parameter.function.oz"
         }
-      },
-      "match": "(?x)\n\t\t\t         \\b(fun|proc)\\b\\s+\n\t\t\t         \\{(\\w+)\n\t\t\t            ((?:\\s\\w+)*)\n\t\t\t         \\}",
-      "name": "meta.function.oz"
+      }
     },
     {
-      "match": "\\[|\\]",
-      "name": "punctuation.section.array.oz"
+      "name": "punctuation.section.array.oz",
+      "match": "\\[|\\]"
     },
     {
+      "name": "string.quoted.simple.oz",
       "begin": "'",
       "end": "'",
-      "name": "string.quoted.simple.oz",
       "patterns": [
         {
-          "match": "\\\\.",
-          "name": "constant.character.escape.oz"
+          "name": "constant.character.escape.oz",
+          "match": "\\\\."
         }
       ]
     },
     {
-      "match": "(@)[A-Z]\\w*",
-      "name": "variable.other.readwrite.cell.oz"
+      "name": "variable.other.readwrite.cell.oz",
+      "match": "(@)[A-Z]\\w*"
     }
-  ],
-  "scopeName": "source.oz",
-  "uuid": "05EF5C4D-C314-43F7-80A6-7E255931EA2C"
+  ]
 }

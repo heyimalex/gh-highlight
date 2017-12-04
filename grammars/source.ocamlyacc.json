@@ -1,36 +1,31 @@
 {
-  "fileTypes": [
-    "mly"
-  ],
-  "foldingStartMarker": "%{|%%",
-  "foldingStopMarker": "%}|%%",
-  "keyEquivalent": "^~O",
   "name": "OCamlyacc",
+  "scopeName": "source.ocamlyacc",
   "patterns": [
     {
+      "name": "meta.header.ocamlyacc",
       "begin": "(%{)\\s*$",
+      "end": "^\\s*(%})",
+      "patterns": [
+        {
+          "include": "source.ocaml"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "punctuation.section.header.begin.ocamlyacc"
         }
       },
-      "end": "^\\s*(%})",
       "endCaptures": {
         "1": {
           "name": "punctuation.section.header.end.ocamlyacc"
         }
-      },
-      "name": "meta.header.ocamlyacc",
-      "patterns": [
-        {
-          "include": "source.ocaml"
-        }
-      ]
+      }
     },
     {
-      "begin": "(?<=%})\\s*$",
-      "end": "(?:^)(?=%%)",
       "name": "meta.declarations.ocamlyacc",
+      "begin": "(?\u003c=%})\\s*$",
+      "end": "(?:^)(?=%%)",
       "patterns": [
         {
           "include": "#comments"
@@ -41,19 +36,9 @@
       ]
     },
     {
-      "begin": "(%%)\\s*$",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.section.rules.begin.ocamlyacc"
-        }
-      },
-      "end": "^\\s*(%%)",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.rules.end.ocamlyacc"
-        }
-      },
       "name": "meta.rules.ocamlyacc",
+      "begin": "(%%)\\s*$",
+      "end": "^\\s*(%%)",
       "patterns": [
         {
           "include": "#comments"
@@ -61,7 +46,17 @@
         {
           "include": "#rules"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.section.rules.begin.ocamlyacc"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.section.rules.end.ocamlyacc"
+        }
+      }
     },
     {
       "include": "source.ocaml"
@@ -70,17 +65,17 @@
       "include": "#comments"
     },
     {
-      "match": "(’|‘|“|”)",
-      "name": "invalid.illegal.unrecognized-character.ocaml"
+      "name": "invalid.illegal.unrecognized-character.ocaml",
+      "match": "(’|‘|“|”)"
     }
   ],
   "repository": {
     "comments": {
       "patterns": [
         {
+          "name": "comment.block.ocamlyacc",
           "begin": "/\\*",
           "end": "\\*/",
-          "name": "comment.block.ocamlyacc",
           "patterns": [
             {
               "include": "#comments"
@@ -88,13 +83,13 @@
           ]
         },
         {
+          "name": "comment.block.string.quoted.double.ocamlyacc",
           "begin": "(?=[^\\\\])(\")",
           "end": "\"",
-          "name": "comment.block.string.quoted.double.ocamlyacc",
           "patterns": [
             {
-              "match": "\\\\(x[a-fA-F0-9][a-fA-F0-9]|[0-2]\\d\\d|[bnrt'\"\\\\])",
-              "name": "comment.block.string.constant.character.escape.ocamlyacc"
+              "name": "comment.block.string.constant.character.escape.ocamlyacc",
+              "match": "\\\\(x[a-fA-F0-9][a-fA-F0-9]|[0-2]\\d\\d|[bnrt'\"\\\\])"
             }
           ]
         }
@@ -103,7 +98,21 @@
     "declaration-matches": {
       "patterns": [
         {
+          "name": "meta.token.declaration.ocamlyacc",
           "begin": "(%)(token)",
+          "end": "^\\s*($|(^\\s*(?=%)))",
+          "patterns": [
+            {
+              "include": "#symbol-types"
+            },
+            {
+              "name": "entity.name.type.token.ocamlyacc",
+              "match": "[A-Z][A-Za-z0-9_]*"
+            },
+            {
+              "include": "#comments"
+            }
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.decorator.token.ocamlyacc"
@@ -111,24 +120,25 @@
             "2": {
               "name": "keyword.other.token.ocamlyacc"
             }
-          },
-          "end": "^\\s*($|(^\\s*(?=%)))",
-          "name": "meta.token.declaration.ocamlyacc",
+          }
+        },
+        {
+          "name": "meta.token.associativity.ocamlyacc",
+          "begin": "(%)(left|right|nonassoc)",
+          "end": "(^\\s*$)|(^\\s*(?=%))",
           "patterns": [
             {
-              "include": "#symbol-types"
+              "name": "entity.name.type.token.ocamlyacc",
+              "match": "[A-Z][A-Za-z0-9_]*"
             },
             {
-              "match": "[A-Z][A-Za-z0-9_]*",
-              "name": "entity.name.type.token.ocamlyacc"
+              "name": "entity.name.function.non-terminal.reference.ocamlyacc",
+              "match": "[a-z][A-Za-z0-9_]*"
             },
             {
               "include": "#comments"
             }
-          ]
-        },
-        {
-          "begin": "(%)(left|right|nonassoc)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.decorator.token.associativity.ocamlyacc"
@@ -136,25 +146,21 @@
             "2": {
               "name": "keyword.other.token.associativity.ocamlyacc"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.start-symbol.ocamlyacc",
+          "begin": "(%)(start)",
           "end": "(^\\s*$)|(^\\s*(?=%))",
-          "name": "meta.token.associativity.ocamlyacc",
           "patterns": [
             {
-              "match": "[A-Z][A-Za-z0-9_]*",
-              "name": "entity.name.type.token.ocamlyacc"
-            },
-            {
-              "match": "[a-z][A-Za-z0-9_]*",
-              "name": "entity.name.function.non-terminal.reference.ocamlyacc"
+              "name": "entity.name.function.non-terminal.reference.ocamlyacc",
+              "match": "[a-z][A-Za-z0-9_]*"
             },
             {
               "include": "#comments"
             }
-          ]
-        },
-        {
-          "begin": "(%)(start)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.decorator.start-symbol.ocamlyacc"
@@ -162,21 +168,28 @@
             "2": {
               "name": "keyword.other.start-symbol.ocamlyacc"
             }
-          },
-          "end": "(^\\s*$)|(^\\s*(?=%))",
-          "name": "meta.start-symbol.ocamlyacc",
+          }
+        },
+        {
+          "name": "meta.symbol-type.ocamlyacc",
+          "begin": "(%)(type)",
+          "end": "$\\s*(?!%)",
           "patterns": [
             {
-              "match": "[a-z][A-Za-z0-9_]*",
-              "name": "entity.name.function.non-terminal.reference.ocamlyacc"
+              "include": "#symbol-types"
+            },
+            {
+              "name": "entity.name.type.token.reference.ocamlyacc",
+              "match": "[A-Z][A-Za-z0-9_]*"
+            },
+            {
+              "name": "entity.name.function.non-terminal.reference.ocamlyacc",
+              "match": "[a-z][A-Za-z0-9_]*"
             },
             {
               "include": "#comments"
             }
-          ]
-        },
-        {
-          "begin": "(%)(type)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.decorator.symbol-type.ocamlyacc"
@@ -184,31 +197,15 @@
             "2": {
               "name": "keyword.other.symbol-type.ocamlyacc"
             }
-          },
-          "end": "$\\s*(?!%)",
-          "name": "meta.symbol-type.ocamlyacc",
-          "patterns": [
-            {
-              "include": "#symbol-types"
-            },
-            {
-              "match": "[A-Z][A-Za-z0-9_]*",
-              "name": "entity.name.type.token.reference.ocamlyacc"
-            },
-            {
-              "match": "[a-z][A-Za-z0-9_]*",
-              "name": "entity.name.function.non-terminal.reference.ocamlyacc"
-            },
-            {
-              "include": "#comments"
-            }
-          ]
+          }
         }
       ]
     },
     "precs": {
       "patterns": [
         {
+          "name": "meta.precidence.declaration",
+          "match": "(%)(prec)\\s+(([a-z][a-zA-Z0-9_]*)|(([A-Z][a-zA-Z0-9_]*)))",
           "captures": {
             "1": {
               "name": "keyword.other.decorator.precedence.ocamlyacc"
@@ -222,35 +219,28 @@
             "5": {
               "name": "entity.name.type.token.reference.ocamlyacc"
             }
-          },
-          "match": "(%)(prec)\\s+(([a-z][a-zA-Z0-9_]*)|(([A-Z][a-zA-Z0-9_]*)))",
-          "name": "meta.precidence.declaration"
+          }
         }
       ]
     },
     "references": {
       "patterns": [
         {
-          "match": "[a-z][a-zA-Z0-9_]*",
-          "name": "entity.name.function.non-terminal.reference.ocamlyacc"
+          "name": "entity.name.function.non-terminal.reference.ocamlyacc",
+          "match": "[a-z][a-zA-Z0-9_]*"
         },
         {
-          "match": "[A-Z][a-zA-Z0-9_]*",
-          "name": "entity.name.type.token.reference.ocamlyacc"
+          "name": "entity.name.type.token.reference.ocamlyacc",
+          "match": "[A-Z][a-zA-Z0-9_]*"
         }
       ]
     },
     "rule-patterns": {
       "patterns": [
         {
-          "begin": "((?<!\\||:)(\\||:)(?!\\||:))",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.separator.rule.ocamlyacc"
-            }
-          },
-          "end": "\\s*(?=\\||;)",
           "name": "meta.rule-match.ocaml",
+          "begin": "((?\u003c!\\||:)(\\||:)(?!\\||:))",
+          "end": "\\s*(?=\\||;)",
           "patterns": [
             {
               "include": "#precs"
@@ -264,83 +254,86 @@
             {
               "include": "#comments"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.separator.rule.ocamlyacc"
+            }
+          }
         }
       ]
     },
     "rules": {
       "patterns": [
         {
+          "name": "meta.non-terminal.ocamlyacc",
           "begin": "[a-z][a-zA-Z_]*",
+          "end": ";",
+          "patterns": [
+            {
+              "include": "#rule-patterns"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "entity.name.function.non-terminal.ocamlyacc"
             }
           },
-          "end": ";",
           "endCaptures": {
             "0": {
               "name": "punctuation.separator.rule.ocamlyacc"
             }
-          },
-          "name": "meta.non-terminal.ocamlyacc",
-          "patterns": [
-            {
-              "include": "#rule-patterns"
-            }
-          ]
+          }
         }
       ]
     },
     "semantic-actions": {
       "patterns": [
         {
+          "name": "meta.action.semantic.ocamlyacc",
           "begin": "[^\\']({)",
+          "end": "(})",
+          "patterns": [
+            {
+              "include": "source.ocaml"
+            }
+          ],
           "beginCaptures": {
             "1": {
               "name": "punctuation.definition.action.semantic.ocamlyacc"
             }
           },
-          "end": "(})",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.action.semantic.ocamlyacc"
             }
-          },
-          "name": "meta.action.semantic.ocamlyacc",
-          "patterns": [
-            {
-              "include": "source.ocaml"
-            }
-          ]
+          }
         }
       ]
     },
     "symbol-types": {
       "patterns": [
         {
-          "begin": "<",
+          "name": "meta.token.type-declaration.ocamlyacc",
+          "begin": "\u003c",
+          "end": "\u003e",
+          "patterns": [
+            {
+              "include": "source.ocaml"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.type-declaration.begin.ocamlyacc"
             }
           },
-          "end": ">",
           "endCaptures": {
             "0": {
               "name": "punctuation.definition.type-declaration.end.ocamlyacc"
             }
-          },
-          "name": "meta.token.type-declaration.ocamlyacc",
-          "patterns": [
-            {
-              "include": "source.ocaml"
-            }
-          ]
+          }
         }
       ]
     }
-  },
-  "scopeName": "source.ocamlyacc",
-  "uuid": "1B59327E-9B82-4B78-9411-BC02067DBDF9"
+  }
 }

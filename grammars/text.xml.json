@@ -1,34 +1,15 @@
 {
-  "fileTypes": [
-    "xml",
-    "xsd",
-    "tld",
-    "jsp",
-    "pt",
-    "cpt",
-    "dtml",
-    "rss",
-    "opml"
-  ],
-  "keyEquivalent": "^~X",
   "name": "XML",
+  "scopeName": "text.xml",
   "patterns": [
     {
-      "begin": "(<\\?)\\s*([-_a-zA-Z0-9]+)",
-      "captures": {
-        "1": {
-          "name": "punctuation.definition.tag.xml"
-        },
-        "2": {
-          "name": "entity.name.tag.xml"
-        }
-      },
-      "end": "(\\?>)",
       "name": "meta.tag.preprocessor.xml",
+      "begin": "(\u003c\\?)\\s*([-_a-zA-Z0-9]+)",
+      "end": "(\\?\u003e)",
       "patterns": [
         {
-          "match": " ([a-zA-Z-]+)",
-          "name": "entity.other.attribute-name.xml"
+          "name": "entity.other.attribute-name.xml",
+          "match": " ([a-zA-Z-]+)"
         },
         {
           "include": "#doublequotedString"
@@ -36,10 +17,25 @@
         {
           "include": "#singlequotedString"
         }
-      ]
+      ],
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.tag.xml"
+        },
+        "2": {
+          "name": "entity.name.tag.xml"
+        }
+      }
     },
     {
-      "begin": "(<!)(DOCTYPE)\\s+([:a-zA-Z_][:a-zA-Z0-9_.-]*)",
+      "name": "meta.tag.sgml.doctype.xml",
+      "begin": "(\u003c!)(DOCTYPE)\\s+([:a-zA-Z_][:a-zA-Z0-9_.-]*)",
+      "end": "\\s*(\u003e)",
+      "patterns": [
+        {
+          "include": "#internalSubset"
+        }
+      ],
       "captures": {
         "1": {
           "name": "punctuation.definition.tag.xml"
@@ -50,27 +46,27 @@
         "3": {
           "name": "variable.language.documentroot.xml"
         }
-      },
-      "end": "\\s*(>)",
-      "name": "meta.tag.sgml.doctype.xml",
-      "patterns": [
-        {
-          "include": "#internalSubset"
-        }
-      ]
+      }
     },
     {
-      "begin": "<[!%]--",
+      "name": "comment.block.xml",
+      "begin": "\u003c[!%]--",
+      "end": "--%?\u003e",
       "captures": {
         "0": {
           "name": "punctuation.definition.comment.xml"
         }
-      },
-      "end": "--%?>",
-      "name": "comment.block.xml"
+      }
     },
     {
-      "begin": "(<)((?:([-_a-zA-Z0-9]+)((:)))?([-_a-zA-Z0-9:]+))(?=(\\s[^>]*)?></\\2>)",
+      "name": "meta.tag.no-content.xml",
+      "begin": "(\u003c)((?:([-_a-zA-Z0-9]+)((:)))?([-_a-zA-Z0-9:]+))(?=(\\s[^\u003e]*)?\u003e\u003c/\\2\u003e)",
+      "end": "(\u003e(\u003c))/(?:([-_a-zA-Z0-9]+)((:)))?([-_a-zA-Z0-9:]+)(\u003e)",
+      "patterns": [
+        {
+          "include": "#tagStuff"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.tag.xml"
@@ -88,7 +84,6 @@
           "name": "entity.name.tag.localname.xml"
         }
       },
-      "end": "(>(<))/(?:([-_a-zA-Z0-9]+)((:)))?([-_a-zA-Z0-9:]+)(>)",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.tag.xml"
@@ -111,16 +106,17 @@
         "7": {
           "name": "punctuation.definition.tag.xml"
         }
-      },
-      "name": "meta.tag.no-content.xml",
+      }
+    },
+    {
+      "name": "meta.tag.xml",
+      "begin": "(\u003c/?)(?:([-_a-zA-Z0-9]+)((:)))?([-_a-zA-Z0-9:]+)",
+      "end": "(/?\u003e)",
       "patterns": [
         {
           "include": "#tagStuff"
         }
-      ]
-    },
-    {
-      "begin": "(</?)(?:([-_a-zA-Z0-9]+)((:)))?([-_a-zA-Z0-9:]+)",
+      ],
       "captures": {
         "1": {
           "name": "punctuation.definition.tag.xml"
@@ -137,14 +133,7 @@
         "5": {
           "name": "entity.name.tag.localname.xml"
         }
-      },
-      "end": "(/?>)",
-      "name": "meta.tag.xml",
-      "patterns": [
-        {
-          "include": "#tagStuff"
-        }
-      ]
+      }
     },
     {
       "include": "#entity"
@@ -153,65 +142,74 @@
       "include": "#bare-ampersand"
     },
     {
-      "begin": "<%@",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.section.embedded.begin.xml"
-        }
-      },
-      "end": "%>",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.section.embedded.end.xml"
-        }
-      },
       "name": "source.java-props.embedded.xml",
+      "begin": "\u003c%@",
+      "end": "%\u003e",
       "patterns": [
         {
-          "match": "page|include|taglib",
-          "name": "keyword.other.page-props.xml"
+          "name": "keyword.other.page-props.xml",
+          "match": "page|include|taglib"
         }
-      ]
-    },
-    {
-      "begin": "<%[!=]?(?!--)",
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.section.embedded.begin.xml"
         }
       },
-      "end": "(?!--)%>",
       "endCaptures": {
         "0": {
           "name": "punctuation.section.embedded.end.xml"
         }
-      },
+      }
+    },
+    {
       "name": "source.java.embedded.xml",
+      "begin": "\u003c%[!=]?(?!--)",
+      "end": "(?!--)%\u003e",
       "patterns": [
         {
           "include": "source.java"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.section.embedded.begin.xml"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.embedded.end.xml"
+        }
+      }
     },
     {
-      "begin": "<!\\[CDATA\\[",
+      "name": "string.unquoted.cdata.xml",
+      "begin": "\u003c!\\[CDATA\\[",
+      "end": "]]\u003e",
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.xml"
         }
       },
-      "end": "]]>",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.xml"
         }
-      },
-      "name": "string.unquoted.cdata.xml"
+      }
     }
   ],
   "repository": {
     "EntityDecl": {
-      "begin": "(<!)(ENTITY)\\s+(%\\s+)?([:a-zA-Z_][:a-zA-Z0-9_.-]*)(\\s+(?:SYSTEM|PUBLIC)\\s+)?",
+      "begin": "(\u003c!)(ENTITY)\\s+(%\\s+)?([:a-zA-Z_][:a-zA-Z0-9_.-]*)(\\s+(?:SYSTEM|PUBLIC)\\s+)?",
+      "end": "(\u003e)",
+      "patterns": [
+        {
+          "include": "#doublequotedString"
+        },
+        {
+          "include": "#singlequotedString"
+        }
+      ],
       "captures": {
         "1": {
           "name": "punctuation.definition.tag.xml"
@@ -228,35 +226,16 @@
         "5": {
           "name": "keyword.other.entitytype.xml"
         }
-      },
-      "end": "(>)",
-      "patterns": [
-        {
-          "include": "#doublequotedString"
-        },
-        {
-          "include": "#singlequotedString"
-        }
-      ]
+      }
     },
     "bare-ampersand": {
-      "match": "&",
-      "name": "invalid.illegal.bad-ampersand.xml"
+      "name": "invalid.illegal.bad-ampersand.xml",
+      "match": "\u0026"
     },
     "doublequotedString": {
-      "begin": "\"",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.xml"
-        }
-      },
-      "end": "\"",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.xml"
-        }
-      },
       "name": "string.quoted.double.xml",
+      "begin": "\"",
+      "end": "\"",
       "patterns": [
         {
           "include": "#entity"
@@ -264,9 +243,21 @@
         {
           "include": "#bare-ampersand"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.xml"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.xml"
+        }
+      }
     },
     "entity": {
+      "name": "constant.character.entity.xml",
+      "match": "(\u0026)([:a-zA-Z_][:a-zA-Z0-9_.-]*|#[0-9]+|#x[0-9a-fA-F]+)(;)",
       "captures": {
         "1": {
           "name": "punctuation.definition.constant.xml"
@@ -274,19 +265,12 @@
         "3": {
           "name": "punctuation.definition.constant.xml"
         }
-      },
-      "match": "(&)([:a-zA-Z_][:a-zA-Z0-9_.-]*|#[0-9]+|#x[0-9a-fA-F]+)(;)",
-      "name": "constant.character.entity.xml"
+      }
     },
     "internalSubset": {
-      "begin": "(\\[)",
-      "captures": {
-        "1": {
-          "name": "punctuation.definition.constant.xml"
-        }
-      },
-      "end": "(\\])",
       "name": "meta.internalsubset.xml",
+      "begin": "(\\[)",
+      "end": "(\\])",
       "patterns": [
         {
           "include": "#EntityDecl"
@@ -294,9 +278,16 @@
         {
           "include": "#parameterEntity"
         }
-      ]
+      ],
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.constant.xml"
+        }
+      }
     },
     "parameterEntity": {
+      "name": "constant.character.parameter-entity.xml",
+      "match": "(%)([:a-zA-Z_][:a-zA-Z0-9_.-]*)(;)",
       "captures": {
         "1": {
           "name": "punctuation.definition.constant.xml"
@@ -304,24 +295,12 @@
         "3": {
           "name": "punctuation.definition.constant.xml"
         }
-      },
-      "match": "(%)([:a-zA-Z_][:a-zA-Z0-9_.-]*)(;)",
-      "name": "constant.character.parameter-entity.xml"
+      }
     },
     "singlequotedString": {
-      "begin": "'",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.xml"
-        }
-      },
-      "end": "'",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.xml"
-        }
-      },
       "name": "string.quoted.single.xml",
+      "begin": "'",
+      "end": "'",
       "patterns": [
         {
           "include": "#entity"
@@ -329,11 +308,22 @@
         {
           "include": "#bare-ampersand"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.xml"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.xml"
+        }
+      }
     },
     "tagStuff": {
       "patterns": [
         {
+          "match": " (?:([-_a-zA-Z0-9]+)((:)))?([-_a-zA-Z0-9]+)=",
           "captures": {
             "1": {
               "name": "entity.other.attribute-name.namespace.xml"
@@ -347,8 +337,7 @@
             "4": {
               "name": "entity.other.attribute-name.localname.xml"
             }
-          },
-          "match": " (?:([-_a-zA-Z0-9]+)((:)))?([-_a-zA-Z0-9]+)="
+          }
         },
         {
           "include": "#doublequotedString"
@@ -358,7 +347,5 @@
         }
       ]
     }
-  },
-  "scopeName": "text.xml",
-  "uuid": "D3C4E6DA-6B1C-11D9-8CC2-000D93589AF6"
+  }
 }

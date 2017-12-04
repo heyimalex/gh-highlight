@@ -1,10 +1,6 @@
 {
   "name": "Modelica",
   "scopeName": "source.modelica",
-  "fileTypes": [
-    "mo"
-  ],
-  "uuid": "43df6fac-7928-42e2-9890-f5073aaddb14",
   "patterns": [
     {
       "name": "comment.block",
@@ -45,7 +41,7 @@
     },
     {
       "name": "keyword.operator.comparison",
-      "match": "<|<\\=|>|>\\=|\\=\\=|<>"
+      "match": "\u003c|\u003c\\=|\u003e|\u003e\\=|\\=\\=|\u003c\u003e"
     },
     {
       "name": "keyword.operator.arithmetic",

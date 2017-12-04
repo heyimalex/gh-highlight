@@ -1,20 +1,15 @@
 {
   "name": "Cirru",
   "scopeName": "source.cirru",
-  "fileTypes": [
-    "cirru",
-    "cr"
-  ],
-  "uuid": "43471e40-4ccc-45e8-b003-29a2b4f7c191",
   "patterns": [
     {
+      "name": "string.quoted.double.cirru",
       "begin": "\"",
       "end": "\"",
-      "name": "string.quoted.double.cirru",
       "patterns": [
         {
-          "match": "\\\\.",
-          "name": "constant.character.escape.cirru"
+          "name": "constant.character.escape.cirru",
+          "match": "\\\\."
         }
       ]
     },
@@ -32,7 +27,7 @@
     },
     {
       "name": "support.function.cirru",
-      "match": "(?<=\\()[^\\(\\)\\s\\$][^\\(\\)\\s]*"
+      "match": "(?\u003c=\\()[^\\(\\)\\s\\$][^\\(\\)\\s]*"
     },
     {
       "name": "support.function.cirru",

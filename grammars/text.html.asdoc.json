@@ -1,23 +1,11 @@
 {
-  "fileTypes": [
-    "asdoc"
-  ],
   "name": "AsDoc",
+  "scopeName": "text.html.asdoc",
   "patterns": [
     {
-      "begin": "(/\\*\\*)\\s*$",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.definition.comment.begin.asdoc"
-        }
-      },
-      "end": "\\*/",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.comment.asdoc"
-        }
-      },
       "name": "comment.block.documentation.asdoc",
+      "begin": "(/\\*\\*)\\s*$",
+      "end": "\\*/",
       "patterns": [
         {
           "include": "#invalid"
@@ -26,9 +14,9 @@
           "include": "#left-margin"
         },
         {
+          "name": "meta.documentation.comment.asdoc",
           "begin": "\\*\\s*\\w",
           "end": "(?=\\s*\\*\\s*@)|(?=\\s*\\*\\s*/)",
-          "name": "meta.documentation.comment.asdoc",
           "patterns": [
             {
               "include": "#inline"
@@ -36,7 +24,14 @@
           ]
         },
         {
+          "name": "meta.documentation.tag.param.asdoc",
           "begin": "\\*\\s*((\\@)param)",
+          "end": "(?=\\s*\\*\\s*@)|(?=\\s*\\*\\s*/)",
+          "patterns": [
+            {
+              "include": "#inline"
+            }
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.documentation.param.asdoc"
@@ -44,17 +39,17 @@
             "2": {
               "name": "punctuation.definition.keyword.asdoc"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.documentation.tag.return.asdoc",
+          "begin": "\\*\\s*((\\@)return)",
           "end": "(?=\\s*\\*\\s*@)|(?=\\s*\\*\\s*/)",
-          "name": "meta.documentation.tag.param.asdoc",
           "patterns": [
             {
               "include": "#inline"
             }
-          ]
-        },
-        {
-          "begin": "\\*\\s*((\\@)return)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.documentation.return.asdoc"
@@ -62,17 +57,17 @@
             "2": {
               "name": "punctuation.definition.keyword.asdoc"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.documentation.tag.throws.asdoc",
+          "begin": "\\*\\s*((\\@)throws)",
           "end": "(?=\\s*\\*\\s*@)|(?=\\s*\\*\\s*/)",
-          "name": "meta.documentation.tag.return.asdoc",
           "patterns": [
             {
               "include": "#inline"
             }
-          ]
-        },
-        {
-          "begin": "\\*\\s*((\\@)throws)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.documentation.throws.asdoc"
@@ -80,17 +75,17 @@
             "2": {
               "name": "punctuation.definition.keyword.asdoc"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.documentation.tag.see.asdoc",
+          "begin": "\\*\\s*((\\@)see)",
           "end": "(?=\\s*\\*\\s*@)|(?=\\s*\\*\\s*/)",
-          "name": "meta.documentation.tag.throws.asdoc",
           "patterns": [
             {
               "include": "#inline"
             }
-          ]
-        },
-        {
-          "begin": "\\*\\s*((\\@)see)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.documentation.see.asdoc"
@@ -98,17 +93,17 @@
             "2": {
               "name": "punctuation.definition.keyword.asdoc"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.documentation.tag.author.asdoc",
+          "begin": "\\*\\s*((\\@)author)",
           "end": "(?=\\s*\\*\\s*@)|(?=\\s*\\*\\s*/)",
-          "name": "meta.documentation.tag.see.asdoc",
           "patterns": [
             {
               "include": "#inline"
             }
-          ]
-        },
-        {
-          "begin": "\\*\\s*((\\@)author)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.documentation.author.asdoc"
@@ -116,17 +111,17 @@
             "2": {
               "name": "punctuation.definition.keyword.asdoc"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.documentation.tag.version.asdoc",
+          "begin": "\\*\\s*((\\@)version)",
           "end": "(?=\\s*\\*\\s*@)|(?=\\s*\\*\\s*/)",
-          "name": "meta.documentation.tag.author.asdoc",
           "patterns": [
             {
               "include": "#inline"
             }
-          ]
-        },
-        {
-          "begin": "\\*\\s*((\\@)version)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.documentation.version.asdoc"
@@ -134,17 +129,17 @@
             "2": {
               "name": "punctuation.definition.keyword.asdoc"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.documentation.tag.see.asdoc",
+          "begin": "\\*\\s*((\\@)see)",
           "end": "(?=\\s*\\*\\s*@)|(?=\\s*\\*\\s*/)",
-          "name": "meta.documentation.tag.version.asdoc",
           "patterns": [
             {
               "include": "#inline"
             }
-          ]
-        },
-        {
-          "begin": "\\*\\s*((\\@)see)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.documentation.see.asdoc"
@@ -152,17 +147,17 @@
             "2": {
               "name": "punctuation.definition.keyword.asdoc"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.documentation.tag.since.asdoc",
+          "begin": "\\*\\s*((\\@)since)",
           "end": "(?=\\s*\\*\\s*@)|(?=\\s*\\*\\s*/)",
-          "name": "meta.documentation.tag.see.asdoc",
           "patterns": [
             {
               "include": "#inline"
             }
-          ]
-        },
-        {
-          "begin": "\\*\\s*((\\@)since)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.documentation.since.asdoc"
@@ -170,17 +165,17 @@
             "2": {
               "name": "punctuation.definition.keyword.asdoc"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.documentation.tag.inheritDoc.asdoc",
+          "begin": "\\*\\s*((\\@)inheritDoc)",
           "end": "(?=\\s*\\*\\s*@)|(?=\\s*\\*\\s*/)",
-          "name": "meta.documentation.tag.since.asdoc",
           "patterns": [
             {
               "include": "#inline"
             }
-          ]
-        },
-        {
-          "begin": "\\*\\s*((\\@)inheritDoc)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.documentation.inheritDoc.asdoc"
@@ -188,17 +183,17 @@
             "2": {
               "name": "punctuation.definition.keyword.asdoc"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.documentation.tag.example.asdoc",
+          "begin": "\\*\\s*((\\@)example)",
           "end": "(?=\\s*\\*\\s*@)|(?=\\s*\\*\\s*/)",
-          "name": "meta.documentation.tag.inheritDoc.asdoc",
           "patterns": [
             {
               "include": "#inline"
             }
-          ]
-        },
-        {
-          "begin": "\\*\\s*((\\@)example)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.documentation.example.asdoc"
@@ -206,17 +201,17 @@
             "2": {
               "name": "punctuation.definition.keyword.asdoc"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.documentation.tag.exampleText.asdoc",
+          "begin": "\\*\\s*((\\@)exampleText)",
           "end": "(?=\\s*\\*\\s*@)|(?=\\s*\\*\\s*/)",
-          "name": "meta.documentation.tag.example.asdoc",
           "patterns": [
             {
               "include": "#inline"
             }
-          ]
-        },
-        {
-          "begin": "\\*\\s*((\\@)exampleText)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.documentation.exampleText.asdoc"
@@ -224,17 +219,17 @@
             "2": {
               "name": "punctuation.definition.keyword.asdoc"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.documentation.tag.eventType.asdoc",
+          "begin": "\\*\\s*((\\@)eventType)",
           "end": "(?=\\s*\\*\\s*@)|(?=\\s*\\*\\s*/)",
-          "name": "meta.documentation.tag.exampleText.asdoc",
           "patterns": [
             {
               "include": "#inline"
             }
-          ]
-        },
-        {
-          "begin": "\\*\\s*((\\@)eventType)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.documentation.eventType.asdoc"
@@ -242,17 +237,17 @@
             "2": {
               "name": "punctuation.definition.keyword.asdoc"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.documentation.tag.internal.asdoc",
+          "begin": "\\*\\s*((\\@)internal)",
           "end": "(?=\\s*\\*\\s*@)|(?=\\s*\\*\\s*/)",
-          "name": "meta.documentation.tag.eventType.asdoc",
           "patterns": [
             {
               "include": "#inline"
             }
-          ]
-        },
-        {
-          "begin": "\\*\\s*((\\@)internal)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.documentation.internal.asdoc"
@@ -260,17 +255,17 @@
             "2": {
               "name": "punctuation.definition.keyword.asdoc"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.documentation.tag.deprecated.asdoc",
+          "begin": "\\*\\s*((\\@)deprecated)",
           "end": "(?=\\s*\\*\\s*@)|(?=\\s*\\*\\s*/)",
-          "name": "meta.documentation.tag.internal.asdoc",
           "patterns": [
             {
               "include": "#inline"
             }
-          ]
-        },
-        {
-          "begin": "\\*\\s*((\\@)deprecated)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.documentation.deprecated.asdoc"
@@ -278,17 +273,17 @@
             "2": {
               "name": "punctuation.definition.keyword.asdoc"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.documentation.tag.playerversion.asdoc",
+          "begin": "\\*\\s*((\\@)playerversion)",
           "end": "(?=\\s*\\*\\s*@)|(?=\\s*\\*\\s*/)",
-          "name": "meta.documentation.tag.deprecated.asdoc",
           "patterns": [
             {
               "include": "#inline"
             }
-          ]
-        },
-        {
-          "begin": "\\*\\s*((\\@)playerversion)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.documentation.playerversion.asdoc"
@@ -296,17 +291,17 @@
             "2": {
               "name": "punctuation.definition.keyword.asdoc"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.documentation.tag.langversion.asdoc",
+          "begin": "\\*\\s*((\\@)langversion)",
           "end": "(?=\\s*\\*\\s*@)|(?=\\s*\\*\\s*/)",
-          "name": "meta.documentation.tag.playerversion.asdoc",
           "patterns": [
             {
               "include": "#inline"
             }
-          ]
-        },
-        {
-          "begin": "\\*\\s*((\\@)langversion)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.other.documentation.langversion.asdoc"
@@ -314,16 +309,10 @@
             "2": {
               "name": "punctuation.definition.keyword.asdoc"
             }
-          },
-          "end": "(?=\\s*\\*\\s*@)|(?=\\s*\\*\\s*/)",
-          "name": "meta.documentation.tag.langversion.asdoc",
-          "patterns": [
-            {
-              "include": "#inline"
-            }
-          ]
+          }
         },
         {
+          "match": "\\*\\s*((\\@)\\w+)\\s",
           "captures": {
             "1": {
               "name": "keyword.other.documentation.custom.asdoc"
@@ -331,10 +320,19 @@
             "2": {
               "name": "punctuation.definition.keyword.asdoc"
             }
-          },
-          "match": "\\*\\s*((\\@)\\w+)\\s"
+          }
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.comment.begin.asdoc"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.asdoc"
+        }
+      }
     }
   ],
   "repository": {
@@ -353,15 +351,18 @@
           "include": "text.html.basic"
         },
         {
-          "match": "((https?|s?ftp|ftps|file|smb|afp|nfs|(x-)?man|gopher|txmt)://|mailto:)[-:@a-zA-Z0-9_.~%+/?=&#]+(?<![.?:])",
-          "name": "markup.underline.link"
+          "name": "markup.underline.link",
+          "match": "((https?|s?ftp|ftps|file|smb|afp|nfs|(x-)?man|gopher|txmt)://|mailto:)[-:@a-zA-Z0-9_.~%+/?=\u0026#]+(?\u003c![.?:])"
         }
       ]
     },
     "inline-formatting": {
       "patterns": [
         {
+          "name": "meta.directive.code.asdoc",
+          "contentName": "markup.raw.code.asdoc",
           "begin": "(\\{)((\\@)code)",
+          "end": "\\}",
           "beginCaptures": {
             "1": {
               "name": "punctuation.definition.directive.begin.asdoc"
@@ -373,20 +374,17 @@
               "name": "punctuation.definition.keyword.asdoc"
             }
           },
-          "contentName": "markup.raw.code.asdoc",
-          "end": "\\}",
           "endCaptures": {
             "0": {
               "name": "punctuation.definition.directive.end.asdoc"
             }
-          },
-          "name": "meta.directive.code.asdoc",
-          "patterns": [
-
-          ]
+          }
         },
         {
+          "name": "meta.directive.literal.asdoc",
+          "contentName": "markup.raw.literal.asdoc",
           "begin": "(\\{)((\\@)literal)",
+          "end": "\\}",
           "beginCaptures": {
             "1": {
               "name": "punctuation.definition.directive.begin.asdoc"
@@ -398,19 +396,15 @@
               "name": "punctuation.definition.keyword.asdoc"
             }
           },
-          "contentName": "markup.raw.literal.asdoc",
-          "end": "\\}",
           "endCaptures": {
             "0": {
               "name": "punctuation.definition.directive.end.asdoc"
             }
-          },
-          "name": "meta.directive.literal.asdoc",
-          "patterns": [
-
-          ]
+          }
         },
         {
+          "name": "meta.directive.docRoot.asdoc",
+          "match": "(\\{)((\\@)docRoot)(\\})",
           "captures": {
             "1": {
               "name": "punctuation.definition.directive.begin.asdoc"
@@ -424,11 +418,11 @@
             "4": {
               "name": "punctuation.definition.directive.end.asdoc"
             }
-          },
-          "match": "(\\{)((\\@)docRoot)(\\})",
-          "name": "meta.directive.docRoot.asdoc"
+          }
         },
         {
+          "name": "meta.directive.inheritDoc.asdoc",
+          "match": "(\\{)((\\@)inheritDoc)(\\})",
           "captures": {
             "1": {
               "name": "punctuation.definition.directive.begin.asdoc"
@@ -442,11 +436,11 @@
             "4": {
               "name": "punctuation.definition.directive.end.asdoc"
             }
-          },
-          "match": "(\\{)((\\@)inheritDoc)(\\})",
-          "name": "meta.directive.inheritDoc.asdoc"
+          }
         },
         {
+          "name": "meta.directive.link.asdoc",
+          "match": "(\\{)((\\@)link)(?:\\s+(\\S+?))?(?:\\s+(.+?))?\\s*(\\})",
           "captures": {
             "1": {
               "name": "punctuation.definition.directive.begin.asdoc"
@@ -466,11 +460,11 @@
             "6": {
               "name": "punctuation.definition.directive.end.asdoc"
             }
-          },
-          "match": "(\\{)((\\@)link)(?:\\s+(\\S+?))?(?:\\s+(.+?))?\\s*(\\})",
-          "name": "meta.directive.link.asdoc"
+          }
         },
         {
+          "name": "meta.directive.linkplain.asdoc",
+          "match": "(\\{)((\\@)linkplain)(?:\\s+(\\S+?))?(?:\\s+(.+?))?\\s*(\\})",
           "captures": {
             "1": {
               "name": "punctuation.definition.directive.begin.asdoc"
@@ -490,11 +484,11 @@
             "6": {
               "name": "punctuation.definition.directive.end.asdoc"
             }
-          },
-          "match": "(\\{)((\\@)linkplain)(?:\\s+(\\S+?))?(?:\\s+(.+?))?\\s*(\\})",
-          "name": "meta.directive.linkplain.asdoc"
+          }
         },
         {
+          "name": "meta.directive.value.asdoc",
+          "match": "(\\{)((\\@)value)\\s*(\\S+?)?\\s*(\\})",
           "captures": {
             "1": {
               "name": "punctuation.definition.directive.begin.asdoc"
@@ -511,29 +505,25 @@
             "5": {
               "name": "punctuation.definition.directive.end.asdoc"
             }
-          },
-          "match": "(\\{)((\\@)value)\\s*(\\S+?)?\\s*(\\})",
-          "name": "meta.directive.value.asdoc"
+          }
         }
       ]
     },
     "invalid": {
       "patterns": [
         {
-          "match": "^(?!\\s*\\*).*$\\n?",
-          "name": "invalid.illegal.missing-asterisk.asdoc"
+          "name": "invalid.illegal.missing-asterisk.asdoc",
+          "match": "^(?!\\s*\\*).*$\\n?"
         }
       ]
     },
     "left-margin": {
       "patterns": [
         {
-          "match": "^\\s*(?=\\*)",
-          "name": "comment.block.documentation.left-margin.asdoc"
+          "name": "comment.block.documentation.left-margin.asdoc",
+          "match": "^\\s*(?=\\*)"
         }
       ]
     }
-  },
-  "scopeName": "text.html.asdoc",
-  "uuid": "D53985FC-8AF9-4EF8-B1E8-9AA517BC72EF"
+  }
 }

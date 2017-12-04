@@ -1,7 +1,6 @@
 {
   "name": "Error List",
   "scopeName": "text.error-list",
-  "uuid": "52410ea6-4de5-4b0e-9be7-12842e39a3a6",
   "patterns": [
     {
       "include": "#error-count"
@@ -14,6 +13,14 @@
     }
   ],
   "repository": {
+    "error-count": {
+      "match": "(?\u003c=\\[)(\\d+\\s*errors)(?=\\])",
+      "captures": {
+        "1": {
+          "name": "keyword.other.error-list"
+        }
+      }
+    },
     "filename": {
       "match": "^([^ ].*:)$",
       "captures": {
@@ -22,11 +29,14 @@
         }
       }
     },
-    "error-count": {
-      "match": "(?<=\\[)(\\d+\\s*errors)(?=\\])",
+    "location": {
+      "match": "(?\u003c=\\()(\\d+),\\s*(\\d+)(?=\\))",
       "captures": {
         "1": {
-          "name": "keyword.other.error-list"
+          "name": "constant.numeric.location.error-list"
+        },
+        "2": {
+          "name": "constant.numeric.location.error-list"
         }
       }
     },
@@ -38,17 +48,6 @@
           "include": "#location"
         }
       ]
-    },
-    "location": {
-      "match": "(?<=\\()(\\d+),\\s*(\\d+)(?=\\))",
-      "captures": {
-        "1": {
-          "name": "constant.numeric.location.error-list"
-        },
-        "2": {
-          "name": "constant.numeric.location.error-list"
-        }
-      }
     }
   }
 }

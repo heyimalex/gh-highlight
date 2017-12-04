@@ -1,16 +1,13 @@
 {
-  "scopeName": "source.cake",
   "name": "C# Cake File",
-  "fileTypes": [
-    "cake"
-  ],
+  "scopeName": "source.cake",
   "patterns": [
     {
       "include": "source.cs"
     },
     {
-      "match": "^#(load|l)",
-      "name": "preprocessor.source.cake"
+      "name": "preprocessor.source.cake",
+      "match": "^#(load|l)"
     }
   ]
 }

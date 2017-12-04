@@ -1,124 +1,16 @@
 {
   "name": "Wavefront Object",
   "scopeName": "source.wavefront.obj",
-  "fileTypes": [
-    "obj"
-  ],
   "patterns": [
     {
       "include": "#main"
     }
   ],
   "repository": {
-    "main": {
-      "patterns": [
-        {
-          "include": "#comment"
-        },
-        {
-          "include": "#line-continuation"
-        },
-        {
-          "include": "#general"
-        },
-        {
-          "include": "#vertex"
-        },
-        {
-          "include": "#elements"
-        },
-        {
-          "include": "#attributes"
-        },
-        {
-          "include": "#freeform"
-        },
-        {
-          "include": "#body-statements"
-        },
-        {
-          "include": "#connect"
-        },
-        {
-          "include": "#grouping"
-        },
-        {
-          "include": "#display"
-        },
-        {
-          "include": "#superseded"
-        },
-        {
-          "include": "#number"
-        }
-      ]
-    },
-    "global": {
-      "patterns": [
-        {
-          "include": "#comment"
-        },
-        {
-          "include": "#number"
-        },
-        {
-          "include": "#line-continuation"
-        }
-      ]
-    },
-    "comment": {
-      "name": "comment.line.number-sign.wavefront.obj",
-      "begin": "#",
-      "end": "$",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.comment.wavefront.obj"
-        }
-      }
-    },
-    "line-continuation": {
-      "name": "constant.character.escape.newline.wavefront.obj",
-      "match": "\\\\\n"
-    },
-    "number": {
-      "patterns": [
-        {
-          "name": "constant.numeric.integer.wavefront.obj",
-          "match": "(?<=[\\s,]|^)-?\\d+(?![-\\d.])"
-        },
-        {
-          "name": "constant.numeric.float.wavefront.obj",
-          "match": "(?<=[\\s,]|^)-?(\\d+)(?:(\\.)(\\d+))?\\b",
-          "captures": {
-            "1": {
-              "name": "leading.decimal"
-            },
-            "2": {
-              "name": "decimal.separator"
-            },
-            "3": {
-              "name": "trailing.decimal"
-            }
-          }
-        },
-        {
-          "name": "constant.numeric.float.no-leading-digits.wavefront.obj",
-          "match": "(?<=[\\s,]|^)-?(\\.)(\\d+)\\b",
-          "captures": {
-            "1": {
-              "name": "decimal.separator"
-            },
-            "2": {
-              "name": "trailing.decimal"
-            }
-          }
-        }
-      ]
-    },
     "args": {
       "name": "meta.arguments.wavefront.obj",
       "begin": "\\G",
-      "end": "(?<!\\\\)$",
+      "end": "(?\u003c!\\\\)$",
       "patterns": [
         {
           "include": "#global"
@@ -126,357 +18,6 @@
         {
           "name": "variable.language.substituted.wavefront.obj",
           "match": "\\$[1-9]+"
-        }
-      ]
-    },
-    "xyzw": {
-      "name": "meta.vector.xyzw.wavefront.obj",
-      "match": "\\G\\s*(?!#)(\\S+)(?<!#)\\s+(?!#)(\\S+)(?<!#)\\s+(?!#)(\\S+)(?<!#)(?:\\s+(?!#)(\\S+)(?<!#))?",
-      "captures": {
-        "1": {
-          "name": "entity.x.coordinate.wavefront.obj",
-          "patterns": [
-            {
-              "include": "#number"
-            }
-          ]
-        },
-        "2": {
-          "name": "entity.y.coordinate.wavefront.obj",
-          "patterns": [
-            {
-              "include": "#number"
-            }
-          ]
-        },
-        "3": {
-          "name": "entity.z.coordinate.wavefront.obj",
-          "patterns": [
-            {
-              "include": "#number"
-            }
-          ]
-        },
-        "4": {
-          "name": "entity.w.weight.wavefront.obj",
-          "patterns": [
-            {
-              "include": "#number"
-            }
-          ]
-        }
-      }
-    },
-    "uvw": {
-      "name": "meta.vector.uvw.wavefront.obj",
-      "match": "\\G\\s*(?!#)(\\S+)(?<!#)\\s+(?!#)(\\S+)(?<!#)\\s+(?!#)(\\S+)(?<!#)",
-      "captures": {
-        "1": {
-          "name": "entity.u.coordinate.wavefront.obj",
-          "patterns": [
-            {
-              "include": "#number"
-            }
-          ]
-        },
-        "2": {
-          "name": "entity.v.coordinate.wavefront.obj",
-          "patterns": [
-            {
-              "include": "#number"
-            }
-          ]
-        },
-        "3": {
-          "name": "entity.w.coordinate.wavefront.obj",
-          "patterns": [
-            {
-              "include": "#number"
-            }
-          ]
-        }
-      }
-    },
-    "ijk": {
-      "name": "meta.vector.ijk.wavefront.obj",
-      "match": "\\G\\s*(?!#)(\\S+)(?<!#)\\s+(?!#)(\\S+)(?<!#)\\s+(?!#)(\\S+)(?<!#)",
-      "captures": {
-        "1": {
-          "name": "entity.i.coordinate.wavefront.obj",
-          "patterns": [
-            {
-              "include": "#number"
-            }
-          ]
-        },
-        "2": {
-          "name": "entity.j.coordinate.wavefront.obj",
-          "patterns": [
-            {
-              "include": "#number"
-            }
-          ]
-        },
-        "3": {
-          "name": "entity.k.coordinate.wavefront.obj",
-          "patterns": [
-            {
-              "include": "#number"
-            }
-          ]
-        }
-      }
-    },
-    "vertref": {
-      "patterns": [
-        {
-          "include": "#vertref-triple"
-        },
-        {
-          "include": "#vertref-double"
-        },
-        {
-          "include": "#vertref-single"
-        }
-      ]
-    },
-    "vertref-single": {
-      "patterns": [
-        {
-          "match": "-\\d+",
-          "name": "constant.numeric.vertex-reference.relative.wavefront.obj"
-        },
-        {
-          "match": "\\d+",
-          "name": "constant.numeric.vertex-reference.absolute.wavefront.obj"
-        }
-      ]
-    },
-    "vertref-double": {
-      "name": "meta.vertex-reference.double.wavefront.obj",
-      "match": "(?<=\\s)(-?\\d+)(\\/)(-?\\d+)(?=\\s|$)",
-      "captures": {
-        "1": {
-          "name": "meta.first.wavefront.obj",
-          "patterns": [
-            {
-              "include": "#vertref"
-            }
-          ]
-        },
-        "2": {
-          "name": "punctuation.separator.slash.wavefront.obj"
-        },
-        "3": {
-          "name": "meta.second.wavefront.obj",
-          "patterns": [
-            {
-              "include": "#vertref"
-            }
-          ]
-        }
-      }
-    },
-    "vertref-triple": {
-      "name": "meta.vertex-reference.triple.wavefront.obj",
-      "match": "(?<=\\s)(-?\\d+)(\\/)(-?\\d+)?(\\/)(-?\\d+)(?=\\s|$)",
-      "captures": {
-        "1": {
-          "name": "meta.first.wavefront.obj",
-          "patterns": [
-            {
-              "include": "#vertref"
-            }
-          ]
-        },
-        "2": {
-          "name": "punctuation.separator.slash.wavefront.obj"
-        },
-        "3": {
-          "name": "meta.second.wavefront.obj",
-          "patterns": [
-            {
-              "include": "#vertref"
-            }
-          ]
-        },
-        "4": {
-          "name": "punctuation.separator.slash.wavefront.obj"
-        },
-        "5": {
-          "name": "meta.third.wavefront.obj",
-          "patterns": [
-            {
-              "include": "#vertref"
-            }
-          ]
-        }
-      }
-    },
-    "curveref": {
-      "name": "meta.curve-reference.wavefront.obj",
-      "match": "([-\\d.]+)\\s+([-\\d.]+)\\s+(\\d+)",
-      "captures": {
-        "1": {
-          "name": "constant.numeric.start-value.wavefront.obj",
-          "patterns": [
-            {
-              "include": "#number"
-            }
-          ]
-        },
-        "2": {
-          "name": "constant.numeric.end-value.wavefront.obj",
-          "patterns": [
-            {
-              "include": "#number"
-            }
-          ]
-        },
-        "3": {
-          "name": "constant.numeric.curve-index.wavefront.obj",
-          "patterns": [
-            {
-              "include": "#number"
-            }
-          ]
-        }
-      }
-    },
-    "general": {
-      "patterns": [
-        {
-          "name": "meta.function-call.$1.wavefront.obj",
-          "begin": "^\\s*(call)(?:\\s+(?!#)(\\S+)?)?",
-          "end": "$",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            },
-            "2": {
-              "name": "string.filename.wavefront.obj"
-            }
-          },
-          "patterns": [
-            {
-              "include": "#args"
-            }
-          ]
-        },
-        {
-          "name": "meta.function-call.$1.ignore-errors.wavefront.obj",
-          "begin": "^\\s*(csh)(?:\\s+(-)(\\w*))",
-          "end": "$",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            },
-            "2": {
-              "name": "punctuation.definition.dash.wavefront.obj"
-            },
-            "3": {
-              "name": "string.command-name.wavefront.obj"
-            }
-          },
-          "patterns": [
-            {
-              "include": "#args"
-            }
-          ]
-        },
-        {
-          "name": "meta.function-call.$1.wavefront.obj",
-          "begin": "^\\s*(csh)(?:\\s+(\\w+))?",
-          "end": "$",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            },
-            "2": {
-              "name": "string.command-name.wavefront.obj"
-            }
-          },
-          "patterns": [
-            {
-              "include": "#args"
-            }
-          ]
-        }
-      ]
-    },
-    "vertex": {
-      "patterns": [
-        {
-          "name": "meta.vertex.geometric.wavefront.obj",
-          "begin": "^\\s*(v)(?=\\s|$|#)",
-          "end": "(?=$|#)",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            }
-          },
-          "patterns": [
-            {
-              "include": "#xyzw"
-            },
-            {
-              "include": "#global"
-            }
-          ]
-        },
-        {
-          "name": "meta.vertex.parameter-space.wavefront.obj",
-          "begin": "^\\s*(vp)(?=\\s|$)",
-          "end": "$",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            }
-          },
-          "patterns": [
-            {
-              "include": "#uvw"
-            },
-            {
-              "include": "#global"
-            }
-          ]
-        },
-        {
-          "name": "meta.vertex.normal.wavefront.obj",
-          "begin": "^\\s*(vn)(?=\\s|$)",
-          "end": "$",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            }
-          },
-          "patterns": [
-            {
-              "include": "#ijk"
-            },
-            {
-              "include": "#global"
-            }
-          ]
-        },
-        {
-          "name": "meta.vertex.texture.wavefront.obj",
-          "begin": "^\\s*(vt)(?=\\s|$)",
-          "end": "$",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            }
-          },
-          "patterns": [
-            {
-              "include": "#uvw"
-            },
-            {
-              "include": "#global"
-            }
-          ]
         }
       ]
     },
@@ -514,9 +55,14 @@
         },
         {
           "name": "meta.free-form.attribute.$2.basis-matrix.wavefront.obj",
-          "begin": "^\\s*(bmat)(?:\\s+(u|v)(?=\\s|$)\\s*)?",
-          "end": "(?<!\\\\)$|(?=#)",
           "contentName": "meta.matrix.wavefront.obj",
+          "begin": "^\\s*(bmat)(?:\\s+(u|v)(?=\\s|$)\\s*)?",
+          "end": "(?\u003c!\\\\)$|(?=#)",
+          "patterns": [
+            {
+              "include": "#global"
+            }
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.function.$1.wavefront.obj"
@@ -524,12 +70,7 @@
             "2": {
               "name": "entity.type.wavefront.obj"
             }
-          },
-          "patterns": [
-            {
-              "include": "#global"
-            }
-          ]
+          }
         },
         {
           "name": "meta.free-form.attribute.step-size.wavefront.obj",
@@ -548,178 +89,17 @@
         }
       ]
     },
-    "elements": {
-      "patterns": [
-        {
-          "name": "meta.polygonal.element.point.wavefront.obj",
-          "begin": "^\\s*(p)(?:\\s|$|#)",
-          "end": "(?<!\\\\)$",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            }
-          },
-          "patterns": [
-            {
-              "include": "#vertref-single"
-            },
-            {
-              "include": "#global"
-            }
-          ]
-        },
-        {
-          "name": "meta.polygonal.element.line.wavefront.obj",
-          "begin": "^\\s*(l)(?:\\s|$|#)",
-          "end": "(?<!\\\\)$",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            }
-          },
-          "patterns": [
-            {
-              "include": "#vertref-double"
-            },
-            {
-              "include": "#vertref-single"
-            },
-            {
-              "include": "#global"
-            }
-          ]
-        },
-        {
-          "name": "meta.polygonal.element.face.wavefront.obj",
-          "begin": "^\\s*(?:(f)|(fo))(?:\\s|$|#)",
-          "end": "(?<!\\\\)$",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            },
-            "2": {
-              "name": "invalid.deprecated.wavefront.obj"
-            }
-          },
-          "patterns": [
-            {
-              "include": "#vertref"
-            },
-            {
-              "include": "#global"
-            }
-          ]
-        },
-        {
-          "name": "meta.free-form.element.curve.wavefront.obj",
-          "begin": "^\\s*(curv)\\s+([-\\d.]+)\\s+([-\\d.]+)",
-          "end": "(?<!\\\\)$",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            },
-            "2": {
-              "name": "entity.value.start-value.wavefront.obj",
-              "patterns": [
-                {
-                  "include": "#number"
-                }
-              ]
-            },
-            "3": {
-              "name": "entity.value.end-value.wavefront.obj",
-              "patterns": [
-                {
-                  "include": "#number"
-                }
-              ]
-            }
-          },
-          "patterns": [
-            {
-              "include": "#vertref-single"
-            },
-            {
-              "include": "#global"
-            }
-          ]
-        },
-        {
-          "name": "meta.free-form.element.curve-2d.wavefront.obj",
-          "begin": "^\\s*(curv2)(?:\\s|$|#)",
-          "end": "(?<!\\\\)$",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            }
-          },
-          "patterns": [
-            {
-              "include": "#vertref-single"
-            },
-            {
-              "include": "#global"
-            }
-          ]
-        },
-        {
-          "name": "meta.free-form.element.surface.wavefront.obj",
-          "begin": "^\\s*(surf)\\s+([-\\d.]+)\\s+([-\\d.]+)\\s+([-\\d.]+)\\s+([-\\d.]+)",
-          "end": "(?<!\\\\)$",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            },
-            "2": {
-              "name": "entity.value.u-start.wavefront.obj",
-              "patterns": [
-                {
-                  "include": "#number"
-                }
-              ]
-            },
-            "3": {
-              "name": "entity.value.u-end.wavefront.obj",
-              "patterns": [
-                {
-                  "include": "#number"
-                }
-              ]
-            },
-            "4": {
-              "name": "entity.value.v-start.wavefront.obj",
-              "patterns": [
-                {
-                  "include": "#number"
-                }
-              ]
-            },
-            "5": {
-              "name": "entity.value.v-end.wavefront.obj",
-              "patterns": [
-                {
-                  "include": "#number"
-                }
-              ]
-            }
-          },
-          "patterns": [
-            {
-              "include": "#vertref"
-            },
-            {
-              "include": "#global"
-            }
-          ]
-        }
-      ]
-    },
     "body-statements": {
       "patterns": [
         {
           "name": "meta.body-statement.parameter.$2-direction.wavefront.obj",
           "begin": "^\\s*(parm)\\s+(u|v)(?=\\s|$|#)",
-          "end": "(?<!\\\\)$",
+          "end": "(?\u003c!\\\\)$",
+          "patterns": [
+            {
+              "include": "#global"
+            }
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.function.$1.wavefront.obj"
@@ -727,22 +107,12 @@
             "2": {
               "name": "entity.direction.wavefront.obj"
             }
-          },
-          "patterns": [
-            {
-              "include": "#global"
-            }
-          ]
+          }
         },
         {
           "name": "meta.body-statement.trimming-loop.wavefront.obj",
           "begin": "^\\s*(trim)(?:\\s+|$|#)",
-          "end": "(?<!\\\\)$",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            }
-          },
+          "end": "(?\u003c!\\\\)$",
           "patterns": [
             {
               "include": "#curveref"
@@ -750,17 +120,17 @@
             {
               "include": "#global"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            }
+          }
         },
         {
           "name": "meta.body-statement.special-curve.wavefront.obj",
           "begin": "^\\s*(scrv)(?:\\s+|$|#)",
-          "end": "(?<!\\\\)$",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            }
-          },
+          "end": "(?\u003c!\\\\)$",
           "patterns": [
             {
               "include": "#curveref"
@@ -768,17 +138,17 @@
             {
               "include": "#global"
             }
-          ]
-        },
-        {
-          "name": "meta.body-statement.special-point.wavefront.obj",
-          "begin": "^\\s*(sp)(?:\\s+|$|#)",
-          "end": "(?<!\\\\)$",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.function.$1.wavefront.obj"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.body-statement.special-point.wavefront.obj",
+          "begin": "^\\s*(sp)(?:\\s+|$|#)",
+          "end": "(?\u003c!\\\\)$",
           "patterns": [
             {
               "include": "#vertref-single"
@@ -786,13 +156,28 @@
             {
               "include": "#global"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            }
+          }
         },
         {
           "name": "keyword.control.body-statement.end.wavefront.obj",
           "match": "^\\s*end(?=\\s|$|#)"
         }
       ]
+    },
+    "comment": {
+      "name": "comment.line.number-sign.wavefront.obj",
+      "begin": "#",
+      "end": "$",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.wavefront.obj"
+        }
+      }
     },
     "connect": {
       "name": "meta.free-form.connectivity.wavefront.obj",
@@ -867,84 +252,35 @@
         }
       }
     },
-    "grouping": {
-      "patterns": [
-        {
-          "name": "meta.grouping-statement.group.wavefront.obj",
-          "begin": "^\\s*(g)(?:\\s|$|#)",
-          "end": "(?<!\\\\)$|(?=#)",
-          "contentName": "meta.group-names.wavefront.obj",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            }
-          },
+    "curveref": {
+      "name": "meta.curve-reference.wavefront.obj",
+      "match": "([-\\d.]+)\\s+([-\\d.]+)\\s+(\\d+)",
+      "captures": {
+        "1": {
+          "name": "constant.numeric.start-value.wavefront.obj",
           "patterns": [
             {
-              "name": "variable.parameter.group-name.wavefront.obj",
-              "match": "(?!#)\\S+(?<!#)"
-            },
-            {
-              "include": "#global"
+              "include": "#number"
             }
           ]
         },
-        {
-          "name": "meta.grouping-statement.smoothing-group.wavefront.obj",
-          "match": "^\\s*(s)\\s+(?:(\\d+)|(off))(?=\\s|$|#)",
-          "captures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            },
-            "2": {
-              "name": "constant.numeric.wavefront.obj"
-            },
-            "3": {
-              "name": "constant.language.boolean.off.wavefront.obj"
+        "2": {
+          "name": "constant.numeric.end-value.wavefront.obj",
+          "patterns": [
+            {
+              "include": "#number"
             }
-          }
+          ]
         },
-        {
-          "name": "meta.free-form.grouping-statement.merge-group.wavefront.obj",
-          "match": "^\\s*(mg)\\s+(?:(off)(?=\\s|$|#)|(\\d+)\\s+([-\\d.]+))",
-          "captures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            },
-            "2": {
-              "name": "constant.language.boolean.off.wavefront.obj"
-            },
-            "3": {
-              "name": "entity.group-number.wavefront.obj",
-              "patterns": [
-                {
-                  "include": "#number"
-                }
-              ]
-            },
-            "4": {
-              "name": "entity.max-distance.wavefront.obj",
-              "patterns": [
-                {
-                  "include": "#number"
-                }
-              ]
+        "3": {
+          "name": "constant.numeric.curve-index.wavefront.obj",
+          "patterns": [
+            {
+              "include": "#number"
             }
-          }
-        },
-        {
-          "name": "meta.grouping-statement.user-defined.wavefront.obj",
-          "match": "^\\s*(o)\\s+(?!#)(\\S+)(?<!#)",
-          "captures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            },
-            "2": {
-              "name": "variable.parameter.object-name.wavefront.obj"
-            }
-          }
+          ]
         }
-      ]
+      }
     },
     "display": {
       "patterns": [
@@ -1004,25 +340,25 @@
         {
           "name": "meta.display.attribute.map-library.wavefront.obj",
           "begin": "^\\s*(maplib)(?=\\s|$|#)",
-          "end": "(?<!\\\\)$|(?=#)",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            }
-          },
+          "end": "(?\u003c!\\\\)$|(?=#)",
           "patterns": [
             {
               "name": "string.filename.wavefront.obj",
-              "match": "(?!#)\\S+(?<!#)"
+              "match": "(?!#)\\S+(?\u003c!#)"
             },
             {
               "include": "#global"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            }
+          }
         },
         {
           "name": "meta.display.attribute.use-map.wavefront.obj",
-          "match": "^\\s*(usemap)\\s+(?:(off)|(?!#)(\\S+)(?<!#))",
+          "match": "^\\s*(usemap)\\s+(?:(off)|(?!#)(\\S+)(?\u003c!#))",
           "captures": {
             "1": {
               "name": "keyword.function.$1.wavefront.obj"
@@ -1037,7 +373,7 @@
         },
         {
           "name": "meta.display.attribute.use-material.wavefront.obj",
-          "match": "^\\s*(usemtl)\\s+(?!#)(\\S+)(?<!#)",
+          "match": "^\\s*(usemtl)\\s+(?!#)(\\S+)(?\u003c!#)",
           "captures": {
             "1": {
               "name": "keyword.function.$1.wavefront.obj"
@@ -1050,25 +386,25 @@
         {
           "name": "meta.display.attribute.material-library.wavefront.obj",
           "begin": "^\\s*(mtllib)(?=\\s|$|#)",
-          "end": "(?<!\\\\)$|(?=#)",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            }
-          },
+          "end": "(?\u003c!\\\\)$|(?=#)",
           "patterns": [
             {
               "name": "string.filename.wavefront.obj",
-              "match": "(?!#)\\S+(?<!#)"
+              "match": "(?!#)\\S+(?\u003c!#)"
             },
             {
               "include": "#global"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            }
+          }
         },
         {
           "name": "meta.display.attribute.shadow-object.wavefront.obj",
-          "match": "^\\s*(shadow_obj)\\s+(?!#)(\\S+)(?<!#)",
+          "match": "^\\s*(shadow_obj)\\s+(?!#)(\\S+)(?\u003c!#)",
           "captures": {
             "1": {
               "name": "keyword.function.$1.wavefront.obj"
@@ -1080,7 +416,7 @@
         },
         {
           "name": "meta.display.attribute.trace-object.wavefront.obj",
-          "match": "^\\s*(trace_obj)\\s+(?!#)(\\S+)(?<!#)",
+          "match": "^\\s*(trace_obj)\\s+(?!#)(\\S+)(?\u003c!#)",
           "captures": {
             "1": {
               "name": "keyword.function.$1.wavefront.obj"
@@ -1093,19 +429,11 @@
         {
           "name": "meta.display.free-form.attribute.curve-technique.wavefront.obj",
           "begin": "^\\s*(ctech)\\s+(cparm|cspace|curv)(?=\\s|$|#)",
-          "end": "(?<!\\\\)$|(?=#)",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.function.$1.wavefront.obj"
-            },
-            "2": {
-              "name": "constant.language.$2.wavefront.obj"
-            }
-          },
+          "end": "(?\u003c!\\\\)$|(?=#)",
           "patterns": [
             {
-              "match": "\\G(?<=cparm)\\s+([-\\d.]+)",
               "name": "entity.value.resolution.wavefront.obj",
+              "match": "\\G(?\u003c=cparm)\\s+([-\\d.]+)",
               "captures": {
                 "1": {
                   "patterns": [
@@ -1117,8 +445,8 @@
               }
             },
             {
-              "match": "\\G(?<=cspace)\\s+([-\\d.]+)",
               "name": "entity.value.max-length.wavefront.obj",
+              "match": "\\G(?\u003c=cspace)\\s+([-\\d.]+)",
               "captures": {
                 "1": {
                   "patterns": [
@@ -1130,7 +458,7 @@
               }
             },
             {
-              "match": "\\G(?<=curv)\\s+([-\\d.]+)\\s+([-\\d.]+)",
+              "match": "\\G(?\u003c=curv)\\s+([-\\d.]+)\\s+([-\\d.]+)",
               "captures": {
                 "1": {
                   "name": "entity.value.max-distance.wavefront.obj",
@@ -1153,12 +481,7 @@
             {
               "include": "#global"
             }
-          ]
-        },
-        {
-          "name": "meta.display.free-form.attribute.surface-technique.wavefront.obj",
-          "begin": "^\\s*(stech)\\s+(cparma|cparmb|cspace|curv)(?=\\s|$|#)",
-          "end": "(?<!\\\\)$|(?=#)",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.function.$1.wavefront.obj"
@@ -1166,10 +489,15 @@
             "2": {
               "name": "constant.language.$2.wavefront.obj"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.display.free-form.attribute.surface-technique.wavefront.obj",
+          "begin": "^\\s*(stech)\\s+(cparma|cparmb|cspace|curv)(?=\\s|$|#)",
+          "end": "(?\u003c!\\\\)$|(?=#)",
           "patterns": [
             {
-              "match": "\\G(?<=cparma)\\s+([-\\d.]+)\\s+([-\\d.]+)",
+              "match": "\\G(?\u003c=cparma)\\s+([-\\d.]+)\\s+([-\\d.]+)",
               "captures": {
                 "1": {
                   "name": "entity.value.u-resolution.wavefront.obj",
@@ -1190,8 +518,8 @@
               }
             },
             {
-              "match": "\\G(?<=cparmb)\\s+([-\\d.]+)",
               "name": "entity.value.uv-resolution.wavefront.obj",
+              "match": "\\G(?\u003c=cparmb)\\s+([-\\d.]+)",
               "captures": {
                 "1": {
                   "patterns": [
@@ -1203,8 +531,8 @@
               }
             },
             {
-              "match": "\\G(?<=cspace)\\s+([-\\d.]+)",
               "name": "entity.value.max-length.wavefront.obj",
+              "match": "\\G(?\u003c=cspace)\\s+([-\\d.]+)",
               "captures": {
                 "1": {
                   "patterns": [
@@ -1216,7 +544,7 @@
               }
             },
             {
-              "match": "\\G(?<=curv)\\s+([-\\d.]+)\\s+([-\\d.]+)",
+              "match": "\\G(?\u003c=curv)\\s+([-\\d.]+)\\s+([-\\d.]+)",
               "captures": {
                 "1": {
                   "name": "entity.value.max-distance.wavefront.obj",
@@ -1239,7 +567,446 @@
             {
               "include": "#global"
             }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            },
+            "2": {
+              "name": "constant.language.$2.wavefront.obj"
+            }
+          }
+        }
+      ]
+    },
+    "elements": {
+      "patterns": [
+        {
+          "name": "meta.polygonal.element.point.wavefront.obj",
+          "begin": "^\\s*(p)(?:\\s|$|#)",
+          "end": "(?\u003c!\\\\)$",
+          "patterns": [
+            {
+              "include": "#vertref-single"
+            },
+            {
+              "include": "#global"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            }
+          }
+        },
+        {
+          "name": "meta.polygonal.element.line.wavefront.obj",
+          "begin": "^\\s*(l)(?:\\s|$|#)",
+          "end": "(?\u003c!\\\\)$",
+          "patterns": [
+            {
+              "include": "#vertref-double"
+            },
+            {
+              "include": "#vertref-single"
+            },
+            {
+              "include": "#global"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            }
+          }
+        },
+        {
+          "name": "meta.polygonal.element.face.wavefront.obj",
+          "begin": "^\\s*(?:(f)|(fo))(?:\\s|$|#)",
+          "end": "(?\u003c!\\\\)$",
+          "patterns": [
+            {
+              "include": "#vertref"
+            },
+            {
+              "include": "#global"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            },
+            "2": {
+              "name": "invalid.deprecated.wavefront.obj"
+            }
+          }
+        },
+        {
+          "name": "meta.free-form.element.curve.wavefront.obj",
+          "begin": "^\\s*(curv)\\s+([-\\d.]+)\\s+([-\\d.]+)",
+          "end": "(?\u003c!\\\\)$",
+          "patterns": [
+            {
+              "include": "#vertref-single"
+            },
+            {
+              "include": "#global"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            },
+            "2": {
+              "name": "entity.value.start-value.wavefront.obj",
+              "patterns": [
+                {
+                  "include": "#number"
+                }
+              ]
+            },
+            "3": {
+              "name": "entity.value.end-value.wavefront.obj",
+              "patterns": [
+                {
+                  "include": "#number"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "meta.free-form.element.curve-2d.wavefront.obj",
+          "begin": "^\\s*(curv2)(?:\\s|$|#)",
+          "end": "(?\u003c!\\\\)$",
+          "patterns": [
+            {
+              "include": "#vertref-single"
+            },
+            {
+              "include": "#global"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            }
+          }
+        },
+        {
+          "name": "meta.free-form.element.surface.wavefront.obj",
+          "begin": "^\\s*(surf)\\s+([-\\d.]+)\\s+([-\\d.]+)\\s+([-\\d.]+)\\s+([-\\d.]+)",
+          "end": "(?\u003c!\\\\)$",
+          "patterns": [
+            {
+              "include": "#vertref"
+            },
+            {
+              "include": "#global"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            },
+            "2": {
+              "name": "entity.value.u-start.wavefront.obj",
+              "patterns": [
+                {
+                  "include": "#number"
+                }
+              ]
+            },
+            "3": {
+              "name": "entity.value.u-end.wavefront.obj",
+              "patterns": [
+                {
+                  "include": "#number"
+                }
+              ]
+            },
+            "4": {
+              "name": "entity.value.v-start.wavefront.obj",
+              "patterns": [
+                {
+                  "include": "#number"
+                }
+              ]
+            },
+            "5": {
+              "name": "entity.value.v-end.wavefront.obj",
+              "patterns": [
+                {
+                  "include": "#number"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "general": {
+      "patterns": [
+        {
+          "name": "meta.function-call.$1.wavefront.obj",
+          "begin": "^\\s*(call)(?:\\s+(?!#)(\\S+)?)?",
+          "end": "$",
+          "patterns": [
+            {
+              "include": "#args"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            },
+            "2": {
+              "name": "string.filename.wavefront.obj"
+            }
+          }
+        },
+        {
+          "name": "meta.function-call.$1.ignore-errors.wavefront.obj",
+          "begin": "^\\s*(csh)(?:\\s+(-)(\\w*))",
+          "end": "$",
+          "patterns": [
+            {
+              "include": "#args"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            },
+            "2": {
+              "name": "punctuation.definition.dash.wavefront.obj"
+            },
+            "3": {
+              "name": "string.command-name.wavefront.obj"
+            }
+          }
+        },
+        {
+          "name": "meta.function-call.$1.wavefront.obj",
+          "begin": "^\\s*(csh)(?:\\s+(\\w+))?",
+          "end": "$",
+          "patterns": [
+            {
+              "include": "#args"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            },
+            "2": {
+              "name": "string.command-name.wavefront.obj"
+            }
+          }
+        }
+      ]
+    },
+    "global": {
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#number"
+        },
+        {
+          "include": "#line-continuation"
+        }
+      ]
+    },
+    "grouping": {
+      "patterns": [
+        {
+          "name": "meta.grouping-statement.group.wavefront.obj",
+          "contentName": "meta.group-names.wavefront.obj",
+          "begin": "^\\s*(g)(?:\\s|$|#)",
+          "end": "(?\u003c!\\\\)$|(?=#)",
+          "patterns": [
+            {
+              "name": "variable.parameter.group-name.wavefront.obj",
+              "match": "(?!#)\\S+(?\u003c!#)"
+            },
+            {
+              "include": "#global"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            }
+          }
+        },
+        {
+          "name": "meta.grouping-statement.smoothing-group.wavefront.obj",
+          "match": "^\\s*(s)\\s+(?:(\\d+)|(off))(?=\\s|$|#)",
+          "captures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            },
+            "2": {
+              "name": "constant.numeric.wavefront.obj"
+            },
+            "3": {
+              "name": "constant.language.boolean.off.wavefront.obj"
+            }
+          }
+        },
+        {
+          "name": "meta.free-form.grouping-statement.merge-group.wavefront.obj",
+          "match": "^\\s*(mg)\\s+(?:(off)(?=\\s|$|#)|(\\d+)\\s+([-\\d.]+))",
+          "captures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            },
+            "2": {
+              "name": "constant.language.boolean.off.wavefront.obj"
+            },
+            "3": {
+              "name": "entity.group-number.wavefront.obj",
+              "patterns": [
+                {
+                  "include": "#number"
+                }
+              ]
+            },
+            "4": {
+              "name": "entity.max-distance.wavefront.obj",
+              "patterns": [
+                {
+                  "include": "#number"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "meta.grouping-statement.user-defined.wavefront.obj",
+          "match": "^\\s*(o)\\s+(?!#)(\\S+)(?\u003c!#)",
+          "captures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            },
+            "2": {
+              "name": "variable.parameter.object-name.wavefront.obj"
+            }
+          }
+        }
+      ]
+    },
+    "ijk": {
+      "name": "meta.vector.ijk.wavefront.obj",
+      "match": "\\G\\s*(?!#)(\\S+)(?\u003c!#)\\s+(?!#)(\\S+)(?\u003c!#)\\s+(?!#)(\\S+)(?\u003c!#)",
+      "captures": {
+        "1": {
+          "name": "entity.i.coordinate.wavefront.obj",
+          "patterns": [
+            {
+              "include": "#number"
+            }
           ]
+        },
+        "2": {
+          "name": "entity.j.coordinate.wavefront.obj",
+          "patterns": [
+            {
+              "include": "#number"
+            }
+          ]
+        },
+        "3": {
+          "name": "entity.k.coordinate.wavefront.obj",
+          "patterns": [
+            {
+              "include": "#number"
+            }
+          ]
+        }
+      }
+    },
+    "line-continuation": {
+      "name": "constant.character.escape.newline.wavefront.obj",
+      "match": "\\\\\n"
+    },
+    "main": {
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#line-continuation"
+        },
+        {
+          "include": "#general"
+        },
+        {
+          "include": "#vertex"
+        },
+        {
+          "include": "#elements"
+        },
+        {
+          "include": "#attributes"
+        },
+        {
+          "include": "#freeform"
+        },
+        {
+          "include": "#body-statements"
+        },
+        {
+          "include": "#connect"
+        },
+        {
+          "include": "#grouping"
+        },
+        {
+          "include": "#display"
+        },
+        {
+          "include": "#superseded"
+        },
+        {
+          "include": "#number"
+        }
+      ]
+    },
+    "number": {
+      "patterns": [
+        {
+          "name": "constant.numeric.integer.wavefront.obj",
+          "match": "(?\u003c=[\\s,]|^)-?\\d+(?![-\\d.])"
+        },
+        {
+          "name": "constant.numeric.float.wavefront.obj",
+          "match": "(?\u003c=[\\s,]|^)-?(\\d+)(?:(\\.)(\\d+))?\\b",
+          "captures": {
+            "1": {
+              "name": "leading.decimal"
+            },
+            "2": {
+              "name": "decimal.separator"
+            },
+            "3": {
+              "name": "trailing.decimal"
+            }
+          }
+        },
+        {
+          "name": "constant.numeric.float.no-leading-digits.wavefront.obj",
+          "match": "(?\u003c=[\\s,]|^)-?(\\.)(\\d+)\\b",
+          "captures": {
+            "1": {
+              "name": "decimal.separator"
+            },
+            "2": {
+              "name": "trailing.decimal"
+            }
+          }
         }
       ]
     },
@@ -1339,6 +1106,236 @@
           }
         }
       ]
+    },
+    "uvw": {
+      "name": "meta.vector.uvw.wavefront.obj",
+      "match": "\\G\\s*(?!#)(\\S+)(?\u003c!#)\\s+(?!#)(\\S+)(?\u003c!#)\\s+(?!#)(\\S+)(?\u003c!#)",
+      "captures": {
+        "1": {
+          "name": "entity.u.coordinate.wavefront.obj",
+          "patterns": [
+            {
+              "include": "#number"
+            }
+          ]
+        },
+        "2": {
+          "name": "entity.v.coordinate.wavefront.obj",
+          "patterns": [
+            {
+              "include": "#number"
+            }
+          ]
+        },
+        "3": {
+          "name": "entity.w.coordinate.wavefront.obj",
+          "patterns": [
+            {
+              "include": "#number"
+            }
+          ]
+        }
+      }
+    },
+    "vertex": {
+      "patterns": [
+        {
+          "name": "meta.vertex.geometric.wavefront.obj",
+          "begin": "^\\s*(v)(?=\\s|$|#)",
+          "end": "(?=$|#)",
+          "patterns": [
+            {
+              "include": "#xyzw"
+            },
+            {
+              "include": "#global"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            }
+          }
+        },
+        {
+          "name": "meta.vertex.parameter-space.wavefront.obj",
+          "begin": "^\\s*(vp)(?=\\s|$)",
+          "end": "$",
+          "patterns": [
+            {
+              "include": "#uvw"
+            },
+            {
+              "include": "#global"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            }
+          }
+        },
+        {
+          "name": "meta.vertex.normal.wavefront.obj",
+          "begin": "^\\s*(vn)(?=\\s|$)",
+          "end": "$",
+          "patterns": [
+            {
+              "include": "#ijk"
+            },
+            {
+              "include": "#global"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            }
+          }
+        },
+        {
+          "name": "meta.vertex.texture.wavefront.obj",
+          "begin": "^\\s*(vt)(?=\\s|$)",
+          "end": "$",
+          "patterns": [
+            {
+              "include": "#uvw"
+            },
+            {
+              "include": "#global"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.function.$1.wavefront.obj"
+            }
+          }
+        }
+      ]
+    },
+    "vertref": {
+      "patterns": [
+        {
+          "include": "#vertref-triple"
+        },
+        {
+          "include": "#vertref-double"
+        },
+        {
+          "include": "#vertref-single"
+        }
+      ]
+    },
+    "vertref-double": {
+      "name": "meta.vertex-reference.double.wavefront.obj",
+      "match": "(?\u003c=\\s)(-?\\d+)(\\/)(-?\\d+)(?=\\s|$)",
+      "captures": {
+        "1": {
+          "name": "meta.first.wavefront.obj",
+          "patterns": [
+            {
+              "include": "#vertref"
+            }
+          ]
+        },
+        "2": {
+          "name": "punctuation.separator.slash.wavefront.obj"
+        },
+        "3": {
+          "name": "meta.second.wavefront.obj",
+          "patterns": [
+            {
+              "include": "#vertref"
+            }
+          ]
+        }
+      }
+    },
+    "vertref-single": {
+      "patterns": [
+        {
+          "name": "constant.numeric.vertex-reference.relative.wavefront.obj",
+          "match": "-\\d+"
+        },
+        {
+          "name": "constant.numeric.vertex-reference.absolute.wavefront.obj",
+          "match": "\\d+"
+        }
+      ]
+    },
+    "vertref-triple": {
+      "name": "meta.vertex-reference.triple.wavefront.obj",
+      "match": "(?\u003c=\\s)(-?\\d+)(\\/)(-?\\d+)?(\\/)(-?\\d+)(?=\\s|$)",
+      "captures": {
+        "1": {
+          "name": "meta.first.wavefront.obj",
+          "patterns": [
+            {
+              "include": "#vertref"
+            }
+          ]
+        },
+        "2": {
+          "name": "punctuation.separator.slash.wavefront.obj"
+        },
+        "3": {
+          "name": "meta.second.wavefront.obj",
+          "patterns": [
+            {
+              "include": "#vertref"
+            }
+          ]
+        },
+        "4": {
+          "name": "punctuation.separator.slash.wavefront.obj"
+        },
+        "5": {
+          "name": "meta.third.wavefront.obj",
+          "patterns": [
+            {
+              "include": "#vertref"
+            }
+          ]
+        }
+      }
+    },
+    "xyzw": {
+      "name": "meta.vector.xyzw.wavefront.obj",
+      "match": "\\G\\s*(?!#)(\\S+)(?\u003c!#)\\s+(?!#)(\\S+)(?\u003c!#)\\s+(?!#)(\\S+)(?\u003c!#)(?:\\s+(?!#)(\\S+)(?\u003c!#))?",
+      "captures": {
+        "1": {
+          "name": "entity.x.coordinate.wavefront.obj",
+          "patterns": [
+            {
+              "include": "#number"
+            }
+          ]
+        },
+        "2": {
+          "name": "entity.y.coordinate.wavefront.obj",
+          "patterns": [
+            {
+              "include": "#number"
+            }
+          ]
+        },
+        "3": {
+          "name": "entity.z.coordinate.wavefront.obj",
+          "patterns": [
+            {
+              "include": "#number"
+            }
+          ]
+        },
+        "4": {
+          "name": "entity.w.weight.wavefront.obj",
+          "patterns": [
+            {
+              "include": "#number"
+            }
+          ]
+        }
+      }
     }
   }
 }

@@ -1,11 +1,6 @@
 {
   "name": "fsharp.fsx",
   "scopeName": "source.fsharp.fsx",
-  "fileTypes": [
-    "fsx"
-  ],
-  "foldingStartMarker": "",
-  "foldingStopMarker": "",
   "patterns": [
     {
       "include": "source.fsharp"

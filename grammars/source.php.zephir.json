@@ -1,12 +1,6 @@
 {
-  "comment": "Zephir Syntax: version 1.0",
-  "fileTypes": [
-    "zep"
-  ],
-  "foldingStartMarker": "^.*\\bfunction\\s*(\\w+\\s*)?\\([^\\)]*\\)(\\s*\\{[^\\}]*)?\\s*$",
-  "foldingStopMarker": "^\\s*\\}",
-  "keyEquivalent": "^~J",
   "name": "Zephir",
+  "scopeName": "source.php.zephir",
   "patterns": [
     {
       "captures": {
@@ -113,27 +107,29 @@
       }
     },
     {
-      "captures": {
-        "1": {
-          "name": "storage.type.function.zephir"
-        },
-        "2": {
-          "name": "entity.name.function.zephir"
-        },
-        "3": {
-          "name": "punctuation.definition.parameters.begin.zephir"
-        },
-        "4": {
-          "name": "variable.parameter.function.zephir"
-        },
-        "5": {
-          "name": "punctuation.definition.parameters.end.zephir"
-        }
-      },
+      "name": "meta.function.zephir",
       "match": "\\b(function)\\s+([a-zA-Z_$]\\w*)?\\s*(\\()(.*?)(\\))",
-      "name": "meta.function.zephir"
+      "captures": {
+        "1": {
+          "name": "storage.type.function.zephir"
+        },
+        "2": {
+          "name": "entity.name.function.zephir"
+        },
+        "3": {
+          "name": "punctuation.definition.parameters.begin.zephir"
+        },
+        "4": {
+          "name": "variable.parameter.function.zephir"
+        },
+        "5": {
+          "name": "punctuation.definition.parameters.end.zephir"
+        }
+      }
     },
     {
+      "name": "meta.function.json.zephir",
+      "match": "\\b([a-zA-Z_?.$][\\w?.$]*)\\s*:\\s*\\b(function)?\\s*(\\()(.*?)(\\))",
       "captures": {
         "1": {
           "name": "entity.name.function.zephir"
@@ -150,11 +146,11 @@
         "5": {
           "name": "punctuation.definition.parameters.end.zephir"
         }
-      },
-      "match": "\\b([a-zA-Z_?.$][\\w?.$]*)\\s*:\\s*\\b(function)?\\s*(\\()(.*?)(\\))",
-      "name": "meta.function.zephiron.zephir"
+      }
     },
     {
+      "name": "meta.function.json.zephir",
+      "match": "(?:((')([^']*)('))|((\")([^\"]*)(\")))\\s*:\\s*\\b(function)?\\s*(\\()([^)]*)(\\))",
       "captures": {
         "1": {
           "name": "string.quoted.single.zephir"
@@ -192,12 +188,11 @@
         "9": {
           "name": "entity.name.function.zephir"
         }
-      },
-      "comment": "Attempt to match \"foo\": function",
-      "match": "(?:((')([^']*)('))|((\")([^\"]*)(\")))\\s*:\\s*\\b(function)?\\s*(\\()([^)]*)(\\))",
-      "name": "meta.function.zephiron.zephir"
+      }
     },
     {
+      "name": "meta.class.instance.constructor",
+      "match": "(new)\\s+(\\w+(?:\\.\\w*)?)",
       "captures": {
         "1": {
           "name": "keyword.operator.new.zephir"
@@ -205,158 +200,154 @@
         "2": {
           "name": "entity.name.type.instance.zephir"
         }
-      },
-      "match": "(new)\\s+(\\w+(?:\\.\\w*)?)",
-      "name": "meta.class.instance.constructor"
+      }
     },
     {
-      "match": "\\b((0(x|X)[0-9a-fA-F]+)|([0-9]+(\\.[0-9]+)?))\\b",
-      "name": "constant.numeric.zephir"
+      "name": "constant.numeric.zephir",
+      "match": "\\b((0(x|X)[0-9a-fA-F]+)|([0-9]+(\\.[0-9]+)?))\\b"
     },
     {
-      "match": "<([a-zA-Z0-9\\_\\\\]+)>",
-      "name": "string.regexp.zephir"
+      "name": "string.regexp.zephir",
+      "match": "\u003c([a-zA-Z0-9\\_\\\\\\!]+)\u003e"
     },
     {
-      "begin": "'",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.zephir"
-        }
-      },
-      "end": "'",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.zephir"
-        }
-      },
       "name": "string.quoted.single.zephir",
+      "begin": "'",
+      "end": "'",
       "patterns": [
         {
-          "match": "\\\\(x\\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)",
-          "name": "constant.character.escape.zephir"
+          "name": "constant.character.escape.zephir",
+          "match": "\\\\(x[0-9A-Fa-f]{2}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)"
         }
-      ]
-    },
-    {
-      "begin": "\"",
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.zephir"
         }
       },
-      "end": "\"",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.zephir"
         }
-      },
+      }
+    },
+    {
       "name": "string.quoted.double.zephir",
+      "begin": "\"",
+      "end": "\"",
       "patterns": [
         {
-          "match": "\\\\(x\\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)",
-          "name": "constant.character.escape.zephir"
+          "name": "constant.character.escape.zephir",
+          "match": "\\\\(x[0-9A-Fa-f]{2}|[0-2][0-7]{0,2}|3[0-6][0-7]|37[0-7]?|[4-7][0-7]?|.)"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.zephir"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.zephir"
+        }
+      }
     },
     {
+      "name": "comment.block.documentation.zephir",
       "begin": "/\\*\\*(?!/)",
+      "end": "\\*/",
       "captures": {
         "0": {
           "name": "punctuation.definition.comment.zephir"
         }
-      },
-      "end": "\\*/",
-      "name": "comment.block.documentation.zephir"
+      }
     },
     {
+      "name": "comment.block.zephir",
       "begin": "/\\*",
+      "end": "\\*/",
       "captures": {
         "0": {
           "name": "punctuation.definition.comment.zephir"
         }
-      },
-      "end": "\\*/",
-      "name": "comment.block.zephir"
+      }
     },
     {
+      "name": "comment.line.double-slash.zephir",
+      "match": "(//).*$\\n?",
       "captures": {
         "1": {
           "name": "punctuation.definition.comment.zephir"
         }
-      },
-      "match": "(//).*$\\n?",
-      "name": "comment.line.double-slash.zephir"
+      }
     },
     {
-      "match": "\\b(boolean|string|char|class|resource|object|array|callable|namespace|use|as|get|__toString|set|abstract|double|float|fn|function|int|interface|long|var|void|ulong|uint|uchar|unsigned|self)\\b",
-      "name": "storage.type.zephir"
+      "name": "storage.type.zephir",
+      "match": "\\b(boolean|string|char|class|trait|resource|object|array|callable|namespace|use|as|get|__toString|set|abstract|double|float|fn|function|int|interface|long|var|void|ulong|uint|uchar|unsigned|self)\\b"
     },
     {
-      "match": "\\b(const|fetch|empty|likely|unlikely|isset|unset|extends|final|implements|private|protected|public|static|scoped|inline|deprecated|enum|throws|clone)\\b",
-      "name": "storage.modifier.zephir"
+      "name": "storage.modifier.zephir",
+      "match": "\\b(const|fetch|empty|likely|unlikely|isset|unset|extends|final|implements|private|protected|public|static|scoped|internal|inline|deprecated|enum|throws|clone)\\b"
     },
     {
-      "match": "\\b(echo|require|break|case|catch|let|continue|default|do|else|elseif|for|goto|if|return|switch|throw|try|while|loop)\\b",
-      "name": "keyword.control.zephir"
+      "name": "keyword.control.zephir",
+      "match": "\\b(echo|require|break|case|catch|let|continue|default|do|else|elseif|for|goto|if|return|switch|match|throw|try|while|loop)\\b"
     },
     {
-      "match": "\\b(in|reverse|instanceof|new|typeof)\\b",
-      "name": "keyword.operator.zephir"
+      "name": "keyword.operator.zephir",
+      "match": "\\b(in|reverse|instanceof|new|typeof)\\b"
     },
     {
-      "match": "\\btrue\\b",
-      "name": "constant.language.boolean.true.zephir"
+      "name": "constant.language.boolean.true.zephir",
+      "match": "\\btrue\\b"
     },
     {
-      "match": "\\bfalse\\b",
-      "name": "constant.language.boolean.false.zephir"
+      "name": "constant.language.boolean.false.zephir",
+      "match": "\\bfalse\\b"
     },
     {
-      "match": "\\bnull\\b",
-      "name": "constant.language.null.zephir"
+      "name": "constant.language.null.zephir",
+      "match": "\\bnull\\b"
     },
     {
-      "match": "\\b(parent|self|this)\\b",
-      "name": "variable.language.zephir"
+      "name": "variable.language.zephir",
+      "match": "\\b(parent|self|this)\\b"
     },
     {
-      "match": "\\b(PHP_EOL|PHP_VERSION|([A-Z0-9\\_]+))\\b",
-      "name": "string.regexp.zephir"
+      "name": "string.regexp.zephir",
+      "match": "\\b(PHP_EOL|PHP_VERSION|([A-Z0-9\\_]+))\\b"
     },
     {
-      "match": "->|::",
-      "name": "keyword.operator.zephir"
+      "name": "keyword.operator.zephir",
+      "match": "-\u003e|::"
     },
     {
-      "match": "!|\\$|%|&|\\*|\\-\\-|\\-|\\+\\+|\\+|~|===|==|=|!=|!==|<=|>=|<<=|>>=|>>>=|<>|<|>|!|&&|\\|\\||\\?\\:|\\*=|(?<!\\()/=|%=|\\+=|\\-=|&=|\\.=|\\^=|\\b(instanceof|new|typeof|void)\\b",
-      "name": "keyword.operator.zephir"
+      "name": "keyword.operator.zephir",
+      "match": "!|\\$|%|\u0026|\\*|\\-\\-|\\-|\\+\\+|\\+|~|===|==|=|!=|!==|\u003c=|\u003e=|\u003c\u003c=|\u003e\u003e=|\u003e\u003e\u003e=|\u003c\u003e|\u003c|\u003e|!|\u0026\u0026|\\|\\||\\?\\:|\\*=|(?\u003c!\\()/=|%=|\\+=|\\-=|\u0026=|\\.=|\\^=|\\b(instanceof|new|typeof|void)\\b"
     },
     {
-      "match": "\\;",
-      "name": "punctuation.terminator.statement.zephir"
+      "name": "punctuation.terminator.statement.zephir",
+      "match": "\\;"
     },
     {
-      "match": ",[ |\\t]*",
-      "name": "meta.delimiter.object.comma.zephir"
+      "name": "meta.delimiter.object.comma.zephir",
+      "match": ",[ |\\t]*"
     },
     {
-      "match": "\\.",
-      "name": "meta.delimiter.method.period.zephir"
+      "name": "meta.delimiter.method.period.zephir",
+      "match": "\\."
     },
     {
-      "match": "\\{|\\}",
-      "name": "meta.brace.curly.zephir"
+      "name": "meta.brace.curly.zephir",
+      "match": "\\{|\\}"
     },
     {
-      "match": "\\(|\\)",
-      "name": "meta.brace.round.zephir"
+      "name": "meta.brace.round.zephir",
+      "match": "\\(|\\)"
     },
     {
-      "match": "\\[|\\]",
-      "name": "meta.brace.square.zephir"
+      "name": "meta.brace.square.zephir",
+      "match": "\\[|\\]"
     }
-  ],
-  "scopeName": "source.php.zephir",
-  "uuid": "D757833E-2573-11E3-9CA0-50E7973F7489"
+  ]
 }

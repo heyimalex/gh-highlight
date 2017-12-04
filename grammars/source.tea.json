@@ -1,14 +1,10 @@
 {
-  "fileTypes": [
-    "tea"
-  ],
-  "foldingStartMarker": "(\\{\\s*(//.*)?$|^\\s*// \\{\\{\\{)",
-  "foldingStopMarker": "^\\s*(\\}|// \\}\\}\\}$)",
   "name": "Tea",
+  "scopeName": "source.tea",
   "patterns": [
     {
-      "begin": "<%",
-      "end": "%>",
+      "begin": "\u003c%",
+      "end": "%\u003e",
       "patterns": [
         {
           "include": "#language"
@@ -29,8 +25,8 @@
     "functions": {
       "patterns": [
         {
-          "match": "\\b(setLocale|getLocale|getAvailableLocales|nullFormat|getNullFormat|getDateFormat|getAvailableTimeZones|getDataFormatTimeZone|numberFormat|getNumberFormat|getNumberFormatInfinity|getNumberFormatNaN|currentDate|startsWith|endsWith|find|findFirst|substring|toLowerCase|toUpperCase|trim|trimLeading|trimTrailing|replace|replaceFirst|replaceLast|shortOrdinal|ordinal|cardinal)\\b(?=\\()",
-          "name": "support.function.tea"
+          "name": "support.function.tea",
+          "match": "\\b(setLocale|getLocale|getAvailableLocales|nullFormat|getNullFormat|getDateFormat|getAvailableTimeZones|getDataFormatTimeZone|numberFormat|getNumberFormat|getNumberFormatInfinity|getNumberFormatNaN|currentDate|startsWith|endsWith|find|findFirst|substring|toLowerCase|toUpperCase|trim|trimLeading|trimTrailing|replace|replaceFirst|replaceLast|shortOrdinal|ordinal|cardinal)\\b(?=\\()"
         }
       ]
     },
@@ -43,19 +39,12 @@
           "include": "#functions"
         },
         {
-          "begin": "\\b(template)\\s+([a-zA-Z_$]\\w*)?\\s*(\\()",
-          "beginCaptures": {
-            "1": {
-              "name": "storage.type.template.tea"
-            },
-            "2": {
-              "name": "entity.name.class.tea"
-            }
-          },
-          "end": "(\\))",
           "name": "meta.template.tea",
+          "begin": "\\b(template)\\s+([a-zA-Z_$]\\w*)?\\s*(\\()",
+          "end": "(\\))",
           "patterns": [
             {
+              "match": "\\s*([a-zA-Z_$][\\w.]*)\\s+(\\w*)(?:,\\s*)?",
               "captures": {
                 "1": {
                   "name": "storage.type.tea"
@@ -63,23 +52,22 @@
                 "2": {
                   "name": "variable.parameter.template.tea"
                 }
-              },
-              "match": "\\s*([a-zA-Z_$][\\w.]*)\\s+(\\w*)(?:,\\s*)?"
+              }
             }
-          ]
-        },
-        {
-          "begin": "\\b(call)\\s+(.*?)\\(.*?",
+          ],
           "beginCaptures": {
             "1": {
-              "name": "keyword.other.tea"
+              "name": "storage.type.template.tea"
             },
             "2": {
-              "name": "entity.name.function.tea"
+              "name": "entity.name.class.tea"
             }
-          },
-          "end": "\\)",
+          }
+        },
+        {
           "name": "meta.template-call.tea",
+          "begin": "\\b(call)\\s+(.*?)\\(.*?",
+          "end": "\\)",
           "patterns": [
             {
               "include": "#functions"
@@ -87,94 +75,100 @@
             {
               "include": "#strings"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.other.tea"
+            },
+            "2": {
+              "name": "entity.name.function.tea"
+            }
+          }
         },
         {
-          "match": "\\?:|\\?\\.|\\b(break|else|foreach|if|in|reverse)\\b",
-          "name": "keyword.control.tea"
+          "name": "keyword.control.tea",
+          "match": "\\?:|\\?\\.|\\b(break|else|foreach|if|in|reverse)\\b"
         },
         {
-          "match": "#|##|\\.\\.|\\.\\.\\.|&|\\*\\.",
-          "name": "keyword.operator.tea"
+          "name": "keyword.operator.tea",
+          "match": "#|##|\\.\\.|\\.\\.\\.|\u0026|\\*\\."
         },
         {
-          "match": "(\\-|\\+|\\*|%)",
-          "name": "keyword.operator.arithmetic.tea"
+          "name": "keyword.operator.arithmetic.tea",
+          "match": "(\\-|\\+|\\*|%)"
         },
         {
-          "match": "(=)",
-          "name": "keyword.operator.assignment.tea"
+          "name": "keyword.operator.assignment.tea",
+          "match": "(=)"
         },
         {
-          "match": "(==|!=|<|>|<=|>=|<=>|\\b(and|not|or|isa)\\b)",
-          "name": "keyword.operator.comparison.tea"
+          "name": "keyword.operator.comparison.tea",
+          "match": "(==|!=|\u003c|\u003e|\u003c=|\u003e=|\u003c=\u003e|\\b(and|not|or|isa)\\b)"
         },
         {
-          "match": "(!)",
-          "name": "keyword.operator.logical.tea"
+          "name": "keyword.operator.logical.tea",
+          "match": "(!)"
         },
         {
-          "match": "\\b(call|as|define)\\b",
-          "name": "keyword.other.tea"
+          "name": "keyword.other.tea",
+          "match": "\\b(call|as|define)\\b"
         },
         {
-          "match": "\\b(true)\\b",
-          "name": "constant.language.boolean.true.tea"
+          "name": "constant.language.boolean.true.tea",
+          "match": "\\b(true)\\b"
         },
         {
-          "match": "\\b(false)\\b",
-          "name": "constant.language.boolean.false.tea"
+          "name": "constant.language.boolean.false.tea",
+          "match": "\\b(false)\\b"
         },
         {
-          "match": "\\b(null)\\b",
-          "name": "constant.language.null.tea"
+          "name": "constant.language.null.tea",
+          "match": "\\b(null)\\b"
         },
         {
-          "match": "\\b((0(x|X)[0-9a-fA-F]+)|([0-9]+(\\.[0-9]+)?))\\b",
-          "name": "constant.numeric.tea"
+          "name": "constant.numeric.tea",
+          "match": "\\b((0(x|X)[0-9a-fA-F]+)|([0-9]+(\\.[0-9]+)?))\\b"
         },
         {
-          "match": "(//).*$\\n?",
-          "name": "comment.line.double-slash.tea"
+          "name": "comment.line.double-slash.tea",
+          "match": "(//).*$\\n?"
         },
         {
+          "name": "comment.block.tea",
           "begin": "/\\*",
-          "end": "\\*/",
-          "name": "comment.block.tea"
+          "end": "\\*/"
         },
         {
-          "match": "\\;",
-          "name": "punctuation.terminator.statement.tea"
+          "name": "punctuation.terminator.statement.tea",
+          "match": "\\;"
         }
       ]
     },
     "strings": {
       "patterns": [
         {
+          "name": "string.quoted.double.tea",
           "begin": "\"",
           "end": "\"",
-          "name": "string.quoted.double.tea",
           "patterns": [
             {
-              "match": "\\\\(x\\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)",
-              "name": "constant.character.escape.tea"
+              "name": "constant.character.escape.tea",
+              "match": "\\\\(x[[:xdigit:]]{2}|[0-2][0-7]{,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)"
             }
           ]
         },
         {
+          "name": "string.quoted.single.tea",
           "begin": "'",
           "end": "'",
-          "name": "string.quoted.single.tea",
           "patterns": [
             {
-              "match": "\\\\(x\\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)",
-              "name": "constant.character.escape.tea"
+              "name": "constant.character.escape.tea",
+              "match": "\\\\(x[[:xdigit:]]{2}|[0-2][0-7]{,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)"
             }
           ]
         }
       ]
     }
-  },
-  "scopeName": "source.tea",
-  "uuid": "89c32adb-9c57-4d3a-982a-3b2d3b6625fb"
+  }
 }

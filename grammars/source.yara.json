@@ -1,0 +1,98 @@
+{
+  "name": "YARA",
+  "scopeName": "source.yara",
+  "patterns": [
+    {
+      "name": "comment.block.yara",
+      "begin": "/\\*",
+      "end": "\\*/",
+      "captures": {
+        "0": {
+          "name": "punctuation.definition.comment.yara"
+        }
+      }
+    },
+    {
+      "name": "comment.line.yara",
+      "begin": "//",
+      "end": "$\\n?",
+      "patterns": [
+        {
+          "name": "punctuation.separator.continuation.yara",
+          "match": "(?\u003e\\\\\\s*\\n)"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.yara"
+        }
+      }
+    },
+    {
+      "name": "keyword.yara",
+      "match": "\\b(true|false|private|global|rule|strings|meta|condition|and|or|not|filesize|in|at|of|for|all|any|nocase|fullword|wide|ascii|entrypoint|them|int8|int16|int32|uint8|uint16|uint32|include|import|matches|contains)\\b"
+    },
+    {
+      "name": "constant.numeric.yara",
+      "match": "\\b(0(x|X)[0-9a-fA-F]+)(MB|KB)?\\b"
+    },
+    {
+      "name": "variable.other.yara",
+      "match": "(\\$|#|@)[a-zA-Z0-9_*]*"
+    },
+    {
+      "name": "string.quoted.double.yara",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "include": "#string_escaped_char"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.yara"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.yara"
+        }
+      }
+    },
+    {
+      "name": "string.quoted.double.yara",
+      "begin": "/",
+      "end": "/",
+      "patterns": [
+        {
+          "include": "#string_escaped_char"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.yara"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.yara"
+        }
+      }
+    }
+  ],
+  "repository": {
+    "string_escaped_char": {
+      "patterns": [
+        {
+          "name": "constant.character.escape.yara",
+          "match": "\\\\(\\\\|[abefnprtv'\"?]|[0-3]\\d{,2}|[4-7]\\d?|x[a-fA-F0-9]{,2}|u[a-fA-F0-9]{,4}|U[a-fA-F0-9]{,8})"
+        },
+        {
+          "name": "invalid.illegal.unknown-escape.yara",
+          "match": "\\\\."
+        }
+      ]
+    }
+  }
+}

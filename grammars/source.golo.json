@@ -1,182 +1,177 @@
 {
-  "fileTypes": [
-    "golo"
-  ],
   "name": "Golo",
+  "scopeName": "source.golo",
   "patterns": [
     {
-      "comment": "comment with #",
-      "match": "(#).*$\n?",
-      "name": "comment.line.number-sign.golo"
+      "name": "comment.line.number-sign.golo",
+      "match": "(#).*$\n?"
     },
     {
+      "name": "comment.block.golo",
       "begin": "----",
-      "captures": {
-        "0": {
-          "name": "punctuation.definition.comment.golo"
-        }
-      },
       "end": "----",
-      "name": "comment.block.golo"
-    },
-    {
-      "begin": "/\\*",
       "captures": {
         "0": {
           "name": "punctuation.definition.comment.golo"
         }
-      },
+      }
+    },
+    {
+      "name": "comment.block.golo",
+      "begin": "/\\*",
       "end": "\\*/",
-      "name": "comment.block.golo"
+      "captures": {
+        "0": {
+          "name": "punctuation.definition.comment.golo"
+        }
+      }
     },
     {
-      "begin": "\"\"\"",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.golo"
-        }
-      },
-      "end": "\"\"\"",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.golo"
-        }
-      },
       "name": "string.quoted.third.golo",
+      "begin": "\"\"\"",
+      "end": "\"\"\"",
       "patterns": [
         {
-          "match": "(\\$\\w+|\\$\\{[^\\}]+\\})",
-          "name": "variable.parameter.template.golo"
+          "name": "variable.parameter.template.golo",
+          "match": "(\\$\\w+|\\$\\{[^\\}]+\\})"
         },
         {
-          "match": "\\\\.",
-          "name": "constant.character.escape.golo"
+          "name": "constant.character.escape.golo",
+          "match": "\\\\."
         }
-      ]
-    },
-    {
-      "begin": "\"",
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.golo"
         }
       },
-      "end": "\"",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.golo"
         }
-      },
+      }
+    },
+    {
       "name": "string.quoted.double.golo",
+      "begin": "\"",
+      "end": "\"",
       "patterns": [
         {
-          "match": "(\\$\\w+|\\$\\{[^\\}]+\\})",
-          "name": "variable.parameter.template.golo"
+          "name": "variable.parameter.template.golo",
+          "match": "(\\$\\w+|\\$\\{[^\\}]+\\})"
         },
         {
-          "match": "\\\\.",
-          "name": "constant.character.escape.golo"
+          "name": "constant.character.escape.golo",
+          "match": "\\\\."
         }
-      ]
-    },
-    {
-      "begin": "'",
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.golo"
         }
       },
-      "end": "'",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.golo"
         }
-      },
+      }
+    },
+    {
       "name": "string.quoted.single.golo",
+      "begin": "'",
+      "end": "'",
       "patterns": [
         {
-          "match": "\\\\.",
-          "name": "constant.character.escape.golo"
+          "name": "constant.character.escape.golo",
+          "match": "\\\\."
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.golo"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.golo"
+        }
+      }
     },
     {
-      "match": "\\b(true|false|null|super|)\\b",
-      "name": "constant.language.golo"
+      "name": "constant.language.golo",
+      "match": "\\b(true|false|null|super|)\\b"
     },
     {
-      "match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)([LlFfUuDd]|UL|ul)?\\b",
-      "name": "constant.numeric.golo"
+      "name": "constant.numeric.golo",
+      "match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)([LlFfUuDd]|UL|ul)?\\b"
     },
     {
-      "match": "\\b([A-Z][A-Z0-9_]+)\\b",
-      "name": "constant.other.golo"
+      "name": "constant.other.golo",
+      "match": "\\b([A-Z][A-Z0-9_]+)\\b"
     },
     {
-      "match": "\\b(this|checkResult|checkArguments|withContext)\\b",
-      "name": "constant.other.golo"
+      "name": "constant.other.golo",
+      "match": "\\b(this|checkResult|checkArguments|withContext)\\b"
     },
     {
-      "match": "\\b(var|let|val|local|extends|implements|overrides|interfaces)\\b",
-      "name": "storage.modifier.golo"
+      "name": "storage.modifier.golo",
+      "match": "\\b(var|let|val|local|extends|implements|overrides|interfaces)\\b"
     },
     {
-      "match": "\\b(try|catch|finally|throw|raise)\\b",
-      "name": "keyword.control.catch-exception.golo"
+      "name": "keyword.control.catch-exception.golo",
+      "match": "\\b(try|catch|finally|throw|raise)\\b"
     },
     {
-      "match": "\\b(if|then|else|match|while|for|foreach|do|return|when|otherwise|where|break|continue)\\b",
-      "name": "keyword.control.golo"
+      "name": "keyword.control.golo",
+      "match": "\\b(if|then|else|match|while|for|foreach|do|return|when|otherwise|where|break|continue)\\b"
     },
     {
-      "match": "\\b(println|print|readln|readpwd|function|fun|pimp|spawn|send|shutdown|augment|AdapterFabric|DynamicObject|Thread|Promise|promise|Observable|DynamicVariable|defaultContext|module|import|fileToText|textToFile|mapEntry|compile|TemplateEngine|EvaluationEnvironment|asInterfaceInstance|)\\b",
-      "name": "keyword.other.golo"
+      "name": "keyword.other.golo",
+      "match": "\\b(println|print|readln|readpwd|function|fun|pimp|spawn|send|shutdown|augment|AdapterFabric|DynamicObject|Thread|Promise|promise|Observable|DynamicVariable|defaultContext|module|import|fileToText|textToFile|mapEntry|compile|TemplateEngine|EvaluationEnvironment|asInterfaceInstance|)\\b"
     },
     {
-      "match": "\\b(define|fail|onSet|onFail|onChange|invokeWithArguments|stringify|value|get|set|future|times|each|filter|map)\\b",
-      "name": "support.function.js"
+      "name": "support.function.js",
+      "match": "\\b(define|fail|onSet|onFail|onChange|invokeWithArguments|stringify|value|get|set|future|times|each|filter|map)\\b"
     },
     {
-      "match": "\\b(in|not|and|or|is|isnt|as|andThen|bindTo|bindAt|\\?:|orIfNull|oftype)\\b",
-      "name": "keyword.operator.golo"
+      "name": "keyword.operator.golo",
+      "match": "\\b(in|not|and|or|is|isnt|as|andThen|bindTo|bindAt|\\?:|orIfNull|oftype)\\b"
     },
     {
-      "match": "(==|!=|<=|>=|<>|<|>|\\?:)",
-      "name": "keyword.operator.comparison.golo"
+      "name": "keyword.operator.comparison.golo",
+      "match": "(==|!=|\u003c=|\u003e=|\u003c\u003e|\u003c|\u003e|\\?:)"
     },
     {
-      "match": "(=)",
-      "name": "keyword.operator.assignment.golo"
+      "name": "keyword.operator.assignment.golo",
+      "match": "(=)"
     },
     {
-      "match": "(:|\\||)",
-      "name": "keyword.operator.declaration.golo"
+      "name": "keyword.operator.declaration.golo",
+      "match": "(:|\\||)"
     },
     {
-      "match": "(\\.)",
-      "name": "keyword.operator.dot.golo"
+      "name": "keyword.operator.dot.golo",
+      "match": "(\\.)"
     },
     {
-      "match": "(\\-\\-|\\+\\+)",
-      "name": "keyword.operator.increment-decrement.golo"
+      "name": "keyword.operator.increment-decrement.golo",
+      "match": "(\\-\\-|\\+\\+)"
     },
     {
-      "match": "(\\-|\\+|\\*|\\/|%)",
-      "name": "keyword.operator.arithmetic.golo"
+      "name": "keyword.operator.arithmetic.golo",
+      "match": "(\\-|\\+|\\*|\\/|%)"
     },
     {
-      "match": "(!|&&|\\|\\|)",
-      "name": "keyword.operator.logical.golo"
+      "name": "keyword.operator.logical.golo",
+      "match": "(!|\u0026\u0026|\\|\\|)"
     },
     {
-      "match": "\\b(struct|range\\[|tuple\\[|array\\[|map\\[|set\\[|vector\\[|list\\[)|\\[|\\]|\\b",
-      "name": "support.class.golo"
+      "name": "support.class.golo",
+      "match": "\\b(struct|range\\[|tuple\\[|array\\[|map\\[|set\\[|vector\\[|list\\[)|\\[|\\]|\\b"
     },
     {
-      "match": "(\\{|\\}|@|\\(|\\))",
-      "name": "support.class.golo"
+      "name": "support.class.golo",
+      "match": "(\\{|\\}|@|\\(|\\))"
     }
-  ],
-  "scopeName": "source.golo",
-  "uuid": "1cc2b523-9678-42fe-80ae-2604ff57e138"
+  ]
 }

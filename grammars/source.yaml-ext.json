@@ -1,0 +1,324 @@
+{
+  "name": "YAML-ext",
+  "scopeName": "source.yaml-ext",
+  "patterns": [
+    {
+      "include": "#erb"
+    },
+    {
+      "name": "string.unquoted.block.yaml-ext",
+      "begin": "^(\\s*)(?!-\\s*)(\\S+\\s*(:))\\s*(\\||\u003e)",
+      "end": "^(?!\\1\\s+)(?=\\s*(-|\\S+\\s*:|#))",
+      "patterns": [
+        {
+          "include": "#erb"
+        }
+      ],
+      "beginCaptures": {
+        "2": {
+          "name": "entity.name.tag.yaml-ext"
+        },
+        "3": {
+          "name": "punctuation.separator.key-value.yaml-ext"
+        }
+      }
+    },
+    {
+      "name": "string.unquoted.block.yaml-ext",
+      "begin": "^(\\s*)(?:(-)|(?:(-(\\s*))?(\\S+\\s*(:))))\\s*(\\||\u003e)",
+      "end": "^(?!\\1 \\4\\s+)(?=\\s*(-|\\S+\\s*:|#))",
+      "patterns": [
+        {
+          "include": "#erb"
+        }
+      ],
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.definition.entry.yaml-ext"
+        },
+        "3": {
+          "name": "punctuation.definition.entry.yaml-ext"
+        },
+        "5": {
+          "name": "entity.name.tag.yaml-ext"
+        },
+        "6": {
+          "name": "punctuation.separator.key-value.yaml-ext"
+        }
+      }
+    },
+    {
+      "name": "constant.numeric.yaml-ext",
+      "match": "(?:(?:(-\\s*)?([^\\s#].*?(:)(?=\\s)))|(-))\\s*((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f)?\\s*($|(?=#)(?!#\\{))",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.entry.yaml-ext"
+        },
+        "2": {
+          "name": "entity.name.tag.yaml-ext"
+        },
+        "3": {
+          "name": "punctuation.separator.key-value.yaml-ext"
+        },
+        "4": {
+          "name": "punctuation.definition.entry.yaml-ext"
+        }
+      }
+    },
+    {
+      "name": "string.unquoted.yaml-ext",
+      "begin": "(?:(?:(-\\s*)?([^\\s#].*?(:)(?=\\s)))|(-))[ \t]*",
+      "end": "$|(?=#)(?!#\\{)",
+      "patterns": [
+        {
+          "name": "string.unquoted.yaml-ext",
+          "match": "\\!\\s*"
+        },
+        {
+          "include": "#double_quoted_string"
+        },
+        {
+          "include": "#single_quoted_string"
+        },
+        {
+          "name": "string.unquoted.yaml-ext",
+          "match": "[^\"'#\\n]([^#\\n]|((?\u003c!\\s)#))*"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.entry.yaml-ext"
+        },
+        "2": {
+          "name": "entity.name.tag.yaml-ext"
+        },
+        "3": {
+          "name": "punctuation.separator.key-value.yaml-ext"
+        },
+        "4": {
+          "name": "punctuation.definition.entry.yaml-ext"
+        }
+      }
+    },
+    {
+      "name": "constant.other.date.yaml-ext",
+      "match": "(?:(?:(-\\s*)?(\\w+\\s*(:)))|(-))\\s*([0-9]{4}-[0-9]{2}-[0-9]{2})\\s*($|(?=#)(?!#\\{))",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.entry.yaml-ext"
+        },
+        "2": {
+          "name": "entity.name.tag.yaml-ext"
+        },
+        "3": {
+          "name": "punctuation.separator.key-value.yaml-ext"
+        },
+        "4": {
+          "name": "punctuation.definition.entry.yaml-ext"
+        }
+      }
+    },
+    {
+      "name": "meta.tag.yaml-ext",
+      "match": "(\\w.*?)(:)\\s*((\\!\\!)omap)?",
+      "captures": {
+        "1": {
+          "name": "entity.name.tag.yaml-ext"
+        },
+        "2": {
+          "name": "punctuation.separator.key-value.yaml-ext"
+        },
+        "3": {
+          "name": "keyword.other.omap.yaml-ext"
+        },
+        "4": {
+          "name": "punctuation.definition.keyword.yaml-ext"
+        }
+      }
+    },
+    {
+      "name": "variable.other.yaml-ext",
+      "match": "(\\\u0026|\\*)\\w.*?$",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.variable.yaml-ext"
+        }
+      }
+    },
+    {
+      "include": "#double_quoted_string"
+    },
+    {
+      "include": "#single_quoted_string"
+    },
+    {
+      "name": "string.interpolated.yaml-ext",
+      "begin": "`",
+      "end": "`",
+      "patterns": [
+        {
+          "include": "#escaped_char"
+        },
+        {
+          "include": "#erb"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.yaml-ext"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.yaml-ext"
+        }
+      }
+    },
+    {
+      "name": "keyword.operator.merge-key.yaml-ext",
+      "match": "(\\\u003c\\\u003c): ((\\*).*)$",
+      "captures": {
+        "1": {
+          "name": "entity.name.tag.yaml-ext"
+        },
+        "2": {
+          "name": "keyword.operator.merge-key.yaml-ext"
+        },
+        "3": {
+          "name": "punctuation.definition.keyword.yaml-ext"
+        }
+      }
+    },
+    {
+      "name": "invalid.deprecated.trailing-whitespace.yaml-ext",
+      "match": "( |\t)+$",
+      "disabled": true
+    },
+    {
+      "begin": "(^[ \\t]+)?(?\u003c!\\$)(?\u003c=^|[ \\t])(?=#)(?!#\\{)",
+      "end": "(?!\\G)",
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.yaml-ext",
+          "begin": "#",
+          "end": "\\n",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.yaml-ext"
+            }
+          }
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.whitespace.comment.leading.yaml-ext"
+        }
+      }
+    },
+    {
+      "name": "keyword.operator.symbol",
+      "match": "-"
+    },
+    {
+      "name": "meta.leading-tabs.yaml-ext",
+      "begin": "^(?=\\t)",
+      "end": "(?=[^\\t])",
+      "patterns": [
+        {
+          "match": "(\\t)(\\t)?",
+          "captures": {
+            "1": {
+              "name": "meta.odd-tab"
+            },
+            "2": {
+              "name": "meta.even-tab"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "repository": {
+    "double_quoted_string": {
+      "name": "string.quoted.double.yaml-ext",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "include": "#escaped_char"
+        },
+        {
+          "include": "#erb"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.yaml-ext"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.yaml-ext"
+        }
+      }
+    },
+    "erb": {
+      "name": "meta.embedded.line.ruby",
+      "contentName": "source.ruby.rails",
+      "begin": "\u003c%+(?!\u003e)=?",
+      "end": "(%)\u003e",
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.ruby",
+          "match": "(#).*?(?=%\u003e)",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.comment.ruby"
+            }
+          }
+        },
+        {}
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.embedded.begin.ruby"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.embedded.end.ruby"
+        },
+        "1": {
+          "name": "source.ruby.rails"
+        }
+      }
+    },
+    "escaped_char": {
+      "name": "constant.character.escape.yaml-ext",
+      "match": "\\\\."
+    },
+    "single_quoted_string": {
+      "name": "string.quoted.single.yaml-ext",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "include": "#escaped_char"
+        },
+        {
+          "include": "#erb"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.yaml-ext"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.yaml-ext"
+        }
+      }
+    }
+  }
+}

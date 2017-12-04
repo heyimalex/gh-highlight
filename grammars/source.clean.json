@@ -1,11 +1,6 @@
 {
   "name": "Clean",
   "scopeName": "source.clean",
-  "fileTypes": [
-    "icl",
-    "dcl"
-  ],
-  "firstLineMatch": "^(definition|implementation|system) module",
   "patterns": [
     {
       "include": "#marks"
@@ -27,16 +22,49 @@
     }
   ],
   "repository": {
-    "marks": {
+    "commentBlock": {
+      "name": "comment.block.clean",
+      "begin": "/\\*",
+      "end": "\\*/",
       "patterns": [
         {
-          "include": "#mark"
+          "include": "#comment"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.begin.clean"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.end.clean"
+        }
+      }
     },
-    "mark": {
-      "name": "markup.heading.clean",
-      "begin": "/// #+ ",
+    "commentDoc": {
+      "name": "comment.block.documentation",
+      "begin": "/\\*\\*",
+      "end": "\\*/",
+      "patterns": [
+        {
+          "include": "source.gfm"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.documentation.begin.clean"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.documentation.begin.clean"
+        }
+      }
+    },
+    "commentLine": {
+      "name": "comment.line.double-slash.clean",
+      "begin": "//",
       "end": "$",
       "beginCaptures": {
         "0": {
@@ -57,55 +85,21 @@
         }
       ]
     },
-    "commentDoc": {
-      "name": "comment.block.documentation",
-      "begin": "/\\*\\*",
-      "end": "\\*/",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.comment.documentation.begin.clean"
-        }
-      },
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.comment.documentation.begin.clean"
-        }
-      },
-      "patterns": [
-        {
-          "include": "text.md"
-        }
-      ]
+    "delimiters": {
+      "name": "punctuation.separator",
+      "match": "[,;(){}]"
     },
-    "commentBlock": {
-      "name": "comment.block.clean",
-      "begin": "/\\*",
-      "end": "\\*/",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.comment.begin.clean"
-        }
-      },
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.comment.end.clean"
-        }
-      },
-      "patterns": [
-        {
-          "include": "#comment"
-        }
-      ]
+    "keywordGeneral": {
+      "name": "keyword.control.clean",
+      "match": "\\b(if|let|in|with|where|case|of|class|instance)\\b"
     },
-    "commentLine": {
-      "name": "comment.line.double-slash.clean",
-      "begin": "//",
-      "end": "$",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.comment.clean"
-        }
-      }
+    "keywordImport": {
+      "name": "keyword.control.import.clean",
+      "match": "\\b(implementation|definition|system|module|from|import|qualified|as)\\b"
+    },
+    "keywordReserved": {
+      "name": "keyword.reserved.clean",
+      "match": "\\b(special|code|inline|foreign|export|ccall|stdcall|generic|derive|infix(l|r)?|otherwise|dynamic)\\b"
     },
     "keywords": {
       "patterns": [
@@ -120,17 +114,49 @@
         }
       ]
     },
-    "keywordGeneral": {
-      "name": "keyword.control.clean",
-      "match": "\\b(if|let|in|with|where|case|of|class|instance)\\b"
+    "literalBool": {
+      "name": "constant.language.boolean.clean",
+      "match": "\\b(True|False)\\b"
     },
-    "keywordImport": {
-      "name": "keyword.control.import.clean",
-      "match": "\\b(implementation|definition|system|module|from|import|qualified|as)\\b"
+    "literalChar": {
+      "name": "constant.character.clean",
+      "match": "'([^'\\\\]|\\\\(x[0-9a-fA-F]+|\\d+|.))'"
     },
-    "keywordReserved": {
-      "name": "keyword.reserved.clean",
-      "match": "\\b(special|code|inline|foreign|export|ccall|stdcall|generic|derive|infix(l|r)?|otherwise)\\b"
+    "literalHex": {
+      "name": "constant.numeric.integer.hexadecimal.clean",
+      "match": "\\b[+~-]?0x[0-9A-Fa-f]+\\b"
+    },
+    "literalInt": {
+      "name": "constant.numeric.integer.decimal.clean",
+      "match": "\\b[+~-]?[0-9]+\\b"
+    },
+    "literalOct": {
+      "name": "constant.numeric.integer.octal.clean",
+      "match": "\\b[+~-]?0[0-7]+\\b"
+    },
+    "literalReal": {
+      "name": "constant.numeric.float.clean",
+      "match": "\\b[+~-]?[0-9]+\\.[0-9]+(E[+-]?[0-9]+)?\\b"
+    },
+    "literalString": {
+      "name": "string.quoted.double.clean",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "include": "#escaped_character"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.clean"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.clean"
+        }
+      }
     },
     "literals": {
       "patterns": [
@@ -157,49 +183,30 @@
         }
       ]
     },
-    "literalChar": {
-      "name": "constant.character.clean",
-      "match": "'([^'\\\\]|\\\\(x[0-9a-fA-F]+|\\d+|.))'"
-    },
-    "literalInt": {
-      "name": "constant.numeric.integer.decimal.clean",
-      "match": "\\b[+~-]?[0-9]+\\b"
-    },
-    "literalOct": {
-      "name": "constant.numeric.integer.octal.clean",
-      "match": "\\b[+~-]?0[0-7]+\\b"
-    },
-    "literalHex": {
-      "name": "constant.numeric.integer.hexadecimal.clean",
-      "match": "\\b[+~-]?0x[0-9A-Fa-f]+\\b"
-    },
-    "literalReal": {
-      "name": "constant.numeric.float.clean",
-      "match": "\\b[+~-]?[0-9]+\\.[0-9]+(E[+-]?[0-9]+)?\\b"
-    },
-    "literalBool": {
-      "name": "constant.language.boolean.clean",
-      "match": "\\b(True|False)\\b"
-    },
-    "literalString": {
-      "name": "string.quoted.double.clean",
-      "begin": "\"",
-      "end": "\"",
+    "mark": {
+      "name": "markup.heading.clean",
+      "begin": "/// #+ ",
+      "end": "$",
       "beginCaptures": {
         "0": {
-          "name": "punctuation.definition.string.begin.swift"
+          "name": "punctuation.definition.comment.clean"
         }
-      },
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.swift"
-        }
-      },
+      }
+    },
+    "marks": {
       "patterns": [
         {
-          "include": "#escaped_character"
+          "include": "#mark"
         }
       ]
+    },
+    "operatorComposition": {
+      "name": "keyword.operator.composition.clean",
+      "match": "\\s+o\\s+"
+    },
+    "operatorGeneral": {
+      "name": "keyword.operator.clean",
+      "match": "[-~@#$%^?!+*\u003c\u003e\\\\/|\u0026=:.]+"
     },
     "operators": {
       "patterns": [
@@ -210,18 +217,6 @@
           "include": "#operatorComposition"
         }
       ]
-    },
-    "operatorGeneral": {
-      "name": "keyword.operator.clean",
-      "match": "[-~@#$%^?!+*<>/|&=:.]+"
-    },
-    "operatorComposition": {
-      "name": "keyword.operator.composition.clean",
-      "match": "\\s+o\\s+"
-    },
-    "delimiters": {
-      "name": "punctuation.separator",
-      "match": "[,;(){}]"
     }
   }
 }

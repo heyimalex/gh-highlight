@@ -1,21 +1,24 @@
 {
-  "fileTypes": [
-    "gdbinit"
-  ],
   "name": "GDB",
+  "scopeName": "source.gdb",
   "patterns": [
     {
+      "name": "comment.line.number-sign.gdb",
+      "match": "^\\s*(#).*$\\n?",
       "captures": {
         "1": {
           "name": "punctuation.definition.comment.gdb"
         }
-      },
-      "comment": "Comment line.",
-      "match": "^\\s*(#).*$\\n?",
-      "name": "comment.line.number-sign.gdb"
+      }
     },
     {
       "begin": "^\\s*(define)\\ +(.*)?",
+      "end": "^(end)$",
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ],
       "beginCaptures": {
         "0": {
           "name": "meta.function"
@@ -27,150 +30,131 @@
           "name": "entity.name.function.gdb"
         }
       },
-      "comment": "GDB Function Define",
-      "end": "^(end)$",
       "endCaptures": {
         "1": {
           "name": "keyword.other.gdb"
         }
-      },
-      "patterns": [
-        {
-          "include": "$self"
-        }
-      ]
+      }
     },
     {
       "begin": "^\\s*(document)\\ +(?:.*)?",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.other.gdb"
-        }
-      },
-      "comment": "GDB Document",
       "end": "^(end)$",
-      "endCaptures": {
+      "patterns": [
+        {
+          "name": "comment.block.documentation.gdb",
+          "match": "."
+        }
+      ],
+      "beginCaptures": {
         "1": {
           "name": "keyword.other.gdb"
         }
       },
-      "patterns": [
-        {
-          "match": ".",
-          "name": "comment.block.documentation.gdb"
+      "endCaptures": {
+        "1": {
+          "name": "keyword.other.gdb"
         }
-      ]
+      }
     },
     {
-      "begin": "\\\"",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.gdb"
-        }
-      },
-      "comment": "GDB String",
-      "end": "\\\"",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end"
-        }
-      },
       "name": "string.quoted.double.gdb",
+      "begin": "\\\"",
+      "end": "\\\"",
       "patterns": [
         {
           "include": "#stringEscapedChar"
         }
-      ]
-    },
-    {
-      "begin": "\\'",
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.gdb"
         }
       },
-      "comment": "GDB Character",
-      "end": "\\'",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end"
         }
-      },
+      }
+    },
+    {
       "name": "string.quoted.single.gdb",
+      "begin": "\\'",
+      "end": "\\'",
       "patterns": [
         {
           "include": "#stringEscapedChar"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.gdb"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end"
+        }
+      }
     },
     {
       "begin": "^\\s*(echo)",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.other.gdb"
-        }
-      },
-      "comment": "Echo statement",
-      "end": "(?<!\\\\)\\n",
+      "end": "(?\u003c!\\\\)\\n",
       "patterns": [
         {
           "include": "#stringEscapedChar"
         },
         {
-          "match": "\\\\$",
-          "name": "constant.character.escape.gdb"
+          "name": "constant.character.escape.gdb",
+          "match": "\\\\$"
         },
         {
-          "match": ".",
-          "name": "string.other.gdb"
+          "name": "string.other.gdb",
+          "match": "."
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.other.gdb"
+        }
+      }
     },
     {
-      "comment": "GDB Number",
-      "match": "\\b(?:[0-9_]+|0x[0-9a-fA-F_]+)\\b",
-      "name": "constant.numeric.gdb"
+      "name": "constant.numeric.gdb",
+      "match": "\\b(?:[0-9_]+|0x[0-9a-fA-F_]+)\\b"
     },
     {
-      "comment": "GDB Variables",
-      "match": "\\$[@_a-zA-Z][@_a-zA-Z0-9]*",
-      "name": "variable.other.gdb"
+      "name": "variable.other.gdb",
+      "match": "\\$[@_a-zA-Z][@_a-zA-Z0-9]*"
     },
     {
-      "comment": "GDB Info",
-      "match": "\\b(?:address|architecture|args|breakpoints|catch|common|copying|dcache|display|files|float|frame|functions|handle|line|locals|program|registers|scope|set|sharedlibrary|signals|source|sources|stack|symbol|target|terminal|threads|syn|keyword|tracepoints|types|udot)\\b",
-      "name": "storage.type.gdb"
+      "name": "storage.type.gdb",
+      "match": "\\b(?:address|architecture|args|breakpoints|catch|common|copying|dcache|display|files|float|frame|functions|handle|line|locals|program|registers|scope|set|sharedlibrary|signals|source|sources|stack|symbol|target|terminal|threads|syn|keyword|tracepoints|types|udot)\\b"
     },
     {
-      "comment": "GDB Statement",
-      "match": "^\\s*(?:actions|apply|attach|awatch|backtrace|break|bt|call|catch|cd|clear|collect|commands|complete|condition|continue|delete|detach|directory|disable|disassemble|display|down|else|enable|end|file|finish|frame|handle|hbreak|help|if|ignore|inspect|jump|kill|list|load|maintenance|make|next|nexti|ni|output|overlay|passcount|path|print|printf|ptype|pwd|quit|rbreak|remote|return|run|rwatch|search|section|set|sharedlibrary|shell|show|si|signal|source|step|stepi|stepping|stop|target|tbreak|tdump|tfind|thbreak|thread|tp|trace|tstart|tstatus|tstop|tty|undisplay|unset|until|up|watch|whatis|where|while|ws|x|add-shared-symbol-files|add-symbol-file|core-file|dont-repeat|down-silently|exec-file|forward-search|reverse-search|save-tracepoints|select-frame|symbol-file|up-silently|while-stepping)\\b",
-      "name": "keyword.other.gdb"
+      "name": "keyword.other.gdb",
+      "match": "^\\s*(?:actions|apply|attach|awatch|backtrace|break|bt|call|catch|cd|clear|collect|commands|complete|condition|continue|delete|detach|directory|disable|disassemble|display|down|else|enable|end|file|finish|frame|handle|hbreak|help|if|ignore|inspect|jump|kill|list|load|maintenance|make|next|nexti|ni|output|overlay|passcount|path|print|printf|ptype|pwd|quit|rbreak|remote|return|run|rwatch|search|section|set|sharedlibrary|shell|show|si|signal|source|step|stepi|stepping|stop|target|tbreak|tdump|tfind|thbreak|thread|tp|trace|tstart|tstatus|tstop|tty|undisplay|unset|until|up|watch|whatis|where|while|ws|x|add-shared-symbol-files|add-symbol-file|core-file|dont-repeat|down-silently|exec-file|forward-search|reverse-search|save-tracepoints|select-frame|symbol-file|up-silently|while-stepping)\\b"
     },
     {
-      "comment": "GDB Set",
-      "match": "\\b(?:annotate|architecture|args|check|complaints|confirm|editing|endian|environment|gnutarget|height|history|language|listsize|print|prompt|radix|remotebaud|remotebreak|remotecache|remotedebug|remotedevice|remotelogbase|remotelogfile|remotetimeout|remotewritesize|targetdebug|variable|verbose|watchdog|width|write|auto-solib-add|solib-absolute-prefix|solib-search-path|stop-on-solib-events|symbol-reloading|input-radix|demangle-style|output-radix)\\b",
-      "name": "support.constant.gdb"
+      "name": "support.constant.gdb",
+      "match": "\\b(?:annotate|architecture|args|check|complaints|confirm|editing|endian|environment|gnutarget|height|history|language|listsize|print|prompt|radix|remotebaud|remotebreak|remotecache|remotedebug|remotedevice|remotelogbase|remotelogfile|remotetimeout|remotewritesize|targetdebug|variable|verbose|watchdog|width|write|auto-solib-add|solib-absolute-prefix|solib-search-path|stop-on-solib-events|symbol-reloading|input-radix|demangle-style|output-radix)\\b"
     },
     {
-      "comment": "GDB Info",
-      "match": "^\\s*info",
-      "name": "constant.language.gdb"
+      "name": "constant.language.gdb",
+      "match": "^\\s*info"
     }
   ],
   "repository": {
     "stringEscapedChar": {
       "patterns": [
         {
-          "match": "\\\\(?:\\\\|[abefnprtv'\"?]|[0-3]\\d{,2}|[4-7]\\d?|x[a-fA-F0-9]{,2}|u[a-fA-F0-9]{,4}|U[a-fA-F0-9]{,8})",
-          "name": "constant.character.escape.gdb"
+          "name": "constant.character.escape.gdb",
+          "match": "\\\\(?:\\\\|[abefnprtv'\"?]|[0-3]\\d{0,2}|[4-7]\\d?|x[a-fA-F0-9]{0,2}|u[a-fA-F0-9]{0,4}|U[a-fA-F0-9]{0,8})"
         },
         {
-          "match": "\\\\.",
-          "name": "invalid.illegal.gdb"
+          "name": "invalid.illegal.gdb",
+          "match": "\\\\."
         }
       ]
     }
-  },
-  "scopeName": "source.gdb",
-  "uuid": "8d97021b-68d8-4b4b-b1c3-5b505e4a08e3"
+  }
 }

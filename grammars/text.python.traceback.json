@@ -1,9 +1,6 @@
 {
-  "scopeName": "text.python.traceback",
   "name": "Python Traceback",
-  "fileTypes": [
-    "pytb"
-  ],
+  "scopeName": "text.python.traceback",
   "patterns": [
     {
       "match": "^  File (\"[^\"]+\"), line (\\d+)(?:, in (.+))?$",

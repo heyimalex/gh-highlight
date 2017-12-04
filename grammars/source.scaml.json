@@ -1,14 +1,10 @@
 {
-  "fileTypes": [
-    "scaml"
-  ],
-  "foldingStartMarker": "^\\s*([-%#\\:\\.\\w\\=].*)\\s$",
-  "foldingStopMarker": "^\\s*$",
   "name": "Scaml (Scalate)",
+  "scopeName": "source.scaml",
   "patterns": [
     {
-      "begin": "^\\s*[&!]?==",
       "contentName": "string.quoted.double.scala",
+      "begin": "^\\s*[\u0026!]?==",
       "end": "$\\n?",
       "patterns": [
         {
@@ -17,9 +13,9 @@
       ]
     },
     {
+      "name": "source.scala.embedded.filter.scaml",
       "begin": "^(\\s*):scala$",
       "end": "^\\1$",
-      "name": "source.scala.embedded.filter.scaml",
       "patterns": [
         {
           "include": "source.scala"
@@ -27,31 +23,29 @@
       ]
     },
     {
+      "name": "meta.prolog.scaml",
+      "match": "^(!!!)($|\\s.*)",
       "captures": {
         "1": {
           "name": "punctuation.definition.prolog.scaml"
         }
-      },
-      "match": "^(!!!)($|\\s.*)",
-      "name": "meta.prolog.scaml"
+      }
     },
     {
+      "name": "source.js.embedded.scaml",
       "begin": ":javascript",
       "end": "^(\\s+)?%",
-      "name": "source.js.embedded.scaml",
       "patterns": [
         {
           "include": "source.js"
         },
-        {
-          "include": "source.js.jquery"
-        }
+        {}
       ]
     },
     {
+      "name": "source.embedded.filter.js",
       "begin": "^(\\s*):javascript$",
       "end": "^\\1$",
-      "name": "source.embedded.filter.js",
       "patterns": [
         {
           "include": "source.js"
@@ -59,9 +53,9 @@
       ]
     },
     {
+      "name": "source.scala.embedded.filter.scaml",
       "begin": "^(\\s*):scala$",
       "end": "^\\1$",
-      "name": "source.scala.embedded.filter.scaml",
       "patterns": [
         {
           "include": "source.scala"
@@ -69,47 +63,36 @@
       ]
     },
     {
+      "name": "comment.line.slash.scaml",
+      "match": "^ *(/)\\s*\\S.*$\\n?",
       "captures": {
         "1": {
           "name": "punctuation.section.comment.scaml"
         }
-      },
-      "match": "^ *(/)\\s*\\S.*$\\n?",
-      "name": "comment.line.slash.scaml"
+      }
     },
     {
-      "begin": "^( *)(/)\\s*$",
-      "beginCaptures": {
-        "2": {
-          "name": "punctuation.section.comment.scaml"
-        }
-      },
-      "end": "^(?!\\1  )",
       "name": "comment.block.scaml",
+      "begin": "^( *)(/)\\s*$",
+      "end": "^(?!\\1  )",
       "patterns": [
         {
           "include": "source.scaml"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.section.comment.scaml"
+        }
+      }
     },
     {
       "begin": "^\\s*(?:((%)(('[^']+')|([\\w\\_\\-:]+)))|(?=\\.\\w|#\\w))",
-      "captures": {
-        "1": {
-          "name": "meta.tag.scaml"
-        },
-        "2": {
-          "name": "punctuation.definition.tag.scaml"
-        },
-        "3": {
-          "name": "entity.name.tag.scaml"
-        }
-      },
-      "end": "$|(?!(\\>\\<|\\<?\\>?)(\\.|#|\\{|\\[|[&!]?=|~|/))",
+      "end": "$|(?!(\\\u003e\\\u003c|\\\u003c?\\\u003e?)(\\.|#|\\{|\\[|[\u0026!]?=|~|/))",
       "patterns": [
         {
-          "begin": "[&!]?==",
           "contentName": "string.quoted.double.scala",
+          "begin": "[\u0026!]?==",
           "end": "$\\n?",
           "patterns": [
             {
@@ -118,27 +101,27 @@
           ]
         },
         {
+          "name": "meta.selector.css",
+          "match": "(\\.[\\w-]+)",
           "captures": {
             "1": {
               "name": "entity.other.attribute-name.class"
             }
-          },
-          "match": "(\\.[\\w-]+)",
-          "name": "meta.selector.css"
+          }
         },
         {
+          "name": "meta.selector.css",
+          "match": "(#[\\w-]+)",
           "captures": {
             "1": {
               "name": "entity.other.attribute-name.id"
             }
-          },
-          "match": "(#[\\w-]+)",
-          "name": "meta.selector.css"
+          }
         },
         {
+          "name": "meta.section.attributes.scaml",
           "begin": "\\{(?=.*\\}||.*\\|\\s*$)",
           "end": "\\}|$|^(?!.*\\|\\s*$)",
-          "name": "meta.section.attributes.scaml",
           "patterns": [
             {
               "include": "source.scala"
@@ -149,9 +132,9 @@
           ]
         },
         {
+          "name": "meta.section.object.scaml",
           "begin": "\\[(?=.*\\]|.*\\|\\s*$)",
           "end": "\\]|$|^(?!.*\\|\\s*$)",
-          "name": "meta.section.object.scaml",
           "patterns": [
             {
               "include": "source.scala"
@@ -168,15 +151,26 @@
           "include": "#scalaline"
         },
         {
-          "match": "/",
-          "name": "punctuation.terminator.tag.scaml"
+          "name": "punctuation.terminator.tag.scaml",
+          "match": "/"
         }
-      ]
+      ],
+      "captures": {
+        "1": {
+          "name": "meta.tag.scaml"
+        },
+        "2": {
+          "name": "punctuation.definition.tag.scaml"
+        },
+        "3": {
+          "name": "entity.name.tag.scaml"
+        }
+      }
     },
     {
+      "name": "source.scala.embedded.filter.scaml",
       "begin": "^(\\s*):scala$",
       "end": "^\\1$",
-      "name": "source.scala.embedded.filter.scaml",
       "patterns": [
         {
           "include": "source.scala"
@@ -184,9 +178,9 @@
       ]
     },
     {
+      "name": "source.scala.embedded.filter.scaml",
       "begin": "^(\\s*):scala$",
       "end": "^\\1([^\\s]*)$",
-      "name": "source.scala.embedded.filter.scaml",
       "patterns": [
         {
           "include": "source.scala"
@@ -194,9 +188,9 @@
       ]
     },
     {
+      "name": "source.sass.embedded.filter.scaml",
       "begin": "^(\\s*):(style|sass)$",
       "end": "^\\1$",
-      "name": "source.sass.embedded.filter.scaml",
       "patterns": [
         {
           "include": "source.sass"
@@ -204,9 +198,9 @@
       ]
     },
     {
+      "name": "source.js.embedded.filter.scaml",
       "begin": "^(\\s*):(java)?script$",
       "end": "^\\1([^\\s]*)$",
-      "name": "source.js.embedded.filter.scaml",
       "patterns": [
         {
           "include": "#javascript_filter"
@@ -214,64 +208,60 @@
       ]
     },
     {
+      "name": "text.plain.embedded.filter.scaml",
       "begin": "^(\\s*):plain$",
       "end": "^\\1([^\\s]*)$",
-      "name": "text.plain.embedded.filter.scaml",
       "patterns": [
-        {
-          "include": "text.plain"
-        }
+        {}
       ]
     },
     {
-      "begin": "^(\\s*)(:scala)",
-      "beginCaptures": {
-        "2": {
-          "name": "keyword.control.filter.scaml"
-        }
-      },
-      "end": "^(?!\\1  )",
       "name": "source.scala.embedded.filter.scaml",
+      "begin": "^(\\s*)(:scala)",
+      "end": "^(?!\\1  )",
       "patterns": [
         {
           "include": "source.scala"
         }
-      ]
-    },
-    {
-      "begin": "^(\\s*)(:javascript)",
+      ],
       "beginCaptures": {
         "2": {
           "name": "keyword.control.filter.scaml"
         }
-      },
-      "end": "^(?!\\1  )",
+      }
+    },
+    {
       "name": "source.js.jquery.embedded.filter.scaml",
+      "begin": "^(\\s*)(:javascript)",
+      "end": "^(?!\\1  )",
       "patterns": [
-        {
-          "include": "source.js.jquery"
-        }
-      ]
-    },
-    {
-      "begin": "^(\\s*)(:sass)",
+        {}
+      ],
       "beginCaptures": {
         "2": {
           "name": "keyword.control.filter.scaml"
         }
-      },
-      "end": "^(?!\\1  )",
+      }
+    },
+    {
       "name": "source.embedded.filter.sass",
+      "begin": "^(\\s*)(:sass)",
+      "end": "^(?!\\1  )",
       "patterns": [
         {
           "include": "source.sass"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "2": {
+          "name": "keyword.control.filter.scaml"
+        }
+      }
     },
     {
+      "name": "source.sass.embedded.filter.scaml",
       "begin": "^(\\s*):(styles|sass)$",
       "end": "^\\1$",
-      "name": "source.sass.embedded.filter.scaml",
       "patterns": [
         {
           "include": "source.sass"
@@ -279,9 +269,9 @@
       ]
     },
     {
+      "name": "source.js.embedded.filter.scaml",
       "begin": "^(\\s*):(java)?script$",
       "end": "^\\1$",
-      "name": "source.js.embedded.filter.scaml",
       "patterns": [
         {
           "include": "source.js"
@@ -289,25 +279,23 @@
       ]
     },
     {
+      "name": "text.plain.embedded.filter.scaml",
       "begin": "^(\\s*):plain$",
       "end": "^\\1$",
-      "name": "text.plain.embedded.filter.scaml",
       "patterns": [
-        {
-          "include": "text.plain"
-        }
+        {}
       ]
     },
     {
+      "match": "^\\s*(\\\\.)",
       "captures": {
         "1": {
           "name": "meta.escape.scaml"
         }
-      },
-      "match": "^\\s*(\\\\.)"
+      }
     },
     {
-      "begin": "^\\s*(?=[&!]?=|-|~)",
+      "begin": "^\\s*(?=[\u0026!]?=|-|~)",
       "end": "$",
       "patterns": [
         {
@@ -321,16 +309,18 @@
   ],
   "repository": {
     "continuation": {
+      "match": "(\\|)\\s*\\n",
       "captures": {
         "1": {
           "name": "punctuation.separator.continuation.scaml"
         }
-      },
-      "match": "(\\|)\\s*\\n"
+      }
     },
     "interpolated_scala": {
       "patterns": [
         {
+          "name": "source.scala.embedded.source",
+          "match": "#\\{(\\})",
           "captures": {
             "0": {
               "name": "punctuation.section.embedded.scala"
@@ -338,19 +328,12 @@
             "1": {
               "name": "source.scala.embedded.source.empty"
             }
-          },
-          "match": "#\\{(\\})",
-          "name": "source.scala.embedded.source"
+          }
         },
         {
-          "begin": "#\\{",
-          "captures": {
-            "0": {
-              "name": "punctuation.section.embedded.scala"
-            }
-          },
-          "end": "(\\})",
           "name": "source.scala.embedded.source",
+          "begin": "#\\{",
+          "end": "(\\})",
           "patterns": [
             {
               "include": "#nest_curly_and_self"
@@ -358,41 +341,46 @@
             {
               "include": "source.scala"
             }
-          ]
+          ],
+          "captures": {
+            "0": {
+              "name": "punctuation.section.embedded.scala"
+            }
+          }
         },
         {
-          "captures": {
-            "1": {
-              "name": "punctuation.definition.variable.scala"
-            }
-          },
+          "name": "variable.other.readwrite.instance.scala",
           "match": "(#@)[a-zA-Z_]\\w*",
-          "name": "variable.other.readwrite.instance.scala"
-        },
-        {
           "captures": {
             "1": {
               "name": "punctuation.definition.variable.scala"
             }
-          },
+          }
+        },
+        {
+          "name": "variable.other.readwrite.class.scala",
           "match": "(#@@)[a-zA-Z_]\\w*",
-          "name": "variable.other.readwrite.class.scala"
-        },
-        {
           "captures": {
             "1": {
               "name": "punctuation.definition.variable.scala"
             }
-          },
+          }
+        },
+        {
+          "name": "variable.other.readwrite.global.scala",
           "match": "(#\\$)[a-zA-Z_]\\w*",
-          "name": "variable.other.readwrite.global.scala"
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.variable.scala"
+            }
+          }
         }
       ]
     },
     "interpolated_scala_line": {
+      "name": "meta.line.scala.interpolated.scaml",
       "begin": "!?==",
       "end": "$",
-      "name": "meta.line.scala.interpolated.scaml",
       "patterns": [
         {
           "include": "#interpolated_scala"
@@ -416,17 +404,17 @@
       "patterns": [
         {
           "begin": "\\{",
-          "captures": {
-            "0": {
-              "name": "punctuation.section.scope.scala"
-            }
-          },
           "end": "\\}",
           "patterns": [
             {
               "include": "#nest_curly_and_self"
             }
-          ]
+          ],
+          "captures": {
+            "0": {
+              "name": "punctuation.section.scope.scala"
+            }
+          }
         },
         {
           "include": "source.scala"
@@ -434,23 +422,14 @@
       ]
     },
     "scalaline": {
-      "begin": "!=|&=|==|=|-|~",
-      "contentName": "source.scala.embedded.scaml",
-      "end": "((do|\\{)( \\|[^|]+\\|)?)$|$|^(?!.*\\|\\s*$)",
-      "endCaptures": {
-        "1": {
-          "name": "source.scala.embedded.html"
-        },
-        "2": {
-          "name": "keyword.control.scala.start-block"
-        }
-      },
       "name": "meta.line.scala.scaml",
+      "contentName": "source.scala.embedded.scaml",
+      "begin": "!=|\u0026=|==|=|-|~",
+      "end": "((do|\\{)( \\|[^|]+\\|)?)$|$|^(?!.*\\|\\s*$)",
       "patterns": [
         {
-          "comment": "Hack to let scala comments work in this context properly",
-          "match": "#.*$",
-          "name": "comment.line.number-sign.scala"
+          "name": "comment.line.number-sign.scala",
+          "match": "#.*$"
         },
         {
           "include": "source.scala"
@@ -458,9 +437,15 @@
         {
           "include": "#continuation"
         }
-      ]
+      ],
+      "endCaptures": {
+        "1": {
+          "name": "source.scala.embedded.html"
+        },
+        "2": {
+          "name": "keyword.control.scala.start-block"
+        }
+      }
     }
-  },
-  "scopeName": "source.scaml",
-  "uuid": "ACCBCED2-E173-4559-8708-ECFE5FEA6625"
+  }
 }

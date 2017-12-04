@@ -1,21 +1,15 @@
 {
-  "fileTypes": [
-    "jflex",
-    "flex"
-  ],
   "name": "JFlex",
+  "scopeName": "source.jflex",
   "patterns": [
     {
+      "name": "meta.package.jflex",
       "begin": "\\A",
       "end": "^%(?=%)",
-      "endCaptures": {
-        "0": {
-          "name": "markup.heading.jflex"
-        }
-      },
-      "name": "meta.package.jflex",
       "patterns": [
         {
+          "name": "meta.package.java",
+          "match": "^\\s*(package)\\b(?:\\s*([^ ;$]+)\\s*(;)?)?",
           "captures": {
             "1": {
               "name": "keyword.other.package.java"
@@ -26,17 +20,60 @@
             "3": {
               "name": "punctuation.terminator.java"
             }
-          },
-          "match": "^\\s*(package)\\b(?:\\s*([^ ;$]+)\\s*(;)?)?",
-          "name": "meta.package.java"
+          }
         },
         {
+          "name": "meta.import.java",
+          "contentName": "storage.modifier.import.java",
           "begin": "(import static)\\b\\s*",
+          "end": "\\s*(?:$|(;))",
+          "patterns": [
+            {
+              "name": "punctuation.separator.java",
+              "match": "\\."
+            },
+            {
+              "name": "invalid.illegal.character_not_allowed_here.java",
+              "match": "\\s"
+            }
+          ],
+          "captures": {
+            "1": {
+              "name": "keyword.other.import.java"
+            },
+            "2": {
+              "name": "storage.modifier.import.java"
+            },
+            "3": {
+              "name": "punctuation.terminator.java"
+            }
+          },
           "beginCaptures": {
             "1": {
               "name": "keyword.other.import.static.java"
             }
           },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.terminator.java"
+            }
+          }
+        },
+        {
+          "name": "meta.import.java",
+          "contentName": "storage.modifier.import.java",
+          "begin": "(import)\\b\\s*",
+          "end": "\\s*(?:$|(;))",
+          "patterns": [
+            {
+              "name": "punctuation.separator.java",
+              "match": "\\."
+            },
+            {
+              "name": "invalid.illegal.character_not_allowed_here.java",
+              "match": "\\s"
+            }
+          ],
           "captures": {
             "1": {
               "name": "keyword.other.import.java"
@@ -48,107 +85,47 @@
               "name": "punctuation.terminator.java"
             }
           },
-          "contentName": "storage.modifier.import.java",
-          "end": "\\s*(?:$|(;))",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.terminator.java"
-            }
-          },
-          "name": "meta.import.java",
-          "patterns": [
-            {
-              "match": "\\.",
-              "name": "punctuation.separator.java"
-            },
-            {
-              "match": "\\s",
-              "name": "invalid.illegal.character_not_allowed_here.java"
-            }
-          ]
-        },
-        {
-          "begin": "(import)\\b\\s*",
           "beginCaptures": {
             "1": {
               "name": "keyword.other.import.java"
             }
           },
-          "captures": {
-            "1": {
-              "name": "keyword.other.import.java"
-            },
-            "2": {
-              "name": "storage.modifier.import.java"
-            },
-            "3": {
-              "name": "punctuation.terminator.java"
-            }
-          },
-          "contentName": "storage.modifier.import.java",
-          "end": "\\s*(?:$|(;))",
           "endCaptures": {
             "1": {
               "name": "punctuation.terminator.java"
             }
-          },
-          "name": "meta.import.java",
-          "patterns": [
-            {
-              "match": "\\.",
-              "name": "punctuation.separator.java"
-            },
-            {
-              "match": "\\s",
-              "name": "invalid.illegal.character_not_allowed_here.java"
-            }
-          ]
+          }
         },
         {
           "include": "source.java#code"
         }
-      ]
-    },
-    {
-      "begin": "%",
-      "beginCaptures": {
-        "0": {
-          "name": "markup.heading.jflex"
-        }
-      },
-      "end": "^%%",
+      ],
       "endCaptures": {
         "0": {
           "name": "markup.heading.jflex"
         }
-      },
+      }
+    },
+    {
       "name": "meta.macros.jflex",
+      "begin": "%",
+      "end": "^%%",
       "patterns": [
         {
-          "match": "^%unicode(\\s+[1-9][0-9]*(\\.[0-9]+){0,2})?",
-          "name": "keyword.other.jflex"
+          "name": "keyword.other.jflex",
+          "match": "^%unicode(\\s+[1-9][0-9]*(\\.[0-9]+){0,2})?"
         },
         {
-          "match": "^%buffer\\s+[1-9][0-9]*",
-          "name": "keyword.other.jflex"
+          "name": "keyword.other.jflex",
+          "match": "^%buffer\\s+[1-9][0-9]*"
         },
         {
-          "match": "^%(eofclose|inputstreamctor)(\\s+(true|false))?",
-          "name": "keyword.other.jflex"
+          "name": "keyword.other.jflex",
+          "match": "^%(eofclose|inputstreamctor)(\\s+(true|false))?"
         },
         {
-          "captures": {
-            "1": {
-              "name": "keyword.other.jflex"
-            },
-            "2": {
-              "name": "storage.type.jflex"
-            }
-          },
+          "name": "meta.somearg.jflex",
           "match": "^(%(?:class|extends|type|ctorarg|implements|include|initthrow|eofthrow|yylexthrow|throws|scanerror))\\s+(.+)",
-          "name": "meta.somearg.jflex"
-        },
-        {
           "captures": {
             "1": {
               "name": "keyword.other.jflex"
@@ -156,11 +133,11 @@
             "2": {
               "name": "storage.type.jflex"
             }
-          },
+          }
+        },
+        {
+          "name": "meta.funarg.jflex",
           "match": "^(%function)\\s+(\\w+)",
-          "name": "meta.funarg.jflex"
-        },
-        {
           "captures": {
             "1": {
               "name": "keyword.other.jflex"
@@ -168,67 +145,84 @@
             "2": {
               "name": "storage.type.jflex"
             }
-          },
-          "match": "^(%cupsym)\\s+(\\w+(\\.w+)*)",
-          "name": "meta.cupsym.jflex"
+          }
         },
         {
-          "begin": "^%state",
-          "beginCaptures": {
-            "0": {
+          "name": "meta.cupsym.jflex",
+          "match": "^(%cupsym)\\s+(\\w+(\\.w+)*)",
+          "captures": {
+            "1": {
               "name": "keyword.other.jflex"
+            },
+            "2": {
+              "name": "storage.type.jflex"
             }
-          },
-          "end": "$",
+          }
+        },
+        {
           "name": "meta.states.jflex",
+          "begin": "^%state",
+          "end": "$",
           "patterns": [
             {
-              "match": "\\w+",
-              "name": "storage.modifier.jflex"
+              "name": "storage.modifier.jflex",
+              "match": "\\w+"
             },
             {
-              "match": ",",
-              "name": "punctuation.separator.jflex"
+              "name": "punctuation.separator.jflex",
+              "match": ","
             },
             {
-              "match": "\\s+",
-              "name": "meta.whitespace.jflex"
+              "name": "meta.whitespace.jflex",
+              "match": "\\s+"
             },
             {
               "include": "source.java#comments"
             },
             {
-              "match": "\\S",
-              "name": "invalid.illegal.characater.jflex"
+              "name": "invalid.illegal.characater.jflex",
+              "match": "\\S"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "keyword.other.jflex"
+            }
+          }
         },
         {
-          "match": "^%(char|line|column|byaccj|cup2|cup(debug)?|integer|int(wrap)?|yyeof|notunix|7bit|full|8bit|16bit|caseless|ignorecase|public|apiprivate|final|abstract|debug|standalone|pack)",
-          "name": "keyword.other.jflex"
+          "name": "keyword.other.jflex",
+          "match": "^%(char|line|column|byaccj|cup2|cup(debug)?|integer|int(wrap)?|yyeof|notunix|7bit|full|8bit|16bit|caseless|ignorecase|public|apiprivate|final|abstract|debug|standalone|pack)"
         },
         {
+          "name": "meta.classcode.jflex",
           "begin": "^%(|init|initthrow|eof|eofthrow|yylexthrow|eofval){",
+          "end": "^%(|init|initthrow|eof|eofthrow|yylexthrow|eofval)}",
+          "patterns": [
+            {
+              "include": "source.java#code"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "keyword.other.jflex"
             }
           },
-          "end": "^%(|init|initthrow|eof|eofthrow|yylexthrow|eofval)}",
           "endCaptures": {
             "0": {
               "name": "keyword.other.jflex"
             }
-          },
-          "name": "meta.classcode.jflex",
-          "patterns": [
-            {
-              "include": "source.java#code"
-            }
-          ]
+          }
         },
         {
+          "name": "meta.macro.jflex",
           "begin": "(\\w+)\\s*(=)",
+          "end": "(?=^%|\\w+\\s*=)",
+          "patterns": [
+            {
+              "include": "#regexp"
+            }
+          ],
           "beginCaptures": {
             "1": {
               "name": "variable.other.jflex"
@@ -236,26 +230,28 @@
             "2": {
               "name": "keyword.operator.jflex"
             }
-          },
-          "end": "(?=^%|\\w+\\s*=)",
-          "name": "meta.macro.jflex",
-          "patterns": [
-            {
-              "include": "#regexp"
-            }
-          ]
+          }
         },
         {
-          "match": "^%\\S*",
-          "name": "invalid.illegal.directive.jflex"
+          "name": "invalid.illegal.directive.jflex",
+          "match": "^%\\S*"
         },
         {
           "include": "source.java#comments"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "markup.heading.jflex"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "markup.heading.jflex"
+        }
+      }
     },
     {
-      "begin": "",
       "contentName": "meta.rules.jflex",
       "end": "\\z",
       "patterns": [
@@ -269,44 +265,44 @@
     "charclass": {
       "patterns": [
         {
-          "match": "\\[:(jletter|jletterdigit|letter|uppercase|lowercase|digit):\\]",
-          "name": "keyword.operator.jflex"
+          "name": "keyword.operator.jflex",
+          "match": "\\[:(jletter|jletterdigit|letter|uppercase|lowercase|digit):\\]"
         },
         {
-          "match": "\\\\(d|D|s|S|w|W|p{[^}]*}|P{[^}]*})",
-          "name": "keyword.operator.jflex"
+          "name": "keyword.operator.jflex",
+          "match": "\\\\(d|D|s|S|w|W|p{[^}]*}|P{[^}]*})"
         }
       ]
     },
     "class": {
       "patterns": [
         {
+          "name": "meta.class.jflex",
           "begin": "\\[",
+          "end": "\\]",
+          "patterns": [
+            {
+              "include": "#classcontent"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "keyword.operator.jflex"
             }
           },
-          "end": "\\]",
           "endCaptures": {
             "0": {
               "name": "keyword.operator.jflex"
             }
-          },
-          "name": "meta.class.jflex",
-          "patterns": [
-            {
-              "include": "#classcontent"
-            }
-          ]
+          }
         }
       ]
     },
     "classcontent": {
       "patterns": [
         {
-          "match": "\\^|\\-|\\&\\&|\\|\\|",
-          "name": "keyword.operator.jflex"
+          "name": "keyword.operator.jflex",
+          "match": "\\^|\\-|\\\u0026\\\u0026|\\|\\|"
         },
         {
           "include": "#charclass"
@@ -318,8 +314,8 @@
           "include": "#escape"
         },
         {
-          "match": "({)(\\w+)(})",
-          "name": "variable.other.macro.jflex"
+          "name": "variable.other.macro.jflex",
+          "match": "({)(\\w+)(})"
         },
         {
           "include": "#string"
@@ -332,40 +328,40 @@
     "escape": {
       "patterns": [
         {
-          "match": "\\\\(b|n|t|f|r|R)",
-          "name": "keyword.operator.jflex"
+          "name": "keyword.operator.jflex",
+          "match": "\\\\(b|n|t|f|r|R)"
         },
         {
-          "match": "\\\\.",
-          "name": "constant.character.escape.jflex"
+          "name": "constant.character.escape.jflex",
+          "match": "\\\\."
         }
       ]
     },
     "macro": {
-      "match": "({)(\\s*\\w+\\s*)(})",
-      "name": "variable.other.macro.jflex"
+      "name": "variable.other.macro.jflex",
+      "match": "({)(\\s*\\w+\\s*)(})"
     },
     "numeric": {
       "patterns": [
         {
-          "match": "\\\\x[0-9a-fA-F]{2}",
-          "name": "constant.numeric.jflex"
+          "name": "constant.numeric.jflex",
+          "match": "\\\\x[0-9a-fA-F]{2}"
         },
         {
-          "match": "\\\\[0-3]?[0-7]{1,2}",
-          "name": "constant.numeric.jflex"
+          "name": "constant.numeric.jflex",
+          "match": "\\\\[0-3]?[0-7]{1,2}"
         },
         {
-          "match": "\\\\U[0-9a-fA-F]{6}",
-          "name": "constant.numeric.jflex"
+          "name": "constant.numeric.jflex",
+          "match": "\\\\U[0-9a-fA-F]{6}"
         },
         {
-          "match": "\\\\u[0-9a-fA-F]{4}",
-          "name": "constant.numeric.jflex"
+          "name": "constant.numeric.jflex",
+          "match": "\\\\u[0-9a-fA-F]{4}"
         },
         {
-          "match": "\\\\u{[0-9a-fA-F]{1,6}}",
-          "name": "constant.numeric.jflex"
+          "name": "constant.numeric.jflex",
+          "match": "\\\\u{[0-9a-fA-F]{1,6}}"
         }
       ]
     },
@@ -396,23 +392,30 @@
           "include": "source.java#comments"
         },
         {
-          "match": "\\.|\\+|\\*|\\(|\\)|\\?|\\||~|!|\\$|\\^|\\\\R|/",
-          "name": "keyword.operator.jflex"
+          "name": "keyword.operator.jflex",
+          "match": "\\.|\\+|\\*|\\(|\\)|\\?|\\||~|!|\\$|\\^|\\\\R|/"
         }
       ]
     },
     "repeat": {
       "patterns": [
         {
-          "match": "{\\s*\\d+\\s*(\\s*,\\s*\\d+\\s*)?}",
-          "name": "keyword.operator.jflex"
+          "name": "keyword.operator.jflex",
+          "match": "{\\s*\\d+\\s*(\\s*,\\s*\\d+\\s*)?}"
         }
       ]
     },
     "rules": {
       "patterns": [
         {
-          "begin": "(\\<\\s*\\w+\\s*(?:,\\s*\\w+\\s*)*\\>)\\s*({)(?!\\s*\\w+\\s*})",
+          "name": "meta.states.jflex",
+          "begin": "(\\\u003c\\s*\\w+\\s*(?:,\\s*\\w+\\s*)*\\\u003e)\\s*({)(?!\\s*\\w+\\s*})",
+          "end": "}",
+          "patterns": [
+            {
+              "include": "#rules"
+            }
+          ],
           "beginCaptures": {
             "1": {
               "name": "variable.parameter.jflex"
@@ -421,58 +424,51 @@
               "name": "keyword.operator.jflex"
             }
           },
-          "end": "}",
           "endCaptures": {
             "0": {
               "name": "keyword.operator.jflex"
             }
-          },
-          "name": "meta.states.jflex",
-          "patterns": [
-            {
-              "include": "#rules"
-            }
-          ]
+          }
         },
         {
-          "match": "\\<\\s*\\w+\\s*(,\\s*\\w+\\s*)*\\>",
-          "name": "variable.parameter.jflex"
+          "name": "variable.parameter.jflex",
+          "match": "\\\u003c\\s*\\w+\\s*(,\\s*\\w+\\s*)*\\\u003e"
         },
         {
           "include": "#regexp"
         },
         {
-          "match": "<<EOF>>",
-          "name": "constant.language.jflex"
+          "name": "constant.language.jflex",
+          "match": "\u003c\u003cEOF\u003e\u003e"
         },
         {
+          "name": "meta.code.jflex",
           "begin": "({)(?!\\s*\\w+\\s*})",
+          "end": "}",
+          "patterns": [
+            {
+              "include": "source.java#code"
+            }
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.operator.jflex"
             }
           },
-          "end": "}",
           "endCaptures": {
             "0": {
               "name": "keyword.operator.jflex"
             }
-          },
-          "name": "meta.code.jflex",
-          "patterns": [
-            {
-              "include": "source.java#code"
-            }
-          ]
+          }
         }
       ]
     },
     "string": {
       "patterns": [
         {
+          "name": "string",
           "begin": "\"",
           "end": "\"",
-          "name": "string",
           "patterns": [
             {
               "include": "#numeric"
@@ -484,7 +480,5 @@
         }
       ]
     }
-  },
-  "scopeName": "source.jflex",
-  "uuid": "298AC028-D72E-4E85-982B-5A38D5B8ABB0"
+  }
 }

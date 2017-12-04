@@ -1,29 +1,24 @@
 {
-  "comment": "BrightAuthor Project File",
-  "fileTypes": [
-    "bpf"
-  ],
   "name": "BrightAuthor Project File",
+  "scopeName": "source.brightauthorproject",
   "patterns": [
     {
       "include": "text.xml"
     },
     {
-      "match": "\\b(if|while|for|return)\\b",
-      "name": "keyword.control.untitled"
+      "name": "keyword.control.untitled",
+      "match": "\\b(if|while|for|return)\\b"
     },
     {
+      "name": "string.quoted.double.untitled",
       "begin": "\"",
       "end": "\"",
-      "name": "string.quoted.double.untitled",
       "patterns": [
         {
-          "match": "\\.",
-          "name": "constant.character.escape.untitled"
+          "name": "constant.character.escape.untitled",
+          "match": "\\."
         }
       ]
     }
-  ],
-  "scopeName": "source.brightauthorproject",
-  "uuid": "DE918636-0D2A-478E-904F-421E661E283F"
+  ]
 }

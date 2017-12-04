@@ -1,9 +1,6 @@
 {
-  "fileTypes": [
-    "abnf"
-  ],
-  "keyEquivalent": "^~A",
   "name": "ABNF",
+  "scopeName": "source.abnf",
   "patterns": [
     {
       "include": "#comment"
@@ -14,29 +11,28 @@
   ],
   "repository": {
     "comment": {
-      "begin": "(?:(?<whitespace>^[ \\t]*)|[ \\t]*)(?=;[[:print:]]*$)",
-      "beginCaptures": {
-        "whitespace": {
-          "name": "punctuation.whitespace.comment.leading.abnf"
-        }
-      },
+      "begin": "(?:(?\u003cwhitespace\u003e^[ \\t]*)|[ \\t]*)(?=;[[:print:]]*$)",
       "end": "(?!\\G)",
       "patterns": [
         {
           "include": "#comment-line"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "whitespace": {
+          "name": "punctuation.whitespace.comment.leading.abnf"
+        }
+      }
     },
     "comment-line": {
+      "name": "comment.line.semicolon.abnf",
       "begin": ";",
+      "end": "\\n",
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.comment.abnf"
         }
-      },
-      "comment": "A line comment starts with a `;` sign and continues to the \n                 end of the line.",
-      "end": "\\n",
-      "name": "comment.line.semicolon.abnf"
+      }
     },
     "constant": {
       "patterns": [
@@ -52,6 +48,8 @@
       ]
     },
     "constant-binary": {
+      "name": "constant.numeric.binary.abnf",
+      "match": "(?x)%b\n                # First number\n                (?\u003cnumber\u003e[^\\s.-]+)        \n                # Optional \n                #   - dash followed by last number of range, or\n                #   - sequence of additional numbers separated by dot\n                (?:(?:(?=-)(?\u003cdash\u003e-)(?\u003clast\u003e\\w+)) |\n                   (?\u003cnumbers\u003e[\\w.]+))?",
       "captures": {
         "dash": {
           "name": "keyword.operator.range.abnf"
@@ -77,11 +75,11 @@
             }
           ]
         }
-      },
-      "match": "(?x)%b\n                # First number\n                (?<number>[^\\s.-]+)        \n                # Optional \n                #   - dash followed by last number of range, or\n                #   - sequence of additional numbers separated by dot\n                (?:(?:(?=-)(?<dash>-)(?<last>\\w+)) |\n                   (?<numbers>[\\w.]+))?",
-      "name": "constant.numeric.binary.abnf"
+      }
     },
     "constant-decimal": {
+      "name": "constant.numeric.decimal.abnf",
+      "match": "(?x)%d\n                (?\u003cnumber\u003e[^\\s.-]+)\n                (?:(?:(?=-)(?\u003cdash\u003e-)(?\u003clast\u003e\\w+)) |\n                   (?\u003cnumbers\u003e[\\w.]+))?",
       "captures": {
         "dash": {
           "name": "keyword.operator.range.abnf"
@@ -107,11 +105,11 @@
             }
           ]
         }
-      },
-      "match": "(?x)%d\n                (?<number>[^\\s.-]+)\n                (?:(?:(?=-)(?<dash>-)(?<last>\\w+)) |\n                   (?<numbers>[\\w.]+))?",
-      "name": "constant.numeric.decimal.abnf"
+      }
     },
     "constant-hex": {
+      "name": "constant.numeric.hex.abnf",
+      "match": "(?x)%x\n                (?\u003cnumber\u003e[^\\s.-]+)\n                (?:(?:(?=-)(?\u003cdash\u003e-)(?\u003clast\u003e\\w+)) |\n                   (?\u003cnumbers\u003e[\\w.]+))?",
       "captures": {
         "dash": {
           "name": "keyword.operator.range.abnf"
@@ -137,9 +135,7 @@
             }
           ]
         }
-      },
-      "match": "(?x)%x\n                (?<number>[^\\s.-]+)\n                (?:(?:(?=-)(?<dash>-)(?<last>\\w+)) |\n                   (?<numbers>[\\w.]+))?",
-      "name": "constant.numeric.hex.abnf"
+      }
     },
     "digit-binary": {
       "patterns": [
@@ -152,8 +148,8 @@
       ]
     },
     "digit-binary-invalid": {
-      "match": "\\S",
-      "name": "invalid.illegal.digit.binary.abnf"
+      "name": "invalid.illegal.digit.binary.abnf",
+      "match": "\\S"
     },
     "digit-binary-valid": {
       "match": "[01]"
@@ -169,8 +165,8 @@
       ]
     },
     "digit-decimal-invalid": {
-      "match": "\\S",
-      "name": "invalid.illegal.digit.decimal.abnf"
+      "name": "invalid.illegal.digit.decimal.abnf",
+      "match": "\\S"
     },
     "digit-decimal-valid": {
       "match": "\\d"
@@ -186,13 +182,14 @@
       ]
     },
     "digit-hex-invalid": {
-      "match": "\\S",
-      "name": "invalid.illegal.digit.hex.abnf"
+      "name": "invalid.illegal.digit.hex.abnf",
+      "match": "\\S"
     },
     "digit-hex-valid": {
       "match": "[0-9A-Fa-f]"
     },
     "digits-binary-concatenation": {
+      "match": "(?\u003cdot\u003e\\.)(?\u003cnumber\u003e[^\\s.]+)",
       "captures": {
         "dot": {
           "name": "keyword.operator.concatenation.abnf"
@@ -204,10 +201,10 @@
             }
           ]
         }
-      },
-      "match": "(?<dot>\\.)(?<number>[^\\s.]+)"
+      }
     },
     "digits-decimal-concatenation": {
+      "match": "(?\u003cdot\u003e\\.)(?\u003cnumber\u003e[^\\s.]+)",
       "captures": {
         "dot": {
           "name": "keyword.operator.concatenation.abnf"
@@ -219,10 +216,10 @@
             }
           ]
         }
-      },
-      "match": "(?<dot>\\.)(?<number>[^\\s.]+)"
+      }
     },
     "digits-hex-concatenation": {
+      "match": "(?\u003cdot\u003e\\.)(?\u003cnumber\u003e[^\\s.]+)",
       "captures": {
         "dot": {
           "name": "keyword.operator.concatenation.abnf"
@@ -234,12 +231,11 @@
             }
           ]
         }
-      },
-      "match": "(?<dot>\\.)(?<number>[^\\s.]+)"
+      }
     },
     "operator-alternative": {
-      "match": "/",
-      "name": "keyword.operator.alternative.abnf"
+      "name": "keyword.operator.alternative.abnf",
+      "match": "/"
     },
     "operator-definition": {
       "patterns": [
@@ -252,15 +248,22 @@
       ]
     },
     "operator-equal": {
-      "match": "=",
-      "name": "keyword.operator.equal.abnf"
+      "name": "keyword.operator.equal.abnf",
+      "match": "="
     },
     "operator-equal-alternative": {
-      "match": "=/",
-      "name": "keyword.operator.equal-alternative.abnf"
+      "name": "keyword.operator.equal-alternative.abnf",
+      "match": "=/"
     },
     "rule": {
-      "begin": "(?x)^(\\s*)\n                 # We match the name of the rule and all following whitespace \n                 # characters. We use the additional whitespace to catch a \n                 # missing closing angle bracket.\n                 (?<name>\\S+\\s+)\n                 # The definition operator follows after the rule name.\n                 (?<operator>\\S+)\n                 ",
+      "name": "meta.rule.abnf",
+      "begin": "(?x)^(\\s*)\n                 # We match the name of the rule and all following whitespace \n                 # characters. We use the additional whitespace to catch a \n                 # missing closing angle bracket.\n                 (?\u003cname\u003e\\S+\\s+)\n                 # The definition operator follows after the rule name.\n                 (?\u003coperator\u003e\\S+)\n                 ",
+      "while": "^(?=\\1\\s)",
+      "patterns": [
+        {
+          "include": "#rule-right-side"
+        }
+      ],
       "captures": {
         "name": {
           "name": "entity.name.function.abnf",
@@ -276,35 +279,27 @@
               "include": "#operator-definition"
             },
             {
-              "match": "\\S+",
-              "name": "invalid.illegal.operator.abnf"
+              "name": "invalid.illegal.operator.abnf",
+              "match": "\\S+"
             }
           ]
         }
-      },
-      "comment": "A rule start with a possibly empty sequence of whitespace. The \n                 rule continues if the next line starts with at least one more\n                 whitespace character than the initial line of the rule.",
-      "name": "meta.rule.abnf",
+      }
+    },
+    "rule-group": {
+      "name": "meta.rule.group.abnf",
+      "begin": "\\(",
+      "end": "\\)",
       "patterns": [
         {
           "include": "#rule-right-side"
         }
       ],
-      "while": "^(?=\\1\\s)"
-    },
-    "rule-group": {
-      "begin": "\\(",
       "captures": {
         "0": {
           "name": "keyword.other.group.abnf"
         }
-      },
-      "end": "\\)",
-      "name": "meta.rule.group.abnf",
-      "patterns": [
-        {
-          "include": "#rule-right-side"
-        }
-      ]
+      }
     },
     "rule-name": {
       "patterns": [
@@ -317,14 +312,19 @@
       ]
     },
     "rule-name-angle-brackets": {
-      "begin": "<",
+      "name": "variable.other.rule",
+      "begin": "\u003c",
+      "end": "\u003e|(\\s)",
+      "patterns": [
+        {
+          "include": "#rule-name"
+        }
+      ],
       "captures": {
         "0": {
           "name": "keyword.other.angle-bracket.abnf"
         }
       },
-      "comment": "Angle brackets may be used around a rule name.",
-      "end": ">|(\\s)",
       "endCaptures": {
         "0": {
           "name": "keyword.other.angle-bracket.abnf"
@@ -332,46 +332,39 @@
         "1": {
           "name": "invalid.illegal.missing.angle-bracket.abnf"
         }
-      },
-      "name": "variable.other.rule",
-      "patterns": [
-        {
-          "include": "#rule-name"
-        }
-      ]
+      }
     },
     "rule-name-core": {
+      "match": "(?x)\\b(?\u003crule\u003e\n                      ALPHA     |\n                      BIT       |\n                      CHAR      |\n                      CR(?:LF)? | \n                      CTL       |\n                      DIGIT     |\n                      DQUOTE    |\n                      HEXDIG    |\n                      HTAB      |\n                      LF        |\n                      LWSP      |\n                      OCTECT    |\n                      SP        |\n                      VCHAR     |\n                      WSP       \n                      )\\b",
       "captures": {
         "rule": {
           "name": "support.constant.core-rule.$1.abnf"
         }
-      },
-      "match": "(?x)\\b(?<rule>\n                      ALPHA     |\n                      BIT       |\n                      CHAR      |\n                      CR(?:LF)? | \n                      CTL       |\n                      DIGIT     |\n                      DQUOTE    |\n                      HEXDIG    |\n                      HTAB      |\n                      LF        |\n                      LWSP      |\n                      OCTECT    |\n                      SP        |\n                      VCHAR     |\n                      WSP       \n                      )\\b"
+      }
     },
     "rule-name-plain": {
+      "name": "variable.other.rule.abnf",
+      "match": "[a-zA-Z][a-zA-Z0-9\\-]*|(?\u003cinvalid\u003e\\S)",
       "captures": {
         "invalid": {
           "name": "invalid.illegal.character.abnf"
         }
-      },
-      "comment": "The name of a rule is a sequence of characters, beginning \n                 with an alphabetic character, and followed by a combination of \n                 alphabetic characters, digits, and hyphens (dashes)",
-      "match": "[a-zA-Z][a-zA-Z0-9\\-]*|(?<invalid>\\S)",
-      "name": "variable.other.rule.abnf"
+      }
     },
     "rule-optional": {
-      "begin": "\\[",
-      "captures": {
-        "0": {
-          "name": "keyword.other.optional.abnf"
-        }
-      },
-      "end": "\\]",
       "name": "meta.rule.optional.abnf",
+      "begin": "\\[",
+      "end": "\\]",
       "patterns": [
         {
           "include": "#rule-right-side"
         }
-      ]
+      ],
+      "captures": {
+        "0": {
+          "name": "keyword.other.optional.abnf"
+        }
+      }
     },
     "rule-right-side": {
       "patterns": [
@@ -415,26 +408,27 @@
       ]
     },
     "string-double-quoted-case-insensitive": {
-      "begin": "(?<operator>%i)?\"",
+      "name": "string.quoted.double.case-insensitive.abnf",
+      "begin": "(?\u003coperator\u003e%i)?\"",
+      "end": "\"",
       "captures": {
         "operator": {
           "name": "keyword.operator.case-insensitive.abnf"
         }
-      },
-      "end": "\"",
-      "name": "string.quoted.double.case-insensitive.abnf"
+      }
     },
     "string-double-quoted-case-sensitive": {
-      "begin": "(?<operator>%s)\"",
+      "name": "string.quoted.double.case-sensitive.abnf",
+      "begin": "(?\u003coperator\u003e%s)\"",
+      "end": "\"",
       "captures": {
         "operator": {
           "name": "keyword.operator.case-insensitive.abnf"
         }
-      },
-      "end": "\"",
-      "name": "string.quoted.double.case-sensitive.abnf"
+      }
     },
     "variable-repetition": {
+      "match": "(?x)\n               # Repetition\n               (?:(?\u003cmin\u003e\\d*)(?\u003crepetition\u003e\\*)(?\u003cmax\u003e\\d*) |\n                  (?\u003cmax\u003e\\d+))\n               # Followed by ABNF element\n               (?=[a-zA-Z(\"])",
       "captures": {
         "max": {
           "name": "constant.numeric.decimal.$max.abnf"
@@ -445,11 +439,7 @@
         "repetition": {
           "name": "keyword.operator.repetition.abnf"
         }
-      },
-      "comment": "Variable repetition uses the syntax\n\n                  - <min>*<max>element or\n                  - <repetition>element\n\n                 , where element is an ABNF element such as a group or a\n                 (sub)rule. the parts in angle brackets specify a decimal\n                 number. Both <min> and <max> are optional.",
-      "match": "(?x)\n               # Repetition\n               (?:(?<min>\\d*)(?<repetition>\\*)(?<max>\\d*) |\n                  (?<max>\\d+))\n               # Followed by ABNF element\n               (?=[a-zA-Z(\"])"
+      }
     }
-  },
-  "scopeName": "source.abnf",
-  "uuid": "7E104F42-A7B3-47CE-AE6E-D55E62C4D5E0"
+  }
 }

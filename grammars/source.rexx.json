@@ -1,59 +1,52 @@
 {
-  "fileTypes": [
-    "rex"
-  ],
-  "firstLineMatch": "/\\*.*(?i:REXX)\\b",
-  "foldingStartMarker": "(/\\*|\\b(do|select)\\b)",
-  "foldingStopMarker": "(\\*/|\\bend\\b)",
   "name": "REXX",
+  "scopeName": "source.rexx",
   "patterns": [
     {
+      "name": "comment.rexx",
       "begin": "/\\*",
-      "end": "\\*/",
-      "name": "comment.rexx"
+      "end": "\\*/"
     },
     {
-      "match": "(['\"])[01 ]+\\1(?i:b)",
-      "name": "constant.rexx"
+      "name": "constant.rexx",
+      "match": "(['\"])[01 ]+\\1(?i:b)"
     },
     {
-      "match": "(['\"])[0-9a-fA-F ]+\\1(?i:x)",
-      "name": "constant.rexx"
+      "name": "constant.rexx",
+      "match": "(['\"])[0-9a-fA-F ]+\\1(?i:x)"
     },
     {
+      "name": "string.rexx",
       "begin": "(['\"])",
-      "end": "\\1",
-      "name": "string.rexx"
+      "end": "\\1"
     },
     {
-      "match": "\\b[A-Za-z@#$!?_][A-Za-z@#$!?_0-9]*:",
-      "name": "entity.name.function.rexx"
+      "name": "entity.name.function.rexx",
+      "match": "\\b[A-Za-z@#$!?_][A-Za-z@#$!?_0-9]*:"
     },
     {
-      "match": "([0-9]+(\\.)?[0-9]*(?i:e[-+]?[0-9]+)?|[0-9]*(\\.)?[0-9]+)(?i:e[-+]?[0-9]+)?\\b",
-      "name": "constant.numeric.rexx"
+      "name": "constant.numeric.rexx",
+      "match": "([0-9]+(\\.)?[0-9]*(?i:e[-+]?[0-9]+)?|[0-9]*(\\.)?[0-9]+)(?i:e[-+]?[0-9]+)?\\b"
     },
     {
-      "match": "[0-9\\.][A-Za-z0-9@#$¢.!?_]*",
-      "name": "constant.other.rexx"
+      "name": "constant.other.rexx",
+      "match": "[0-9\\.][A-Za-z0-9@#$¢.!?_]*"
     },
     {
-      "match": "([\\+-/*%&|()¬\\\\=<>])",
-      "name": "keyword.operator.rexx"
+      "name": "keyword.operator.rexx",
+      "match": "([\\+-/*%\u0026|()¬\\\\=\u003c\u003e~])"
     },
     {
-      "match": "\\b(?i:do|forever|while|until|to|by|for|end|exit|if|then|else|iterate|leave|nop|return|select|when|otherwise|call(\\s+(off|on)\\s+(error|failure(\\s+name)?|halt))?|signal(\\s+(off|on)\\s+(error|failure(\\s+name)?|halt|novalue|syntax))|address\\s+\\w+|arg|drop|interpret|numeric\\s+(digits|form(\\s+(scientific|engineering|value))?|fuzz)|options|parse(\\s+upper)?\\s+(external|numeric|source|value|var|version)?|with|procedure(\\s+expose)?|pull|push|queue|say|trace\\s+\\w+|upper)\\b(?!\\.)",
-      "name": "keyword.rexx"
+      "name": "keyword.rexx",
+      "match": "\\b(?i:do|forever|while|until|to|by|for|end|exit|if|then|else|iterate|leave|nop|return|select|when|otherwise|call(\\s+(off|on)\\s+(error|failure(\\s+name)?|halt))?|signal(\\s+(off|on)\\s+(error|failure(\\s+name)?|halt|novalue|syntax))|address\\s+\\w+|arg|drop|interpret|numeric\\s+(digits|form(\\s+(scientific|engineering|value))?|fuzz)|options|parse(\\s+upper)?\\s+(external|numeric|source|value|var|version)?|with|procedure(\\s+expose)?|pull|push|queue|say|trace\\s+\\w+|upper)\\b(?!\\.)"
     },
     {
-      "match": "\\b[A-Za-z@#$!?_0-9]+(?=\\()",
-      "name": "support.function.rexx"
+      "name": "support.function.rexx",
+      "match": "\\b[A-Za-z@#$!?_0-9]+(?=\\()"
     },
     {
-      "match": "\\b[A-Za-z@#$¢!?_][A-Za-z0-9@#$¢.!?_]*",
-      "name": "variable.rexx"
+      "name": "variable.rexx",
+      "match": "\\b[A-Za-z@#$¢!?_][A-Za-z0-9@#$¢.!?_]*"
     }
-  ],
-  "scopeName": "source.rexx",
-  "uuid": "1ebe3dbc-ae7f-413a-990f-c37fc1b0d204"
+  ]
 }

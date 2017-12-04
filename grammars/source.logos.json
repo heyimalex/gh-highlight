@@ -1,23 +1,18 @@
 {
-  "fileTypes": [
-    "xm",
-    "x",
-    "xi",
-    "xmi"
-  ],
   "name": "Logos",
+  "scopeName": "source.logos",
   "patterns": [
     {
-      "match": "%(init|hook|subclass|group|class|new|ctor|end|config|orig|log)",
-      "name": "keyword.source.logos"
+      "name": "keyword.source.logos",
+      "match": "%(init|hook|subclass|group|class|new|ctor|end|config|orig|log)"
     },
     {
+      "match": "%c\\(([A-Za-z$_]+)\\)",
       "captures": {
         "1": {
           "name": "keyword.source.logos"
         }
-      },
-      "match": "%c\\(([A-Za-z$_]+)\\)"
+      }
     },
     {
       "include": "source.objc"
@@ -25,7 +20,5 @@
     {
       "include": "source.c++"
     }
-  ],
-  "scopeName": "source.logos",
-  "uuid": "168b905c-d157-40e3-ae1d-3a79f5326ace"
+  ]
 }

@@ -1,168 +1,10 @@
 {
   "name": "Rust",
   "scopeName": "source.rust",
-  "fileTypes": [
-    "rs"
-  ],
-  "repository": {
-    "block_doc_comment": {
-      "comment": "Block documentation comment",
-      "name": "comment.block.documentation.rust",
-      "begin": "/\\*[\\*!](?![\\*/])",
-      "end": "\\*/",
-      "patterns": [
-        {
-          "include": "#block_doc_comment"
-        },
-        {
-          "include": "#block_comment"
-        }
-      ]
-    },
-    "block_comment": {
-      "comment": "Block comment",
-      "name": "comment.block.rust",
-      "begin": "/\\*",
-      "end": "\\*/",
-      "patterns": [
-        {
-          "include": "#block_doc_comment"
-        },
-        {
-          "include": "#block_comment"
-        }
-      ]
-    },
-    "line_doc_comment": {
-      "comment": "Single-line documentation comment",
-      "name": "comment.line.documentation.rust",
-      "begin": "//[!/](?=[^/])",
-      "end": "$"
-    },
-    "line_comment": {
-      "comment": "Single-line comment",
-      "name": "comment.line.double-slash.rust",
-      "begin": "//",
-      "end": "$"
-    },
-    "escaped_character": {
-      "name": "constant.character.escape.rust",
-      "match": "\\\\(x\\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)"
-    },
-    "string_literal": {
-      "comment": "Double-quote string literal",
-      "name": "string.quoted.double.rust",
-      "begin": "b?\"",
-      "end": "\"",
-      "patterns": [
-        {
-          "include": "#escaped_character"
-        }
-      ]
-    },
-    "raw_string_literal": {
-      "comment": "Raw double-quote string literal",
-      "name": "string.quoted.double.raw.rust",
-      "begin": "b?r(#*)\"",
-      "end": "\"\\1"
-    },
-    "sigils": {
-      "comment": "Sigil",
-      "name": "keyword.operator.sigil.rust",
-      "match": "[&*](?=[a-zA-Z0-9_\\(\\[\\|\\\"]+)"
-    },
-    "self": {
-      "comment": "Self variable",
-      "name": "variable.language.rust",
-      "match": "\\bself\\b"
-    },
-    "mut": {
-      "comment": "Mutable storage modifier",
-      "name": "storage.modifier.mut.rust",
-      "match": "\\bmut\\b"
-    },
-    "box": {
-      "comment": "Box storage modifier",
-      "name": "storage.modifier.box.rust",
-      "match": "\\bbox\\b"
-    },
-    "const": {
-      "comment": "Const storage modifier",
-      "name": "storage.modifier.const.rust",
-      "match": "\\bconst\\b"
-    },
-    "pub": {
-      "comment": "Visibility modifier",
-      "name": "storage.modifier.visibility.rust",
-      "match": "\\bpub\\b"
-    },
-    "unsafe": {
-      "comment": "Unsafe code keyword",
-      "name": "keyword.other.unsafe.rust",
-      "match": "\\bunsafe\\b"
-    },
-    "where": {
-      "comment": "Generic where clause",
-      "name": "keyword.other.where.rust",
-      "match": "\\bwhere\\b"
-    },
-    "lifetime": {
-      "comment": "Named lifetime",
-      "name": "storage.modifier.lifetime.rust",
-      "match": "'([a-zA-Z_][a-zA-Z0-9_]*)\\b",
-      "captures": {
-        "1": {
-          "name": "entity.name.lifetime.rust"
-        }
-      }
-    },
-    "ref_lifetime": {
-      "comment": "Reference with named lifetime",
-      "match": "&('([a-zA-Z_][a-zA-Z0-9_]*))\\b",
-      "captures": {
-        "1": {
-          "name": "storage.modifier.lifetime.rust"
-        },
-        "2": {
-          "name": "entity.name.lifetime.rust"
-        }
-      }
-    },
-    "core_types": {
-      "comment": "Built-in/core type",
-      "name": "storage.type.core.rust",
-      "match": "\\b(bool|char|usize|isize|u8|u16|u32|u64|u128|i8|i16|i32|i64|i128|f32|f64|str|Self|Option|Result)\\b"
-    },
-    "core_vars": {
-      "comment": "Core type variant",
-      "name": "support.constant.core.rust",
-      "match": "\\b(Some|None|Ok|Err)\\b"
-    },
-    "core_marker": {
-      "comment": "Core trait (marker)",
-      "name": "support.type.marker.rust",
-      "match": "\\b(Copy|Send|Sized|Sync)\\b"
-    },
-    "core_traits": {
-      "comment": "Core trait",
-      "name": "support.type.core.rust",
-      "match": "\\b(Drop|Fn|FnMut|FnOnce|Clone|PartialEq|PartialOrd|Eq|Ord|AsRef|AsMut|Into|From|Default|Iterator|Extend|IntoIterator|DoubleEndedIterator|ExactSizeIterator)\\b"
-    },
-    "std_types": {
-      "comment": "Standard library type",
-      "name": "storage.class.std.rust",
-      "match": "\\b(Box|String|Vec|Path|PathBuf)\\b"
-    },
-    "std_traits": {
-      "comment": "Standard library trait",
-      "name": "support.type.std.rust",
-      "match": "\\b(ToOwned|ToString)\\b"
-    },
-    "type_params": {
-      "comment": "Type parameters",
-      "name": "meta.type_params.rust",
-      "begin": "<(?![=<])",
-      "end": ">",
+  "patterns": [
+    {
+      "begin": "\\b(impl)\\b",
+      "end": "\\{",
       "patterns": [
         {
           "include": "#block_comment"
@@ -177,7 +19,7 @@
           "include": "#mut"
         },
         {
-          "include": "#lifetime"
+          "include": "#ref_lifetime"
         },
         {
           "include": "#core_types"
@@ -196,11 +38,24 @@
         },
         {
           "include": "#type_params"
+        },
+        {
+          "include": "#where"
+        },
+        {
+          "name": "storage.type.rust",
+          "match": "\\bfor\\b"
+        },
+        {
+          "include": "#type"
         }
-      ]
-    }
-  },
-  "patterns": [
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.rust"
+        }
+      }
+    },
     {
       "include": "#block_doc_comment"
     },
@@ -214,20 +69,30 @@
       "include": "#line_comment"
     },
     {
-      "comment": "Attribute",
       "name": "meta.attribute.rust",
       "begin": "#\\!?\\[",
       "end": "\\]",
       "patterns": [
         {
           "include": "#string_literal"
+        },
+        {
+          "include": "#block_doc_comment"
+        },
+        {
+          "include": "#block_comment"
+        },
+        {
+          "include": "#line_doc_comment"
+        },
+        {
+          "include": "#line_comment"
         }
       ]
     },
     {
-      "comment": "Single-quote string literal (character)",
       "name": "string.quoted.single.rust",
-      "match": "b?'([^'\\\\]|\\\\(x\\h{2}|[0-2][0-7]{,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.))'"
+      "match": "b?'([^'\\\\]|\\\\(x[0-9A-Fa-f]{2}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.))'"
     },
     {
       "include": "#string_literal"
@@ -236,59 +101,52 @@
       "include": "#raw_string_literal"
     },
     {
-      "comment": "Floating point literal (fraction)",
       "name": "constant.numeric.float.rust",
       "match": "\\b[0-9][0-9_]*\\.[0-9][0-9_]*([eE][+-]?[0-9_]+)?(f32|f64)?\\b"
     },
     {
-      "comment": "Floating point literal (exponent)",
       "name": "constant.numeric.float.rust",
       "match": "\\b[0-9][0-9_]*(\\.[0-9][0-9_]*)?[eE][+-]?[0-9_]+(f32|f64)?\\b"
     },
     {
-      "comment": "Floating point literal (typed)",
       "name": "constant.numeric.float.rust",
       "match": "\\b[0-9][0-9_]*(\\.[0-9][0-9_]*)?([eE][+-]?[0-9_]+)?(f32|f64)\\b"
     },
     {
-      "comment": "Integer literal (decimal)",
       "name": "constant.numeric.integer.decimal.rust",
       "match": "\\b[0-9][0-9_]*([ui](8|16|32|64|128|s|size))?\\b"
     },
     {
-      "comment": "Integer literal (hexadecimal)",
       "name": "constant.numeric.integer.hexadecimal.rust",
       "match": "\\b0x[a-fA-F0-9_]+([ui](8|16|32|64|128|s|size))?\\b"
     },
     {
-      "comment": "Integer literal (octal)",
       "name": "constant.numeric.integer.octal.rust",
       "match": "\\b0o[0-7_]+([ui](8|16|32|64|128|s|size))?\\b"
     },
     {
-      "comment": "Integer literal (binary)",
       "name": "constant.numeric.integer.binary.rust",
       "match": "\\b0b[01_]+([ui](8|16|32|64|128|s|size))?\\b"
     },
     {
-      "comment": "Static storage modifier",
       "name": "storage.modifier.static.rust",
       "match": "\\bstatic\\b"
     },
     {
-      "comment": "Boolean constant",
       "name": "constant.language.boolean.rust",
       "match": "\\b(true|false)\\b"
     },
     {
-      "comment": "Control keyword",
       "name": "keyword.control.rust",
       "match": "\\b(break|continue|else|if|in|for|loop|match|return|while)\\b"
     },
     {
-      "comment": "Keyword",
       "name": "keyword.other.rust",
-      "match": "\\b(crate|extern|mod|let|proc|ref|use|super|as|move)\\b"
+      "match": "\\b(crate|extern|mod|let|ref|use|super|move)\\b"
+    },
+    {
+      "name": "invalid.deprecated.rust",
+      "match": "\\b(abstract|alignof|become|do|final|macro|offsetof|override|priv|proc|pure|sizeof|typeof|virtual|yield)\\b"
     },
     {
       "include": "#unsafe"
@@ -318,29 +176,24 @@
       "include": "#pub"
     },
     {
-      "comment": "Miscellaneous operator",
       "name": "keyword.operator.misc.rust",
-      "match": "(=>|::|\\bas\\b)"
+      "match": "(=\u003e|::|\\bas\\b)"
     },
     {
-      "comment": "Comparison operator",
       "name": "keyword.operator.comparison.rust",
-      "match": "(&&|\\|\\||==|!=)"
+      "match": "(\u0026\u0026|\\|\\||==|!=)"
     },
     {
-      "comment": "Assignment operator",
       "name": "keyword.operator.assignment.rust",
-      "match": "(\\+=|-=|/=|\\*=|%=|\\^=|&=|\\|=|<<=|>>=|=)"
+      "match": "(\\+=|-=|/=|\\*=|%=|\\^=|\u0026=|\\|=|\u003c\u003c=|\u003e\u003e=|=)"
     },
     {
-      "comment": "Arithmetic operator",
       "name": "keyword.operator.arithmetic.rust",
-      "match": "(!|\\+|-|/|\\*|%|\\^|&|\\||<<|>>)"
+      "match": "(!|\\+|-|/|\\*|%|\\^|\u0026|\\||\u003c\u003c|\u003e\u003e)"
     },
     {
-      "comment": "Comparison operator (second group because of regex precedence)",
       "name": "keyword.operator.comparison.rust",
-      "match": "(<=|>=|<|>)"
+      "match": "(\u003c=|\u003e=|\u003c|\u003e)"
     },
     {
       "include": "#core_types"
@@ -361,27 +214,22 @@
       "include": "#std_traits"
     },
     {
-      "comment": "Built-in macro",
       "name": "support.function.builtin.rust",
       "match": "\\b(macro_rules|format_args|env|option_env|concat_idents|concat|log_syntax|line|column|file|stringify|include|include_str|include_bytes|module_path|asm|cfg|trace_macros)!"
     },
     {
-      "comment": "Core macro",
       "name": "support.function.core.rust",
       "match": "\\b(panic|assert|assert_eq|debug_assert|debug_assert_eq|try|write|writeln|unreachable|unimplemented)!"
     },
     {
-      "comment": "Standard library macro",
       "name": "support.function.std.rust",
       "match": "\\b(format|print|println|select|vec)!"
     },
     {
-      "comment": "Logging macro",
       "name": "support.function.log.rust",
       "match": "\\b(log|error|warn|info|debug|trace|log_enabled)!"
     },
     {
-      "comment": "Invokation of a macro",
       "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*\\!)\\s*[({\\[]",
       "captures": {
         "1": {
@@ -390,8 +238,7 @@
       }
     },
     {
-      "comment": "Function call",
-      "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*\\(",
+      "match": "\\b([A-Za-z][A-Za-z0-9_]*|_[A-Za-z0-9_]+)\\s*\\(",
       "captures": {
         "1": {
           "name": "entity.name.function.rust"
@@ -399,17 +246,25 @@
       }
     },
     {
-      "comment": "Function definition",
-      "begin": "\\b(fn)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
-      "end": "[\\{;]",
-      "beginCaptures": {
+      "begin": "\\b([A-Za-z][A-Za-z0-9_]*|_[A-Za-z0-9_]+)\\s*(::)(?=\\s*\u003c.*\u003e\\s*\\()",
+      "end": "\\(",
+      "patterns": [
+        {
+          "include": "#type_params"
+        }
+      ],
+      "captures": {
         "1": {
-          "name": "keyword.other.fn.rust"
+          "name": "entity.name.function.rust"
         },
         "2": {
-          "name": "entity.name.function.rust"
+          "name": "keyword.operator.misc.rust"
         }
-      },
+      }
+    },
+    {
+      "begin": "\\b(fn)\\s+([A-Za-z][A-Za-z0-9_]*|_[A-Za-z0-9_]+)",
+      "end": "[\\{;]",
       "patterns": [
         {
           "include": "#block_comment"
@@ -457,24 +312,22 @@
           "include": "#unsafe"
         },
         {
-          "comment": "Function arguments",
-          "match": "fn",
-          "name": "keyword.other.fn.rust"
+          "name": "keyword.other.fn.rust",
+          "match": "\u0008fn\u0008"
         }
-      ]
-    },
-    {
-      "comment": "Type declaration",
-      "begin": "\\b(enum|struct|trait)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
-      "end": "[\\{\\(;]",
+      ],
       "beginCaptures": {
         "1": {
-          "name": "storage.type.rust"
+          "name": "keyword.other.fn.rust"
         },
         "2": {
-          "name": "entity.name.type.rust"
+          "name": "entity.name.function.rust"
         }
-      },
+      }
+    },
+    {
+      "begin": "\\b(enum|struct|trait|union)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+      "end": "[\\{\\(;]",
       "patterns": [
         {
           "include": "#block_comment"
@@ -500,12 +353,7 @@
         {
           "include": "#where"
         }
-      ]
-    },
-    {
-      "comment": "Type alias",
-      "begin": "\\b(type)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
-      "end": ";",
+      ],
       "beginCaptures": {
         "1": {
           "name": "storage.type.rust"
@@ -513,7 +361,11 @@
         "2": {
           "name": "entity.name.type.rust"
         }
-      },
+      }
+    },
+    {
+      "begin": "\\b(type)\\s+([a-zA-Z_][a-zA-Z0-9_]*)",
+      "end": ";",
       "patterns": [
         {
           "include": "#block_comment"
@@ -551,17 +403,149 @@
         {
           "include": "#type_params"
         }
-      ]
-    },
-    {
-      "comment": "Implementation",
-      "begin": "\\b(impl)\\b",
-      "end": "\\{",
+      ],
       "beginCaptures": {
         "1": {
           "name": "storage.type.rust"
+        },
+        "2": {
+          "name": "entity.name.type.rust"
         }
-      },
+      }
+    }
+  ],
+  "repository": {
+    "block_comment": {
+      "name": "comment.block.rust",
+      "begin": "/\\*",
+      "end": "\\*/",
+      "patterns": [
+        {
+          "include": "#block_doc_comment"
+        },
+        {
+          "include": "#block_comment"
+        }
+      ]
+    },
+    "block_doc_comment": {
+      "name": "comment.block.documentation.rust",
+      "begin": "/\\*[\\*!](?![\\*/])",
+      "end": "\\*/",
+      "patterns": [
+        {
+          "include": "#block_doc_comment"
+        },
+        {
+          "include": "#block_comment"
+        }
+      ]
+    },
+    "box": {
+      "name": "storage.modifier.box.rust",
+      "match": "\\bbox\\b"
+    },
+    "const": {
+      "name": "storage.modifier.const.rust",
+      "match": "\\bconst\\b"
+    },
+    "core_marker": {
+      "name": "support.type.marker.rust",
+      "match": "\\b(Copy|Send|Sized|Sync)\\b"
+    },
+    "core_traits": {
+      "name": "support.type.core.rust",
+      "match": "\\b(Drop|Fn|FnMut|FnOnce|Clone|PartialEq|PartialOrd|Eq|Ord|AsRef|AsMut|Into|From|Default|Iterator|Extend|IntoIterator|DoubleEndedIterator|ExactSizeIterator)\\b"
+    },
+    "core_types": {
+      "name": "storage.type.core.rust",
+      "match": "\\b(bool|char|usize|isize|u8|u16|u32|u64|u128|i8|i16|i32|i64|i128|f32|f64|str|Self|Option|Result)\\b"
+    },
+    "core_vars": {
+      "name": "support.constant.core.rust",
+      "match": "\\b(Some|None|Ok|Err)\\b"
+    },
+    "escaped_character": {
+      "name": "constant.character.escape.rust",
+      "match": "\\\\(x[0-9A-Fa-f]{2}|[0-2][0-7]{0,2}|3[0-6][0-7]?|37[0-7]?|[4-7][0-7]?|.)"
+    },
+    "lifetime": {
+      "name": "storage.modifier.lifetime.rust",
+      "match": "'([a-zA-Z_][a-zA-Z0-9_]*)\\b",
+      "captures": {
+        "1": {
+          "name": "entity.name.lifetime.rust"
+        }
+      }
+    },
+    "line_comment": {
+      "name": "comment.line.double-slash.rust",
+      "begin": "//",
+      "end": "$"
+    },
+    "line_doc_comment": {
+      "name": "comment.line.documentation.rust",
+      "begin": "//[!/](?=[^/])",
+      "end": "$"
+    },
+    "mut": {
+      "name": "storage.modifier.mut.rust",
+      "match": "\\bmut\\b"
+    },
+    "pub": {
+      "name": "storage.modifier.visibility.rust",
+      "match": "\\bpub\\b"
+    },
+    "raw_string_literal": {
+      "name": "string.quoted.double.raw.rust",
+      "begin": "b?r(#*)\"",
+      "end": "\"\\1"
+    },
+    "ref_lifetime": {
+      "match": "\u0026('([a-zA-Z_][a-zA-Z0-9_]*))\\b",
+      "captures": {
+        "1": {
+          "name": "storage.modifier.lifetime.rust"
+        },
+        "2": {
+          "name": "entity.name.lifetime.rust"
+        }
+      }
+    },
+    "self": {
+      "name": "variable.language.rust",
+      "match": "\\bself\\b"
+    },
+    "sigils": {
+      "name": "keyword.operator.sigil.rust",
+      "match": "[\u0026*](?=[a-zA-Z0-9_\\(\\[\\|\\\"]+)"
+    },
+    "std_traits": {
+      "name": "support.type.std.rust",
+      "match": "\\b(ToOwned|ToString)\\b"
+    },
+    "std_types": {
+      "name": "storage.class.std.rust",
+      "match": "\\b(Box|String|Vec|Path|PathBuf)\\b"
+    },
+    "string_literal": {
+      "name": "string.quoted.double.rust",
+      "begin": "b?\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "include": "#escaped_character"
+        }
+      ]
+    },
+    "type": {
+      "name": "entity.name.type.rust",
+      "match": "\\b([A-Za-z][_A-Za-z0-9]*|_[_A-Za-z0-9]+)\\b"
+    },
+    "type_params": {
+      "name": "meta.type_params.rust",
+      "begin": "\u003c(?![=\u003c])",
+      "end": "(?\u003c![-])\u003e",
       "patterns": [
         {
           "include": "#block_comment"
@@ -576,7 +560,7 @@
           "include": "#mut"
         },
         {
-          "include": "#ref_lifetime"
+          "include": "#lifetime"
         },
         {
           "include": "#core_types"
@@ -595,15 +579,16 @@
         },
         {
           "include": "#type_params"
-        },
-        {
-          "include": "#where"
-        },
-        {
-          "name": "storage.type.rust",
-          "match": "\\bfor\\b"
         }
       ]
+    },
+    "unsafe": {
+      "name": "keyword.other.unsafe.rust",
+      "match": "\\bunsafe\\b"
+    },
+    "where": {
+      "name": "keyword.other.where.rust",
+      "match": "\\bwhere\\b"
     }
-  ]
+  }
 }

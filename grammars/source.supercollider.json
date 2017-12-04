@@ -1,100 +1,93 @@
 {
-  "fileTypes": [
-    "sc",
-    "scd"
-  ],
-  "foldingStartMarker": "\\{|\\/\\*",
-  "foldingStopMarker": "\\}|\\*\\/",
   "name": "SuperCollider",
+  "scopeName": "source.supercollider",
   "patterns": [
     {
-      "match": "\\b(arg|var|classvar|this|thisThread|thisMethod|thisFunction|thisProcess|true|false|inf|nil)\\b",
-      "name": "keyword.control.supercollider"
+      "name": "keyword.control.supercollider",
+      "match": "\\b(arg|var|classvar|const|this|thisThread|thisMethod|thisFunction|thisFunctionDef|thisProcess|true|false|inf|nil)\\b"
     },
     {
+      "name": "string.quoted.double.supercollider",
       "begin": "\"",
       "end": "\"",
-      "name": "string.quoted.double.supercollider",
       "patterns": [
         {
-          "match": "\\\\.",
-          "name": "constant.character.escape.supercollider"
+          "name": "constant.character.escape.supercollider",
+          "match": "\\\\."
         }
       ]
     },
     {
+      "name": "entity.name.symbol.supercollider",
       "begin": "'",
       "end": "'",
-      "name": "entity.name.symbol.supercollider",
       "patterns": [
         {
-          "match": "\\\\.",
-          "name": "constant.character.escape.supercollider"
+          "name": "constant.character.escape.supercollider",
+          "match": "\\\\."
         }
       ]
     },
     {
-      "match": "[a-z][a-zA-Z0-9_]*\\:",
-      "name": "support.name.tag.supercollider"
+      "name": "support.name.tag.supercollider",
+      "match": "[a-z][a-zA-Z0-9_]*\\:"
     },
     {
+      "match": "^\\s*\\+*\\s*([A-Z]{1}[a-zA-Z0-9_]*)\\s*\\:{1}\\s*([A-Z]{1}[a-zA-Z0-9_]*)\\s*\\{",
       "captures": {
         "1": {
           "name": "entity.name.class.supercollider"
         }
-      },
-      "match": "^\\s*\\+*\\s*([A-Z]{1}[a-zA-Z0-9_]*)\\s*\\:{1}\\s*([A-Z]{1}[a-zA-Z0-9_]*)\\s*\\{"
+      }
     },
     {
+      "match": "^([A-Z_]{1}[a-zA-Z0-9_]*)[^a-zA-Z0-9_]",
       "captures": {
         "1": {
           "name": "entity.name.class.supercollider"
         }
-      },
-      "match": "^([A-Z_]{1}[a-zA-Z0-9_]*)[^a-zA-Z0-9_]"
+      }
     },
     {
-      "match": "\\|[a-zA-Z0-9\\#\\[\\]\\\"\\_\\=\\.\\(\\)[[:space:]]\\,]+\\|",
-      "name": "variable.parameter.function.supercollider"
+      "name": "variable.parameter.function.supercollider",
+      "match": "\\|[a-zA-Z0-9\\#\\[\\]\\\"\\_\\=\\.\\(\\)[[:space:]]\\,]+\\|"
     },
     {
+      "match": "[^a-zA-Z0-9\\\\]([A-Z_]{1}[a-zA-Z0-9_]*)[^a-zA-Z0-9_]",
       "captures": {
         "1": {
           "name": "entity.name.class.supercollider"
         }
-      },
-      "match": "[^a-zA-Z0-9\\\\]([A-Z_]{1}[a-zA-Z0-9_]*)[^a-zA-Z0-9_]"
+      }
     },
     {
-      "match": "\\\\[a-zA-Z0-9\\_]+",
-      "name": "entity.name.symbol.supercollider"
+      "name": "entity.name.symbol.supercollider",
+      "match": "\\\\[a-zA-Z0-9\\_]+"
     },
     {
+      "match": "^\\s*(\\**[a-z]{1}[a-zA-Z0-9_]+)\\s*\\{",
       "captures": {
         "1": {
           "name": "entity.name.function.supercollider"
         }
-      },
-      "match": "^\\s*(\\**[a-z]{1}[a-zA-Z0-9_]+)\\s*\\{"
+      }
     },
     {
-      "match": "\\~[a-zA-Z0-9]+",
-      "name": "variable.language.supercollider"
+      "name": "variable.language.supercollider",
+      "match": "\\~[a-z][a-zA-Z0-9_]*"
     },
     {
-      "match": "\\/\\/.*",
-      "name": "comment.single.supercollider"
+      "name": "comment.single.supercollider",
+      "match": "\\/\\/.*"
     },
     {
+      "name": "comment.multiline.supercollider",
       "begin": "\\/\\*",
-      "end": "\\*\\/",
-      "name": "comment.multiline.supercollider"
+      "end": "\\*\\/"
     },
     {
-      "comment": "source: ruby bundle",
-      "match": "\\b(0[xX]\\h(?>_?\\h)*|\\d(?>_?\\d)*(\\.(?![^[:space:][:digit:]])(?>_?\\d)*)?([eE][-+]?\\d(?>_?\\d)*)?|0[bB][01]+)\\b",
-      "name": "constant.numeric.supercollider"
+      "name": "constant.numeric.supercollider",
+      "match": "\\b(0[xX][0-9A-Fa-f](?\u003e_?[0-9A-Fa-f])*|\\d(?\u003e_?\\d)*(\\.(?![^[:space:][:digit:]])(?\u003e_?\\d)*)?([eE][-+]?\\d(?\u003e_?\\d)*)?|0[bB][01]+)\\b"
     }
-  ],
-  "scopeName": "source.supercollider"
+  ]
 }

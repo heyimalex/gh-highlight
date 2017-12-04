@@ -1,81 +1,78 @@
 {
-  "fileTypes": [
-
-  ],
-  "foldingStartMarker": "\\{\\s*$",
-  "foldingStopMarker": "^\\s*\\}",
-  "keyEquivalent": "^~M",
   "name": "Mata",
+  "scopeName": "source.mata",
   "patterns": [
     {
+      "name": "string.quoted.double.mata",
       "begin": "\"",
+      "end": "\"",
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.mata"
         }
       },
-      "end": "\"",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.mata"
         }
-      },
-      "name": "string.quoted.double.mata"
+      }
     },
     {
-      "begin": "`\"",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.mata"
-        }
-      },
-      "end": "\"'",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.mata"
-        }
-      },
       "name": "string.quoted.double.compound.mata",
+      "begin": "`\"",
+      "end": "\"'",
       "patterns": [
         {
           "include": "#cdq_string_content"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.mata"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.mata"
+        }
+      }
     },
     {
+      "name": "comment.block.mata",
       "begin": "/\\*",
+      "end": "\\*/",
+      "patterns": [
+        {
+          "include": "#cb_content"
+        }
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.comment.begin.mata"
         }
       },
-      "end": "\\*/",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.comment.end.mata"
         }
-      },
-      "name": "comment.block.mata",
-      "patterns": [
-        {
-          "include": "#cb_content"
-        }
-      ]
+      }
     },
     {
+      "name": "comment.line.double-slash.mata",
+      "match": "(//).*$\\n?",
       "captures": {
         "0": {
           "name": "punctuation.definition.comment.mata"
         }
-      },
-      "match": "(//).*$\\n?",
-      "name": "comment.line.double-slash.mata"
+      }
     },
     {
-      "match": "(?<![^$\\s])(version|pragma|if|else|for|while|do|break|continue|goto|return)(?=\\s)",
-      "name": "keyword.control.mata"
+      "name": "keyword.control.mata",
+      "match": "(?\u003c![^$\\s])(version|pragma|if|else|for|while|do|break|continue|goto|return)(?=\\s)"
     },
     {
+      "name": "storage.type.mata",
+      "match": "\\b(transmorphic|string|numeric|real|complex|(pointer(\\([^)]+\\))?))\\s+(matrix|vector|rowvector|colvector|scalar)\\b",
       "captures": {
         "1": {
           "name": "storage.type.eltype.mata"
@@ -83,22 +80,19 @@
         "4": {
           "name": "storage.type.orgtype.mata"
         }
-      },
-      "match": "\\b(transmorphic|string|numeric|real|complex|(pointer(\\([^)]+\\))?))\\s+(matrix|vector|rowvector|colvector|scalar)\\b",
-      "name": "storage.type.mata"
+      }
     },
     {
-      "comment": "need to end with whitespace character here or last group doesn't match",
-      "match": "\\b(transmorphic|string|numeric|real|complex|(pointer(\\([^)]+\\))?))\\s",
-      "name": "storage.type.eltype.mata"
+      "name": "storage.type.eltype.mata",
+      "match": "\\b(transmorphic|string|numeric|real|complex|(pointer(\\([^)]+\\))?))\\s"
     },
     {
-      "match": "\\b(matrix|vector|rowvector|colvector|scalar)\\b",
-      "name": "storage.type.orgtype.mata"
+      "name": "storage.type.orgtype.mata",
+      "match": "\\b(matrix|vector|rowvector|colvector|scalar)\\b"
     },
     {
-      "match": "\\!|\\+\\+|\\-\\-|\\&|\\'|\\?|\\\\|\\:\\:|\\,|\\.\\.|\\||\\=|\\=\\=|\\>\\=|\\<\\=|\\<|\\>|\\!\\=|\\#|\\+|\\-|\\*|\\^|\\/",
-      "name": "keyword.operator.mata"
+      "name": "keyword.operator.mata",
+      "match": "\\!|\\+\\+|\\-\\-|\\\u0026|\\'|\\?|\\\\|\\:\\:|\\,|\\.\\.|\\||\\=|\\=\\=|\\\u003e\\=|\\\u003c\\=|\\\u003c|\\\u003e|\\!\\=|\\#|\\+|\\-|\\*|\\^|\\/"
     },
     {
       "include": "#builtin_functions"
@@ -106,8 +100,8 @@
   ],
   "repository": {
     "builtin_functions": {
-      "match": "(?x)(\n                abs|acos|acosh|acosr|ado_fromlchar|ado_intolchar|adosubdir|all|allof|\n\t\t\t  any|anyof|arg|args|ascii|asin|asinh|asinr|assert|asserteq|atan|atan2|\n\t\t\t  atanh|atanr\n\t\t\t)(?=\\()",
-      "name": "support.function.builtin.mata"
+      "name": "support.function.builtin.mata",
+      "match": "(?x)(\n                abs|acos|acosh|acosr|ado_fromlchar|ado_intolchar|adosubdir|all|allof|\n\t\t\t  any|anyof|arg|args|ascii|asin|asinh|asinr|assert|asserteq|atan|atan2|\n\t\t\t  atanh|atanr\n\t\t\t)(?=\\()"
     },
     "cb_content": {
       "begin": "/\\*",
@@ -127,7 +121,5 @@
         }
       ]
     }
-  },
-  "scopeName": "source.mata",
-  "uuid": "A1B2D6E0-F46E-4C1D-9120-60F1DE74272F"
+  }
 }

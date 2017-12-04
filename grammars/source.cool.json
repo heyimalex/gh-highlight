@@ -1,18 +1,15 @@
 {
-  "comment": "This adds support for the COOL programming language used in CS 143 (Compilers) at Stanford",
-  "fileTypes": [
-    "cl"
-  ],
   "name": "COOL",
+  "scopeName": "source.cool",
   "patterns": [
     {
-      "match": "--(.*)\\n",
-      "name": "comment.line.double-dash"
+      "name": "comment.line.double-dash",
+      "match": "--(.*)\\n"
     },
     {
+      "name": "comment.block.documentation",
       "begin": "\\(\\*",
       "end": "\\*\\)",
-      "name": "comment.block.documentation",
       "patterns": [
         {
           "include": "#comment.block.documentation"
@@ -20,66 +17,64 @@
       ]
     },
     {
-      "match": "(Int|String|Bool|Object|IO)",
-      "name": "support.class"
+      "name": "support.class",
+      "match": "(Int|String|Bool|Object|IO)"
     },
     {
-      "match": "(abort\\(\\)|type_name\\(\\)|copy\\(\\))",
-      "name": "support.function"
+      "name": "support.function",
+      "match": "(abort\\(\\)|type_name\\(\\)|copy\\(\\))"
     },
     {
-      "match": "\\b(if|fi|else|then|loop|pool|while|case|esac)\\b",
-      "name": "keyword.control"
+      "name": "keyword.control",
+      "match": "\\b(if|fi|else|then|loop|pool|while|case|esac)\\b"
     },
     {
-      "match": "\\b(in|inherits|isvoid|let|new|of|new|not)\\b",
-      "name": "keyword.operator"
+      "name": "keyword.operator",
+      "match": "\\b(in|inherits|isvoid|let|new|of|new|not)\\b"
     },
     {
-      "match": "\\b(true|false)\\b",
-      "name": "constant.language"
+      "name": "constant.language",
+      "match": "\\b(true|false)\\b"
     },
     {
-      "match": "(?x)\\b((?i:( [0-9]+ ( ' [0-9]+ )* )))",
-      "name": "constant.numeric"
+      "name": "constant.numeric",
+      "match": "(?x)\\b((?i:( [0-9]+ ( ' [0-9]+ )* )))"
     },
     {
-      "match": "\\b([A-Z]([A-Z]|[a-z]|[0-9]|_)*|SELF_TYPE)\\b",
-      "name": "entity.name.type"
+      "name": "entity.name.type",
+      "match": "\\b([A-Z]([A-Z]|[a-z]|[0-9]|_)*|SELF_TYPE)\\b"
     },
     {
-      "match": "\\b(class)\\b",
-      "name": "storage.modifier"
+      "name": "storage.modifier",
+      "match": "\\b(class)\\b"
     },
     {
-      "match": "\\b(self)\\b",
-      "name": "variable.language"
+      "name": "variable.language",
+      "match": "\\b(self)\\b"
     },
     {
-      "match": "\\b[a-z]([A-z]|[a-z]|[0-9]|_)*\\b",
-      "name": "variable.parameter"
+      "name": "variable.parameter",
+      "match": "\\b[a-z]([A-z]|[a-z]|[0-9]|_)*\\b"
     },
     {
-      "match": "\\b[a-z]*\\(.*\\)\\b",
-      "name": "entity.name.function"
+      "name": "entity.name.function",
+      "match": "\\b[a-z]*\\(.*\\)\\b"
     },
     {
-      "begin": "\"",
-      "beginCaptures": {
-        "0": {
-        }
-      },
-      "end": "\"",
-      "endCaptures": {
-        "0": {
-        }
-      },
       "name": "string.quoted.double",
+      "begin": "\"",
+      "end": "\"",
       "patterns": [
         {
           "include": "#string_placeholder"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {}
+      },
+      "endCaptures": {
+        "0": {}
+      }
     }
   ],
   "repository": {
@@ -97,7 +92,5 @@
         }
       ]
     }
-  },
-  "scopeName": "source.cool",
-  "uuid": "BAAC41A1-4CB7-4CB2-A0C1-E1B1585D451E"
+  }
 }

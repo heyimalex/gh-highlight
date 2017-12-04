@@ -1,18 +1,6 @@
 {
-  "fileType": [
-    "ecr",
-    "html.ecr"
-  ],
-  "injections": {
-    "text.html.ecr": {
-      "patterns": [
-        {
-          "include": "#tags"
-        }
-      ]
-    }
-  },
   "name": "HTML (Crystal - ECR)",
+  "scopeName": "text.html.ecr",
   "patterns": [
     {
       "include": "text.html.basic"
@@ -22,7 +10,15 @@
     "tags": {
       "patterns": [
         {
-          "begin": "(<%)(=)?",
+          "name": "meta.embedded.line.ecr",
+          "contentName": "source.crystal.embedded.ecr",
+          "begin": "(\u003c%)(=)?",
+          "end": "%\u003e",
+          "patterns": [
+            {
+              "include": "source.crystal"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "punctuation.section.embedded.begin.ecr"
@@ -31,22 +27,22 @@
               "name": "punctuation.section.embedded.return.ecr"
             }
           },
-          "contentName": "source.crystal.embedded.ecr",
-          "end": "%>",
           "endCaptures": {
             "0": {
               "name": "punctuation.section.embedded.end.ecr"
             }
-          },
-          "name": "meta.embedded.line.ecr",
-          "patterns": [
-            {
-              "include": "source.crystal"
-            }
-          ]
+          }
         }
       ]
     }
   },
-  "scopeName": "text.html.ecr"
+  "injections": {
+    "text.html.ecr": {
+      "patterns": [
+        {
+          "include": "#tags"
+        }
+      ]
+    }
+  }
 }

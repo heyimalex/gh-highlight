@@ -1,16 +1,13 @@
 {
-  "fileTypes": [
-
-  ],
   "name": "ACUCOBOL",
+  "scopeName": "source.acucobol",
   "patterns": [
     {
-      "match": "(^......[ a-zA-Z0-9\\-]...................................................................*$)",
-      "name": "invalid.illegal.cobol"
+      "name": "invalid.illegal.cobol",
+      "match": "(^......[ a-zA-Z0-9\\-]...................................................................*$)"
     },
     {
       "include": "source.cobol"
     }
-  ],
-  "scopeName": "source.acucobol"
+  ]
 }

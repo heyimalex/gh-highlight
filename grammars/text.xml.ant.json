@@ -1,54 +1,56 @@
 {
-  "fileTypes": [
-    "ant.xml",
-    "build.xml"
-  ],
-  "firstLineMatch": "<\\!--\\s*ant\\s*-->",
-  "keyEquivalent": "^~A",
   "name": "Ant",
+  "scopeName": "text.xml.ant",
   "patterns": [
     {
-      "begin": "<[!%]--",
+      "name": "comment.block.xml.ant",
+      "begin": "\u003c[!%]--",
+      "end": "--%?\u003e",
       "captures": {
         "0": {
           "name": "punctuation.definition.comment.xml.ant"
         }
-      },
-      "end": "--%?>",
-      "name": "comment.block.xml.ant"
+      }
     },
     {
-      "begin": "(<target)\\b",
+      "name": "meta.tag.target.xml.ant",
+      "begin": "(\u003ctarget)\\b",
+      "end": "(/?\u003e)",
+      "patterns": [
+        {
+          "include": "#tagStuff"
+        }
+      ],
       "captures": {
         "1": {
           "name": "entity.name.tag.target.xml.ant"
         }
-      },
-      "end": "(/?>)",
-      "name": "meta.tag.target.xml.ant",
+      }
+    },
+    {
+      "name": "meta.tag.macrodef.xml.ant",
+      "begin": "(\u003cmacrodef)\\b",
+      "end": "(/?\u003e)",
       "patterns": [
         {
           "include": "#tagStuff"
         }
-      ]
-    },
-    {
-      "begin": "(<macrodef)\\b",
+      ],
       "captures": {
         "1": {
           "name": "entity.name.tag.macrodef.xml.ant"
         }
-      },
-      "end": "(/?>)",
-      "name": "meta.tag.macrodef.xml.ant",
+      }
+    },
+    {
+      "name": "meta.tag.xml.ant",
+      "begin": "(\u003c/?)(?:([-_a-zA-Z0-9]+)((:)))?([-_a-zA-Z0-9:]+)",
+      "end": "(/?\u003e)",
       "patterns": [
         {
           "include": "#tagStuff"
         }
-      ]
-    },
-    {
-      "begin": "(</?)(?:([-_a-zA-Z0-9]+)((:)))?([-_a-zA-Z0-9:]+)",
+      ],
       "captures": {
         "1": {
           "name": "punctuation.definition.tag.xml.ant"
@@ -65,14 +67,7 @@
         "5": {
           "name": "entity.name.tag.localname.xml.ant"
         }
-      },
-      "end": "(/?>)",
-      "name": "meta.tag.xml.ant",
-      "patterns": [
-        {
-          "include": "#tagStuff"
-        }
-      ]
+      }
     },
     {
       "include": "text.xml"
@@ -86,19 +81,9 @@
   ],
   "repository": {
     "doublequotedString": {
-      "begin": "\"",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.xml.ant"
-        }
-      },
-      "end": "\"",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.xml.ant"
-        }
-      },
       "name": "string.quoted.double.xml.ant",
+      "begin": "\"",
+      "end": "\"",
       "patterns": [
         {
           "include": "#javaAttributes"
@@ -106,17 +91,28 @@
         {
           "include": "#javaProperties"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.xml.ant"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.xml.ant"
+        }
+      }
     },
     "javaAttributes": {
+      "name": "meta.embedded.line.java",
+      "contentName": "source.java",
       "begin": "@\\{",
+      "end": "(\\})",
       "beginCaptures": {
         "0": {
           "name": "punctuation.section.embedded.begin.ant"
         }
       },
-      "contentName": "source.java",
-      "end": "(\\})",
       "endCaptures": {
         "0": {
           "name": "punctuation.section.embedded.end.ant"
@@ -124,18 +120,18 @@
         "1": {
           "name": "source.java"
         }
-      },
-      "name": "meta.embedded.line.java"
+      }
     },
     "javaProperties": {
+      "name": "meta.embedded.line.java-props",
+      "contentName": "source.java-props",
       "begin": "\\$\\{",
+      "end": "(\\})",
       "beginCaptures": {
         "0": {
           "name": "punctuation.section.embedded.begin.ant"
         }
       },
-      "contentName": "source.java-props",
-      "end": "(\\})",
       "endCaptures": {
         "0": {
           "name": "punctuation.section.embedded.end.ant"
@@ -143,23 +139,12 @@
         "1": {
           "name": "source.java-props"
         }
-      },
-      "name": "meta.embedded.line.java-props"
+      }
     },
     "singlequotedString": {
-      "begin": "'",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.xml.ant"
-        }
-      },
-      "end": "'",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.xml.ant"
-        }
-      },
       "name": "string.quoted.single.xml.ant",
+      "begin": "'",
+      "end": "'",
       "patterns": [
         {
           "include": "#javaAttributes"
@@ -167,11 +152,22 @@
         {
           "include": "#javaProperties"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.xml.ant"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.xml.ant"
+        }
+      }
     },
     "tagStuff": {
       "patterns": [
         {
+          "match": " (?:([-_a-zA-Z0-9]+)((:)))?([_a-zA-Z-]+)=",
           "captures": {
             "1": {
               "name": "entity.other.attribute-name.namespace.xml.ant"
@@ -185,8 +181,7 @@
             "4": {
               "name": "entity.other.attribute-name.localname.xml.ant"
             }
-          },
-          "match": " (?:([-_a-zA-Z0-9]+)((:)))?([_a-zA-Z-]+)="
+          }
         },
         {
           "include": "#doublequotedString"
@@ -196,7 +191,5 @@
         }
       ]
     }
-  },
-  "scopeName": "text.xml.ant",
-  "uuid": "E1B78601-E584-4A7F-B011-A61710BFE035"
+  }
 }

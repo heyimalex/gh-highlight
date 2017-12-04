@@ -1,338 +1,239 @@
 {
-  "fileTypes": [
-    "vb"
-  ],
   "name": "VB.NET",
+  "scopeName": "source.vbnet",
   "patterns": [
     {
-      "include": "#singleLineComment"
+      "include": "#comment-single-quote"
     },
     {
-      "include": "#region"
+      "include": "#comment-rem"
     },
     {
-      "include": "#quotedString"
+      "include": "#keyword-a"
     },
     {
-      "include": "#compilerOption"
+      "include": "#keyword-b"
     },
     {
-      "include": "#importDefinition"
+      "include": "#keyword-c"
     },
     {
-      "include": "#numericConstant"
+      "include": "#keyword-d"
     },
     {
-      "include": "#characterOperator"
+      "include": "#keyword-e"
     },
     {
-      "include": "#lineContinuationOperator"
+      "include": "#keyword-f"
     },
     {
-      "include": "#wordOperator"
+      "include": "#keyword-g"
     },
     {
-      "include": "#languageContants"
+      "include": "#keyword-h"
     },
     {
-      "include": "#compilerDirectives"
+      "include": "#keyword-i"
     },
     {
-      "include": "#supportTypes"
+      "include": "#keyword-j"
     },
     {
-      "include": "#suportFunctions"
+      "include": "#keyword-k"
     },
     {
-      "include": "#linqKeywords"
+      "include": "#keyword-l"
     },
     {
-      "include": "#languageVariable"
+      "include": "#keyword-m"
     },
     {
-      "include": "#namespaceDefinition"
+      "include": "#keyword-n"
     },
     {
-      "include": "#moduleDefinition"
+      "include": "#keyword-o"
     },
     {
-      "include": "#interfaceDefinition"
+      "include": "#keyword-p"
     },
     {
-      "include": "#classDefinition"
+      "include": "#keyword-r"
     },
     {
-      "include": "#functionDefinition"
+      "include": "#keyword-s"
     },
     {
-      "include": "#lambdaDefinition"
+      "include": "#keyword-t"
     },
     {
-      "include": "#propertyDefinition"
+      "include": "#keyword-u"
     },
     {
-      "include": "#propertyGetSet"
+      "include": "#keyword-v"
     },
     {
-      "include": "#definitionEnd"
+      "include": "#keyword-w"
     },
     {
-      "include": "#storageModifiers"
+      "include": "#keyword-x"
     },
     {
-      "include": "#inheritanceModifiers"
+      "include": "#keyword-y"
     },
     {
-      "include": "#controlKeywords"
+      "include": "#integer-literal"
     },
     {
-      "include": "#modifierKeywords"
+      "include": "#floating-point-literal"
     },
     {
-      "include": "#vbFunctions"
+      "include": "#character-literal"
+    },
+    {
+      "include": "#string-literal"
+    },
+    {
+      "include": "#date-literal"
+    },
+    {
+      "include": "#symbol"
+    },
+    {
+      "include": "#identifier"
     }
   ],
   "repository": {
-    "characterOperator": {
-      "match": "(\\.|\\+=|\\+|\\*=|\\*|\\\\=|\\\\|/=|/|=|-=|-|<|<=|>|>=|&=|&|\\^|\\^=|>>=|>>|<<=|<<|:=)",
-      "name": "keyword.operator.vbnet"
+    "character-literal": {
+      "name": "string.quoted.double.vbnet",
+      "match": "(?i:[\"\\x{201C}\\x{201D}]([^\"\\x{201C}\\x{201D}]|[\"\\x{201C}\\x{201D}]{2})[\"\\x{201C}\\x{201D}]C)"
     },
-    "classDefinition": {
-      "captures": {
-        "1": {
-          "name": "storage.type.class.vbnet"
-        },
-        "2": {
-          "name": "entity.name.type.class.vbnet"
-        }
-      },
-      "match": "(?i:\\b(class)\\s+([a-zA-Z_]\\w*)\\s*)",
-      "name": "meta.class.vbnet"
+    "comment-rem": {
+      "name": "comment.line.singlequote.vbnet",
+      "match": "(?i)(?\u003c=[^_\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}\\p{Nd}\\p{Mn}\\p{Mc}\\p{Cf}\\p{Pc}])REM((?=[\\r|\\n])| [^\\r\\n]*)"
     },
-    "compilerDirectives": {
-      "match": "^\\s*(?i:#if|#else|#elseif|#endif|#const|#externalsource|#end|#end externalsource)\\s+",
-      "name": "keyword.directive.vbnet"
+    "comment-single-quote": {
+      "name": "comment.line.singlequote.vbnet",
+      "match": "['\\x{2018}\\x{2019}][^\\r\\n]*"
     },
-    "compilerOption": {
-      "captures": {
-        "1": {
-          "name": "keyword.other.compiler-option.vbnet"
-        },
-        "2": {
-          "name": "support.constant.compiler-option.vbnet"
-        },
-        "3": {
-          "name": "constant.language.option-value.vbnet"
-        }
-      },
-      "match": "(?i:^\\s*(option)\\s*(strict|infer|explicit|compare)\\s*(on|off|binary|text))"
+    "date-literal": {
+      "name": "string.quoted.double.vbnet",
+      "match": "(#\\s*(((((\\d+/\\d+/\\d+)|(\\d+-\\d+-\\d+))\\s+(\\d+:\\d+(:\\d+)?\\s*(AM|PM)?)))|((\\d+/\\d+/\\d+)|(\\d+-\\d+-\\d+))|(\\d+:\\d+(:\\d+)?\\s*(AM|PM)?))\\s*#)"
     },
-    "controlKeywords": {
-      "match": "(?i:\\b(If|Then|Else|ElseIf|Else If|End If|While|End While|For|End For|To|Each|Case|Select|End Select|Return|Continue|Do|Until|Loop|Next|End With|With|Exit Do|Exit For|Exit Function|Exit Property|Exit Sub|IIf|Step|GoTo|Try|Catch|Finally|End Try|Using|RaiseEvent|Stop|On Error|Resume|Async|Await|Yield)\\b)",
-      "name": "keyword.control.vbnet"
+    "floating-point-literal": {
+      "name": "string.quoted.double.vbnet",
+      "match": "(?i:[0-9]*(\\.[0-9]+)?((?\u003c=[0-9])E[+-]?[0-9]+)?(?\u003c=[0-9])[FRD@\u0026#]?)"
     },
-    "definitionEnd": {
-      "match": "(?i:^\\s*(end)\\s+(function|sub|class|namespace|module|interface|property|addhandler|enum|event|operator|raiseevent|removehandler|select|structure|synclock))",
-      "name": "keyword.control.end-definition.vbnet"
+    "identifier": {
+      "name": "variable.other.namespace-alias.vbnet",
+      "match": "(([\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}]|_[_\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}\\p{Nd}\\p{Mn}\\p{Mc}\\p{Cf}\\p{Pc}])[_\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}\\p{Nd}\\p{Mn}\\p{Mc}\\p{Cf}\\p{Pc}]*[%\u0026@!#$]?|\\[([\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}]|_[_\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}\\p{Nd}\\p{Mn}\\p{Mc}\\p{Cf}\\p{Pc}])[_\\p{Lu}\\p{Ll}\\p{Lt}\\p{Lm}\\p{Lo}\\p{Nl}\\p{Nd}\\p{Mn}\\p{Mc}\\p{Cf}\\p{Pc}]*\\])"
     },
-    "functionDefinition": {
-      "begin": "(?i:\\b(function|sub)\\s+([a-zA-Z_]\\w*)\\s*(\\()?)",
-      "beginCaptures": {
-        "1": {
-          "name": "support.type.function.vbnet"
-        },
-        "2": {
-          "name": "entity.name.function.vbnet"
-        },
-        "3": {
-          "name": "meta.parameters.vbnet"
-        },
-        "4": {
-          "name": "punctuation.definition.parameters.vbnet"
-        }
-      },
-      "end": "(\\))?\\s*",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.definition.parameters.vbnet"
-        }
-      },
-      "name": "meta.function.vbnet",
-      "patterns": [
-        {
-          "include": "#modifierKeywords"
-        },
-        {
-          "include": "#supportTypes"
-        }
-      ]
+    "integer-literal": {
+      "name": "string.quoted.double.vbnet",
+      "match": "(?i)(\u0026H[0-9A-F]+|\u0026O[0-7]+|\u0026B[0-1]+|[0-9]+)(S|I|L|US|UI|UL|%|!)?"
     },
-    "importDefinition": {
-      "captures": {
-        "1": {
-          "name": "keyword.other.vbnet"
-        },
-        "2": {
-          "name": "variable.other.namespace-alias.vbnet"
-        }
-      },
-      "match": "(?i:^\\s*(imports)\\s*([a-zA-Z_]\\w*\\s*=)?\\s*([a-zA-Z_]\\w*\\.?)+)"
+    "keyword-a": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(AddHandler|AddressOf|Aggregate|Alias|And|AndAlso|Ansi|As|Ascending|Assembly|Async(?=\\s+(Sub|Function))|Auto|Await)\\b"
     },
-    "inheritanceModifiers": {
-      "match": "(?i:overloads|overrides|overridable|notoverridable|mustoverride|mustoverride overrides|notoverridable overrides|overloads overrides|mustinherit|notinheritable)",
-      "name": "storage.modifier.inheritance.vbnet"
+    "keyword-b": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])((?\u003c=Compare)\\s+Binary|Boolean|ByRef|Byte|ByVal)\\b"
     },
-    "interfaceDefinition": {
-      "captures": {
-        "1": {
-          "name": "storage.type.interface.vbnet"
-        },
-        "2": {
-          "name": "entity.name.type.interface.vbnet"
-        }
-      },
-      "match": "(?i:\\b(interface)\\s+([a-zA-Z_]\\w*)\\s*)",
-      "name": "meta.interface.vbnet"
+    "keyword-c": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(Call|Case|Catch|CBool|CByte|CChar|CDate|CDbl|CDec|Char|CInt|Class|CLng|CObj|(?\u003c=Option\\s)Compare|Const|Continue|CShort|CSng|CStr|CType|Custom(?=\\s+Event))\\b"
     },
-    "lambdaDefinition": {
-      "match": "(?i:function|sub)",
-      "name": "support.type.lambda.vbnet"
+    "keyword-d": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(Date|Decimal|Declare|Default|Delegate|Descending|Dim|DirectCast|Distinct|Do|Double)\\b"
     },
-    "languageContants": {
-      "match": "((?i:true|false|nothing))",
-      "name": "constant.language.vbnet"
+    "keyword-e": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(Each|Else|ElseIf|End|EndIf|Enum|Equals|Erase|Error|Event|Exit|(?\u003c=Option)\\s+Explicit)\\b"
     },
-    "languageVariable": {
-      "match": "\\b((?i:Me|MyBase|MyClass))\\.",
-      "name": "keyword.other.vbnet"
+    "keyword-f": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(False|Finally|For|Friend|From(?=\\s+{)|From|Function)\\b"
     },
-    "lineContinuationOperator": {
-      "match": "\\w*\\b(\\_)$",
-      "name": "keyword.operator.vbnet"
+    "keyword-g": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(Get|GetType|Global|GoSub|GoTo|Group\\s+By|Group)\\b"
     },
-    "linqKeywords": {
-      "match": "(?i:\\b(from|aggregate|select|where|order by|join|groupp by|into|group join|equals|let|distinct|skip|skip while|take|take while)\\b)",
-      "name": "keyword.control.linq.vbnet"
+    "keyword-h": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(Handles)\\b"
     },
-    "modifierKeywords": {
-      "match": "\\b(?i:As|byval|byref|optional|handles|inherits|implements|withevents|end set|end get|of|alias|declare|widening|narrowing|ansi|assembly|auto|iterator|key|unicode)\\s+",
-      "name": "keyword.modifier.vbnet"
+    "keyword-i": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(If|Implements|Imports|In|(?\u003c=Option)\\s+Infer|Inherits|Integer|Interface|Into|Is|IsNot|Iterator(?=\\s+(Function|Property)))\\b"
     },
-    "moduleDefinition": {
-      "captures": {
-        "1": {
-          "name": "storage.type.module.vbnet"
-        },
-        "2": {
-          "name": "entity.name.type.module.vbnet"
-        }
-      },
-      "match": "(?i:\\b(module)\\s+([a-zA-Z_]\\w*)\\s*)",
-      "name": "meta.module.vbnet"
+    "keyword-j": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(Join)\\b"
     },
-    "namespaceDefinition": {
-      "captures": {
-        "1": {
-          "name": "storage.type.namespace.vbnet"
-        },
-        "2": {
-          "name": "entity.name.type.namespace.vbnet"
-        }
-      },
-      "match": "\\b((?i:namespace))\\s+([a-zA-Z_]\\w*)\\s*",
-      "name": "meta.namespace.vbnet"
+    "keyword-k": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(Key)\\b"
     },
-    "numericConstant": {
-      "match": "\\b(-?\\d+(\\.?\\d?)*)",
-      "name": "constant.numeric.vbnet"
+    "keyword-l": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(Let|Lib|Like|Long|Loop)\\b"
     },
-    "propertyDefinition": {
-      "begin": "(?i:\\b(property)\\s+([a-zA-Z_]\\w*)\\s*(\\()?)",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.type.property.vbnet"
-        },
-        "2": {
-          "name": "entity.name.type.property.vbnet"
-        },
-        "3": {
-          "name": "punctuation.definition.parameters.property.vbnet"
-        }
-      },
-      "end": "(\\))?\\s*",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.definition.parameters.property.vbnet"
-        }
-      },
-      "name": "meta.property.vbnet",
-      "patterns": [
-        {
-          "include": "#modifierKeywords"
-        },
-        {
-          "include": "#supportTypes"
-        }
-      ]
+    "keyword-m": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(Me|Mod|Module|MustInherit|MustOverride|MyBase|MyClass)\\b"
     },
-    "propertyGetSet": {
-      "match": "(?i:^\\s*(protected friend|protected|friend|private)?\\s+(get|set)\\s*\\(?\\b)",
-      "name": "keyword.other.property.accessor.vbnet"
+    "keyword-n": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(NameOf|Namespace|Narrowing|New|Next|Not|Nothing|NotInheritable|NotOverridable)\\b"
     },
-    "quotedString": {
-      "match": "(\")([^\"]|\"\")*(\")",
-      "name": "string.quoted.double.vbnet"
+    "keyword-o": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(Object|Of|(?\u003c=Explicit|Infer|Strict)\\s+Off|On|Operator|Option|Optional|Or|Order\\s+By|OrElse|Out|Overloads|Overridable|Overrides)\\b"
     },
-    "region": {
-      "begin": "^\\s*((?i:#region))",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.directive.vbnet"
-        }
-      },
-      "end": "^\\s*((?i:#end region))",
-      "endCaptures": {
-        "1": {
-          "name": "keyword.directive.vbnet"
-        }
-      },
-      "name": "meta.region.source.vbnet",
-      "patterns": [
-        {
-          "include": "$self"
-        }
-      ]
+    "keyword-p": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(ParamArray|Partial(?=\\s+(Class|Structure|Module|Interface))|Partial(?=\\s+(Class|Structure|Module|Interface|Sub|Public|Private|Protected|Friend|MustInherit|NotInheritable|NotOverrideable|Overridable|Shared))|Preserve|Private|Property|Protected|Public)\\b"
     },
-    "singleLineComment": {
-      "comment": "single quote comment",
-      "match": "'.*$",
-      "name": "comment.line.singlequote.vbnet"
+    "keyword-r": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(RaiseEvent|ReadOnly|ReDim|(?\u003c=#|#End\\s)Region|RemoveHandler|Resume|Return)\\b"
     },
-    "storageModifiers": {
-      "match": "\\b(?i:dim|public|private|protected friend|protected|friend|shadows|static|shared|readonly|default|partial|readonly|writeonly|erase|redim|lib)\\b",
-      "name": "storage.modifier.access.vbnet"
+    "keyword-s": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(Select|Set|Shadows|Shared|Short|Single|Skip|Static|Step|Stop|(?\u003c=Option)\\s+Strict|String|Structure|Sub|SyncLock)\\b"
     },
-    "suportFunctions": {
-      "match": "(?i:\\b(new|addressof|addhandler|removehandler|throw|typeof|like|call|synclock)\\b)",
-      "name": "support.function.vbnet"
+    "keyword-t": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(Take|(?\u003c=Compare)\\s+Text|Then|Throw|To|True|Try|TryCast|TypeOf)\\b"
     },
-    "supportTypes": {
-      "match": "(?i:\\b(integer|decimal|double|single|date|long|short|char|string|byte|date|boolean|delegate|event|enum|sbyte|uinteger|ulong|ushort|const|object|global|paramarray)\\b)",
-      "name": "support.type.vbnet"
+    "keyword-u": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(Unicode|Until|Using)\\b"
     },
-    "vbFunctions": {
-      "captures": {
-        "1": {
-          "name": "support.function.vbnet"
-        }
-      },
-      "match": "\\b((?i:CBool|CByte|CChar|CDate|CDbl|CDec|Char|CInt|CLng|CObj|CSByte|CShort|CSng|CStr|CType|CUInt|CULng|CUShort|DirectCast|GetType|TryCast|GetXmlNamespace))\\("
+    "keyword-v": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(Variant)\\b"
     },
-    "wordOperator": {
-      "match": "(?i:\\b(mod|not|and|andalso|or|orelse|in|is|isnot|xor|out)\\b)",
-      "name": "keyword.operator.vbnet"
+    "keyword-w": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(Wend|When|Where|While|Widening|With|WithEvents|WriteOnly)\\b"
+    },
+    "keyword-x": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(Xor)\\b"
+    },
+    "keyword-y": {
+      "name": "keyword.other.vbnet",
+      "match": "(?i)(?\u003c![.!])(Yield)\\b"
+    },
+    "string-literal": {
+      "name": "string.quoted.double.vbnet",
+      "match": "([\"\\x{201C}\\x{201D}]([^\"\\x{201C}\\x{201D}]|[\"\\x{201C}\\x{201D}]{2})*[\"\\x{201C}\\x{201D}])"
+    },
+    "symbol": {
+      "name": "variable.other.namespace-alias.vbnet",
+      "match": "(([\u0026*+\\-/\\\\^\u003c=\u003e])|([(){}!#,.:]|((?\u003c= )_(?=\\s$)))|\\?)"
     }
-  },
-  "scopeName": "source.vbnet",
-  "uuid": "975d5447-0eb5-444c-a471-5934193ca1ea"
+  }
 }

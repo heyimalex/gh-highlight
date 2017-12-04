@@ -1,25 +1,21 @@
 {
-  "fileTypes": [
-    "ik"
-  ],
-  "firstLineMatch": "^#!/.*\\bioke\\b",
-  "keyEquivalent": "^~I",
   "name": "Ioke",
+  "scopeName": "source.ioke",
   "patterns": [
     {
+      "name": "comment.line.ioke",
       "begin": ";",
-      "end": "$\\n?",
-      "name": "comment.line.ioke"
+      "end": "$\\n?"
     },
     {
+      "name": "comment.line.ioke",
       "begin": "#!",
-      "end": "$\\n?",
-      "name": "comment.line.ioke"
+      "end": "$\\n?"
     },
     {
-      "begin": "((?<=fn\\()|(?<=fnx\\()|(?<=method\\()|(?<=macro\\()|(?<=lecro\\()|(?<=syntax\\()|(?<=dmacro\\()|(?<=dlecro\\()|(?<=dlecrox\\()|(?<=dsyntax\\())[[:space]]*\"",
-      "end": "\"",
       "name": "string.documentation.ioke",
+      "begin": "((?\u003c=fn\\()|(?\u003c=fnx\\()|(?\u003c=method\\()|(?\u003c=macro\\()|(?\u003c=lecro\\()|(?\u003c=syntax\\()|(?\u003c=dmacro\\()|(?\u003c=dlecro\\()|(?\u003c=dlecrox\\()|(?\u003c=dsyntax\\())[[:space]]*\"",
+      "end": "\"",
       "patterns": [
         {
           "include": "#text_literal_escapes"
@@ -30,12 +26,12 @@
       ]
     },
     {
-      "match": "((?<![[:alnum:]!?_:])|(?<![[:alnum:]!?_:]!))[[:alnum:]!?_]+:\\s",
-      "name": "string.literal.keyword-argument.ioke"
+      "name": "string.literal.keyword-argument.ioke",
+      "match": "((?\u003c![[:alnum:]!?_:])|(?\u003c![[:alnum:]!?_:]!))[[:alnum:]!?_]+:\\s"
     },
     {
-      "match": "[[:alnum:]_:][[:alnum:]!?_:]*(?=[[:space:]]*[+*/-]?=[^=].*($|\\.))",
-      "name": "variable.assignment.ioke"
+      "name": "variable.assignment.ioke",
+      "match": "[[:alnum:]_:][[:alnum:]!?_:]*(?=[[:space:]]*[+*/-]?=[^=].*($|\\.))"
     },
     {
       "include": "#assignments"
@@ -44,25 +40,25 @@
       "include": "#kinds"
     },
     {
-      "match": "((?<![[:alnum:]!?_:])|(?<![[:alnum:]!?_:]!))[[:alnum:]!?_:]+(?=[[:space:]]*=.*mimic[[:space]])",
-      "name": "constant.object.mimic.ioke"
+      "name": "constant.object.mimic.ioke",
+      "match": "((?\u003c![[:alnum:]!?_:])|(?\u003c![[:alnum:]!?_:]!))[[:alnum:]!?_:]+(?=[[:space:]]*=.*mimic[[:space]])"
     },
     {
-      "match": "(?<![[:alnum:]])[+-]?[[:digit:]][[:digit:]]*(\\.[[:digit:]])?[[:digit:]]*([eE][+-]?[[:digit:]]+)?(?![[:alnum:]!?_:])",
-      "name": "constant.numeric.ioke"
+      "name": "constant.numeric.ioke",
+      "match": "(?\u003c![[:alnum:]])[+-]?[[:digit:]][[:digit:]]*(\\.[[:digit:]])?[[:digit:]]*([eE][+-]?[[:digit:]]+)?(?![[:alnum:]!?_:])"
     },
     {
-      "match": "((?<![[:alnum:]!?_:])|(?<![[:alnum:]!?_:]!))0[xX][[:xdigit:]]+\\b",
-      "name": "constant.numeric.hexadecimal.ioke"
+      "name": "constant.numeric.hexadecimal.ioke",
+      "match": "((?\u003c![[:alnum:]!?_:])|(?\u003c![[:alnum:]!?_:]!))0[xX][[:xdigit:]]+\\b"
     },
     {
-      "match": "((?<![[:alnum:]!?_:])|(?<![[:alnum:]!?_:]!)):[[:alnum:]!?_:-]+",
-      "name": "string.literal.symbol.ioke"
+      "name": "string.literal.symbol.ioke",
+      "match": "((?\u003c![[:alnum:]!?_:])|(?\u003c![[:alnum:]!?_:]!)):[[:alnum:]!?_:-]+"
     },
     {
+      "name": "string.regexp.ioke",
       "begin": "#/",
       "end": "/[oxpniums]*",
-      "name": "string.regexp.ioke",
       "patterns": [
         {
           "include": "#text_literal_escapes"
@@ -73,9 +69,9 @@
       ]
     },
     {
+      "name": "string.regexp.ioke",
       "begin": "#r\\[",
       "end": "\\][oxpniums]*",
-      "name": "string.regexp.ioke",
       "patterns": [
         {
           "include": "#text_literal_escapes"
@@ -86,9 +82,9 @@
       ]
     },
     {
+      "name": "string.literal.symbol.ioke",
       "begin": ":\"",
       "end": "\"",
-      "name": "string.literal.symbol.ioke",
       "patterns": [
         {
           "include": "#text_literal_escapes"
@@ -99,9 +95,9 @@
       ]
     },
     {
+      "name": "string.quoted.double.ioke",
       "begin": "\"",
       "end": "\"",
-      "name": "string.quoted.double.ioke",
       "patterns": [
         {
           "include": "#text_literal_escapes"
@@ -112,9 +108,9 @@
       ]
     },
     {
+      "name": "string.quoted.double.ioke",
       "begin": "#\\[",
       "end": "\\]",
-      "name": "string.quoted.double.ioke",
       "patterns": [
         {
           "include": "#text_literal_escapes"
@@ -125,37 +121,39 @@
       ]
     },
     {
-      "match": "((?<![[:alnum:]!?_:])|(?<![[:alnum:]!?_:]!))it(?![[:alnum:]!?_:])",
-      "name": "entity.standout-names.ioke"
+      "name": "entity.standout-names.ioke",
+      "match": "((?\u003c![[:alnum:]!?_:])|(?\u003c![[:alnum:]!?_:]!))it(?![[:alnum:]!?_:])"
     },
     {
-      "match": "#{",
-      "name": "punctuation.set-literal-start.ioke"
+      "name": "punctuation.set-literal-start.ioke",
+      "match": "#{"
     },
     {
       "include": "#keywords"
     },
     {
-      "match": "(\\`\\`|\\`|''|'|\\.|\\,|@|@@|\\[|\\]|\\(|\\))",
-      "name": "punctuation.ioke"
+      "name": "punctuation.ioke",
+      "match": "(\\`\\`|\\`|''|'|\\.|\\,|@|@@|\\[|\\]|\\(|\\))"
     },
     {
-      "match": "[[:alnum:]_][[:alnum:]!?_:$]*[[:alnum:]!?_:]",
-      "name": "source.identifier.ioke"
+      "name": "source.identifier.ioke",
+      "match": "[[:alnum:]_][[:alnum:]!?_:$]*[[:alnum:]!?_:]"
     }
   ],
   "repository": {
     "assignments": {
       "patterns": [
         {
-          "match": "(?<=[[:space:]])[^[:space:].]+=[[:space:]]*=[[:space:]](fn|fnx|method|macro|lecro|syntax|dmacro|dlecro|dlecrox|dsyntax)",
-          "name": "variable.assignment.function.ioke"
+          "name": "variable.assignment.function.ioke",
+          "match": "(?\u003c=[[:space:]])[^[:space:].]+=[[:space:]]*=[[:space:]](fn|fnx|method|macro|lecro|syntax|dmacro|dlecro|dlecrox|dsyntax)"
         }
       ]
     },
     "embedded_source": {
       "patterns": [
         {
+          "name": "source.embedded.ioke",
+          "match": "#\\{(\\})",
           "captures": {
             "0": {
               "name": "punctuation.section.embedded.ioke"
@@ -163,19 +161,12 @@
             "1": {
               "name": "source.embedded.empty.ioke"
             }
-          },
-          "match": "#\\{(\\})",
-          "name": "source.embedded.ioke"
+          }
         },
         {
-          "begin": "#\\{",
-          "captures": {
-            "0": {
-              "name": "punctuation.section.embedded.ioke"
-            }
-          },
-          "end": "\\}",
           "name": "source.embedded.ioke",
+          "begin": "#\\{",
+          "end": "\\}",
           "patterns": [
             {
               "include": "#nest_curly_and_self"
@@ -183,57 +174,62 @@
             {
               "include": "$self"
             }
-          ]
+          ],
+          "captures": {
+            "0": {
+              "name": "punctuation.section.embedded.ioke"
+            }
+          }
         }
       ]
     },
     "keywords": {
       "patterns": [
         {
-          "match": "((?<![[:alnum:]!?_:])|(?<![[:alnum:]!?_:]!))(mimic|self|use|true|false|nil)(?![[:alnum:]!?_:])",
-          "name": "keyword.ioke"
+          "name": "keyword.ioke",
+          "match": "((?\u003c![[:alnum:]!?_:])|(?\u003c![[:alnum:]!?_:]!))(mimic|self|use|true|false|nil)(?![[:alnum:]!?_:])"
         },
         {
-          "match": "((?<![[:alnum:]!?_:])|(?<![[:alnum:]!?_:]!))(return|break|continue|unless|true|false|nil)(?![[:alnum:]!?_:])",
-          "name": "keyword.control.ioke"
+          "name": "keyword.control.ioke",
+          "match": "((?\u003c![[:alnum:]!?_:])|(?\u003c![[:alnum:]!?_:]!))(return|break|continue|unless|true|false|nil)(?![[:alnum:]!?_:])"
         },
         {
-          "match": "(&&>>|\\|\\|>>|\\*\\*>>|\\.\\.\\.|===|\\*\\*>|\\*\\*=|&&>|&&=|\\|\\|>|\\|\\|=|\\->>|\\+>>|!>>|<>>>|<>>|&>>|%>>|#>>|@>>|/>>|\\*>>|\\?>>|\\|>>|\\^>>|~>>|\\$>>|=>>|<<=|>>=|<=>|<\\->|=~|!~|=>|\\+\\+|\\-\\-|<=|>=|==|!=|&&|\\.\\.|\\+=|\\-=|\\*=|\\/=|%=|&=|\\^=|\\|=|<\\-|\\+>|!>|<>|&>|%>|#>|\\@>|\\/>|\\*>|\\?>|\\|>|\\^>|~>|\\$>|<\\->|\\->|<<|>>|\\*\\*|\\?\\||\\?&|\\|\\||>|<|\\*|\\/|%|\\+|\\-|&|\\^|\\||=|\\$|!|~|\\?|#)",
-          "name": "keyword.operator.ioke"
+          "name": "keyword.operator.ioke",
+          "match": "(\u0026\u0026\u003e\u003e|\\|\\|\u003e\u003e|\\*\\*\u003e\u003e|\\.\\.\\.|===|\\*\\*\u003e|\\*\\*=|\u0026\u0026\u003e|\u0026\u0026=|\\|\\|\u003e|\\|\\|=|\\-\u003e\u003e|\\+\u003e\u003e|!\u003e\u003e|\u003c\u003e\u003e\u003e|\u003c\u003e\u003e|\u0026\u003e\u003e|%\u003e\u003e|#\u003e\u003e|@\u003e\u003e|/\u003e\u003e|\\*\u003e\u003e|\\?\u003e\u003e|\\|\u003e\u003e|\\^\u003e\u003e|~\u003e\u003e|\\$\u003e\u003e|=\u003e\u003e|\u003c\u003c=|\u003e\u003e=|\u003c=\u003e|\u003c\\-\u003e|=~|!~|=\u003e|\\+\\+|\\-\\-|\u003c=|\u003e=|==|!=|\u0026\u0026|\\.\\.|\\+=|\\-=|\\*=|\\/=|%=|\u0026=|\\^=|\\|=|\u003c\\-|\\+\u003e|!\u003e|\u003c\u003e|\u0026\u003e|%\u003e|#\u003e|\\@\u003e|\\/\u003e|\\*\u003e|\\?\u003e|\\|\u003e|\\^\u003e|~\u003e|\\$\u003e|\u003c\\-\u003e|\\-\u003e|\u003c\u003c|\u003e\u003e|\\*\\*|\\?\\||\\?\u0026|\\|\\||\u003e|\u003c|\\*|\\/|%|\\+|\\-|\u0026|\\^|\\||=|\\$|!|~|\\?|#)"
         },
         {
-          "match": "((?<![[:alnum:]!?_:])|(?<![[:alnum:]!?_:]!))(nand|and|nor|xor|or)(?![[:alnum:]!?_:])",
-          "name": "keyword.operator.boolean.ioke"
+          "name": "keyword.operator.boolean.ioke",
+          "match": "((?\u003c![[:alnum:]!?_:])|(?\u003c![[:alnum:]!?_:]!))(nand|and|nor|xor|or)(?![[:alnum:]!?_:])"
         },
         {
-          "match": "((?<![[:alnum:]!?_:])|(?<![[:alnum:]!?_:]!))(Base|Call|Condition|DateTime|DefaultBehavior|DefaultMacro|DefaultMethod|DefaultSyntax|Dict|FileSystem|Ground|Handler|IO|JavaMethod|LexicalBlock|LexicalMacro|List|Message|Method|Mixins|Number|Number Decimal|Number Integer|Number Rational|Number Real|Origin|Pair|Range|Regexp|Rescue|Restart|Runtime|Set|Symbol|System|Text)(?![[:alnum:]!?_:])",
-          "name": "keyword.prototype-names.ioke"
+          "name": "keyword.prototype-names.ioke",
+          "match": "((?\u003c![[:alnum:]!?_:])|(?\u003c![[:alnum:]!?_:]!))(Base|Call|Condition|DateTime|DefaultBehavior|DefaultMacro|DefaultMethod|DefaultSyntax|Dict|FileSystem|Ground|Handler|IO|JavaMethod|LexicalBlock|LexicalMacro|List|Message|Method|Mixins|Number|Number Decimal|Number Integer|Number Rational|Number Real|Origin|Pair|Range|Regexp|Rescue|Restart|Runtime|Set|Symbol|System|Text)(?![[:alnum:]!?_:])"
         },
         {
-          "match": "((^)|(?<![[:alnum:]!?_:])|(?<![[:alnum:]!?_:]!))(fn|fnx|method|macro|lecro|syntax|dmacro|dlecro|dlecrox|dsyntax)(?![[:alnum:]!?_:])",
-          "name": "keyword.function.ioke"
+          "name": "keyword.function.ioke",
+          "match": "((^)|(?\u003c![[:alnum:]!?_:])|(?\u003c![[:alnum:]!?_:]!))(fn|fnx|method|macro|lecro|syntax|dmacro|dlecro|dlecrox|dsyntax)(?![[:alnum:]!?_:])"
         },
         {
-          "match": "((?<![[:alnum:]!?_:])|(?<![[:alnum:]!?_:]!))(print|println|cell\\?|cell|keyword|documentation|if|unless|while|until|loop|for|for:set|for:dict|bind|rescue|handle|restart|asText|inspect|notice|do|call|list|dict|set|with|kind)(?![[:alnum:]!?_:])",
-          "name": "keyword.cell-names.ioke"
+          "name": "keyword.cell-names.ioke",
+          "match": "((?\u003c![[:alnum:]!?_:])|(?\u003c![[:alnum:]!?_:]!))(print|println|cell\\?|cell|keyword|documentation|if|unless|while|until|loop|for|for:set|for:dict|bind|rescue|handle|restart|asText|inspect|notice|do|call|list|dict|set|with|kind)(?![[:alnum:]!?_:])"
         }
       ]
     },
     "kinds": {
       "patterns": [
         {
-          "match": "((?<![[:alnum:]!?_:])|(?<![[:alnum:]!?_:]!))[A-Z][[:alnum:]!?_:-]*(?![[:alnum:]!?_:])",
-          "name": "constant.kind.ioke"
+          "name": "constant.kind.ioke",
+          "match": "((?\u003c![[:alnum:]!?_:])|(?\u003c![[:alnum:]!?_:]!))[A-Z][[:alnum:]!?_:-]*(?![[:alnum:]!?_:])"
         }
       ]
     },
     "meta_parens": {
       "patterns": [
         {
+          "name": "meta.parens.ioke",
           "begin": "\\(",
           "end": "\\)",
-          "include": "#meta_parens",
-          "name": "meta.parens.ioke"
+          "include": "#meta_parens"
         }
       ]
     },
@@ -241,17 +237,17 @@
       "patterns": [
         {
           "begin": "\\{",
-          "captures": {
-            "0": {
-              "name": "punctuation.section.scope.ioke"
-            }
-          },
           "end": "\\}",
           "patterns": [
             {
               "include": "#nest_curly_and_self"
             }
-          ]
+          ],
+          "captures": {
+            "0": {
+              "name": "punctuation.section.scope.ioke"
+            }
+          }
         },
         {
           "include": "$self"
@@ -261,12 +257,10 @@
     "text_literal_escapes": {
       "patterns": [
         {
-          "match": "(\\\\b|\\\\e|\\\\t|\\\\n|\\\\f|\\\\r|\\\\\"|\\\\\\\\|\\\\#|\\\\\\Z|\\\\u[[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]]|\\\\[0-3]?[0-7]?[0-7],[[:space:]]+\\\\[0-3]?[0-7]?[0-7],[[:space:]]+\\\\[0-3]?[0-7]?[0-7]|\\\\[0-3]?[0-7]?[0-7],[[:space:]]+\\\\[0-3]?[0-7]?[0-7]|\\\\[0-3]?[0-7]?[0-7])",
-          "name": "constant.character.escape.ioke"
+          "name": "constant.character.escape.ioke",
+          "match": "(\\\\b|\\\\e|\\\\t|\\\\n|\\\\f|\\\\r|\\\\\"|\\\\\\\\|\\\\#|\\\\\\Z|\\\\u[[:xdigit:]][[:xdigit:]][[:xdigit:]][[:xdigit:]]|\\\\[0-3]?[0-7]?[0-7],[[:space:]]+\\\\[0-3]?[0-7]?[0-7],[[:space:]]+\\\\[0-3]?[0-7]?[0-7]|\\\\[0-3]?[0-7]?[0-7],[[:space:]]+\\\\[0-3]?[0-7]?[0-7]|\\\\[0-3]?[0-7]?[0-7])"
         }
       ]
     }
-  },
-  "scopeName": "source.ioke",
-  "uuid": "EC751C80-9E93-44B4-AFF3-EF4FF8346C90"
+  }
 }

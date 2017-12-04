@@ -1,12 +1,6 @@
 {
-  "author": "Siddley - https://github.com/Siddley",
-  "fileTypes": [
-    "creole",
-    "cr"
-  ],
-  "foldingStartMarker": "(?x)\n\t\t(<(?i:head|body|table|thead|tbody|tfoot|tr|div|select|fieldset|style|script|ul|ol|form|dl)\\b.*?>\n\t\t|<!--(?!.*-->)\n\t\t|\\{\\s*($|\\?>\\s*$|//|/\\*(.*\\*/\\s*$|(?!.*?\\*/)))\n\t\t)",
-  "foldingStopMarker": "(?x)\n\t\t(</(?i:head|body|table|thead|tbody|tfoot|tr|div|select|fieldset|style|script|ul|ol|form|dl)>\n\t\t|^\\s*-->\n\t\t|(^|\\s)\\}\n\t\t)",
   "name": "Creole",
+  "scopeName": "text.html.creole",
   "patterns": [
     {
       "name": "meta.block-level.creole",
@@ -23,14 +17,9 @@
       ]
     },
     {
-      "begin": "^ *([*])+(?=\\s)",
-      "captures": {
-        "1": {
-          "name": "punctuation.definition.list_item.creole"
-        }
-      },
-      "end": "^(?=\\S)",
       "name": "markup.list.unnumbered.creole",
+      "begin": "^ *([*])+(?=\\s)",
+      "end": "^(?=\\S)",
       "patterns": [
         {
           "include": "#list-paragraph"
@@ -38,17 +27,17 @@
         {
           "include": "#inline"
         }
-      ]
-    },
-    {
-      "begin": "^[ ]*(#)(?=\\s)",
+      ],
       "captures": {
         "1": {
           "name": "punctuation.definition.list_item.creole"
         }
-      },
-      "end": "^(?=\\S)",
+      }
+    },
+    {
       "name": "markup.list.numbered.creole",
+      "begin": "^[ ]*(#)(?=\\s)",
+      "end": "^(?=\\S)",
       "patterns": [
         {
           "include": "#list-paragraph"
@@ -56,13 +45,17 @@
         {
           "include": "#inline"
         }
-      ]
+      ],
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.list_item.creole"
+        }
+      }
     },
     {
-      "begin": "^(?=<(p|div|h[1-6]|blockquote|pre|table|dl|ol|ul|script|noscript|form|fieldset|iframe|math|ins|del)\\b)(?!.*?</\\1>)",
-      "comment": "disable creole formatting in block-level tags",
-      "end": "(?<=^</\\1>$\\n)",
       "name": "meta.disable-markdown",
+      "begin": "^(?=\u003c(p|div|h[1-6]|blockquote|pre|table|dl|ol|ul|script|noscript|form|fieldset|iframe|math|ins|del)\\b)(?!.*?\u003c/\\1\u003e)",
+      "end": "(?\u003c=^\u003c/\\1\u003e$\\n)",
       "patterns": [
         {
           "include": "text.html.basic"
@@ -70,10 +63,9 @@
       ]
     },
     {
-      "begin": "^(?=<(p|div|h[1-6]|blockquote|pre|table|dl|ol|ul|script|noscript|form|fieldset|iframe|math|ins|del)\\b)",
-      "comment": "disable creole formatting in inline tags",
+      "name": "meta.disable-markdown",
+      "begin": "^(?=\u003c(p|div|h[1-6]|blockquote|pre|table|dl|ol|ul|script|noscript|form|fieldset|iframe|math|ins|del)\\b)",
       "end": "$\\n?",
-      "name": "meta.disable-markdown",
       "patterns": [
         {
           "include": "text.html.basic"
@@ -81,111 +73,81 @@
       ]
     },
     {
-      "match": "^ *-{4,} *$\\n?",
-      "name": "punctuation.definition.horizonlal-rule.creole"
+      "name": "punctuation.definition.horizonlal-rule.creole",
+      "match": "^ *-{4,} *$\\n?"
     }
   ],
   "repository": {
-    "list-paragraph": {
-      "patterns": [
-        {
-          "begin": "\\G\\s+(?=\\S)",
-          "end": "^\\s*$",
-          "name": "meta.paragraph.list.creole",
-          "patterns": [
-            {
-              "include": "#inline"
-            }
-          ]
-        }
-      ]
+    "ampersand": {
+      "name": "meta.other.valid-ampersand.markdown",
+      "match": "\u0026(?!([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+);)"
     },
     "block_raw": {
       "patterns": [
         {
+          "name": "markup.raw.block.creole",
           "begin": "^(\\{\\{\\{)\\s*$\\n?",
+          "end": "^(\\}\\}\\})\\s*$\\n?",
           "captures": {
             "1": {
               "name": "punctuation.definition.raw.creole"
             }
-          },
-          "end": "^(\\}\\}\\})\\s*$\\n?",
-          "name": "markup.raw.block.creole"
+          }
         }
       ]
     },
-    "inline_raw": {
+    "bold": {
+      "name": "markup.bold.creole",
+      "begin": "(?x)\n\t\t\t\t\t\t(\\*\\*)(?=\\S)\t\t\t\t\t\t\t\t\t# opening **\n\t\t\t\t\t\t(?=\t\t\t\t\t\t\t\t\t\t\t\t# zero-width positive lookahead\n\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t    \u003c[^\u003e]*+\u003e\t\t\t\t\t\t# match any HTML tag\n\t\t\t\t\t\t\t  | ~[\\\\*{}\\[\\]#\\|/\u003e]?+\t\t\t\t\t# or escape characters\n\t\t\t\t\t\t\t  | \\[\t\t\t\t\t\t\t\t\t\t# or literal [\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t        (?\u003csquare\u003e\t\t\t\t# named group\n\t\t\t\t\t\t\t\t\t\t\t[^\\[\\]~]\t\t\t\t\t# don't match these\n\t\t\t\t\t\t\t\t          | ~.\t\t\t\t\t\t\t# or escaped characters\n\t\t\t\t\t\t\t\t          | \\[ \\g\u003csquare\u003e*+ \\]\t# or nested group\n\t\t\t\t\t\t\t\t        )*+\n\t\t\t\t\t\t\t\t\t\\]\n\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\t  | (?!(?\u003c=\\S)\\1).\t\t\t\t\t\t# or everything else\n\t\t\t\t\t\t\t)++\n\t\t\t\t\t\t\t(?\u003c=\\S)\\1\t\t\t\t\t\t\t\t# closing **\n\t\t\t\t\t\t)\t\t\t\t\t\t\t\t\t\t\t\t# close positive lookahead\n\t\t\t\t\t",
+      "end": "(?\u003c=\\S)(\\1)",
       "patterns": [
         {
-          "match": "(\\{\\{\\{).*?(\\}\\}\\})",
-          "captures": {
-            "1": {
-              "name": "punctuation.definition.raw.creole"
-            },
-            "2": {
-              "name": "punctuation.definition.raw.creole"
+          "begin": "(?=\u003c[^\u003e]*?\u003e)",
+          "end": "(?\u003c=\u003e)",
+          "patterns": [
+            {
+              "include": "text.html.basic"
             }
-          },
-          "name": "markup.raw.inline.creole"
+          ],
+          "applyEndPatternLast": true
+        },
+        {
+          "include": "#inline"
         }
-      ]
-    },
-    "link-inline": {
+      ],
       "captures": {
         "1": {
-          "name": "punctuation.definition.link.creole"
-        },
-        "2": {
-          "name": "markup.underline.link.creole"
-        },
-        "4": {
-          "name": "punctuation.definition.link.creole"
-        },
-        "5": {
-          "name": "string.other.link.title.creole"
-        },
-        "6": {
-          "name": "punctuation.definition.link.creole"
+          "name": "punctuation.definition.bold.creole"
         }
-      },
-      "match": "(?x:\n\t\t\t\t(\\[\\[)\t\t\t\t\t\t# opening double square bracket\n\t\t\t\t(\\s*[^\\s\\|]+[^\\|]+?)\t\t# the url; anything except pipe (at least 1 not whitespace)\n\t\t\t\t((\\|)\t\t\t\t\t\t# pipe separator\n\t\t\t\t(\\s*[^\\|\\s]+[^\\|]+)\t\t\t# title text\n\t\t\t\t\t)?\t\t\t\t\t\t# pipe and title are optional\n\t\t\t\t(\\]\\])\t\t\t\t\t\t# close double square bracket (end link)\n\t\t\t )",
-      "name": "meta.link.inline.creole"
+      }
     },
-    "link-email": {
+    "bracket": {
+      "name": "meta.other.valid-bracket.creole",
+      "match": "\u003c(?![a-z/?\\$!])"
+    },
+    "escape": {
+      "name": "constant.character.escape.creole",
+      "match": "~[*#{}\\|\\[\\]\\\\/\u003e]+"
+    },
+    "heading": {
+      "name": "markup.heading.creole",
+      "contentName": "entity.name.section.creole",
+      "begin": "\\G(={1,6})(?!=)\\s*(?=\\S)",
+      "end": "\\s*(=*) *$\\n?",
+      "patterns": [
+        {
+          "include": "#inline"
+        }
+      ],
       "captures": {
         "1": {
-          "name": "invalid.illegal.punctuation.link.creole"
-        },
-        "2": {
-          "name": "markup.underline.link.creole"
-        },
-        "4": {
-          "name": "invalid.illegal.punctuation.link.creole"
+          "name": "punctuation.definition.heading.creole"
         }
-      },
-      "match": "(<)((?:mailto:)?[-.\\w]+@[-a-z0-9]+(\\.[-a-z0-9]+)*\\.[a-z]+)(>)",
-      "name": "meta.link.email.lt-gt.creole"
-    },
-    "link-inet": {
-      "captures": {
-        "1": {
-          "name": "invalid.illegal.punctuation.link.creole"
-        },
-        "2": {
-          "name": "markup.underline.link.creole"
-        },
-        "3": {
-          "name": "invalid.illegal.punctuation.link.creole"
-        }
-      },
-      "match": "(<)?((?:https?|ftp)://[^\\s>]+)(>)?",
-      "name": "meta.link.inet.creole"
-    },
-    "line-break": {
-      "match": " *(\\\\\\\\){1} *",
-      "name": "punctuation.definition.line-break.creole"
+      }
     },
     "image-inline": {
+      "name": "meta.image.inline.creole",
+      "match": "(?x:\n\t\t\t\t(\\{\\{)\t\t\t\t\t\t# opening double curly bracket\n\t\t\t\t(\\s*[^\\s\\|]+[^\\|]+?)\t\t# the url; anything except pipe (at least 1 not whitespace)\n\t\t\t\t((\\|)\t\t\t\t\t\t# pipe separator\n\t\t\t\t(\\s*[^\\|\\s]+[^\\|]+)\t\t\t# title text\n\t\t\t\t\t)?\t\t\t\t\t\t# pipe and title are optional\n\t\t\t\t(\\}\\})\t\t\t\t\t\t# close double curly bracket (end image)\n\t\t\t )",
       "captures": {
         "1": {
           "name": "punctuation.definition.image.creole"
@@ -202,89 +164,7 @@
         "6": {
           "name": "punctuation.definition.image.creole"
         }
-      },
-      "match": "(?x:\n\t\t\t\t(\\{\\{)\t\t\t\t\t\t# opening double curly bracket\n\t\t\t\t(\\s*[^\\s\\|]+[^\\|]+?)\t\t# the url; anything except pipe (at least 1 not whitespace)\n\t\t\t\t((\\|)\t\t\t\t\t\t# pipe separator\n\t\t\t\t(\\s*[^\\|\\s]+[^\\|]+)\t\t\t# title text\n\t\t\t\t\t)?\t\t\t\t\t\t# pipe and title are optional\n\t\t\t\t(\\}\\})\t\t\t\t\t\t# close double curly bracket (end image)\n\t\t\t )",
-      "name": "meta.image.inline.creole"
-    },
-    "italic": {
-      "begin": "(?x)\n\t\t\t\t\t\t(\\/\\/)(?=\\S)\t\t\t\t\t\t\t\t\t# opening //\n\t\t\t\t\t\t(?=\t\t\t\t\t\t\t\t\t\t\t\t# zero-width positive lookahead\n\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t    <[^>]*+>\t\t\t\t\t\t# match any HTML tag\n\t\t\t\t\t\t\t  | ~[\\\\*{}\\[\\]#\\|/>]?+\t\t\t\t\t# or escape characters\n\t\t\t\t\t\t\t  | \\[\t\t\t\t\t\t\t\t\t\t# or literal [\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t        (?<square>\t\t\t\t# named group\n\t\t\t\t\t\t\t\t\t\t\t[^\\[\\]~]\t\t\t\t\t# don't match these\n\t\t\t\t\t\t\t\t          | ~.\t\t\t\t\t\t\t# or escaped characters\n\t\t\t\t\t\t\t\t          | \\[ \\g<square>*+ \\]\t# or nested group\n\t\t\t\t\t\t\t\t        )*+\n\t\t\t\t\t\t\t\t\t\\]\n\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\t  | (?!(?<=\\S)\\1).\t\t\t\t\t\t# or everything else\n\t\t\t\t\t\t\t)++\n\t\t\t\t\t\t\t(?<=\\S)\\1\t\t\t\t\t\t\t\t# closing //\n\t\t\t\t\t\t)\t\t\t\t\t\t\t\t\t\t\t\t# close positive lookahead\n\t\t\t\t\t",
-      "captures": {
-        "1": {
-          "name": "punctuation.definition.italic.creole"
-        }
-      },
-      "end": "(?<=\\S)(\\1)((?!\\1)|(?=\\1\\1))",
-      "name": "markup.italic.creole",
-      "patterns": [
-        {
-          "applyEndPatternLast": 1,
-          "begin": "(?=<[^>]*?>)",
-          "end": "(?<=>)",
-          "patterns": [
-            {
-              "include": "text.html.basic"
-            }
-          ]
-        },
-        {
-          "include": "#inline"
-        }
-      ]
-    },
-    "bold": {
-      "begin": "(?x)\n\t\t\t\t\t\t(\\*\\*)(?=\\S)\t\t\t\t\t\t\t\t\t# opening **\n\t\t\t\t\t\t(?=\t\t\t\t\t\t\t\t\t\t\t\t# zero-width positive lookahead\n\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t    <[^>]*+>\t\t\t\t\t\t# match any HTML tag\n\t\t\t\t\t\t\t  | ~[\\\\*{}\\[\\]#\\|/>]?+\t\t\t\t\t# or escape characters\n\t\t\t\t\t\t\t  | \\[\t\t\t\t\t\t\t\t\t\t# or literal [\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t        (?<square>\t\t\t\t# named group\n\t\t\t\t\t\t\t\t\t\t\t[^\\[\\]~]\t\t\t\t\t# don't match these\n\t\t\t\t\t\t\t\t          | ~.\t\t\t\t\t\t\t# or escaped characters\n\t\t\t\t\t\t\t\t          | \\[ \\g<square>*+ \\]\t# or nested group\n\t\t\t\t\t\t\t\t        )*+\n\t\t\t\t\t\t\t\t\t\\]\n\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\t  | (?!(?<=\\S)\\1).\t\t\t\t\t\t# or everything else\n\t\t\t\t\t\t\t)++\n\t\t\t\t\t\t\t(?<=\\S)\\1\t\t\t\t\t\t\t\t# closing **\n\t\t\t\t\t\t)\t\t\t\t\t\t\t\t\t\t\t\t# close positive lookahead\n\t\t\t\t\t",
-      "captures": {
-        "1": {
-          "name": "punctuation.definition.bold.creole"
-        }
-      },
-      "end": "(?<=\\S)(\\1)",
-      "name": "markup.bold.creole",
-      "patterns": [
-        {
-          "applyEndPatternLast": 1,
-          "begin": "(?=<[^>]*?>)",
-          "end": "(?<=>)",
-          "patterns": [
-            {
-              "include": "text.html.basic"
-            }
-          ]
-        },
-        {
-          "include": "#inline"
-        }
-      ]
-    },
-    "bracket": {
-      "comment": "matched so it's not when converted to html",
-      "match": "<(?![a-z/?\\$!])",
-      "name": "meta.other.valid-bracket.creole"
-    },
-    "escape": {
-      "match": "~[*#{}\\|\\[\\]\\\\/>]+",
-      "name": "constant.character.escape.creole"
-    },
-    "ampersand": {
-      "comment": "matched so it's not when converted to html",
-      "match": "&(?!([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+);)",
-      "name": "meta.other.valid-ampersand.markdown"
-    },
-    "heading": {
-      "begin": "\\G(={1,6})(?!=)\\s*(?=\\S)",
-      "captures": {
-        "1": {
-          "name": "punctuation.definition.heading.creole"
-        }
-      },
-      "contentName": "entity.name.section.creole",
-      "end": "\\s*(=*) *$\\n?",
-      "name": "markup.heading.creole",
-      "patterns": [
-        {
-          "include": "#inline"
-        }
-      ]
+      }
     },
     "inline": {
       "patterns": [
@@ -322,8 +202,116 @@
           "include": "#ampersand"
         }
       ]
+    },
+    "inline_raw": {
+      "patterns": [
+        {
+          "name": "markup.raw.inline.creole",
+          "match": "(\\{\\{\\{).*?(\\}\\}\\})",
+          "captures": {
+            "1": {
+              "name": "punctuation.definition.raw.creole"
+            },
+            "2": {
+              "name": "punctuation.definition.raw.creole"
+            }
+          }
+        }
+      ]
+    },
+    "italic": {
+      "name": "markup.italic.creole",
+      "begin": "(?x)\n\t\t\t\t\t\t(\\/\\/)(?=\\S)\t\t\t\t\t\t\t\t\t# opening //\n\t\t\t\t\t\t(?=\t\t\t\t\t\t\t\t\t\t\t\t# zero-width positive lookahead\n\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t    \u003c[^\u003e]*+\u003e\t\t\t\t\t\t# match any HTML tag\n\t\t\t\t\t\t\t  | ~[\\\\*{}\\[\\]#\\|/\u003e]?+\t\t\t\t\t# or escape characters\n\t\t\t\t\t\t\t  | \\[\t\t\t\t\t\t\t\t\t\t# or literal [\n\t\t\t\t\t\t\t\t(\n\t\t\t\t\t\t\t\t        (?\u003csquare\u003e\t\t\t\t# named group\n\t\t\t\t\t\t\t\t\t\t\t[^\\[\\]~]\t\t\t\t\t# don't match these\n\t\t\t\t\t\t\t\t          | ~.\t\t\t\t\t\t\t# or escaped characters\n\t\t\t\t\t\t\t\t          | \\[ \\g\u003csquare\u003e*+ \\]\t# or nested group\n\t\t\t\t\t\t\t\t        )*+\n\t\t\t\t\t\t\t\t\t\\]\n\t\t\t\t\t\t\t\t)\n\t\t\t\t\t\t\t  | (?!(?\u003c=\\S)\\1).\t\t\t\t\t\t# or everything else\n\t\t\t\t\t\t\t)++\n\t\t\t\t\t\t\t(?\u003c=\\S)\\1\t\t\t\t\t\t\t\t# closing //\n\t\t\t\t\t\t)\t\t\t\t\t\t\t\t\t\t\t\t# close positive lookahead\n\t\t\t\t\t",
+      "end": "(?\u003c=\\S)(\\1)((?!\\1)|(?=\\1\\1))",
+      "patterns": [
+        {
+          "begin": "(?=\u003c[^\u003e]*?\u003e)",
+          "end": "(?\u003c=\u003e)",
+          "patterns": [
+            {
+              "include": "text.html.basic"
+            }
+          ],
+          "applyEndPatternLast": true
+        },
+        {
+          "include": "#inline"
+        }
+      ],
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.italic.creole"
+        }
+      }
+    },
+    "line-break": {
+      "name": "punctuation.definition.line-break.creole",
+      "match": " *(\\\\\\\\){1} *"
+    },
+    "link-email": {
+      "name": "meta.link.email.lt-gt.creole",
+      "match": "(\u003c)((?:mailto:)?[-.\\w]+@[-a-z0-9]+(\\.[-a-z0-9]+)*\\.[a-z]+)(\u003e)",
+      "captures": {
+        "1": {
+          "name": "invalid.illegal.punctuation.link.creole"
+        },
+        "2": {
+          "name": "markup.underline.link.creole"
+        },
+        "4": {
+          "name": "invalid.illegal.punctuation.link.creole"
+        }
+      }
+    },
+    "link-inet": {
+      "name": "meta.link.inet.creole",
+      "match": "(\u003c)?((?:https?|ftp)://[^\\s\u003e]+)(\u003e)?",
+      "captures": {
+        "1": {
+          "name": "invalid.illegal.punctuation.link.creole"
+        },
+        "2": {
+          "name": "markup.underline.link.creole"
+        },
+        "3": {
+          "name": "invalid.illegal.punctuation.link.creole"
+        }
+      }
+    },
+    "link-inline": {
+      "name": "meta.link.inline.creole",
+      "match": "(?x:\n\t\t\t\t(\\[\\[)\t\t\t\t\t\t# opening double square bracket\n\t\t\t\t(\\s*[^\\s\\|]+[^\\|]+?)\t\t# the url; anything except pipe (at least 1 not whitespace)\n\t\t\t\t((\\|)\t\t\t\t\t\t# pipe separator\n\t\t\t\t(\\s*[^\\|\\s]+[^\\|]+)\t\t\t# title text\n\t\t\t\t\t)?\t\t\t\t\t\t# pipe and title are optional\n\t\t\t\t(\\]\\])\t\t\t\t\t\t# close double square bracket (end link)\n\t\t\t )",
+      "captures": {
+        "1": {
+          "name": "punctuation.definition.link.creole"
+        },
+        "2": {
+          "name": "markup.underline.link.creole"
+        },
+        "4": {
+          "name": "punctuation.definition.link.creole"
+        },
+        "5": {
+          "name": "string.other.link.title.creole"
+        },
+        "6": {
+          "name": "punctuation.definition.link.creole"
+        }
+      }
+    },
+    "list-paragraph": {
+      "patterns": [
+        {
+          "name": "meta.paragraph.list.creole",
+          "begin": "\\G\\s+(?=\\S)",
+          "end": "^\\s*$",
+          "patterns": [
+            {
+              "include": "#inline"
+            }
+          ]
+        }
+      ]
     }
-  },
-  "scopeName": "text.html.creole",
-  "uuid": "16e92828-eaa9-4cde-bc6c-a166adc48304"
+  }
 }

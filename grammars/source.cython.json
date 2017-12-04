@@ -1,84 +1,78 @@
 {
-  "comment": "\n\ttodo:\n\t\tlist comprehension / generator comprehension scope.\n\t\t\n\t",
-  "fileTypes": [
-    "pyx",
-    "pxi",
-    "pxd"
-  ],
-  "firstLineMatch": "^#!/.*\\bcython\\b",
-  "keyEquivalent": "^~C",
   "name": "Cython",
+  "scopeName": "source.cython",
   "patterns": [
     {
       "begin": "(^[ \\t]+)?(?=#)",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.whitespace.comment.leading.cython"
-        }
-      },
       "end": "(?!\\G)",
       "patterns": [
         {
+          "name": "comment.line.number-sign.cython",
           "begin": "#",
+          "end": "\\n",
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.comment.cython"
             }
-          },
-          "end": "\\n",
-          "name": "comment.line.number-sign.cython"
+          }
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.whitespace.comment.leading.cython"
+        }
+      }
     },
     {
-      "match": "\\b(?i:(0x\\h*)L)",
-      "name": "constant.numeric.integer.long.hexadecimal.cython"
+      "name": "constant.numeric.integer.long.hexadecimal.cython",
+      "match": "\\b(?i:(0x[0-9A-Fa-f]*)L)"
     },
     {
-      "match": "\\b(?i:(0x\\h*))",
-      "name": "constant.numeric.integer.hexadecimal.cython"
+      "name": "constant.numeric.integer.hexadecimal.cython",
+      "match": "\\b(?i:(0x[0-9A-Fa-f]*))"
     },
     {
-      "match": "\\b(?i:(0[0-7]+)L)",
-      "name": "constant.numeric.integer.long.octal.cython"
+      "name": "constant.numeric.integer.long.octal.cython",
+      "match": "\\b(?i:(0[0-7]+)L)"
     },
     {
-      "match": "\\b(0[0-7]+)",
-      "name": "constant.numeric.integer.octal.cython"
+      "name": "constant.numeric.integer.octal.cython",
+      "match": "\\b(0[0-7]+)"
     },
     {
-      "match": "\\b(?i:(((\\d+(\\.(?=[^a-zA-Z_])\\d*)?|(?<=[^0-9a-zA-Z_])\\.\\d+)(e[\\-\\+]?\\d+)?))J)",
-      "name": "constant.numeric.complex.cython"
+      "name": "constant.numeric.complex.cython",
+      "match": "\\b(?i:(((\\d+(\\.(?=[^a-zA-Z_])\\d*)?|(?\u003c=[^0-9a-zA-Z_])\\.\\d+)(e[\\-\\+]?\\d+)?))J)"
     },
     {
-      "match": "\\b(?i:(\\d+\\.\\d*(e[\\-\\+]?\\d+)?))(?=[^a-zA-Z_])",
-      "name": "constant.numeric.float.cython"
+      "name": "constant.numeric.float.cython",
+      "match": "\\b(?i:(\\d+\\.\\d*(e[\\-\\+]?\\d+)?))(?=[^a-zA-Z_])"
     },
     {
-      "match": "(?<=[^0-9a-zA-Z_])(?i:(\\.\\d+(e[\\-\\+]?\\d+)?))",
-      "name": "constant.numeric.float.cython"
+      "name": "constant.numeric.float.cython",
+      "match": "(?\u003c=[^0-9a-zA-Z_])(?i:(\\.\\d+(e[\\-\\+]?\\d+)?))"
     },
     {
-      "match": "\\b(?i:(\\d+e[\\-\\+]?\\d+))",
-      "name": "constant.numeric.float.cython"
+      "name": "constant.numeric.float.cython",
+      "match": "\\b(?i:(\\d+e[\\-\\+]?\\d+))"
     },
     {
-      "match": "\\b(?i:([1-9]+[0-9]*|0)L)",
-      "name": "constant.numeric.integer.long.decimal.cython"
+      "name": "constant.numeric.integer.long.decimal.cython",
+      "match": "\\b(?i:([1-9]+[0-9]*|0)L)"
     },
     {
-      "match": "\\b([1-9]+[0-9]*|0)",
-      "name": "constant.numeric.integer.decimal.cython"
+      "name": "constant.numeric.integer.decimal.cython",
+      "match": "\\b([1-9]+[0-9]*|0)"
     },
     {
+      "match": "\\b(global)\\b",
       "captures": {
         "1": {
           "name": "storage.modifier.global.cython"
         }
-      },
-      "match": "\\b(global)\\b"
+      }
     },
     {
+      "match": "\\b(?:(import|include)|(from))\\b",
       "captures": {
         "1": {
           "name": "keyword.control.import.cython"
@@ -86,98 +80,133 @@
         "2": {
           "name": "keyword.control.import.from.cython"
         }
-      },
-      "match": "\\b(?:(import|include)|(from))\\b"
+      }
     },
     {
-      "comment": "keywords that delimit flow blocks",
-      "match": "\\b(elif|else|except|finally|for|if|try|while|with|IF|ELIF|ELSE)\\b",
-      "name": "keyword.control.flow.cython"
+      "name": "keyword.control.flow.cython",
+      "match": "\\b(elif|else|except|finally|for|if|try|while|with|IF|ELIF|ELSE)\\b"
     },
     {
-      "comment": "keywords that alter flow from within a block",
-      "match": "\\b(break|continue|pass|raise|return|yield)\\b",
-      "name": "keyword.control.flow.cython"
+      "name": "keyword.control.flow.cython",
+      "match": "\\b(break|continue|pass|raise|return|yield)\\b"
     },
     {
-      "comment": "keyword operators that evaluate to True or False",
-      "match": "\\b(and|in|is|not|or)\\b",
-      "name": "keyword.operator.logical.cython"
+      "name": "keyword.operator.logical.cython",
+      "match": "\\b(and|in|is|not|or)\\b"
     },
     {
+      "match": "\\b(as|assert|del|exec|print)\\b",
       "captures": {
         "1": {
           "name": "keyword.other.cython"
         }
-      },
-      "comment": "keywords that haven't fit into other groups (yet).",
-      "match": "\\b(as|assert|del|exec|print)\\b"
+      }
     },
     {
-      "match": "\\b(asm|__asm__|auto|bool|_Bool|char|_Complex|double|enum|float|_Imaginary|int|long|short|signed|struct|typedef|union|unsigned|void)\\b",
-      "name": "storage.type.cython"
+      "name": "storage.type.cython",
+      "match": "\\b(asm|__asm__|auto|bool|_Bool|char|_Complex|double|enum|float|_Imaginary|int|long|short|signed|struct|typedef|union|unsigned|void)\\b"
     },
     {
-      "match": "<\\=|>\\=|\\=\\=|<|>|<>",
-      "name": "keyword.operator.comparison.cython"
+      "name": "keyword.operator.comparison.cython",
+      "match": "\u003c\\=|\u003e\\=|\\=\\=|\u003c|\u003e|\u003c\u003e"
     },
     {
-      "match": "\\+\\=|-\\=|\\*\\=|/\\=|//\\=|%\\=|&\\=|\\|\\=|\\^\\=|>>\\=|<<\\=|\\*\\*\\=",
-      "name": "keyword.operator.assignment.augmented.cython"
+      "name": "keyword.operator.assignment.augmented.cython",
+      "match": "\\+\\=|-\\=|\\*\\=|/\\=|//\\=|%\\=|\u0026\\=|\\|\\=|\\^\\=|\u003e\u003e\\=|\u003c\u003c\\=|\\*\\*\\="
     },
     {
-      "match": "\\+|\\-|\\*|\\*\\*|/|//|%|<<|>>|&|\\||\\^|~",
-      "name": "keyword.operator.arithmetic.cython"
+      "name": "keyword.operator.arithmetic.cython",
+      "match": "\\+|\\-|\\*|\\*\\*|/|//|%|\u003c\u003c|\u003e\u003e|\u0026|\\||\\^|~"
     },
     {
-      "match": "\\=",
-      "name": "keyword.operator.assignment.cython"
+      "name": "keyword.operator.assignment.cython",
+      "match": "\\="
     },
     {
+      "name": "meta.class.old-style.cython",
+      "contentName": "entity.name.type.class.cython",
       "begin": "^\\s*(class)\\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\\s*\\:)",
+      "end": "\\s*(:)",
+      "patterns": [
+        {
+          "include": "#entity_name_class"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "storage.type.class.cython"
         }
       },
-      "contentName": "entity.name.type.class.cython",
-      "end": "\\s*(:)",
       "endCaptures": {
         "1": {
           "name": "punctuation.section.class.begin.cython"
         }
-      },
-      "name": "meta.class.old-style.cython",
-      "patterns": [
-        {
-          "include": "#entity_name_class"
-        }
-      ]
+      }
     },
     {
+      "name": "meta.property.cython",
+      "contentName": "entity.name.type.property.cython",
       "begin": "^\\s*(property)\\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\\s*\\:)",
+      "end": "\\s*(:)",
       "beginCaptures": {
         "1": {
           "name": "storage.type.property.cython"
         }
       },
-      "contentName": "entity.name.type.property.cython",
-      "end": "\\s*(:)",
       "endCaptures": {
         "1": {
           "name": "punctuation.section.property.begin.cython"
         }
-      },
-      "name": "meta.property.cython"
+      }
     },
     {
+      "name": "meta.class.cython",
       "begin": "^\\s*(class)\\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\\s*\\()",
+      "end": "(\\))\\s*(?:(\\:)|(.*$\\n?))",
+      "patterns": [
+        {
+          "contentName": "entity.name.type.class.cython",
+          "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
+          "end": "(?![A-Za-z0-9_])",
+          "patterns": [
+            {
+              "include": "#entity_name_class"
+            }
+          ]
+        },
+        {
+          "contentName": "meta.class.inheritance.cython",
+          "begin": "(\\()",
+          "end": "(?=\\)|:)",
+          "patterns": [
+            {
+              "contentName": "entity.other.inherited-class.cython",
+              "begin": "(?\u003c=\\(|,)\\s*",
+              "end": "\\s*(?:(,)|(?=\\)))",
+              "patterns": [
+                {
+                  "include": "$self"
+                }
+              ],
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.separator.inheritance.cython"
+                }
+              }
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.inheritance.begin.cython"
+            }
+          }
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "storage.type.class.cython"
         }
       },
-      "end": "(\\))\\s*(?:(\\:)|(.*$\\n?))",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.inheritance.end.cython"
@@ -188,56 +217,29 @@
         "3": {
           "name": "invalid.illegal.missing-section-begin.cython"
         }
-      },
+      }
+    },
+    {
       "name": "meta.class.cython",
+      "begin": "^\\s*(class)\\s+(?=[a-zA-Z_][a-zA-Z_0-9])",
+      "end": "(\\()|\\s*($\\n?|#.*$\\n?)",
       "patterns": [
         {
-          "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
           "contentName": "entity.name.type.class.cython",
+          "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
           "end": "(?![A-Za-z0-9_])",
           "patterns": [
             {
-              "include": "#entity_name_class"
-            }
-          ]
-        },
-        {
-          "begin": "(\\()",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.definition.inheritance.begin.cython"
-            }
-          },
-          "contentName": "meta.class.inheritance.cython",
-          "end": "(?=\\)|:)",
-          "patterns": [
-            {
-              "begin": "(?<=\\(|,)\\s*",
-              "contentName": "entity.other.inherited-class.cython",
-              "end": "\\s*(?:(,)|(?=\\)))",
-              "endCaptures": {
-                "1": {
-                  "name": "punctuation.separator.inheritance.cython"
-                }
-              },
-              "patterns": [
-                {
-                  "include": "$self"
-                }
-              ]
+              "include": "#entity_name_function"
             }
           ]
         }
-      ]
-    },
-    {
-      "begin": "^\\s*(class)\\s+(?=[a-zA-Z_][a-zA-Z_0-9])",
+      ],
       "beginCaptures": {
         "1": {
           "name": "storage.type.class.cython"
         }
       },
-      "end": "(\\()|\\s*($\\n?|#.*$\\n?)",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.inheritance.begin.cython"
@@ -245,29 +247,55 @@
         "2": {
           "name": "invalid.illegal.missing-inheritance.cython"
         }
-      },
-      "name": "meta.class.cython",
+      }
+    },
+    {
+      "name": "meta.function.cython",
+      "begin": "^\\s*(def)\\s+(?=[A-Za-z_][A-Za-z0-9_]*\\s*\\()",
+      "end": "(\\))\\s*(?:(\\:)|(.*$\\n?))",
       "patterns": [
         {
+          "contentName": "entity.name.function.cython",
           "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
-          "contentName": "entity.name.type.class.cython",
           "end": "(?![A-Za-z0-9_])",
           "patterns": [
             {
               "include": "#entity_name_function"
             }
           ]
+        },
+        {
+          "contentName": "meta.function.parameters.cython",
+          "begin": "(\\()",
+          "end": "(?=\\)\\s*\\:)",
+          "patterns": [
+            {
+              "include": "#keyword_arguments"
+            },
+            {
+              "match": "\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(,)|(?=[\\n\\)]))",
+              "captures": {
+                "1": {
+                  "name": "variable.parameter.function.cython"
+                },
+                "2": {
+                  "name": "punctuation.separator.parameters.cython"
+                }
+              }
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.parameters.begin.cython"
+            }
+          }
         }
-      ]
-    },
-    {
-      "begin": "^\\s*(def)\\s+(?=[A-Za-z_][A-Za-z0-9_]*\\s*\\()",
+      ],
       "beginCaptures": {
         "1": {
           "name": "storage.type.function.cython"
         }
       },
-      "end": "(\\))\\s*(?:(\\:)|(.*$\\n?))",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.parameters.end.cython"
@@ -278,55 +306,29 @@
         "3": {
           "name": "invalid.illegal.missing-section-begin.cython"
         }
-      },
+      }
+    },
+    {
       "name": "meta.function.cython",
+      "begin": "^\\s*(def)\\s+(?=[A-Za-z_][A-Za-z0-9_]*)",
+      "end": "(\\()|\\s*($\\n?|#.*$\\n?)",
       "patterns": [
         {
-          "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
           "contentName": "entity.name.function.cython",
+          "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
           "end": "(?![A-Za-z0-9_])",
           "patterns": [
             {
               "include": "#entity_name_function"
             }
           ]
-        },
-        {
-          "begin": "(\\()",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.definition.parameters.begin.cython"
-            }
-          },
-          "contentName": "meta.function.parameters.cython",
-          "end": "(?=\\)\\s*\\:)",
-          "patterns": [
-            {
-              "include": "#keyword_arguments"
-            },
-            {
-              "captures": {
-                "1": {
-                  "name": "variable.parameter.function.cython"
-                },
-                "2": {
-                  "name": "punctuation.separator.parameters.cython"
-                }
-              },
-              "match": "\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(,)|(?=[\\n\\)]))"
-            }
-          ]
         }
-      ]
-    },
-    {
-      "begin": "^\\s*(def)\\s+(?=[A-Za-z_][A-Za-z0-9_]*)",
+      ],
       "beginCaptures": {
         "1": {
           "name": "storage.type.function.cython"
         }
       },
-      "end": "(\\()|\\s*($\\n?|#.*$\\n?)",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.parameters.begin.cython"
@@ -334,29 +336,40 @@
         "2": {
           "name": "invalid.illegal.missing-parameters.cython"
         }
-      },
-      "name": "meta.function.cython",
+      }
+    },
+    {
+      "name": "meta.function.inline.cython",
+      "begin": "(lambda)(?=\\s+)",
+      "end": "(\\:)",
       "patterns": [
         {
-          "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
-          "contentName": "entity.name.function.cython",
-          "end": "(?![A-Za-z0-9_])",
+          "contentName": "meta.function.inline.parameters.cython",
+          "begin": "\\s+",
+          "end": "(?=\\:)",
           "patterns": [
             {
-              "include": "#entity_name_function"
+              "include": "#keyword_arguments"
+            },
+            {
+              "match": "\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(,)|(?=[\\n\\)\\:]))",
+              "captures": {
+                "1": {
+                  "name": "variable.parameter.function.cython"
+                },
+                "2": {
+                  "name": "punctuation.separator.parameters.cython"
+                }
+              }
             }
           ]
         }
-      ]
-    },
-    {
-      "begin": "(lambda)(?=\\s+)",
+      ],
       "beginCaptures": {
         "1": {
           "name": "storage.type.function.inline.cython"
         }
       },
-      "end": "(\\:)",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.parameters.end.cython"
@@ -367,66 +380,31 @@
         "3": {
           "name": "invalid.illegal.missing-section-begin.cython"
         }
-      },
-      "name": "meta.function.inline.cython",
-      "patterns": [
-        {
-          "begin": "\\s+",
-          "contentName": "meta.function.inline.parameters.cython",
-          "end": "(?=\\:)",
-          "patterns": [
-            {
-              "include": "#keyword_arguments"
-            },
-            {
-              "captures": {
-                "1": {
-                  "name": "variable.parameter.function.cython"
-                },
-                "2": {
-                  "name": "punctuation.separator.parameters.cython"
-                }
-              },
-              "match": "\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(,)|(?=[\\n\\)\\:]))"
-            }
-          ]
-        }
-      ]
+      }
     },
     {
-      "begin": "^\\s*(?=@\\s*[A-Za-z_][A-Za-z0-9_]*(?:\\.[a-zA-Z_][a-zA-Z_0-9]*)*\\s*\\()",
-      "comment": "a decorator may be a function call which returns a decorator.",
-      "end": "(\\))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.definition.arguments.end.cython"
-        }
-      },
       "name": "meta.function.decorator.cython",
+      "begin": "^\\s*(?=@\\s*[A-Za-z_][A-Za-z0-9_]*(?:\\.[a-zA-Z_][a-zA-Z_0-9]*)*\\s*\\()",
+      "end": "(\\))",
       "patterns": [
         {
-          "begin": "(?=(@)\\s*[A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z_][A-Za-z0-9_]*)*\\s*\\()",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.definition.decorator.cython"
-            }
-          },
           "contentName": "entity.name.function.decorator.cython",
+          "begin": "(?=(@)\\s*[A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z_][A-Za-z0-9_]*)*\\s*\\()",
           "end": "(?=\\s*\\()",
           "patterns": [
             {
               "include": "#dotted_name"
             }
-          ]
-        },
-        {
-          "begin": "(\\()",
+          ],
           "beginCaptures": {
             "1": {
-              "name": "punctuation.definition.arguments.begin.cython"
+              "name": "punctuation.definition.decorator.cython"
             }
-          },
+          }
+        },
+        {
           "contentName": "meta.function.decorator.arguments.cython",
+          "begin": "(\\()",
           "end": "(?=\\))",
           "patterns": [
             {
@@ -435,47 +413,47 @@
             {
               "include": "$self"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.arguments.begin.cython"
+            }
+          }
         }
-      ]
+      ],
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.arguments.end.cython"
+        }
+      }
     },
     {
-      "begin": "^\\s*(?=@\\s*[A-Za-z_][A-Za-z0-9_]*(?:\\.[a-zA-Z_][a-zA-Z_0-9]*)*)",
-      "contentName": "entity.name.function.decorator.cython",
-      "end": "(?=\\s|$\\n?|#)",
       "name": "meta.function.decorator.cython",
+      "contentName": "entity.name.function.decorator.cython",
+      "begin": "^\\s*(?=@\\s*[A-Za-z_][A-Za-z0-9_]*(?:\\.[a-zA-Z_][a-zA-Z_0-9]*)*)",
+      "end": "(?=\\s|$\\n?|#)",
       "patterns": [
         {
           "begin": "(?=(@)\\s*[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*)",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.definition.decorator.cython"
-            }
-          },
           "end": "(?=\\s|$\\n?|#)",
           "patterns": [
             {
               "include": "#dotted_name"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.decorator.cython"
+            }
+          }
         }
       ]
     },
     {
-      "begin": "(?<=\\)|\\])\\s*(\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.definition.arguments.begin.cython"
-        }
-      },
-      "contentName": "meta.function-call.arguments.cython",
-      "end": "(\\))",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.definition.arguments.end.cython"
-        }
-      },
       "name": "meta.function-call.cython",
+      "contentName": "meta.function-call.arguments.cython",
+      "begin": "(?\u003c=\\)|\\])\\s*(\\()",
+      "end": "(\\))",
       "patterns": [
         {
           "include": "#keyword_arguments"
@@ -483,17 +461,22 @@
         {
           "include": "$self"
         }
-      ]
-    },
-    {
-      "begin": "(?=[A-Za-z_][A-Za-z0-9_]*(?:\\.[a-zA-Z_][a-zA-Z_0-9]*)*\\s*\\()",
-      "end": "(\\))",
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.definition.arguments.begin.cython"
+        }
+      },
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.arguments.end.cython"
         }
-      },
+      }
+    },
+    {
       "name": "meta.function-call.cython",
+      "begin": "(?=[A-Za-z_][A-Za-z0-9_]*(?:\\.[a-zA-Z_][a-zA-Z_0-9]*)*\\s*\\()",
+      "end": "(\\))",
       "patterns": [
         {
           "begin": "(?=[A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z_][A-Za-z0-9_]*)*\\s*\\()",
@@ -505,13 +488,8 @@
           ]
         },
         {
-          "begin": "(\\()",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.definition.arguments.begin.cython"
-            }
-          },
           "contentName": "meta.function-call.arguments.cython",
+          "begin": "(\\()",
           "end": "(?=\\))",
           "patterns": [
             {
@@ -520,19 +498,24 @@
             {
               "include": "$self"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.arguments.begin.cython"
+            }
+          }
         }
-      ]
-    },
-    {
-      "begin": "(?=[A-Za-z_][A-Za-z0-9_]*(?:\\.[a-zA-Z_][a-zA-Z_0-9]*)*\\s*\\[)",
-      "end": "(\\])",
+      ],
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.arguments.end.cython"
         }
-      },
+      }
+    },
+    {
       "name": "meta.item-access.cython",
+      "begin": "(?=[A-Za-z_][A-Za-z0-9_]*(?:\\.[a-zA-Z_][a-zA-Z_0-9]*)*\\s*\\[)",
+      "end": "(\\])",
       "patterns": [
         {
           "begin": "(?=[A-Za-z_][A-Za-z0-9_]*(?:\\.[A-Za-z_][A-Za-z0-9_]*)*\\s*\\[)",
@@ -544,58 +527,63 @@
           ]
         },
         {
-          "begin": "(\\[)",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.definition.arguments.begin.cython"
-            }
-          },
           "contentName": "meta.item-access.arguments.cython",
+          "begin": "(\\[)",
           "end": "(?=\\])",
           "patterns": [
             {
               "include": "$self"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.arguments.begin.cython"
+            }
+          }
         }
-      ]
+      ],
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.definition.arguments.end.cython"
+        }
+      }
     },
     {
-      "begin": "(?<=\\)|\\])\\s*(\\[)",
+      "name": "meta.item-access.cython",
+      "contentName": "meta.item-access.arguments.cython",
+      "begin": "(?\u003c=\\)|\\])\\s*(\\[)",
+      "end": "(\\])",
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.arguments.begin.cython"
         }
       },
-      "contentName": "meta.item-access.arguments.cython",
-      "end": "(\\])",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.arguments.end.cython"
         }
-      },
-      "name": "meta.item-access.cython",
-      "patterns": [
-        {
-          "include": "$self"
-        }
-      ]
+      }
     },
     {
+      "match": "\\b(def|lambda)\\b",
       "captures": {
         "1": {
           "name": "storage.type.function.cython"
         }
-      },
-      "match": "\\b(def|lambda)\\b"
+      }
     },
     {
+      "match": "\\b(class)\\b",
       "captures": {
         "1": {
           "name": "storage.type.class.cython"
         }
-      },
-      "match": "\\b(class)\\b"
+      }
     },
     {
       "include": "#line_continuation"
@@ -604,8 +592,8 @@
       "include": "#language_variables"
     },
     {
-      "match": "\\b(None|True|False|Ellipsis|NotImplemented|NULL)\\b",
-      "name": "constant.language.cython"
+      "name": "constant.language.cython",
+      "match": "\\b(None|True|False|Ellipsis|NotImplemented|NULL)\\b"
     },
     {
       "include": "#string_quoted_single"
@@ -626,6 +614,7 @@
       ]
     },
     {
+      "match": "(\\[)(\\s*(\\]))\\b",
       "captures": {
         "1": {
           "name": "punctuation.definition.list.begin.cython"
@@ -636,42 +625,43 @@
         "3": {
           "name": "punctuation.definition.list.end.cython"
         }
-      },
-      "match": "(\\[)(\\s*(\\]))\\b"
+      }
     },
     {
+      "name": "meta.structure.list.cython",
       "begin": "(\\[)",
+      "end": "(\\])",
+      "patterns": [
+        {
+          "contentName": "meta.structure.list.item.cython",
+          "begin": "(?\u003c=\\[|\\,)\\s*(?![\\],])",
+          "end": "\\s*(?:(,)|(?=\\]))",
+          "patterns": [
+            {
+              "include": "$self"
+            }
+          ],
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.separator.list.cython"
+            }
+          }
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.list.begin.cython"
         }
       },
-      "end": "(\\])",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.list.end.cython"
         }
-      },
-      "name": "meta.structure.list.cython",
-      "patterns": [
-        {
-          "begin": "(?<=\\[|\\,)\\s*(?![\\],])",
-          "contentName": "meta.structure.list.item.cython",
-          "end": "\\s*(?:(,)|(?=\\]))",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.separator.list.cython"
-            }
-          },
-          "patterns": [
-            {
-              "include": "$self"
-            }
-          ]
-        }
-      ]
+      }
     },
     {
+      "name": "meta.structure.tuple.cython",
+      "match": "(\\()(\\s*(\\)))",
       "captures": {
         "1": {
           "name": "punctuation.definition.tuple.begin.cython"
@@ -682,11 +672,11 @@
         "3": {
           "name": "punctuation.definition.tuple.end.cython"
         }
-      },
-      "match": "(\\()(\\s*(\\)))",
-      "name": "meta.structure.tuple.cython"
+      }
     },
     {
+      "name": "meta.structure.dictionary.cython",
+      "match": "(\\{)(\\s*(\\}))",
       "captures": {
         "1": {
           "name": "punctuation.definition.dictionary.begin.cython"
@@ -697,81 +687,79 @@
         "3": {
           "name": "punctuation.definition.dictionary.end.cython"
         }
-      },
-      "match": "(\\{)(\\s*(\\}))",
-      "name": "meta.structure.dictionary.cython"
+      }
     },
     {
+      "name": "meta.structure.dictionary.cython",
       "begin": "(\\{)",
+      "end": "(\\})",
+      "patterns": [
+        {
+          "contentName": "meta.structure.dictionary.key.cython",
+          "begin": "(?\u003c=\\{|\\,|^)\\s*(?![\\},])",
+          "end": "\\s*(?:(?=\\})|(\\:))",
+          "patterns": [
+            {
+              "include": "$self"
+            }
+          ],
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.separator.valuepair.dictionary.cython"
+            }
+          }
+        },
+        {
+          "contentName": "meta.structure.dictionary.value.cython",
+          "begin": "(?\u003c=\\:|^)\\s*",
+          "end": "\\s*(?:(?=\\})|(,))",
+          "patterns": [
+            {
+              "include": "$self"
+            }
+          ],
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.separator.dictionary.cython"
+            }
+          }
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.dictionary.begin.cython"
         }
       },
-      "end": "(\\})",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.dictionary.end.cython"
         }
-      },
-      "name": "meta.structure.dictionary.cython",
-      "patterns": [
-        {
-          "begin": "(?<=\\{|\\,|^)\\s*(?![\\},])",
-          "contentName": "meta.structure.dictionary.key.cython",
-          "end": "\\s*(?:(?=\\})|(\\:))",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.separator.valuepair.dictionary.cython"
-            }
-          },
-          "patterns": [
-            {
-              "include": "$self"
-            }
-          ]
-        },
-        {
-          "begin": "(?<=\\:|^)\\s*",
-          "contentName": "meta.structure.dictionary.value.cython",
-          "end": "\\s*(?:(?=\\})|(,))",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.separator.dictionary.cython"
-            }
-          },
-          "patterns": [
-            {
-              "include": "$self"
-            }
-          ]
-        }
-      ]
+      }
     }
   ],
   "repository": {
     "builtin_exceptions": {
-      "match": "(?x)\\b((Arithmetic|Assertion|Attribute|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|OS|Overflow|NotImplemented|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Translate|Encode|Decode)?|Value|ZeroDivision)Error|(Deprecation|Future|Overflow|PendingDeprecation|Runtime|Syntax|User)?Warning|KeyboardInterrupt|NotImplemented|StopIteration|SystemExit|(Base)?Exception)\\b",
-      "name": "support.type.exception.cython"
+      "name": "support.type.exception.cython",
+      "match": "(?x)\\b((Arithmetic|Assertion|Attribute|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|OS|Overflow|NotImplemented|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Translate|Encode|Decode)?|Value|ZeroDivision)Error|(Deprecation|Future|Overflow|PendingDeprecation|Runtime|Syntax|User)?Warning|KeyboardInterrupt|NotImplemented|StopIteration|SystemExit|(Base)?Exception)\\b"
     },
     "builtin_functions": {
-      "match": "(?x)\\b(\n                __import__|all|abs|any|apply|callable|chr|cmp|coerce|compile|delattr|dir|\n                divmod|eval|execfile|filter|getattr|globals|hasattr|hash|hex|id|\n                input|intern|isinstance|issubclass|iter|len|locals|map|max|min|oct|\n                ord|pow|range|raw_input|reduce|reload|repr|round|setattr|sorted|\n                sum|unichr|vars|zip\n\t\t\t)\\b",
-      "name": "support.function.builtin.cython"
+      "name": "support.function.builtin.cython",
+      "match": "(?x)\\b(\n                __import__|all|abs|any|apply|callable|chr|cmp|coerce|compile|delattr|dir|\n                divmod|eval|execfile|filter|getattr|globals|hasattr|hash|hex|id|\n                input|intern|isinstance|issubclass|iter|len|locals|map|max|min|oct|\n                ord|pow|range|raw_input|reduce|reload|repr|round|setattr|sorted|\n                sum|unichr|vars|zip\n\t\t\t)\\b"
     },
     "builtin_types": {
-      "match": "(?x)\\b(\n\t\t\t\tbasestring|bool|buffer|classmethod|complex|dict|enumerate|file|\n\t\t\t\tfloat|frozenset|int|list|long|object|open|reversed|set|\n\t\t\t\tslice|staticmethod|str|super|tuple|type|unicode|xrange\n\t\t\t)\\b",
-      "name": "support.type.cython"
+      "name": "support.type.cython",
+      "match": "(?x)\\b(\n\t\t\t\tbasestring|bool|buffer|classmethod|complex|dict|enumerate|file|\n\t\t\t\tfloat|frozenset|int|list|long|object|open|reversed|set|\n\t\t\t\tslice|staticmethod|str|super|tuple|type|unicode|xrange\n\t\t\t)\\b"
     },
     "constant_placeholder": {
-      "match": "(?i:%(\\([a-z_]+\\))?#?0?\\-?[ ]?\\+?([0-9]*|\\*)(\\.([0-9]*|\\*))?[hL]?[a-z%])",
-      "name": "constant.other.placeholder.cython"
+      "name": "constant.other.placeholder.cython",
+      "match": "(?i:%(\\([a-z_]+\\))?#?0?\\-?[ ]?\\+?([0-9]*|\\*)(\\.([0-9]*|\\*))?[hL]?[a-z%])"
     },
     "docstrings": {
       "patterns": [
         {
-          "begin": "^\\s*(?=[uU]?[rR]?\"\"\")",
-          "end": "(?<=\"\"\")",
           "name": "comment.block.cython",
+          "begin": "^\\s*(?=[uU]?[rR]?\"\"\")",
+          "end": "(?\u003c=\"\"\")",
           "patterns": [
             {
               "include": "#string_quoted_double"
@@ -779,9 +767,9 @@
           ]
         },
         {
-          "begin": "^\\s*(?=[uU]?[rR]?''')",
-          "end": "(?<=''')",
           "name": "comment.block.cython",
+          "begin": "^\\s*(?=[uU]?[rR]?''')",
+          "end": "(?\u003c=''')",
           "patterns": [
             {
               "include": "#string_quoted_single"
@@ -813,7 +801,7 @@
           ]
         },
         {
-          "begin": "(?<!\\.)(?=[A-Za-z_][A-Za-z0-9_]*)",
+          "begin": "(?\u003c!\\.)(?=[A-Za-z_][A-Za-z0-9_]*)",
           "end": "(?![A-Za-z0-9_])",
           "patterns": [
             {
@@ -868,6 +856,7 @@
       ]
     },
     "escaped_char": {
+      "match": "(\\\\x[0-9A-F]{2})|(\\\\[0-7]{3})|(\\\\\\n)|(\\\\\\\\)|(\\\\\\\")|(\\\\')|(\\\\a)|(\\\\b)|(\\\\f)|(\\\\n)|(\\\\r)|(\\\\t)|(\\\\v)",
       "captures": {
         "1": {
           "name": "constant.character.escape.hex.cython"
@@ -908,10 +897,10 @@
         "9": {
           "name": "constant.character.escape.formfeed.cython"
         }
-      },
-      "match": "(\\\\x[0-9A-F]{2})|(\\\\[0-7]{3})|(\\\\\\n)|(\\\\\\\\)|(\\\\\\\")|(\\\\')|(\\\\a)|(\\\\b)|(\\\\f)|(\\\\n)|(\\\\r)|(\\\\t)|(\\\\v)"
+      }
     },
     "escaped_unicode_char": {
+      "match": "(\\\\U[0-9A-Fa-f]{8})|(\\\\u[0-9A-Fa-f]{4})|(\\\\N\\{[a-zA-Z ]+\\})",
       "captures": {
         "1": {
           "name": "constant.character.escape.unicode.16-bit-hex.cython"
@@ -922,8 +911,7 @@
         "3": {
           "name": "constant.character.escape.unicode.name.cython"
         }
-      },
-      "match": "(\\\\U[0-9A-Fa-f]{8})|(\\\\u[0-9A-Fa-f]{4})|(\\\\N\\{[a-zA-Z ]+\\})"
+      }
     },
     "function_name": {
       "patterns": [
@@ -951,11 +939,17 @@
       "match": "[A-Za-z_][A-Za-z0-9_]*"
     },
     "illegal_names": {
-      "match": "\\b(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|not|or|pass|print|raise|return|try|while|with|yield)\\b",
-      "name": "invalid.illegal.name.cython"
+      "name": "invalid.illegal.name.cython",
+      "match": "\\b(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|not|or|pass|print|raise|return|try|while|with|yield)\\b"
     },
     "keyword_arguments": {
       "begin": "\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(=)(?!=)",
+      "end": "\\s*(?:(,)|(?=$\\n?|[\\)\\:]))",
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "variable.parameter.function.cython"
@@ -964,23 +958,18 @@
           "name": "keyword.operator.assignment.cython"
         }
       },
-      "end": "\\s*(?:(,)|(?=$\\n?|[\\)\\:]))",
       "endCaptures": {
         "1": {
           "name": "punctuation.separator.parameters.cython"
         }
-      },
-      "patterns": [
-        {
-          "include": "$self"
-        }
-      ]
+      }
     },
     "language_variables": {
-      "match": "\\b(self|cls)\\b",
-      "name": "variable.language.cython"
+      "name": "variable.language.cython",
+      "match": "\\b(self|cls)\\b"
     },
     "line_continuation": {
+      "match": "(\\\\)(.*)$\\n?",
       "captures": {
         "1": {
           "name": "punctuation.separator.continuation.line.cython"
@@ -988,22 +977,17 @@
         "2": {
           "name": "invalid.illegal.unexpected-text.cython"
         }
-      },
-      "match": "(\\\\)(.*)$\\n?"
+      }
     },
     "magic_function_names": {
-      "comment": "these methods have magic interpretation by cython and are generally called indirectly through syntactic constructs",
-      "match": "(?x)\\b(__(?:\n\t\t\t\t\t\tabs|add|and|call|cmp|coerce|complex|contains|del|delattr|\n\t\t\t\t\t\tdelete|delitem|delslice|div|divmod|enter|eq|exit|float|\n\t\t\t\t\t\tfloordiv|ge|get|getattr|getattribute|getitem|getslice|gt|\n\t\t\t\t\t\thash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|\n\t\t\t\t\t\tint|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|\n\t\t\t\t\t\tlong|lshift|lt|mod|mul|ne|neg|new|nonzero|oct|or|pos|pow|\n\t\t\t\t\t\tradd|rand|rdiv|rdivmod|repr|rfloordiv|rlshift|rmod|rmul|ror|\n\t\t\t\t\t\trpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|\n\t\t\t\t\t\tsetslice|str|sub|truediv|unicode|xor\n\t\t\t\t\t)__)\\b",
-      "name": "support.function.magic.cython"
+      "name": "support.function.magic.cython",
+      "match": "(?x)\\b(__(?:\n\t\t\t\t\t\tabs|add|and|call|cmp|coerce|complex|contains|del|delattr|\n\t\t\t\t\t\tdelete|delitem|delslice|div|divmod|enter|eq|exit|float|\n\t\t\t\t\t\tfloordiv|ge|get|getattr|getattribute|getitem|getslice|gt|\n\t\t\t\t\t\thash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|\n\t\t\t\t\t\tint|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|\n\t\t\t\t\t\tlong|lshift|lt|mod|mul|ne|neg|new|nonzero|oct|or|pos|pow|\n\t\t\t\t\t\tradd|rand|rdiv|rdivmod|repr|rfloordiv|rlshift|rmod|rmul|ror|\n\t\t\t\t\t\trpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|\n\t\t\t\t\t\tsetslice|str|sub|truediv|unicode|xor\n\t\t\t\t\t)__)\\b"
     },
     "magic_variable_names": {
-      "comment": "magic variables which a class/module may have.",
-      "match": "\\b__(all|bases|class|debug|dict|doc|file|members|metaclass|methods|name|slots|weakref)__\\b",
-      "name": "support.variable.magic.cython"
+      "name": "support.variable.magic.cython",
+      "match": "\\b__(all|bases|class|debug|dict|doc|file|members|metaclass|methods|name|slots|weakref)__\\b"
     },
     "regular_expressions": {
-      "comment": "Changed disabled to 1 to turn off syntax highlighting in “r” strings.",
-      "disabled": 0,
       "patterns": [
         {
           "include": "source.regexp.python"
@@ -1013,26 +997,9 @@
     "string_quoted_double": {
       "patterns": [
         {
-          "begin": "([uU]r)(\"\"\")",
-          "beginCaptures": {
-            "1": {
-              "name": "storage.type.string.cython"
-            },
-            "2": {
-              "name": "punctuation.definition.string.begin.cython"
-            }
-          },
-          "comment": "single quoted unicode-raw string",
-          "end": "((?<=\"\"\")(\")\"\"|\"\"\")",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.definition.string.end.cython"
-            },
-            "2": {
-              "name": "meta.empty-string.double.cython"
-            }
-          },
           "name": "string.quoted.double.block.unicode-raw-regex.cython",
+          "begin": "([uU]r)(\"\"\")",
+          "end": "((?\u003c=\"\"\")(\")\"\"|\"\"\")",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1046,10 +1013,7 @@
             {
               "include": "#regular_expressions"
             }
-          ]
-        },
-        {
-          "begin": "([uU]R)(\"\"\")",
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.string.cython"
@@ -1058,8 +1022,6 @@
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "single quoted unicode-raw string without regular expression highlighting",
-          "end": "((?<=\"\"\")(\")\"\"|\"\"\")",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
@@ -1067,8 +1029,12 @@
             "2": {
               "name": "meta.empty-string.double.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.double.block.unicode-raw.cython",
+          "begin": "([uU]R)(\"\"\")",
+          "end": "((?\u003c=\"\"\")(\")\"\"|\"\"\")",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1079,10 +1045,7 @@
             {
               "include": "#escaped_char"
             }
-          ]
-        },
-        {
-          "begin": "(r)(\"\"\")",
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.string.cython"
@@ -1091,8 +1054,6 @@
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "double quoted raw string",
-          "end": "((?<=\"\"\")(\")\"\"|\"\"\")",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
@@ -1100,8 +1061,12 @@
             "2": {
               "name": "meta.empty-string.double.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.double.block.raw-regex.cython",
+          "begin": "(r)(\"\"\")",
+          "end": "((?\u003c=\"\"\")(\")\"\"|\"\"\")",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1112,10 +1077,7 @@
             {
               "include": "#regular_expressions"
             }
-          ]
-        },
-        {
-          "begin": "(R)(\"\"\")",
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.string.cython"
@@ -1124,8 +1086,6 @@
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "double quoted raw string",
-          "end": "((?<=\"\"\")(\")\"\"|\"\"\")",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
@@ -1133,8 +1093,12 @@
             "2": {
               "name": "meta.empty-string.double.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.double.block.raw.cython",
+          "begin": "(R)(\"\"\")",
+          "end": "((?\u003c=\"\"\")(\")\"\"|\"\"\")",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1142,10 +1106,7 @@
             {
               "include": "#escaped_char"
             }
-          ]
-        },
-        {
-          "begin": "([uU])(\"\"\")",
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.string.cython"
@@ -1154,8 +1115,6 @@
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "double quoted unicode string",
-          "end": "((?<=\"\"\")(\")\"\"|\"\"\")",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
@@ -1163,8 +1122,12 @@
             "2": {
               "name": "meta.empty-string.double.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.double.block.unicode.cython",
+          "begin": "([uU])(\"\"\")",
+          "end": "((?\u003c=\"\"\")(\")\"\"|\"\"\")",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1175,10 +1138,7 @@
             {
               "include": "#escaped_char"
             }
-          ]
-        },
-        {
-          "begin": "([uU]r)(\")",
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.string.cython"
@@ -1187,20 +1147,19 @@
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "double-quoted raw string",
-          "end": "((?<=\")(\")|\")|(\\n)",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
             },
             "2": {
               "name": "meta.empty-string.double.cython"
-            },
-            "3": {
-              "name": "invalid.illegal.unclosed-string.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.double.single-line.unicode-raw-regex.cython",
+          "begin": "([uU]r)(\")",
+          "end": "((?\u003c=\")(\")|\")|(\\n)",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1214,10 +1173,7 @@
             {
               "include": "#regular_expressions"
             }
-          ]
-        },
-        {
-          "begin": "([uU]R)(\")",
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.string.cython"
@@ -1226,8 +1182,6 @@
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "double-quoted raw string",
-          "end": "((?<=\")(\")|\")|(\\n)",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
@@ -1238,8 +1192,12 @@
             "3": {
               "name": "invalid.illegal.unclosed-string.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.double.single-line.unicode-raw.cython",
+          "begin": "([uU]R)(\")",
+          "end": "((?\u003c=\")(\")|\")|(\\n)",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1250,10 +1208,7 @@
             {
               "include": "#escaped_char"
             }
-          ]
-        },
-        {
-          "begin": "(r)(\")",
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.string.cython"
@@ -1262,8 +1217,6 @@
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "double-quoted raw string",
-          "end": "((?<=\")(\")|\")|(\\n)",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
@@ -1274,8 +1227,12 @@
             "3": {
               "name": "invalid.illegal.unclosed-string.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.double.single-line.raw-regex.cython",
+          "begin": "(r)(\")",
+          "end": "((?\u003c=\")(\")|\")|(\\n)",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1286,10 +1243,7 @@
             {
               "include": "#regular_expressions"
             }
-          ]
-        },
-        {
-          "begin": "(R)(\")",
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.string.cython"
@@ -1298,8 +1252,6 @@
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "double-quoted raw string",
-          "end": "((?<=\")(\")|\")|(\\n)",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
@@ -1310,8 +1262,12 @@
             "3": {
               "name": "invalid.illegal.unclosed-string.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.double.single-line.raw.cython",
+          "begin": "(R)(\")",
+          "end": "((?\u003c=\")(\")|\")|(\\n)",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1319,10 +1275,7 @@
             {
               "include": "#escaped_char"
             }
-          ]
-        },
-        {
-          "begin": "([uU])(\")",
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.string.cython"
@@ -1331,8 +1284,6 @@
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "double quoted unicode string",
-          "end": "((?<=\")(\")|\")|(\\n)",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
@@ -1343,8 +1294,12 @@
             "3": {
               "name": "invalid.illegal.unclosed-string.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.double.single-line.unicode.cython",
+          "begin": "([uU])(\")",
+          "end": "((?\u003c=\")(\")|\")|(\\n)",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1355,26 +1310,31 @@
             {
               "include": "#escaped_char"
             }
-          ]
-        },
-        {
-          "begin": "(\"\"\")(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))",
+          ],
           "beginCaptures": {
             "1": {
+              "name": "storage.type.string.cython"
+            },
+            "2": {
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "double quoted string",
-          "end": "((?<=\"\"\")(\")\"\"|\"\"\")",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
             },
             "2": {
               "name": "meta.empty-string.double.cython"
+            },
+            "3": {
+              "name": "invalid.illegal.unclosed-string.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.double.block.sql.cython",
+          "begin": "(\"\"\")(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))",
+          "end": "((?\u003c=\"\"\")(\")\"\"|\"\"\")",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1385,29 +1345,25 @@
             {
               "include": "source.sql"
             }
-          ]
-        },
-        {
-          "begin": "(\")(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))",
+          ],
           "beginCaptures": {
             "1": {
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "double quoted string",
-          "end": "((?<=\")(\")|\")|(\\n)",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
             },
             "2": {
               "name": "meta.empty-string.double.cython"
-            },
-            "3": {
-              "name": "invalid.illegal.unclosed-string.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.double.single-line.sql.cython",
+          "begin": "(\")(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))",
+          "end": "((?\u003c=\")(\")|\")|(\\n)",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1418,44 +1374,12 @@
             {
               "include": "source.sql"
             }
-          ]
-        },
-        {
-          "begin": "(\"\"\")",
+          ],
           "beginCaptures": {
             "1": {
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "double quoted string",
-          "end": "((?<=\"\"\")(\")\"\"|\"\"\")",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.definition.string.end.cython"
-            },
-            "2": {
-              "name": "meta.empty-string.double.cython"
-            }
-          },
-          "name": "string.quoted.double.block.cython",
-          "patterns": [
-            {
-              "include": "#constant_placeholder"
-            },
-            {
-              "include": "#escaped_char"
-            }
-          ]
-        },
-        {
-          "begin": "(\")",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.definition.string.begin.cython"
-            }
-          },
-          "comment": "double quoted string",
-          "end": "((?<=\")(\")|\")|(\\n)",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
@@ -1466,8 +1390,12 @@
             "3": {
               "name": "invalid.illegal.unclosed-string.cython"
             }
-          },
-          "name": "string.quoted.double.single-line.cython",
+          }
+        },
+        {
+          "name": "string.quoted.double.block.cython",
+          "begin": "(\"\"\")",
+          "end": "((?\u003c=\"\"\")(\")\"\"|\"\"\")",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1475,13 +1403,57 @@
             {
               "include": "#escaped_char"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.string.begin.cython"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.string.end.cython"
+            },
+            "2": {
+              "name": "meta.empty-string.double.cython"
+            }
+          }
+        },
+        {
+          "name": "string.quoted.double.single-line.cython",
+          "begin": "(\")",
+          "end": "((?\u003c=\")(\")|\")|(\\n)",
+          "patterns": [
+            {
+              "include": "#constant_placeholder"
+            },
+            {
+              "include": "#escaped_char"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.string.begin.cython"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.string.end.cython"
+            },
+            "2": {
+              "name": "meta.empty-string.double.cython"
+            },
+            "3": {
+              "name": "invalid.illegal.unclosed-string.cython"
+            }
+          }
         }
       ]
     },
     "string_quoted_single": {
       "patterns": [
         {
+          "name": "string.quoted.single.single-line.cython",
+          "match": "(?\u003c!')(')(('))(?!')",
           "captures": {
             "1": {
               "name": "punctuation.definition.string.begin.cython"
@@ -1492,31 +1464,12 @@
             "3": {
               "name": "meta.empty-string.single.cython"
             }
-          },
-          "match": "(?<!')(')(('))(?!')",
-          "name": "string.quoted.single.single-line.cython"
+          }
         },
         {
-          "begin": "([uU]r)(''')",
-          "beginCaptures": {
-            "1": {
-              "name": "storage.type.string.cython"
-            },
-            "2": {
-              "name": "punctuation.definition.string.begin.cython"
-            }
-          },
-          "comment": "single quoted unicode-raw string",
-          "end": "((?<=''')(')''|''')",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.definition.string.end.cython"
-            },
-            "2": {
-              "name": "meta.empty-string.single.cython"
-            }
-          },
           "name": "string.quoted.single.block.unicode-raw-regex.cython",
+          "begin": "([uU]r)(''')",
+          "end": "((?\u003c=''')(')''|''')",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1530,10 +1483,7 @@
             {
               "include": "#regular_expressions"
             }
-          ]
-        },
-        {
-          "begin": "([uU]R)(''')",
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.string.cython"
@@ -1542,8 +1492,6 @@
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "single quoted unicode-raw string",
-          "end": "((?<=''')(')''|''')",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
@@ -1551,8 +1499,12 @@
             "2": {
               "name": "meta.empty-string.single.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.single.block.unicode-raw.cython",
+          "begin": "([uU]R)(''')",
+          "end": "((?\u003c=''')(')''|''')",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1563,10 +1515,7 @@
             {
               "include": "#escaped_char"
             }
-          ]
-        },
-        {
-          "begin": "(r)(''')",
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.string.cython"
@@ -1575,8 +1524,6 @@
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "single quoted raw string",
-          "end": "((?<=''')(')''|''')",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
@@ -1584,8 +1531,12 @@
             "2": {
               "name": "meta.empty-string.single.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.single.block.raw-regex.cython",
+          "begin": "(r)(''')",
+          "end": "((?\u003c=''')(')''|''')",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1596,10 +1547,7 @@
             {
               "include": "#regular_expressions"
             }
-          ]
-        },
-        {
-          "begin": "(R)(''')",
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.string.cython"
@@ -1608,8 +1556,6 @@
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "single quoted raw string",
-          "end": "((?<=''')(')''|''')",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
@@ -1617,8 +1563,12 @@
             "2": {
               "name": "meta.empty-string.single.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.single.block.raw.cython",
+          "begin": "(R)(''')",
+          "end": "((?\u003c=''')(')''|''')",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1626,10 +1576,7 @@
             {
               "include": "#escaped_char"
             }
-          ]
-        },
-        {
-          "begin": "([uU])(''')",
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.string.cython"
@@ -1638,8 +1585,6 @@
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "single quoted unicode string",
-          "end": "((?<=''')(')''|''')",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
@@ -1647,8 +1592,12 @@
             "2": {
               "name": "meta.empty-string.single.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.single.block.unicode.cython",
+          "begin": "([uU])(''')",
+          "end": "((?\u003c=''')(')''|''')",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1659,10 +1608,7 @@
             {
               "include": "#escaped_char"
             }
-          ]
-        },
-        {
-          "begin": "([uU]r)(')",
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.string.cython"
@@ -1671,17 +1617,19 @@
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "single quoted raw string",
-          "end": "(')|(\\n)",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
             },
             "2": {
-              "name": "invalid.illegal.unclosed-string.cython"
+              "name": "meta.empty-string.single.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.single.single-line.unicode-raw-regex.cython",
+          "begin": "([uU]r)(')",
+          "end": "(')|(\\n)",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1695,10 +1643,7 @@
             {
               "include": "#regular_expressions"
             }
-          ]
-        },
-        {
-          "begin": "([uU]R)(')",
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.string.cython"
@@ -1707,8 +1652,6 @@
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "single quoted raw string",
-          "end": "(')|(\\n)",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
@@ -1716,8 +1659,12 @@
             "2": {
               "name": "invalid.illegal.unclosed-string.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.single.single-line.unicode-raw.cython",
+          "begin": "([uU]R)(')",
+          "end": "(')|(\\n)",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1728,10 +1675,7 @@
             {
               "include": "#escaped_char"
             }
-          ]
-        },
-        {
-          "begin": "(r)(')",
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.string.cython"
@@ -1740,8 +1684,6 @@
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "single quoted raw string",
-          "end": "(')|(\\n)",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
@@ -1749,8 +1691,12 @@
             "2": {
               "name": "invalid.illegal.unclosed-string.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.single.single-line.raw-regex.cython",
+          "begin": "(r)(')",
+          "end": "(')|(\\n)",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1761,10 +1707,7 @@
             {
               "include": "#regular_expressions"
             }
-          ]
-        },
-        {
-          "begin": "(R)(')",
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.string.cython"
@@ -1773,8 +1716,6 @@
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "single quoted raw string",
-          "end": "(')|(\\n)",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
@@ -1782,8 +1723,12 @@
             "2": {
               "name": "invalid.illegal.unclosed-string.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.single.single-line.raw.cython",
+          "begin": "(R)(')",
+          "end": "(')|(\\n)",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1791,10 +1736,7 @@
             {
               "include": "#escaped_char"
             }
-          ]
-        },
-        {
-          "begin": "([uU])(')",
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.string.cython"
@@ -1803,8 +1745,6 @@
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "single quoted unicode string",
-          "end": "(')|(\\n)",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
@@ -1812,8 +1752,12 @@
             "2": {
               "name": "invalid.illegal.unclosed-string.cython"
             }
-          },
+          }
+        },
+        {
           "name": "string.quoted.single.single-line.unicode.cython",
+          "begin": "([uU])(')",
+          "end": "(')|(\\n)",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1824,26 +1768,28 @@
             {
               "include": "#escaped_char"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "storage.type.string.cython"
+            },
+            "2": {
+              "name": "punctuation.definition.string.begin.cython"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.string.end.cython"
+            },
+            "2": {
+              "name": "invalid.illegal.unclosed-string.cython"
+            }
+          }
         },
         {
+          "name": "string.quoted.single.block.cython",
           "begin": "(''')(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.definition.string.begin.cython"
-            }
-          },
-          "comment": "single quoted string",
-          "end": "((?<=''')(')''|''')",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.definition.string.end.cython"
-            },
-            "2": {
-              "name": "meta.empty-string.single.cython"
-            }
-          },
-          "name": "string.quoted.single.block.cython",
+          "end": "((?\u003c=''')(')''|''')",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1854,26 +1800,25 @@
             {
               "include": "source.sql"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.string.begin.cython"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.string.end.cython"
+            },
+            "2": {
+              "name": "meta.empty-string.single.cython"
+            }
+          }
         },
         {
+          "name": "string.quoted.single.single-line.cython",
           "begin": "(')(?=\\s*(SELECT|INSERT|UPDATE|DELETE|CREATE|REPLACE|ALTER))",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.definition.string.begin.cython"
-            }
-          },
-          "comment": "single quoted string",
           "end": "(')|(\\n)",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.definition.string.end.cython"
-            },
-            "2": {
-              "name": "invalid.illegal.unclosed-string.cython"
-            }
-          },
-          "name": "string.quoted.single.single-line.cython",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1884,44 +1829,12 @@
             {
               "include": "source.sql"
             }
-          ]
-        },
-        {
-          "begin": "(''')",
+          ],
           "beginCaptures": {
             "1": {
               "name": "punctuation.definition.string.begin.cython"
             }
           },
-          "comment": "single quoted string",
-          "end": "((?<=''')(')''|''')",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.definition.string.end.cython"
-            },
-            "2": {
-              "name": "meta.empty-string.single.cython"
-            }
-          },
-          "name": "string.quoted.single.block.cython",
-          "patterns": [
-            {
-              "include": "#constant_placeholder"
-            },
-            {
-              "include": "#escaped_char"
-            }
-          ]
-        },
-        {
-          "begin": "(')",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.definition.string.begin.cython"
-            }
-          },
-          "comment": "single quoted string",
-          "end": "(')|(\\n)",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.string.end.cython"
@@ -1929,8 +1842,12 @@
             "2": {
               "name": "invalid.illegal.unclosed-string.cython"
             }
-          },
-          "name": "string.quoted.single.single-line.cython",
+          }
+        },
+        {
+          "name": "string.quoted.single.block.cython",
+          "begin": "(''')",
+          "end": "((?\u003c=''')(')''|''')",
           "patterns": [
             {
               "include": "#constant_placeholder"
@@ -1938,7 +1855,46 @@
             {
               "include": "#escaped_char"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.string.begin.cython"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.string.end.cython"
+            },
+            "2": {
+              "name": "meta.empty-string.single.cython"
+            }
+          }
+        },
+        {
+          "name": "string.quoted.single.single-line.cython",
+          "begin": "(')",
+          "end": "(')|(\\n)",
+          "patterns": [
+            {
+              "include": "#constant_placeholder"
+            },
+            {
+              "include": "#escaped_char"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.string.begin.cython"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.definition.string.end.cython"
+            },
+            "2": {
+              "name": "invalid.illegal.unclosed-string.cython"
+            }
+          }
         }
       ]
     },
@@ -1952,7 +1908,5 @@
         }
       ]
     }
-  },
-  "scopeName": "source.cython",
-  "uuid": "8CD92F62-B42C-4130-9936-5E864FA2AC79"
+  }
 }

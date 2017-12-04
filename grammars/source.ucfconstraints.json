@@ -1,9 +1,6 @@
 {
-  "fileTypes": [
-    "ucf",
-    "UCF"
-  ],
   "name": "ucfconstraints",
+  "scopeName": "source.ucfconstraints",
   "patterns": [
     {
       "name": "storage.type.ucfconstraints",
@@ -22,25 +19,25 @@
       "match": "\\b(?i)(FALSE|TRUE|LVCMOS12|LVCMOS15|LVCMOS18|LVCMOS25|LVCMOS33|LVPECL_25|LVDCI_15|LVDCI_18|LVDS_25|LVDSEXT_25|LVDCI_25|LVDCI_DV2_15|LVDCI_DV2_18|LVDCI_DV2_25|SSTL15_DCI|SSTL15_T_DCI|SSTL15|DIFF_SSTL15|DIFF_SSTL15_T_DCI)\\b"
     },
     {
-      "match": "(#).*$\\n?",
-      "name": "comment.line"
+      "name": "comment.line",
+      "match": "(#).*$\\n?"
     },
     {
-      "match": "(//).*$\\n?",
-      "name": "comment.line.double-slash"
+      "name": "comment.line.double-slash",
+      "match": "(//).*$\\n?"
     },
     {
+      "name": "comment.block",
       "begin": "/\\*",
-      "end": "\\*/",
-      "name": "comment.block"
+      "end": "\\*/"
     },
     {
-      "match": "\\b(?i)(\\d+\\s*(fs|ps|ns|us|ms|s)?)\\b",
-      "name": "constant.numeric.ucfconstraints"
+      "name": "constant.numeric.ucfconstraints",
+      "match": "\\b(?i)(\\d+\\s*(fs|ps|ns|us|ms|s)?)\\b"
     },
     {
-      "match": "(=|;|\\|)",
-      "name": "keyword.operator"
+      "name": "keyword.operator",
+      "match": "(=|;|\\|)"
     },
     {
       "include": "#strings"
@@ -50,23 +47,21 @@
     "strings": {
       "patterns": [
         {
+          "name": "string.quoted.double.systemverilog",
           "begin": "\"",
+          "end": "\"",
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.string.begin.systemverilog"
             }
           },
-          "end": "\"",
           "endCaptures": {
             "0": {
               "name": "punctuation.definition.string.end.systemverilog"
             }
-          },
-          "name": "string.quoted.double.systemverilog"
+          }
         }
       ]
     }
-  },
-  "scopeName": "source.ucfconstraints",
-  "uuid": "443130c7-cdc8-4a90-836c-a530d3b17266"
+  }
 }

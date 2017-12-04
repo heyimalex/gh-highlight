@@ -1,15 +1,50 @@
 {
   "name": "Apollo Guidance Computer",
   "scopeName": "source.agc",
-  "fileTypes": [
-    "agc"
-  ],
   "patterns": [
     {
       "include": "#main"
     }
   ],
   "repository": {
+    "comment": {
+      "patterns": [
+        {
+          "name": "comment.line.number-sign.agc",
+          "begin": "#",
+          "end": "$",
+          "patterns": [
+            {
+              "name": "disable-todo",
+              "match": "TODO|FIXME|CHANGED|XXX|IDEA|HACK|NOTE|REVIEW|NB|BUG"
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.comment.agc"
+            }
+          }
+        },
+        {
+          "name": "comment.annotation.numeric.agc",
+          "match": "^\\t[-+]\\d+(?=\\t)"
+        }
+      ]
+    },
+    "identifier": {
+      "name": "entity.name.identifier.agc",
+      "match": "^(?!\\$)(?:[^#\\s]{1,7}\\t|[^#\\s]{8})"
+    },
+    "inclusion": {
+      "name": "meta.preprocessor.include.directive.agc",
+      "begin": "^\\$",
+      "end": "(?=\\s)",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.directive.agc"
+        }
+      }
+    },
     "main": {
       "patterns": [
         {
@@ -29,51 +64,13 @@
         }
       ]
     },
-    "comment": {
-      "patterns": [
-        {
-          "name": "comment.line.number-sign.agc",
-          "begin": "#",
-          "end": "$",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.definition.comment.agc"
-            }
-          },
-          "patterns": [
-            {
-              "match": "TODO|FIXME|CHANGED|XXX|IDEA|HACK|NOTE|REVIEW|NB|BUG",
-              "name": "disable-todo"
-            }
-          ]
-        },
-        {
-          "name": "comment.annotation.numeric.agc",
-          "match": "^\\t[-+]\\d+(?=\\t)"
-        }
-      ]
-    },
     "number": {
       "name": "constant.numeric.agc",
       "match": "[-+]\\d+(?:\\.\\d+)?D?"
     },
-    "inclusion": {
-      "name": "meta.preprocessor.include.directive.agc",
-      "begin": "^\\$",
-      "end": "(?=\\s)",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.directive.agc"
-        }
-      }
-    },
-    "identifier": {
-      "name": "entity.name.identifier.agc",
-      "match": "^(?!\\$)(?:[^#\\s]{1,7}\\t|[^#\\s]{8})"
-    },
     "opcode": {
       "name": "meta.opcode.agc",
-      "begin": "(?<=\\t)([^#\\s]+)(?=\\s|$)",
+      "begin": "(?\u003c=\\t)([^#\\s]+)(?=\\s|$)",
       "end": "$|(?=#)|[^#\\s]+",
       "beginCaptures": {
         "1": {

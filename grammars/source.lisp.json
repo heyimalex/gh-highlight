@@ -1,37 +1,31 @@
 {
-  "comment": "",
-  "fileTypes": [
-    "lisp",
-    "cl",
-    "l",
-    "mud",
-    "el"
-  ],
-  "keyEquivalent": "^~L",
   "name": "Lisp",
+  "scopeName": "source.lisp",
   "patterns": [
     {
       "begin": "(^[ \\t]+)?(?=;)",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.whitespace.comment.leading.lisp"
-        }
-      },
       "end": "(?!\\G)",
       "patterns": [
         {
+          "name": "comment.line.semicolon.lisp",
           "begin": ";",
+          "end": "\\n",
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.comment.lisp"
             }
-          },
-          "end": "\\n",
-          "name": "comment.line.semicolon.lisp"
+          }
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.whitespace.comment.leading.lisp"
+        }
+      }
     },
     {
+      "name": "meta.function.lisp",
+      "match": "(\\b(?i:(defun|defmethod|defmacro))\\b)(\\s+)((\\w|\\-|\\!|\\?)*)",
       "captures": {
         "2": {
           "name": "storage.type.function-type.lisp"
@@ -39,20 +33,20 @@
         "4": {
           "name": "entity.name.function.lisp"
         }
-      },
-      "match": "(\\b(?i:(defun|defmethod|defmacro))\\b)(\\s+)((\\w|\\-|\\!|\\?)*)",
-      "name": "meta.function.lisp"
+      }
     },
     {
+      "name": "constant.character.lisp",
+      "match": "(#|\\?)(\\w|[\\\\+-=\u003c\u003e'\"\u0026#])+",
       "captures": {
         "1": {
           "name": "punctuation.definition.constant.lisp"
         }
-      },
-      "match": "(#|\\?)(\\w|[\\\\+-=<>'\"&#])+",
-      "name": "constant.character.lisp"
+      }
     },
     {
+      "name": "variable.other.global.lisp",
+      "match": "(\\*)(\\S*)(\\*)",
       "captures": {
         "1": {
           "name": "punctuation.definition.variable.lisp"
@@ -60,52 +54,48 @@
         "3": {
           "name": "punctuation.definition.variable.lisp"
         }
-      },
-      "match": "(\\*)(\\S*)(\\*)",
-      "name": "variable.other.global.lisp"
+      }
     },
     {
-      "match": "\\b(?i:case|do|let|loop|if|else|when)\\b",
-      "name": "keyword.control.lisp"
+      "name": "keyword.control.lisp",
+      "match": "\\b(?i:case|do|let|loop|if|else|when)\\b"
     },
     {
-      "match": "\\b(?i:eq|neq|and|or)\\b",
-      "name": "keyword.operator.lisp"
+      "name": "keyword.operator.lisp",
+      "match": "\\b(?i:eq|neq|and|or)\\b"
     },
     {
-      "match": "\\b(?i:null|nil)\\b",
-      "name": "constant.language.lisp"
+      "name": "constant.language.lisp",
+      "match": "\\b(?i:null|nil)\\b"
     },
     {
-      "match": "(?<![-\\w])(?i:cons|car|cdr|cond|lambda|format|setq|setf|quote|eval|append|list|listp|memberp|t|load|progn)(?![-\\w])",
-      "name": "support.function.lisp"
+      "name": "support.function.lisp",
+      "match": "(?\u003c![-\\w])(?i:cons|car|cdr|cond|lambda|format|setq|setf|quote|eval|append|list|listp|memberp|t|load|progn)(?![-\\w])"
     },
     {
-      "match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b",
-      "name": "constant.numeric.lisp"
+      "name": "constant.numeric.lisp",
+      "match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b"
     },
     {
+      "name": "string.quoted.double.lisp",
       "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.lisp",
+          "match": "\\\\."
+        }
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.lisp"
         }
       },
-      "end": "\"",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.lisp"
         }
-      },
-      "name": "string.quoted.double.lisp",
-      "patterns": [
-        {
-          "match": "\\\\.",
-          "name": "constant.character.escape.lisp"
-        }
-      ]
+      }
     }
-  ],
-  "scopeName": "source.lisp",
-  "uuid": "00D451C9-6B1D-11D9-8DFA-000D93589AF6"
+  ]
 }

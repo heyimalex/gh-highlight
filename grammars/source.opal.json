@@ -1,11 +1,6 @@
 {
   "name": "Opal",
   "scopeName": "source.opal",
-  "fileTypes": [
-    "impl",
-    "sign"
-  ],
-  "uuid": "3da0f3f0-8b32-41c9-857c-ce9be39b99d4",
   "patterns": [
     {
       "name": "comment.line.double-dash.opal",
@@ -48,6 +43,16 @@
       "name": "meta.signature-implementation.opal",
       "begin": "^\\s*(SIGNATURE|IMPLEMENTATION)\\s+([^A-Z])?(\\w+)\\s*(\\[)",
       "end": "(\\])",
+      "patterns": [
+        {
+          "name": "punctuation.separator.inheritance.opal",
+          "match": "\\,"
+        },
+        {
+          "name": "entity.other.inherited-class.opal",
+          "match": "(?:[^\\,\\]]+)"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "keyword.meta.signature-implementation.opal"
@@ -66,17 +71,7 @@
         "1": {
           "name": "punctuation.definition.inheritance.end.opal"
         }
-      },
-      "patterns": [
-        {
-          "name": "punctuation.separator.inheritance.opal",
-          "match": "\\,"
-        },
-        {
-          "name": "entity.other.inherited-class.opal",
-          "match": "(?:[^\\,\\]]+)"
-        }
-      ]
+      }
     },
     {
       "name": "keyword.control.import.opal",
@@ -84,9 +79,19 @@
     },
     {
       "name": "meta.function.opal",
+      "contentName": "meta.function.parameters.opal",
       "begin": "^\\s*(FUN)\\s+([^\\\"():]+)\\s*(\\:)",
       "end": "($)|(?=\\-\\-)|(?=/\\*)",
-      "contentName": "meta.function.parameters.opal",
+      "patterns": [
+        {
+          "name": "punctuation.seperator.parameters.opal",
+          "match": "\\*\\*|\\-\u003e"
+        },
+        {
+          "name": "storage.type.opal",
+          "match": "\\b(\\w+)\\b"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "storage.type.function.opal"
@@ -97,17 +102,7 @@
         "3": {
           "name": "punctuation.definition.parameters.begin.opal"
         }
-      },
-      "patterns": [
-        {
-          "name": "punctuation.seperator.parameters.opal",
-          "match": "\\*\\*|\\->"
-        },
-        {
-          "name": "storage.type.opal",
-          "match": "\\b(\\w+)\\b"
-        }
-      ]
+      }
     },
     {
       "name": "meta.function.opal",
@@ -134,6 +129,16 @@
       "name": "meta.function.opal",
       "begin": "^\\s*(DEF)\\s+([^\\s():]+)\\s*(?:(\\())?",
       "end": "(?:(\\)))?\\s*(==)",
+      "patterns": [
+        {
+          "name": "punctuation.seperator.parameters.opal",
+          "match": "\\,"
+        },
+        {
+          "name": "variable.parameter.opal",
+          "match": "\\w*"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "storage.type.function.opal"
@@ -152,33 +157,23 @@
         "2": {
           "name": "punctuation.section.function.begin.opal"
         }
-      },
-      "patterns": [
-        {
-          "name": "punctuation.seperator.parameters.opal",
-          "match": "\\,"
-        },
-        {
-          "name": "variable.parameter.opal",
-          "match": "\\w*"
-        }
-      ]
+      }
     },
     {
       "name": "meta.type.sort.opal",
       "begin": "^\\s*(SORT)",
       "end": "$",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.type.sort.opal"
-        }
-      },
       "patterns": [
         {
           "name": "entity.name.function.type.sort.opal",
           "match": "\\b[^\\s():]+\\b"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.sort.opal"
+        }
+      }
     },
     {
       "name": "meta.type.data.opal",
@@ -202,20 +197,6 @@
       "name": "meta.type.constructors.opal",
       "begin": "(\\w+)\\s*\\(\\s*(\\w+)\\s*(:)\\s*(\\w+)",
       "end": "\\)",
-      "beginCaptures": {
-        "1": {
-          "name": "entity.name.function.constructor.opal"
-        },
-        "2": {
-          "name": "variable.parameter.opal"
-        },
-        "3": {
-          "name": "punctuation.seperator.type.opal"
-        },
-        "4": {
-          "name": "storage.type.opal"
-        }
-      },
       "patterns": [
         {
           "name": "punctuation.seperator.parameters.opal",
@@ -243,7 +224,21 @@
             }
           }
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "entity.name.function.constructor.opal"
+        },
+        "2": {
+          "name": "variable.parameter.opal"
+        },
+        "3": {
+          "name": "punctuation.seperator.type.opal"
+        },
+        "4": {
+          "name": "storage.type.opal"
+        }
+      }
     },
     {
       "include": "#evaluable"
@@ -258,19 +253,9 @@
       "patterns": [
         {
           "name": "meta.function.anonymous.opal",
+          "contentName": "meta.definition.parameters.opal",
           "begin": "(\\\\\\\\)",
           "end": "(\\.)",
-          "contentName": "meta.definition.parameters.opal",
-          "beginCaptures": {
-            "1": {
-              "name": "storage.type.function.opal"
-            }
-          },
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.function.begin.opal"
-            }
-          },
           "patterns": [
             {
               "name": "punctuation.seperator.parameters.opal",
@@ -295,7 +280,17 @@
               "name": "variable.parameter.opal",
               "match": "\\w+"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "storage.type.function.opal"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.section.function.begin.opal"
+            }
+          }
         },
         {
           "name": "constant.numeric.integer.opal",
@@ -311,25 +306,12 @@
         },
         {
           "name": "constant.numeric.hexadecimal.opal",
-          "match": "\\\"0x\\h+\\\"!"
+          "match": "\\\"0x[0-9A-Fa-f]+\\\"!"
         },
         {
           "name": "string.quoted.double.opal",
           "begin": "(\\\")",
           "end": "(\\n)|(\\\")",
-          "beginCaptures": {
-            "1": {
-              "name": "punctuation.definition.string.begin.opal"
-            }
-          },
-          "endCaptures": {
-            "1": {
-              "name": "invalid.illegal.unclosed-string.opal"
-            },
-            "2": {
-              "name": "punctuation.definition.string.end.opal"
-            }
-          },
           "patterns": [
             {
               "name": "constant.character.escape.backslash.opal",
@@ -375,7 +357,20 @@
               "name": "invalid.illegal.unknown-escape.opal",
               "match": "\\\\."
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.definition.string.begin.opal"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "invalid.illegal.unclosed-string.opal"
+            },
+            "2": {
+              "name": "punctuation.definition.string.end.opal"
+            }
+          }
         },
         {
           "name": "support.function.builtin.opal",
@@ -383,7 +378,7 @@
         },
         {
           "name": "support.function.builtin.opal",
-          "match": "<>\\?|<>(?!\\?)"
+          "match": "\u003c\u003e\\?|\u003c\u003e(?!\\?)"
         },
         {
           "name": "keyword.control.opal",
@@ -395,7 +390,7 @@
         },
         {
           "name": "keyword.operator.comparison.opal",
-          "match": "(<=|>=|<|>|\\|=|(?<!=)=(?!=))"
+          "match": "(\u003c=|\u003e=|\u003c|\u003e|\\|=|(?\u003c!=)=(?!=))"
         },
         {
           "name": "keyword.operator.arithmetic.opal",

@@ -1,22 +1,14 @@
 {
-  "comment": "This Source Code Form is subject to the terms of the Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with this file, You can obtain one at http://mozilla.org/MPL/2.0/.",
-  "fileTypes": [
-    "ecl"
-  ],
   "name": "ECLiPSe Prolog",
+  "scopeName": "source.prolog.eclipse",
   "patterns": [
     {
       "include": "#comments"
     },
     {
-      "begin": "(?<=:-)\\s*",
-      "end": "(\\.)[^(\\.\\.)]",
-      "endCaptures": {
-        "1": {
-          "name": "keyword.control.clause.bodyend.prolog"
-        }
-      },
       "name": "meta.clause.body.prolog",
+      "begin": "(?\u003c=:-)\\s*",
+      "end": "(\\.)[^(\\.\\.)]",
       "patterns": [
         {
           "include": "#comments"
@@ -37,20 +29,20 @@
           "include": "#constants"
         },
         {
-          "match": ".",
-          "name": "meta.clause.body.prolog"
+          "name": "meta.clause.body.prolog",
+          "match": "."
         }
-      ]
-    },
-    {
-      "begin": "(?<=-->)\\s*",
-      "end": "(\\.)[^(\\.\\.)]",
+      ],
       "endCaptures": {
         "1": {
-          "name": "keyword.control.dcg.bodyend.prolog"
+          "name": "keyword.control.clause.bodyend.prolog"
         }
-      },
+      }
+    },
+    {
       "name": "meta.dcg.body.prolog",
+      "begin": "(?\u003c=--\u003e)\\s*",
+      "end": "(\\.)[^(\\.\\.)]",
       "patterns": [
         {
           "include": "#comments"
@@ -68,10 +60,15 @@
           "include": "#constants"
         },
         {
-          "match": ".",
-          "name": "meta.dcg.body.prolog"
+          "name": "meta.dcg.body.prolog",
+          "match": "."
         }
-      ]
+      ],
+      "endCaptures": {
+        "1": {
+          "name": "keyword.control.dcg.bodyend.prolog"
+        }
+      }
     },
     {
       "include": "source.prolog"
@@ -81,77 +78,67 @@
     "atom": {
       "patterns": [
         {
-          "match": "(?<![a-zA-Z0-9_])[a-z][a-zA-Z0-9_]*(?!\\s*\\(|[a-zA-Z0-9_])",
-          "name": "constant.other.atom.simple.prolog"
+          "name": "constant.other.atom.simple.prolog",
+          "match": "(?\u003c![a-zA-Z0-9_])[a-z][a-zA-Z0-9_]*(?!\\s*\\(|[a-zA-Z0-9_])"
         },
         {
-          "match": "'.*?'",
-          "name": "constant.other.atom.quoted.prolog"
+          "name": "constant.other.atom.quoted.prolog",
+          "match": "'.*?'"
         },
         {
-          "match": "\\[\\]",
-          "name": "constant.other.atom.emptylist.prolog"
+          "name": "constant.other.atom.emptylist.prolog",
+          "match": "\\[\\]"
         }
       ]
     },
     "builtin": {
       "patterns": [
         {
-          "match": "\\b(op|findall|write|nl|writeln|fail|lib)\\b",
-          "name": "keyword.other.prolog"
+          "name": "keyword.other.prolog",
+          "match": "\\b(op|findall|write|nl|writeln|fail|lib)\\b"
         },
         {
-          "match": "\\b(for(each(elem)?)?|fromto|do|param|dim)\\b",
-          "name": "keyword.other.prolog.eclipse"
+          "name": "keyword.other.prolog.eclipse",
+          "match": "\\b(for(each(elem)?)?|fromto|do|param|dim)\\b"
         }
       ]
     },
     "comments": {
       "patterns": [
         {
-          "match": "%.*",
-          "name": "comment.line.percent-sign.prolog"
+          "name": "comment.line.percent-sign.prolog",
+          "match": "%.*"
         },
         {
+          "name": "comment.block.prolog",
           "begin": "/\\*",
+          "end": "\\*/",
           "captures": {
             "0": {
               "name": "punctuation.definition.comment.prolog"
             }
-          },
-          "end": "\\*/",
-          "name": "comment.block.prolog"
+          }
         }
       ]
     },
     "constants": {
       "patterns": [
         {
-          "match": "(?<![a-zA-Z]|/)(\\d+|(\\d+\\.\\d+))",
-          "name": "constant.numeric.integer.prolog"
+          "name": "constant.numeric.integer.prolog",
+          "match": "(?\u003c![a-zA-Z]|/)(\\d+|(\\d+\\.\\d+))"
         },
         {
-          "match": "\".*?\"",
-          "name": "string.quoted.double.prolog"
+          "name": "string.quoted.double.prolog",
+          "match": "\".*?\""
         }
       ]
     },
     "controlandkeywords": {
       "patterns": [
         {
-          "begin": "(->)",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.control.if.prolog"
-            }
-          },
-          "end": "(;)",
-          "endCaptures": {
-            "1": {
-              "name": "keyword.control.else.prolog"
-            }
-          },
           "name": "meta.if.prolog",
+          "begin": "(-\u003e)",
+          "end": "(;)",
           "patterns": [
             {
               "include": "$self"
@@ -169,38 +156,46 @@
               "include": "#variable"
             },
             {
-              "match": ".",
-              "name": "meta.if.body.prolog"
+              "name": "meta.if.body.prolog",
+              "match": "."
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.control.if.prolog"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "keyword.control.else.prolog"
+            }
+          }
         },
         {
-          "match": "!",
-          "name": "keyword.control.cut.prolog"
+          "name": "keyword.control.cut.prolog",
+          "match": "!"
         },
         {
-          "match": "(\\s(is)\\s)|=:=|=?\\\\?=|\\\\\\+|@?>|@?=?<|\\+|\\*|\\-",
-          "name": "keyword.operator.prolog"
+          "name": "keyword.operator.prolog",
+          "match": "(\\s(is)\\s)|=:=|=?\\\\?=|\\\\\\+|@?\u003e|@?=?\u003c|\\+|\\*|\\-"
         },
         {
-          "match": "(#|&|\\$)(<|>|=)|(#|&|\\$)?(::)|\\.\\.|or|and|(#|&|\\$)\\\\=",
-          "name": "keyword.operator.prolog.eclipse"
+          "name": "keyword.operator.prolog.eclipse",
+          "match": "(#|\u0026|\\$)(\u003c|\u003e|=)|(#|\u0026|\\$)?(::)|\\.\\.|or|and|(#|\u0026|\\$)\\\\="
         }
       ]
     },
     "variable": {
       "patterns": [
         {
-          "match": "(?<![a-zA-Z0-9_])[A-Z][a-zA-Z0-9_]*",
-          "name": "variable.parameter.uppercase.prolog"
+          "name": "variable.parameter.uppercase.prolog",
+          "match": "(?\u003c![a-zA-Z0-9_])[A-Z][a-zA-Z0-9_]*"
         },
         {
-          "match": "(?<!\\w)_",
-          "name": "variable.language.anonymous.prolog"
+          "name": "variable.language.anonymous.prolog",
+          "match": "(?\u003c!\\w)_"
         }
       ]
     }
-  },
-  "scopeName": "source.prolog.eclipse",
-  "uuid": "a933e734-8345-407e-90af-9f7647f5ebf8"
+  }
 }

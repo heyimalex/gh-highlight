@@ -1,119 +1,119 @@
 {
-  "fileTypes": [
-    "gs",
-    "gsp",
-    "gsx",
-    "gst",
-    "proto"
-  ],
-  "foldingStartMarker": "(/\\*\\*|\\{\\s*$)",
-  "foldingStopMarker": "(\\*\\*/|^\\s*\\})",
   "name": "Gosu",
+  "scopeName": "source.gosu.2",
   "patterns": [
     {
-      "match": "\\b(List|Map)\\b",
-      "name": "support.class.gosu.2"
+      "name": "support.class.gosu.2",
+      "match": "\\b(List|Map)\\b"
     },
     {
-      "match": "\\b(where|find|each)\\b",
-      "name": "support.function.gosu.2"
+      "name": "support.function.gosu.2",
+      "match": "\\b(where|find|each)\\b"
     },
     {
-      "match": "\\b(abstract|assert|break|case|catch|class|continue|do|else|enum|extends|final|finally|for|if|implements|uses|typeis|interface|new|package|private|protected|public|return|static|super|switch|throw|try|void|while|enhancement|protocol|function|block|as|represents|delegate|readonly|property|get|set|using|var|print|construct|in|override|and|or|not|params|typeloader|classpath|index|typeof|@[a-zA-Z]+)\\b",
-      "name": "keyword.control.gosu.2"
+      "name": "keyword.control.gosu.2",
+      "match": "\\b(abstract|assert|break|case|catch|class|continue|do|else|enum|extends|final|finally|for|if|implements|uses|typeis|interface|new|package|private|protected|public|return|static|super|switch|throw|try|void|while|enhancement|protocol|function|block|as|represents|delegate|readonly|property|get|set|using|var|print|construct|in|override|and|or|not|params|typeloader|classpath|index|typeof|@[a-zA-Z]+)\\b"
     },
     {
-      "match": "\\b(Boolean|String|Double|Long|Integer)\\b",
-      "name": "storage.type.gosu.2"
+      "name": "storage.type.gosu.2",
+      "match": "\\b(Boolean|String|Double|Long|Integer)\\b"
     },
     {
-      "match": "\\b(null|true|false|this)\\b",
-      "name": "constant.language.gosu.2"
+      "name": "constant.language.gosu.2",
+      "match": "\\b(null|true|false|this)\\b"
     },
     {
-      "match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f)?\\b",
-      "name": "constant.numeric.gosu.2"
+      "name": "constant.numeric.gosu.2",
+      "match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f)?\\b"
     },
     {
-      "begin": "\"",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.gosu.2"
-        }
-      },
-      "end": "\"",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.gosu.2"
-        }
-      },
       "name": "string.quoted.double.gosu.2",
+      "begin": "\"",
+      "end": "\"",
       "patterns": [
         {
-          "match": "\\\\.",
-          "name": "constant.character.escape.gosu.2"
+          "name": "constant.character.escape.gosu.2",
+          "match": "\\\\."
         }
-      ]
-    },
-    {
-      "begin": "'",
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.gosu.2"
         }
       },
-      "end": "'",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.gosu.2"
         }
-      },
-      "name": "string.quoted.single.gosu.2",
-      "patterns": [
-        {
-          "match": "\\\\.",
-          "name": "constant.character.escape.gosu.2"
-        }
-      ]
+      }
     },
     {
+      "name": "string.quoted.single.gosu.2",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "name": "constant.character.escape.gosu.2",
+          "match": "\\\\."
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.gosu.2"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.gosu.2"
+        }
+      }
+    },
+    {
+      "name": "comment.block.gosu.2",
       "begin": "/\\*",
+      "end": "\\*/",
       "captures": {
         "0": {
           "name": "punctuation.definition.comment.gosu.2"
         }
-      },
-      "end": "\\*/",
-      "name": "comment.block.gosu.2"
+      }
     },
     {
+      "name": "comment.line.double-slash.gosu.2",
+      "match": "(//).*$\\n?",
       "captures": {
         "1": {
           "name": "punctuation.definition.comment.gosu.2"
         }
-      },
-      "match": "(//).*$\\n?",
-      "name": "comment.line.double-slash.gosu.2"
+      }
     },
     {
-      "match": "\\b(instanceof)\\b",
-      "name": "keyword.operator.gosu.2"
+      "name": "keyword.operator.gosu.2",
+      "match": "\\b(instanceof)\\b"
     },
     {
-      "match": "[-!%&*+=/?:]",
-      "name": "keyword.operator.symbolic.gosu.2"
+      "name": "keyword.operator.symbolic.gosu.2",
+      "match": "[-!%\u0026*+=/?:]"
     },
     {
+      "name": "meta.preprocessor.gosu.2",
+      "match": "^[ \\t]*(#)[a-zA-Z]+",
       "captures": {
         "1": {
           "name": "punctuation.definition.preprocessor.gosu.2"
         }
-      },
-      "match": "^[ \\t]*(#)[a-zA-Z]+",
-      "name": "meta.preprocessor.gosu.2"
+      }
     },
     {
+      "name": "meta.function.gosu.2",
       "begin": "\\b(function)\\s+([a-zA-Z_]\\w*)\\s*(\\()",
+      "end": "\\)",
+      "patterns": [
+        {
+          "name": "variable.parameter.function.gosu.2",
+          "match": "[^,)\\n]+"
+        }
+      ],
       "captures": {
         "1": {
           "name": "storage.type.function.gosu.2"
@@ -125,21 +125,15 @@
           "name": "punctuation.definition.parameters.begin.gosu.2"
         }
       },
-      "end": "\\)",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.parameters.end.gosu.2"
         }
-      },
-      "name": "meta.function.gosu.2",
-      "patterns": [
-        {
-          "match": "[^,)\\n]+",
-          "name": "variable.parameter.function.gosu.2"
-        }
-      ]
+      }
     },
     {
+      "name": "meta.class.gosu.2",
+      "match": "\\b(class)\\s+([a-zA-Z_](?:\\w|\\.)*)(?:\\s+(extends)\\s+([a-zA-Z_](?:\\w|\\.)*))?",
       "captures": {
         "1": {
           "name": "storage.type.class.gosu.2"
@@ -153,11 +147,7 @@
         "4": {
           "name": "entity.other.inherited-class.gosu.2"
         }
-      },
-      "match": "\\b(class)\\s+([a-zA-Z_](?:\\w|\\.)*)(?:\\s+(extends)\\s+([a-zA-Z_](?:\\w|\\.)*))?",
-      "name": "meta.class.gosu.2"
+      }
     }
-  ],
-  "scopeName": "source.gosu.2",
-  "uuid": "1A5480B8-D53B-4F54-BD42-0945CFD37011"
+  ]
 }

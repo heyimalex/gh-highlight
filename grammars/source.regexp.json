@@ -1,50 +1,12 @@
 {
   "name": "Regular Expression",
   "scopeName": "source.regexp",
-  "fileTypes": [
-    "regexp",
-    "regex"
-  ],
   "patterns": [
     {
       "include": "#main"
     }
   ],
   "repository": {
-    "main": {
-      "patterns": [
-        {
-          "include": "#comment"
-        },
-        {
-          "include": "#variable"
-        },
-        {
-          "include": "#anchor"
-        },
-        {
-          "include": "#escape"
-        },
-        {
-          "include": "#alternation"
-        },
-        {
-          "include": "#quantifier"
-        },
-        {
-          "include": "#assertion"
-        },
-        {
-          "include": "#conditional"
-        },
-        {
-          "include": "#group"
-        },
-        {
-          "include": "#class"
-        }
-      ]
-    },
     "alternation": {
       "name": "keyword.operator.logical.or.regexp",
       "match": "\\|"
@@ -52,28 +14,28 @@
     "anchor": {
       "patterns": [
         {
-          "match": "\\^",
-          "name": "keyword.control.anchor.line-start.regexp"
+          "name": "keyword.control.anchor.line-start.regexp",
+          "match": "\\^"
         },
         {
-          "match": "\\$",
-          "name": "keyword.control.anchor.line-end.regexp"
+          "name": "keyword.control.anchor.line-end.regexp",
+          "match": "\\$"
         },
         {
-          "match": "\\\\A",
-          "name": "keyword.control.anchor.string-start.regexp"
+          "name": "keyword.control.anchor.string-start.regexp",
+          "match": "\\\\A"
         },
         {
-          "match": "\\\\Z",
-          "name": "keyword.control.anchor.string-end-line.regexp"
+          "name": "keyword.control.anchor.string-end-line.regexp",
+          "match": "\\\\Z"
         },
         {
-          "match": "\\\\z",
-          "name": "keyword.control.anchor.string-end.regexp"
+          "name": "keyword.control.anchor.string-end.regexp",
+          "match": "\\\\z"
         },
         {
-          "match": "\\\\G",
-          "name": "keyword.control.anchor.search-start.regexp"
+          "name": "keyword.control.anchor.search-start.regexp",
+          "match": "\\\\G"
         },
         {
           "name": "meta.unicode-boundary.regexp",
@@ -97,12 +59,12 @@
           }
         },
         {
-          "match": "\\\\b",
-          "name": "keyword.control.anchor.word-boundary.regexp"
+          "name": "keyword.control.anchor.word-boundary.regexp",
+          "match": "\\\\b"
         },
         {
-          "match": "\\\\B",
-          "name": "keyword.control.anchor.non-word-boundary.regexp"
+          "name": "keyword.control.anchor.non-word-boundary.regexp",
+          "match": "\\\\B"
         }
       ]
     },
@@ -112,6 +74,11 @@
           "name": "meta.assertion.positive.look-ahead.regexp",
           "begin": "\\(\\?=",
           "end": "\\)",
+          "patterns": [
+            {
+              "include": "#main"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.assertion.begin.regexp"
@@ -121,17 +88,17 @@
             "0": {
               "name": "punctuation.definition.assertion.end.regexp"
             }
-          },
-          "patterns": [
-            {
-              "include": "#main"
-            }
-          ]
+          }
         },
         {
           "name": "meta.assertion.negative.look-ahead.regexp",
           "begin": "\\(\\?!",
           "end": "\\)",
+          "patterns": [
+            {
+              "include": "#main"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.assertion.begin.regexp"
@@ -141,17 +108,17 @@
             "0": {
               "name": "punctuation.definition.assertion.end.regexp"
             }
-          },
-          "patterns": [
-            {
-              "include": "#main"
-            }
-          ]
+          }
         },
         {
           "name": "meta.assertion.negative.look-behind.regexp",
-          "begin": "\\(\\?<!",
+          "begin": "\\(\\?\u003c!",
           "end": "\\)",
+          "patterns": [
+            {
+              "include": "#main"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.assertion.begin.regexp"
@@ -161,17 +128,17 @@
             "0": {
               "name": "punctuation.definition.assertion.end.regexp"
             }
-          },
-          "patterns": [
-            {
-              "include": "#main"
-            }
-          ]
+          }
         },
         {
           "name": "meta.assertion.positive.look-behind.regexp",
-          "begin": "\\(\\?<=",
+          "begin": "\\(\\?\u003c=",
           "end": "\\)",
+          "patterns": [
+            {
+              "include": "#main"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.assertion.begin.regexp"
@@ -181,12 +148,7 @@
             "0": {
               "name": "punctuation.definition.assertion.end.regexp"
             }
-          },
-          "patterns": [
-            {
-              "include": "#main"
-            }
-          ]
+          }
         }
       ]
     },
@@ -194,6 +156,11 @@
       "name": "meta.character-class.set.regexp",
       "begin": "\\[",
       "end": "\\]",
+      "patterns": [
+        {
+          "include": "#classInnards"
+        }
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.character-class.set.begin.regexp"
@@ -203,12 +170,7 @@
         "0": {
           "name": "punctuation.definition.character-class.set.end.regexp"
         }
-      },
-      "patterns": [
-        {
-          "include": "#classInnards"
-        }
-      ]
+      }
     },
     "classInnards": {
       "patterns": [
@@ -221,8 +183,13 @@
           "match": "\\\\b"
         },
         {
-          "begin": "(&&)(\\[)",
+          "begin": "(\u0026\u0026)(\\[)",
           "end": "\\]",
+          "patterns": [
+            {
+              "include": "#classInnards"
+            }
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.operator.logical.intersect.regexp"
@@ -235,39 +202,15 @@
             "0": {
               "name": "punctuation.definition.character-class.set.end.regexp"
             }
-          },
-          "patterns": [
-            {
-              "include": "#classInnards"
-            }
-          ]
+          }
         },
         {
           "name": "keyword.operator.logical.intersect.regexp",
-          "match": "&&"
+          "match": "\u0026\u0026"
         },
         {
-          "name": "constant.other.character-class.range.regexp",
-          "match": "(?x) ([^\\\\]|\\\\(?:x[0-9A-Fa-f]{2}|x\\{[0-9A-Fa-f]+\\}|\\d{3}|.)) (-) ([^\\\\]|\\\\(?:x[0-9A-Fa-f]{2}|x\\{[0-9A-Fa-f]+\\}|\\d{3}|.))",
-          "captures": {
-            "1": {
-              "patterns": [
-                {
-                  "include": "#escape"
-                }
-              ]
-            },
-            "2": {
-              "name": "punctuation.separator.range.dash.regexp"
-            },
-            "3": {
-              "patterns": [
-                {
-                  "include": "#escape"
-                }
-              ]
-            }
-          }
+          "name": "punctuation.separator.range.dash.regexp",
+          "match": "(?\u003c!\\G|\\\\[dwshDWSHN])-(?!\\])"
         },
         {
           "name": "constant.language.posix.$2-char.character-class.regexp",
@@ -295,6 +238,9 @@
           "match": "\\^|\\$|\\(|\\)|\\["
         },
         {
+          "include": "#escape"
+        },
+        {
           "include": "$self"
         },
         {
@@ -304,13 +250,13 @@
       ]
     },
     "comment": {
+      "name": "comment.block.regexp",
       "begin": "\\(\\?#",
       "end": "\\)",
-      "name": "comment.block.regexp",
       "patterns": [
         {
-          "match": "\\\\.",
-          "name": "constant.character.escape.backslash.regexp"
+          "name": "constant.character.escape.backslash.regexp",
+          "match": "\\\\."
         }
       ]
     },
@@ -318,19 +264,6 @@
       "name": "meta.conditional.regexp",
       "begin": "(\\()(\\?)(?=\\()",
       "end": "\\)",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.section.condition.begin.regexp"
-        },
-        "2": {
-          "name": "keyword.control.flow.regexp"
-        }
-      },
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.section.condition.end.regexp"
-        }
-      },
       "patterns": [
         {
           "name": "punctuation.separator.condition.if-else.regexp",
@@ -343,27 +276,17 @@
           "name": "meta.condition.function-call.regexp",
           "begin": "\\G\\(",
           "end": "\\)",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.section.condition.begin.regexp"
-            }
-          },
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.section.condition.end.regexp"
-            }
-          },
           "patterns": [
             {
-              "match": "\\GDEFINE",
-              "name": "storage.type.function.subpattern.regexp"
+              "name": "storage.type.function.subpattern.regexp",
+              "match": "\\GDEFINE"
             },
             {
-              "match": "\\Gassert",
-              "name": "keyword.other.assertion.regexp"
+              "name": "keyword.other.assertion.regexp",
+              "match": "\\Gassert"
             },
             {
-              "match": "\\G(?:(<)([^>]+)(>)|(')([^>]+)('))",
+              "match": "\\G(?:(\u003c)([^\u003e]+)(\u003e)|(')([^\u003e]+)('))",
               "captures": {
                 "1": {
                   "name": "punctuation.definition.group-reference.bracket.angle.begin.regexp"
@@ -386,7 +309,7 @@
               }
             },
             {
-              "match": "\\G(R(&))(\\w+)",
+              "match": "\\G(R(\u0026))(\\w+)",
               "captures": {
                 "1": {
                   "name": "keyword.other.recursion.specific.regexp"
@@ -400,89 +323,112 @@
               }
             },
             {
-              "match": "\\GR\\d+",
-              "name": "keyword.other.recursion.specific-group.regexp"
+              "name": "keyword.other.recursion.specific-group.regexp",
+              "match": "\\GR\\d+"
             },
             {
-              "match": "\\GR",
-              "name": "keyword.other.recursion.overall.regexp"
+              "name": "keyword.other.recursion.overall.regexp",
+              "match": "\\GR"
             },
             {
-              "match": "\\G\\d+",
-              "name": "keyword.other.reference.absolute.regexp"
+              "name": "keyword.other.reference.absolute.regexp",
+              "match": "\\G\\d+"
             },
             {
-              "match": "\\G[-+]\\d+",
-              "name": "keyword.other.reference.relative.regexp"
+              "name": "keyword.other.reference.relative.regexp",
+              "match": "\\G[-+]\\d+"
             },
             {
-              "match": "\\G\\w+",
-              "name": "entity.group.name.regexp"
+              "name": "entity.group.name.regexp",
+              "match": "\\G\\w+"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.section.condition.begin.regexp"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.condition.end.regexp"
+            }
+          }
         },
         {
           "include": "#main"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.section.condition.begin.regexp"
+        },
+        "2": {
+          "name": "keyword.control.flow.regexp"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.condition.end.regexp"
+        }
+      }
     },
     "escape": {
       "patterns": [
         {
-          "match": "\\\\d",
-          "name": "constant.character.escape.decimal.regexp"
+          "name": "constant.character.escape.decimal.regexp",
+          "match": "\\\\d"
         },
         {
-          "match": "\\\\s",
-          "name": "constant.character.escape.whitespace.regexp"
+          "name": "constant.character.escape.whitespace.regexp",
+          "match": "\\\\s"
         },
         {
-          "match": "\\\\w",
-          "name": "constant.character.escape.word-char.regexp"
+          "name": "constant.character.escape.word-char.regexp",
+          "match": "\\\\w"
         },
         {
-          "match": "\\\\n",
-          "name": "constant.character.escape.newline.regexp"
+          "name": "constant.character.escape.newline.regexp",
+          "match": "\\\\n"
         },
         {
-          "match": "\\\\t",
-          "name": "constant.character.escape.tab.regexp"
+          "name": "constant.character.escape.tab.regexp",
+          "match": "\\\\t"
         },
         {
-          "match": "\\\\r",
-          "name": "constant.character.escape.return.regexp"
+          "name": "constant.character.escape.return.regexp",
+          "match": "\\\\r"
         },
         {
-          "match": "\\\\D",
-          "name": "constant.character.escape.non-decimal.regexp"
+          "name": "constant.character.escape.non-decimal.regexp",
+          "match": "\\\\D"
         },
         {
-          "match": "\\\\S",
-          "name": "constant.character.escape.non-whitespace.regexp"
+          "name": "constant.character.escape.non-whitespace.regexp",
+          "match": "\\\\S"
         },
         {
-          "match": "\\\\W",
-          "name": "constant.character.escape.non-word-char.regexp"
+          "name": "constant.character.escape.non-word-char.regexp",
+          "match": "\\\\W"
         },
         {
-          "match": "\\\\a",
-          "name": "constant.character.escape.alarm.regexp"
+          "name": "constant.character.escape.alarm.regexp",
+          "match": "\\\\a"
         },
         {
-          "match": "\\\\e",
-          "name": "constant.character.escape.escape-char.regexp"
+          "name": "constant.character.escape.escape-char.regexp",
+          "match": "\\\\e"
         },
         {
-          "match": "\\\\f",
-          "name": "constant.character.escape.form-feed.regexp"
+          "name": "constant.character.escape.form-feed.regexp",
+          "match": "\\\\f"
         },
         {
-          "match": "\\\\v",
-          "name": "constant.character.escape.vertical-tab.regexp"
+          "name": "constant.character.escape.vertical-tab.regexp",
+          "match": "\\\\v"
         },
         {
-          "match": "\\\\x[0-9A-Fa-f]{2}",
-          "name": "constant.character.escape.numeric.regexp"
+          "name": "constant.character.escape.numeric.regexp",
+          "match": "\\\\x[0-9A-Fa-f]{2}"
         },
         {
           "name": "meta.character-escape.hex.regexp",
@@ -561,13 +507,13 @@
         {
           "name": "meta.group-reference.regexp",
           "contentName": "entity.group.name.regexp",
+          "begin": "(\\\\[kg])(\u003c)",
+          "end": "\u003e",
           "patterns": [
             {
               "include": "#groupRefInnards"
             }
           ],
-          "begin": "(\\\\[kg])(<)",
-          "end": ">",
           "beginCaptures": {
             "1": {
               "name": "keyword.operator.group-reference.regexp"
@@ -585,13 +531,13 @@
         {
           "name": "meta.group-reference.regexp",
           "contentName": "entity.group.name.regexp",
+          "begin": "(\\\\[kg])(')",
+          "end": "'",
           "patterns": [
             {
               "include": "#groupRefInnards"
             }
           ],
-          "begin": "(\\\\[kg])(')",
-          "end": "'",
           "beginCaptures": {
             "1": {
               "name": "keyword.operator.group-reference.regexp"
@@ -656,7 +602,7 @@
                 },
                 {
                   "name": "punctuation.separator.codepoint.regexp",
-                  "match": "(?<=U)\\+(?=[A-Fa-f0-9])"
+                  "match": "(?\u003c=U)\\+(?=[A-Fa-f0-9])"
                 }
               ]
             },
@@ -666,88 +612,88 @@
           }
         },
         {
-          "match": "\\\\(?:\\d{3}|0\\d)",
-          "name": "constant.character.escape.octal.numeric.regexp"
+          "name": "constant.character.escape.octal.numeric.regexp",
+          "match": "\\\\(?:\\d{3}|0\\d)"
         },
         {
-          "match": "\\\\0",
-          "name": "constant.character.escape.null-byte.numeric.regexp"
+          "name": "constant.character.escape.null-byte.numeric.regexp",
+          "match": "\\\\0"
         },
         {
-          "match": "\\\\(\\d{1,2})",
-          "name": "keyword.other.back-reference.$1.regexp"
+          "name": "keyword.other.back-reference.$1.regexp",
+          "match": "\\\\(\\d{1,2})"
         },
         {
-          "match": "\\\\(?:c|C-)[?-_]",
-          "name": "constant.character.escape.control-char.regexp"
+          "name": "constant.character.escape.control-char.regexp",
+          "match": "\\\\(?:c|C-)[?-_]"
         },
         {
-          "match": "\\\\h",
-          "name": "constant.character.escape.hex-digit.regexp"
+          "name": "constant.character.escape.hex-digit.regexp",
+          "match": "\\\\h"
         },
         {
-          "match": "\\\\H",
-          "name": "constant.character.escape.non-hex-digit.regexp"
+          "name": "constant.character.escape.non-hex-digit.regexp",
+          "match": "\\\\H"
         },
         {
-          "match": "\\\\E",
-          "name": "keyword.control.end-mode.regexp"
+          "name": "keyword.control.end-mode.regexp",
+          "match": "\\\\E"
         },
         {
-          "match": "\\\\Q",
-          "name": "keyword.control.quote-mode.regexp"
+          "name": "keyword.control.quote-mode.regexp",
+          "match": "\\\\Q"
         },
         {
-          "match": "\\\\F",
-          "name": "keyword.control.foldcase-mode.regexp"
+          "name": "keyword.control.foldcase-mode.regexp",
+          "match": "\\\\F"
         },
         {
-          "match": "\\\\L",
-          "name": "keyword.control.lowercase-mode.regexp"
+          "name": "keyword.control.lowercase-mode.regexp",
+          "match": "\\\\L"
         },
         {
-          "match": "\\\\U",
-          "name": "keyword.control.titlecase-mode.regexp"
+          "name": "keyword.control.titlecase-mode.regexp",
+          "match": "\\\\U"
         },
         {
-          "match": "\\\\K",
-          "name": "keyword.control.keep-out.regexp"
+          "name": "keyword.control.keep-out.regexp",
+          "match": "\\\\K"
         },
         {
-          "match": "\\\\l",
-          "name": "constant.character.escape.lowercase-next.regexp"
+          "name": "constant.character.escape.lowercase-next.regexp",
+          "match": "\\\\l"
         },
         {
-          "match": "\\\\u",
-          "name": "constant.character.escape.titlecase-next.regexp"
+          "name": "constant.character.escape.titlecase-next.regexp",
+          "match": "\\\\u"
         },
         {
-          "match": "\\\\N",
-          "name": "constant.character.escape.non-newline.regexp"
+          "name": "constant.character.escape.non-newline.regexp",
+          "match": "\\\\N"
         },
         {
-          "match": "\\\\X",
-          "name": "constant.character.escape.extended-grapheme.regexp"
+          "name": "constant.character.escape.extended-grapheme.regexp",
+          "match": "\\\\X"
         },
         {
-          "match": "\\\\R",
-          "name": "constnat.character.escape.linebreak-grapheme.regexp"
+          "name": "constnat.character.escape.linebreak-grapheme.regexp",
+          "match": "\\\\R"
         },
         {
-          "match": "\\\\V",
-          "name": "constant.character.escape.non-vertical-whitespace.regexp"
+          "name": "constant.character.escape.non-vertical-whitespace.regexp",
+          "match": "\\\\V"
         },
         {
-          "match": "\\\\M-\\\\C-[?-_]",
-          "name": "constant.character.escape.meta-control.regexp"
+          "name": "constant.character.escape.meta-control.regexp",
+          "match": "\\\\M-\\\\C-[?-_]"
         },
         {
-          "match": "\\\\M-.",
-          "name": "constant.character.escape.meta-char.regexp"
+          "name": "constant.character.escape.meta-char.regexp",
+          "match": "\\\\M-."
         },
         {
-          "match": "\\\\.",
-          "name": "constant.character.escape.misc.regexp"
+          "name": "constant.character.escape.misc.regexp",
+          "match": "\\\\."
         }
       ]
     },
@@ -770,23 +716,13 @@
         },
         {
           "name": "meta.group.named.regexp",
-          "begin": "\\(\\?(?=P?[<'])",
+          "begin": "\\(\\?(?=P?[\u003c'])",
           "end": "\\)",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.definition.group.begin.regexp"
-            }
-          },
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.definition.group.end.regexp"
-            }
-          },
           "patterns": [
             {
               "contentName": "entity.group.name.regexp",
-              "begin": "\\G(P?)(<)",
-              "end": ">",
+              "begin": "\\G(P?)(\u003c)",
+              "end": "\u003e",
               "beginCaptures": {
                 "1": {
                   "name": "storage.type.function.named-group.regexp"
@@ -819,17 +755,27 @@
             {
               "include": "#main"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.group.begin.regexp"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.group.end.regexp"
+            }
+          }
         },
         {
           "name": "meta.group.non-capturing.regexp",
+          "begin": "(\\(\\?)([-A-Za-z^]*)(:)",
+          "end": "\\)",
           "patterns": [
             {
               "include": "#main"
             }
           ],
-          "begin": "(\\(\\?)([-A-Za-z^]*)(:)",
-          "end": "\\)",
           "beginCaptures": {
             "1": {
               "name": "punctuation.definition.group.begin.regexp"
@@ -853,8 +799,13 @@
         },
         {
           "name": "meta.group.atomic.regexp",
-          "begin": "\\(\\?>",
+          "begin": "\\(\\?\u003e",
           "end": "\\)",
+          "patterns": [
+            {
+              "include": "#main"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.group.begin.regexp"
@@ -864,12 +815,7 @@
             "0": {
               "name": "punctuation.definition.group.end.regexp"
             }
-          },
-          "patterns": [
-            {
-              "include": "#main"
-            }
-          ]
+          }
         },
         {
           "name": "meta.group.scoped-modifiers.regexp",
@@ -913,7 +859,7 @@
         },
         {
           "name": "meta.group-reference.named.regexp",
-          "match": "(\\()(\\?(?:&|P[>=]))(\\w+)(\\))",
+          "match": "(\\()(\\?(?:\u0026|P[\u003e=]))(\\w+)(\\))",
           "captures": {
             "1": {
               "name": "punctuation.definition.group.begin.regexp"
@@ -948,6 +894,11 @@
           "name": "meta.group.regexp",
           "begin": "\\(",
           "end": "\\)",
+          "patterns": [
+            {
+              "include": "#main"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.group.begin.regexp"
@@ -957,36 +908,68 @@
             "0": {
               "name": "punctuation.definition.group.end.regexp"
             }
-          },
-          "patterns": [
-            {
-              "include": "#main"
-            }
-          ]
+          }
         }
       ]
     },
     "groupRefInnards": {
       "patterns": [
         {
-          "match": "\\-(?=\\d)",
-          "name": "keyword.operator.arithmetic.minus.regexp"
+          "name": "keyword.operator.arithmetic.minus.regexp",
+          "match": "\\-(?=\\d)"
         },
         {
-          "match": "\\+(?=\\d)",
-          "name": "keyword.operator.arithmetic.plus.regexp"
+          "name": "keyword.operator.arithmetic.plus.regexp",
+          "match": "\\+(?=\\d)"
+        }
+      ]
+    },
+    "main": {
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#variable"
+        },
+        {
+          "include": "#anchor"
+        },
+        {
+          "include": "#escape"
+        },
+        {
+          "include": "#wildcard"
+        },
+        {
+          "include": "#alternation"
+        },
+        {
+          "include": "#quantifier"
+        },
+        {
+          "include": "#assertion"
+        },
+        {
+          "include": "#conditional"
+        },
+        {
+          "include": "#group"
+        },
+        {
+          "include": "#class"
         }
       ]
     },
     "propInnards": {
       "patterns": [
         {
-          "match": "=",
-          "name": "keyword.operator.comparison.regexp"
+          "name": "keyword.operator.comparison.regexp",
+          "match": "="
         },
         {
-          "match": "True|False",
-          "name": "constant.language.boolean.${0:/downcase}.regexp"
+          "name": "constant.language.boolean.${0:/downcase}.regexp",
+          "match": "True|False"
         }
       ]
     },
@@ -1028,16 +1011,16 @@
     "scopedModifiers": {
       "patterns": [
         {
-          "match": "(?<=\\?)\\^",
-          "name": "keyword.operator.modifier.reset.regexp"
+          "name": "keyword.operator.modifier.reset.regexp",
+          "match": "(?\u003c=\\?)\\^"
         },
         {
-          "match": "-",
-          "name": "keyword.operator.modifier.negate.regexp"
+          "name": "keyword.operator.modifier.negate.regexp",
+          "match": "-"
         },
         {
-          "match": "[A-Za-z]",
-          "name": "storage.modifier.flag.$0.regexp"
+          "name": "storage.modifier.flag.$0.regexp",
+          "match": "[A-Za-z]"
         }
       ]
     },
@@ -1045,7 +1028,7 @@
       "patterns": [
         {
           "name": "variable.other.regexp",
-          "match": "(?<![^\\\\]\\\\|^\\\\)\\$(?!\\d|-)[-\\w]+",
+          "match": "(?\u003c![^\\\\]\\\\|^\\\\)\\$(?!\\d|-)[-\\w]+",
           "captures": {
             "1": {
               "name": "punctuation.definition.variable.regexp"
@@ -1054,7 +1037,7 @@
         },
         {
           "name": "variable.other.bracket.regexp",
-          "match": "(?<![^\\\\]\\\\|^\\\\)(\\$\\{)\\s*(?!\\d|-)[-\\w]+\\s*(\\})",
+          "match": "(?\u003c![^\\\\]\\\\|^\\\\)(\\$\\{)\\s*(?!\\d|-)[-\\w]+\\s*(\\})",
           "captures": {
             "1": {
               "name": "punctuation.definition.variable.begin.tmcg"
@@ -1065,6 +1048,10 @@
           }
         }
       ]
+    },
+    "wildcard": {
+      "name": "constant.character.wildcard.dot.match.any.regexp",
+      "match": "\\."
     }
   }
 }

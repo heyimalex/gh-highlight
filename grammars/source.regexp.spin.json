@@ -1,48 +1,49 @@
 {
-  "comment": "Matches Spins's regular expression syntax.",
-  "fileTypes": [
-    "re"
-  ],
-  "foldingStartMarker": "(/\\*|\\{|\\()",
-  "foldingStopMarker": "(\\*/|\\}|\\))",
   "name": "Regular Expressions (spin)",
+  "scopeName": "source.regexp.spin",
   "patterns": [
     {
-      "match": "\\\\[bBAZzG]|\\^|\\$",
-      "name": "keyword.control.anchor.regexp"
+      "name": "keyword.control.anchor.regexp",
+      "match": "\\\\[bBAZzG]|\\^|\\$"
     },
     {
-      "match": "\\\\[1-9][0-9]?",
-      "name": "keyword.other.back-reference.regexp"
+      "name": "keyword.other.back-reference.regexp",
+      "match": "\\\\[1-9][0-9]?"
     },
     {
-      "match": "[?+*][?+]?|\\{(\\d+,\\d+|\\d+,|,\\d+|\\d+)\\}\\??",
-      "name": "keyword.operator.quantifier.regexp"
+      "name": "keyword.operator.quantifier.regexp",
+      "match": "[?+*][?+]?|\\{(\\d+,\\d+|\\d+,|,\\d+|\\d+)\\}\\??"
     },
     {
-      "match": "\\|",
-      "name": "keyword.operator.or.regexp"
+      "name": "keyword.operator.or.regexp",
+      "match": "\\|"
     },
     {
+      "name": "comment.block.regexp",
       "begin": "\\(\\?\\#",
-      "end": "\\)",
-      "name": "comment.block.regexp"
+      "end": "\\)"
     },
     {
-      "comment": "We are restrictive in what we allow to go after the comment character to avoid false positives, since the availability of comments depend on regexp flags.",
-      "match": "(?<=^|\\s)#\\s[[a-zA-Z0-9,. \\t?!-:][^\\x{00}-\\x{7F}]]*$",
-      "name": "comment.line.number-sign.regexp"
+      "name": "comment.line.number-sign.regexp",
+      "match": "(?\u003c=^|\\s)#\\s[[a-zA-Z0-9,. \\t?!-:][^\\x{00}-\\x{7F}]]*$"
     },
     {
-      "match": "\\(\\?[iLmsux]+\\)",
-      "name": "keyword.other.option-toggle.regexp"
+      "name": "keyword.other.option-toggle.regexp",
+      "match": "\\(\\?[iLmsux]+\\)"
     },
     {
-      "match": "(\\()(\\?P=([a-zA-Z_][a-zA-Z_0-9]*\\w*))(\\))",
-      "name": "keyword.other.back-reference.named.regexp"
+      "name": "keyword.other.back-reference.named.regexp",
+      "match": "(\\()(\\?P=([a-zA-Z_][a-zA-Z_0-9]*\\w*))(\\))"
     },
     {
-      "begin": "(\\()((\\?=)|(\\?!)|(\\?<=)|(\\?<!))",
+      "name": "meta.group.assertion.regexp",
+      "begin": "(\\()((\\?=)|(\\?!)|(\\?\u003c=)|(\\?\u003c!))",
+      "end": "(\\))",
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.group.regexp"
@@ -63,21 +64,21 @@
           "name": "meta.assertion.negative-look-behind.regexp"
         }
       },
-      "end": "(\\))",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.group.regexp"
         }
-      },
-      "name": "meta.group.assertion.regexp",
+      }
+    },
+    {
+      "name": "meta.group.assertion.conditional.regexp",
+      "begin": "(\\()(\\?\\(([1-9][0-9]?|[a-zA-Z_][a-zA-Z_0-9]*)\\))",
+      "end": "(\\))",
       "patterns": [
         {
           "include": "$self"
         }
-      ]
-    },
-    {
-      "begin": "(\\()(\\?\\(([1-9][0-9]?|[a-zA-Z_][a-zA-Z_0-9]*)\\))",
+      ],
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.group.regexp"
@@ -88,18 +89,17 @@
         "3": {
           "name": "entity.name.section.back-reference.regexp"
         }
-      },
-      "comment": "we can make this more sophisticated to match the | character that separates yes-pattern from no-pattern, but it's not really necessary.",
+      }
+    },
+    {
+      "name": "meta.group.regexp",
+      "begin": "(\\()((\\?P\u003c)([a-z]\\w*)(\u003e)|(\\?:))?",
       "end": "(\\))",
-      "name": "meta.group.assertion.conditional.regexp",
       "patterns": [
         {
           "include": "$self"
         }
-      ]
-    },
-    {
-      "begin": "(\\()((\\?P<)([a-z]\\w*)(>)|(\\?:))?",
+      ],
       "beginCaptures": {
         "1": {
           "name": "punctuation.definition.group.regexp"
@@ -117,18 +117,11 @@
           "name": "punctuation.definition.group.no-capture.regexp"
         }
       },
-      "end": "(\\))",
       "endCaptures": {
         "1": {
           "name": "punctuation.definition.group.regexp"
         }
-      },
-      "name": "meta.group.regexp",
-      "patterns": [
-        {
-          "include": "$self"
-        }
-      ]
+      }
     },
     {
       "include": "#character-class"
@@ -138,15 +131,34 @@
     "character-class": {
       "patterns": [
         {
-          "match": "\\\\[wWsSdDhH]|\\.",
-          "name": "constant.character.character-class.regexp"
+          "name": "constant.character.character-class.regexp",
+          "match": "\\\\[wWsSdDhH]|\\."
         },
         {
-          "match": "\\\\.",
-          "name": "constant.character.escape.backslash.regexp"
+          "name": "constant.character.escape.backslash.regexp",
+          "match": "\\\\."
         },
         {
+          "name": "constant.other.character-class.set.regexp",
           "begin": "(\\[)(\\^)?",
+          "end": "(\\])",
+          "patterns": [
+            {
+              "include": "#character-class"
+            },
+            {
+              "name": "constant.other.character-class.range.regexp",
+              "match": "((\\\\.)|.)\\-((\\\\.)|[^\\]])",
+              "captures": {
+                "2": {
+                  "name": "constant.character.escape.backslash.regexp"
+                },
+                "4": {
+                  "name": "constant.character.escape.backslash.regexp"
+                }
+              }
+            }
+          ],
           "beginCaptures": {
             "1": {
               "name": "punctuation.definition.character-class.regexp"
@@ -155,34 +167,13 @@
               "name": "keyword.operator.negation.regexp"
             }
           },
-          "end": "(\\])",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.character-class.regexp"
             }
-          },
-          "name": "constant.other.character-class.set.regexp",
-          "patterns": [
-            {
-              "include": "#character-class"
-            },
-            {
-              "captures": {
-                "2": {
-                  "name": "constant.character.escape.backslash.regexp"
-                },
-                "4": {
-                  "name": "constant.character.escape.backslash.regexp"
-                }
-              },
-              "match": "((\\\\.)|.)\\-((\\\\.)|[^\\]])",
-              "name": "constant.other.character-class.range.regexp"
-            }
-          ]
+          }
         }
       ]
     }
-  },
-  "scopeName": "source.regexp.spin",
-  "uuid": "DD867ABF-1EC6-415D-B047-687F550A1D51"
+  }
 }

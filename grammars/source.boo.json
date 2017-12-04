@@ -1,112 +1,97 @@
 {
-  "fileTypes": [
-    "boo"
-  ],
   "name": "Boo",
+  "scopeName": "source.boo",
   "patterns": [
     {
+      "name": "comment.line.source.boo",
       "begin": "(#|//)",
-      "end": "\\n",
-      "name": "comment.line.source.boo"
+      "end": "\\n"
     },
     {
+      "name": "comment.block.source.boo",
       "begin": "/\\*",
-      "end": "\\*/",
-      "name": "comment.block.source.boo"
+      "end": "\\*/"
     },
     {
-      "match": "\\b(import|from|if|else|elif|unless|for|in|while|continue|break|pass|return|namespace|try|raise|except|ensure|assert|yield|goto|get|set|of|ref|unsafe|new|match|case|otherwise|debug|using|lock|block|macro|self|event|property)\\b",
-      "name": "keyword.control.source.boo"
+      "name": "keyword.control.source.boo",
+      "match": "\\b(import|from|if|else|elif|unless|for|in|while|continue|break|pass|return|namespace|try|raise|except|ensure|assert|yield|goto|get|set|of|ref|unsafe|new|match|case|otherwise|debug|using|lock|block|macro|self|event|property)\\b"
     },
     {
-      "match": "\\b(isa|is|as|cast)\\b",
-      "name": "keyword.operator.types.source.boo"
+      "name": "keyword.operator.types.source.boo",
+      "match": "\\b(isa|is|as|cast)\\b"
     },
     {
-      "match": "\\b(and|or|not)\\b",
-      "name": "keyword.operator.logical.source.boo"
+      "name": "keyword.operator.logical.source.boo",
+      "match": "\\b(and|or|not)\\b"
     },
     {
-      "match": "(\\*=|/=|%=|\\+=|-=|\\*\\*=|>>=|<<=|&=|\\|=|\\^=|\\+\\+|--)",
-      "name": "keyword.operator.assignment.augmented.source.boo"
+      "name": "keyword.operator.assignment.augmented.source.boo",
+      "match": "(\\*=|/=|%=|\\+=|-=|\\*\\*=|\u003e\u003e=|\u003c\u003c=|\u0026=|\\|=|\\^=|\\+\\+|--)"
     },
     {
-      "match": "(\\*|/|%|\\+|-|\\*\\*|>>|<<|&|\\||\\^)",
-      "name": "keyword.operator.arithmetic.source.boo"
+      "name": "keyword.operator.arithmetic.source.boo",
+      "match": "(\\*|/|%|\\+|-|\\*\\*|\u003e\u003e|\u003c\u003c|\u0026|\\||\\^)"
     },
     {
-      "match": "(<|>|<=|>=|==|!=)",
-      "name": "keyword.operator.comparison.source.boo"
+      "name": "keyword.operator.comparison.source.boo",
+      "match": "(\u003c|\u003e|\u003c=|\u003e=|==|!=)"
     },
     {
-      "match": "(=)",
-      "name": "keyword.operator.assignment.source.boo"
+      "name": "keyword.operator.assignment.source.boo",
+      "match": "(=)"
     },
     {
-      "match": "(\\(|\\)|\\[|\\]|{|}|:|,)",
-      "name": "keyword.operator.source.boo"
+      "name": "keyword.operator.source.boo",
+      "match": "(\\(|\\)|\\[|\\]|{|}|:|,)"
     },
     {
-      "match": "\\b\\d+(\\.\\d+)?(f|F|L)?\\b",
-      "name": "constant.numeric.source.boo"
+      "name": "constant.numeric.source.boo",
+      "match": "\\b\\d+(\\.\\d+)?(f|F|L)?\\b"
     },
     {
-      "match": "\\b(true|false|null|value)\\b",
-      "name": "constant.language.source.boo"
+      "name": "constant.language.source.boo",
+      "match": "\\b(true|false|null|value)\\b"
     },
     {
+      "name": "string.quoted.single.source.boo",
       "begin": "'",
-      "end": "'",
-      "name": "string.quoted.single.source.boo"
+      "end": "'"
     },
     {
+      "name": "string.quoted.double.source.boo",
       "begin": "\"",
-      "end": "\"",
-      "name": "string.quoted.double.source.boo"
+      "end": "\""
     },
     {
+      "name": "string.quoted.double.source.boo",
       "begin": "\"\"\"",
-      "end": "\"\"\"",
-      "name": "string.quoted.double.source.boo"
+      "end": "\"\"\""
     },
     {
-      "match": "\\b(sbyte|short|int|long|byte|ushort|uint|ulong|single|double|decimal|char|string|bool|object|duck|date|enum)\\b",
-      "name": "storage.type.source.boo"
+      "name": "storage.type.source.boo",
+      "match": "\\b(sbyte|short|int|long|byte|ushort|uint|ulong|single|double|decimal|char|string|bool|object|duck|date|enum)\\b"
     },
     {
-      "match": "\\b(public|protected|internal|private|abstract|final|static|partial|virtual|override)\\b",
-      "name": "storage.modifier.source.boo"
+      "name": "storage.modifier.source.boo",
+      "match": "\\b(public|protected|internal|private|abstract|final|static|partial|virtual|override)\\b"
     },
     {
-      "match": "\\b(print|enumerate|gets|prompt|join|map|array|matrix|iterator|shellp|shell|shellm|super|enemurate|range|reversed|zip|cat|typeof|sizeof|len)\\b",
-      "name": "support.function.source.boo"
+      "name": "support.function.source.boo",
+      "match": "\\b(print|enumerate|gets|prompt|join|map|array|matrix|iterator|shellp|shell|shellm|super|enemurate|range|reversed|zip|cat|typeof|sizeof|len)\\b"
     },
     {
-      "begin": "(?<=\\[)\\s*([Gg]etter|Setter|Property)\\s*(?=\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.type.property.source.boo"
-        }
-      },
-      "end": "(\\))\\s*(\\])",
-      "endCaptures": {
-        "1": {
-          "name": "keyword.operator.source.boo"
-        },
-        "2": {
-          "name": "keyword.operator.source.boo"
-        }
-      },
       "name": "meta.property.source.boo",
+      "begin": "(?\u003c=\\[)\\s*([Gg]etter|Setter|Property)\\s*(?=\\()",
+      "end": "(\\))\\s*(\\])",
       "patterns": [
         {
-          "begin": "(?<=\\()",
           "contentName": "meta.name.property.source.boo",
+          "begin": "(?\u003c=\\()",
           "end": "(?=,|\\))",
           "patterns": [
             {
-              "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
               "contentName": "entity.name.function.source.boo",
+              "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
               "end": "(?![A-Za-z0-9_])"
             },
             {
@@ -117,40 +102,47 @@
         {
           "include": "$self"
         }
-      ]
-    },
-    {
-      "match": "\\b([Gg]etter|Setter|Property)\\b",
-      "name": "storage.type.property.source.boo"
-    },
-    {
-      "begin": "\\b(def)\\s+(?=[A-Za-z_][A-Za-z0-9_]*\\s*\\([^\\n]*\\))",
+      ],
       "beginCaptures": {
         "1": {
-          "name": "storage.type.function.source.boo"
+          "name": "storage.type.property.source.boo"
         }
       },
-      "end": "(\\))\\s*(?:(\\:?)|(.*$\\n?))",
       "endCaptures": {
         "1": {
           "name": "keyword.operator.source.boo"
         },
         "2": {
           "name": "keyword.operator.source.boo"
-        },
-        "3": {
-          "name": "invalid.illegal.missing-section-begin.source.boo"
         }
-      },
+      }
+    },
+    {
+      "name": "storage.type.property.source.boo",
+      "match": "\\b([Gg]etter|Setter|Property)\\b"
+    },
+    {
       "name": "meta.function.source.boo",
+      "begin": "\\b(def)\\s+(?=[A-Za-z_][A-Za-z0-9_]*\\s*\\([^\\n]*\\))",
+      "end": "(\\))\\s*(?:(\\:?)|(.*$\\n?))",
       "patterns": [
         {
-          "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
           "contentName": "entity.name.function.source.boo",
+          "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
           "end": "(?![A-Za-z0-9_])"
         },
         {
+          "contentName": "meta.function.parameters.source.boo",
           "begin": "(\\()\\s*(ref\\b)?",
+          "end": "(?=\\)\\s*\\:?)",
+          "patterns": [
+            {
+              "include": "#keyword_arguments"
+            },
+            {
+              "include": "$self"
+            }
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.operator.source.boo"
@@ -158,176 +150,14 @@
             "2": {
               "name": "keyword.control.source.boo"
             }
-          },
-          "contentName": "meta.function.parameters.source.boo",
-          "end": "(?=\\)\\s*\\:?)",
-          "patterns": [
-            {
-              "include": "#keyword_arguments"
-            },
-            {
-              "include": "$self"
-            }
-          ]
+          }
         }
-      ]
-    },
-    {
-      "begin": "\\b(def|do)(?=\\s*\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.type.closure.source.boo"
-        }
-      },
-      "end": "(\\))\\s*(\\:)",
-      "endCaptures": {
-        "1": {
-          "name": "keyword.operator.source.boo"
-        },
-        "2": {
-          "name": "keyword.operator.source.boo"
-        }
-      },
-      "name": "meta.function.source.boo",
-      "patterns": [
-        {
-          "begin": "(\\()",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.operator.source.boo"
-            }
-          },
-          "contentName": "meta.function.parameters.source.boo",
-          "end": "(?=\\)\\s*\\:?)",
-          "patterns": [
-            {
-              "include": "#keyword_arguments"
-            },
-            {
-              "include": "$self"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "begin": "\\b(def)\\s+(?=[A-Za-z_][A-Za-z0-9_]*)",
+      ],
       "beginCaptures": {
         "1": {
           "name": "storage.type.function.source.boo"
         }
       },
-      "end": "(\\()|\\s*($\\n?|#.*$\\n?)",
-      "endCaptures": {
-        "1": {
-          "name": "keyword.operator.source.boo"
-        },
-        "2": {
-          "name": "invalid.illegal.missing-parameters.source.boo"
-        }
-      },
-      "name": "meta.function.source.boo",
-      "patterns": [
-        {
-          "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
-          "contentName": "entity.name.function.source.boo",
-          "end": "(?![A-Za-z0-9_])",
-          "patterns": [
-            {
-              "include": "#entity_name_function"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "match": "\\b(def)\\b",
-      "name": "storage.type.function.source.boo"
-    },
-    {
-      "match": "\\b(do)\\b",
-      "name": "storage.type.closure.source.boo"
-    },
-    {
-      "match": "\\b(constructor|destructor)\\b",
-      "name": "keyword.control.source.boo"
-    },
-    {
-      "begin": "\\b(callable)\\s+(?=[A-Za-z_][A-Za-z0-9_]*\\s*\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.type.callable.source.boo"
-        }
-      },
-      "end": "(\\))",
-      "endCaptures": {
-        "1": {
-          "name": "keyword.operator.source.boo"
-        }
-      },
-      "name": "meta.callable.source.boo",
-      "patterns": [
-        {
-          "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
-          "contentName": "entity.name.callable.source.boo",
-          "end": "(?![A-Za-z0-9_])"
-        },
-        {
-          "begin": "(\\()",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.operator.source.boo"
-            }
-          },
-          "contentName": "meta.callable.parameters.source.boo",
-          "end": "(?=\\)\\s*\\:?)",
-          "patterns": [
-            {
-              "include": "#keyword_arguments"
-            },
-            {
-              "include": "$self"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "match": "\\b(callable)\\b",
-      "name": "storage.type.callable.source.boo"
-    },
-    {
-      "begin": "\\b(class|interface|struct)\\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\\s*(?:(\\:)|($\\n?)))",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.type.class.source.boo"
-        }
-      },
-      "contentName": "entity.name.class.source.boo",
-      "end": "\\s*(?:(:)|($\\n?))",
-      "endCaptures": {
-        "1": {
-          "name": "keyword.operator.source.boo"
-        },
-        "2": {
-          "name": "invalid.illegal.missing-section-begin.source.boo"
-        }
-      },
-      "name": "meta.class.old-style.source.boo",
-      "patterns": [
-        {
-          "include": "#entity_name_class"
-        }
-      ]
-    },
-    {
-      "begin": "\\b(class|interface|struct)\\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\\s*\\([^\\n]*\\))",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.type.class.source.boo"
-        }
-      },
-      "end": "(\\))\\s*(?:(\\:)|(.*$\\n?))",
       "endCaptures": {
         "1": {
           "name": "keyword.operator.source.boo"
@@ -338,12 +168,164 @@
         "3": {
           "name": "invalid.illegal.missing-section-begin.source.boo"
         }
-      },
-      "name": "meta.class.source.boo",
+      }
+    },
+    {
+      "name": "meta.function.source.boo",
+      "begin": "\\b(def|do)(?=\\s*\\()",
+      "end": "(\\))\\s*(\\:)",
       "patterns": [
         {
+          "contentName": "meta.function.parameters.source.boo",
+          "begin": "(\\()",
+          "end": "(?=\\)\\s*\\:?)",
+          "patterns": [
+            {
+              "include": "#keyword_arguments"
+            },
+            {
+              "include": "$self"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.operator.source.boo"
+            }
+          }
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.closure.source.boo"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "keyword.operator.source.boo"
+        },
+        "2": {
+          "name": "keyword.operator.source.boo"
+        }
+      }
+    },
+    {
+      "name": "meta.function.source.boo",
+      "begin": "\\b(def)\\s+(?=[A-Za-z_][A-Za-z0-9_]*)",
+      "end": "(\\()|\\s*($\\n?|#.*$\\n?)",
+      "patterns": [
+        {
+          "contentName": "entity.name.function.source.boo",
           "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
+          "end": "(?![A-Za-z0-9_])",
+          "patterns": [
+            {
+              "include": "#entity_name_function"
+            }
+          ]
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.function.source.boo"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "keyword.operator.source.boo"
+        },
+        "2": {
+          "name": "invalid.illegal.missing-parameters.source.boo"
+        }
+      }
+    },
+    {
+      "name": "storage.type.function.source.boo",
+      "match": "\\b(def)\\b"
+    },
+    {
+      "name": "storage.type.closure.source.boo",
+      "match": "\\b(do)\\b"
+    },
+    {
+      "name": "keyword.control.source.boo",
+      "match": "\\b(constructor|destructor)\\b"
+    },
+    {
+      "name": "meta.callable.source.boo",
+      "begin": "\\b(callable)\\s+(?=[A-Za-z_][A-Za-z0-9_]*\\s*\\()",
+      "end": "(\\))",
+      "patterns": [
+        {
+          "contentName": "entity.name.callable.source.boo",
+          "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
+          "end": "(?![A-Za-z0-9_])"
+        },
+        {
+          "contentName": "meta.callable.parameters.source.boo",
+          "begin": "(\\()",
+          "end": "(?=\\)\\s*\\:?)",
+          "patterns": [
+            {
+              "include": "#keyword_arguments"
+            },
+            {
+              "include": "$self"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.operator.source.boo"
+            }
+          }
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.callable.source.boo"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "keyword.operator.source.boo"
+        }
+      }
+    },
+    {
+      "name": "storage.type.callable.source.boo",
+      "match": "\\b(callable)\\b"
+    },
+    {
+      "name": "meta.class.old-style.source.boo",
+      "contentName": "entity.name.class.source.boo",
+      "begin": "\\b(class|interface|struct)\\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\\s*(?:(\\:)|($\\n?)))",
+      "end": "\\s*(?:(:)|($\\n?))",
+      "patterns": [
+        {
+          "include": "#entity_name_class"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.class.source.boo"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "keyword.operator.source.boo"
+        },
+        "2": {
+          "name": "invalid.illegal.missing-section-begin.source.boo"
+        }
+      }
+    },
+    {
+      "name": "meta.class.source.boo",
+      "begin": "\\b(class|interface|struct)\\s+(?=[a-zA-Z_][a-zA-Z_0-9]*\\s*\\([^\\n]*\\))",
+      "end": "(\\))\\s*(?:(\\:)|(.*$\\n?))",
+      "patterns": [
+        {
           "contentName": "entity.name.class.source.boo",
+          "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
           "end": "(?![A-Za-z0-9_])",
           "patterns": [
             {
@@ -352,55 +334,58 @@
           ]
         },
         {
-          "begin": "(\\()",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.operator.source.boo"
-            }
-          },
           "contentName": "meta.class.inheritance.source.boo",
+          "begin": "(\\()",
           "end": "(?=\\)|:)",
           "patterns": [
             {
-              "begin": "(?<=\\(|,)\\s*",
               "contentName": "entity.other.inherited-class.source.boo",
+              "begin": "(?\u003c=\\(|,)\\s*",
               "end": "\\s*(?:(,)|(?=\\)))",
-              "endCaptures": {
-                "1": {
-                  "name": "punctuation.separator.inheritance.source.boo"
-                }
-              },
               "patterns": [
                 {
                   "include": "$self"
                 }
-              ]
+              ],
+              "endCaptures": {
+                "1": {
+                  "name": "punctuation.separator.inheritance.source.boo"
+                }
+              }
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.operator.source.boo"
+            }
+          }
         }
-      ]
-    },
-    {
-      "begin": "\\b(class|interface|struct)\\s+(?=[a-zA-Z_][a-zA-Z_0-9])",
+      ],
       "beginCaptures": {
         "1": {
           "name": "storage.type.class.source.boo"
         }
       },
-      "end": "(\\()|\\s*($\\n?|#.*$\\n?)",
       "endCaptures": {
         "1": {
           "name": "keyword.operator.source.boo"
         },
         "2": {
-          "name": "invalid.illegal.missing-inheritance.source.boo"
+          "name": "keyword.operator.source.boo"
+        },
+        "3": {
+          "name": "invalid.illegal.missing-section-begin.source.boo"
         }
-      },
+      }
+    },
+    {
       "name": "meta.class.source.boo",
+      "begin": "\\b(class|interface|struct)\\s+(?=[a-zA-Z_][a-zA-Z_0-9])",
+      "end": "(\\()|\\s*($\\n?|#.*$\\n?)",
       "patterns": [
         {
-          "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
           "contentName": "entity.name.class.source.boo",
+          "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
           "end": "(?![A-Za-z0-9_])",
           "patterns": [
             {
@@ -408,13 +393,27 @@
             }
           ]
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.class.source.boo"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "keyword.operator.source.boo"
+        },
+        "2": {
+          "name": "invalid.illegal.missing-inheritance.source.boo"
+        }
+      }
     },
     {
-      "match": "\\b(class|interface|struct)\\b",
-      "name": "storage.type.class.source.boo"
+      "name": "storage.type.class.source.boo",
+      "match": "\\b(class|interface|struct)\\b"
     },
     {
+      "match": "\\b([a-z_]+[A-Za-z_0-9]*\\s+(as))\\b",
       "captures": {
         "1": {
           "name": "variable.source.boo"
@@ -422,31 +421,28 @@
         "2": {
           "name": "keyword.operator.source.boo"
         }
-      },
-      "match": "\\b([a-z_]+[A-Za-z_0-9]*\\s+(as))\\b"
+      }
     }
   ],
   "repository": {
     "keyword_arguments": {
       "begin": "\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*",
+      "end": "\\s*(?:(,)|(?=\\n|\\)[:\\s]))",
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "variable.parameter.function.json"
         }
       },
-      "end": "\\s*(?:(,)|(?=\\n|\\)[:\\s]))",
       "endCaptures": {
         "1": {
           "name": "punctuation.separator.parameters.json"
         }
-      },
-      "patterns": [
-        {
-          "include": "$self"
-        }
-      ]
+      }
     }
-  },
-  "scopeName": "source.boo",
-  "uuid": "40d7173c-d213-4009-938e-5249ec75849d"
+  }
 }

@@ -1,14 +1,8 @@
 {
-  "fileTypes": [
-    "properties"
-  ],
-  "foldingStartMarker": "^[a-zA-Z0-9.-_]+=.*\\\n",
-  "foldingStopMarker": "^(.*(?<!\\)\n)",
-  "keyEquivalent": "^~J",
   "name": "Java Properties",
+  "scopeName": "source.java-properties",
   "patterns": [
     {
-      "comment": "Ignore blank lines",
       "match": "^\\s*$"
     },
     {
@@ -23,6 +17,8 @@
   ],
   "repository": {
     "comment-line": {
+      "name": "comment.line.java-properties",
+      "match": "^(\\s*)([#!])(.+)?$\\n?",
       "captures": {
         "1": {
           "name": "punctuation.whitespace.comment.leading.java-properties"
@@ -30,12 +26,27 @@
         "2": {
           "name": "punctuation.definition.comment.java-properties"
         }
-      },
-      "match": "^(\\s*)([#!])(.+)?$\\n?",
-      "name": "comment.line.java-properties"
+      }
     },
     "property-definition": {
+      "name": "meta.key-value.java-properties",
+      "contentName": "string.unquoted.java-properties",
       "begin": "^(\\s*)((?:\\\\[ \\t]|\\\\:|\\\\=|[^:=\\s])+)(?:\\s*([:=]))?\\s*",
+      "end": "(?\u003c!\\\\{1})$\\n",
+      "patterns": [
+        {
+          "name": "punctuation.whitespace.leading.java-properties",
+          "match": "^\\s*"
+        },
+        {
+          "name": "punctuation.separator.continuation.java-properties",
+          "match": "(\\\\{1})(?=$\\n)"
+        },
+        {
+          "name": "constant.character.escape.java-properties",
+          "match": "\\\\(?:[\\\\ntfr\\\"']|u[0-9A-Fa-f]{4})"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "punctuation.whitespace.leading.java-properties"
@@ -44,35 +55,19 @@
           "name": "support.constant.java-properties",
           "patterns": [
             {
-              "match": "\\\\(?:[ \\t:=\\\\ntfr\\\"']|u[0-9A-Fa-f]{4})",
-              "name": "constant.character.escape.java-properties"
+              "name": "constant.character.escape.java-properties",
+              "match": "\\\\(?:[ \\t:=\\\\ntfr\\\"']|u[0-9A-Fa-f]{4})"
             }
           ]
         },
         "3": {
           "name": "punctuation.separator.key-value.java-properties"
         }
-      },
-      "contentName": "string.unquoted.java-properties",
-      "end": "(?<!\\\\{1})$\\n",
-      "name": "meta.key-value.java-properties",
-      "patterns": [
-        {
-          "comment": "Leading space on a continued line is ignored",
-          "match": "^\\s*",
-          "name": "punctuation.whitespace.leading.java-properties"
-        },
-        {
-          "match": "(\\\\{1})(?=$\\n)",
-          "name": "punctuation.separator.continuation.java-properties"
-        },
-        {
-          "match": "\\\\(?:[\\\\ntfr\\\"']|u[0-9A-Fa-f]{4})",
-          "name": "constant.character.escape.java-properties"
-        }
-      ]
+      }
     },
     "property-name": {
+      "name": "meta.key-value.java-properties",
+      "match": "^(\\s*)((?:\\\\[ \\t]|\\\\:|\\\\=|[^:=\\s])+)(?:\\s*([:=]))?\\s*$\\n",
       "captures": {
         "1": {
           "name": "punctuation.whitespace.comment.leading.java-properties"
@@ -81,17 +76,12 @@
           "name": "support.constant.java-properties",
           "patterns": [
             {
-              "match": "\\\\(?:[ \\t:=\\\\ntfr\\\"']|u[0-9A-Fa-f]{4})",
-              "name": "constant.character.escape.java-properties"
+              "name": "constant.character.escape.java-properties",
+              "match": "\\\\(?:[ \\t:=\\\\ntfr\\\"']|u[0-9A-Fa-f]{4})"
             }
           ]
         }
-      },
-      "comment": "A property name with no value",
-      "match": "^(\\s*)((?:\\\\[ \\t]|\\\\:|\\\\=|[^:=\\s])+)(?:\\s*([:=]))?\\s*$\\n",
-      "name": "meta.key-value.java-properties"
+      }
     }
-  },
-  "scopeName": "source.java-properties",
-  "uuid": "D364E829-7643-4AFF-948D-3C0D6B4EA8A4"
+  }
 }

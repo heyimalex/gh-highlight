@@ -1,94 +1,92 @@
 {
-  "fileTypes": [
-    "pir"
-  ],
-  "keyEquivalent": "^~P",
   "name": "Parrot PIR",
+  "scopeName": "source.parrot.pir",
   "patterns": [
     {
-      "begin": "\"",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.pir"
-        }
-      },
-      "end": "\"",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.pir"
-        }
-      },
       "name": "string.quoted.double.pir",
+      "begin": "\"",
+      "end": "\"",
       "patterns": [
         {
-          "match": "\\\\.",
-          "name": "constant.character.escape.pir"
+          "name": "constant.character.escape.pir",
+          "match": "\\\\."
         }
-      ]
-    },
-    {
-      "begin": "'",
+      ],
       "beginCaptures": {
         "0": {
           "name": "punctuation.definition.string.begin.pir"
         }
       },
-      "end": "'",
       "endCaptures": {
         "0": {
           "name": "punctuation.definition.string.end.pir"
         }
-      },
+      }
+    },
+    {
       "name": "string.quoted.single.pir",
+      "begin": "'",
+      "end": "'",
       "patterns": [
         {
-          "match": "\\\\.",
-          "name": "constant.character.escape.pir"
+          "name": "constant.character.escape.pir",
+          "match": "\\\\."
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.pir"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.pir"
+        }
+      }
     },
     {
-      "match": "\\b(print|save|restore)\\b",
-      "name": "support.function.pir"
+      "name": "support.function.pir",
+      "match": "\\b(print|save|restore)\\b"
     },
     {
-      "match": "(if|unless|goto|\\.return|\\.end|\\.emit|\\.eot)",
-      "name": "keyword.control.pir"
+      "name": "keyword.control.pir",
+      "match": "(if|unless|goto|\\.return|\\.end|\\.emit|\\.eot)"
     },
     {
-      "match": "(\\.(pcc_begin|pcc_end|pcc_call|nci_call|invocant|meth_call|arg|result|pcc_begin_return|pcc_end_return|pcc_begin_yield|pcc_end_yield|yield))",
-      "name": "keyword.control.pcc.pir"
+      "name": "keyword.control.pcc.pir",
+      "match": "(\\.(pcc_begin|pcc_end|pcc_call|nci_call|invocant|meth_call|arg|result|pcc_begin_return|pcc_end_return|pcc_begin_yield|pcc_end_yield|yield))"
     },
     {
-      "match": "([SNIP]\\d+)",
-      "name": "variable.other.register.pir"
+      "name": "variable.other.register.pir",
+      "match": "([SNIP]\\d+)"
     },
     {
-      "match": "(\\$[SNIP]\\d+)",
-      "name": "variable.other.register.symbolic.pir"
+      "name": "variable.other.register.symbolic.pir",
+      "match": "(\\$[SNIP]\\d+)"
     },
     {
-      "comment": "Label",
-      "match": "^\\s*(\\S+:)\\s*",
-      "name": "keyword.other.label.pir"
+      "name": "keyword.other.label.pir",
+      "match": "^\\s*(\\S+:)\\s*"
     },
     {
-      "match": "(int|float|string|pmc|array|\\.Array|\\.Sub)",
-      "name": "storage.type.pir"
+      "name": "storage.type.pir",
+      "match": "(int|float|string|pmc|array|\\.Array|\\.Sub)"
     },
     {
-      "match": "\\.(namespace|endnamespace)",
-      "name": "storage.type.pir"
+      "name": "storage.type.pir",
+      "match": "\\.(namespace|endnamespace)"
     },
     {
-      "match": "\\.(local|arg|lex|param|global|const)",
-      "name": "storage.modifier.pir"
+      "name": "storage.modifier.pir",
+      "match": "\\.(local|arg|lex|param|global|const)"
     },
     {
-      "match": "!|-|~",
-      "name": "keyword.operator.unary.pir"
+      "name": "keyword.operator.unary.pir",
+      "match": "!|-|~"
     },
     {
+      "name": "meta.function.pir",
+      "match": "(?x)\n\t\t\t\t\\s* (\\.sub) \\s+ ([_a-zA-Z](?:[_a-zA-Z0-9]+)?)\n\t\t\t\t(?:\\s+\n\t\t\t\t\t(?: (:(?:load|init|immediate|postcomp|main|anon|lex)) #sub_pragma\n\t\t\t\t\t| (:vtable \\s* (?: \\(\"\\S+\"\\) )? ) #vtable_pragma\n\t\t\t\t\t| (:multi  \\s* (?: \\( \\))? ) #multi_pragma\n\t\t\t\t\t| (:outer  \\s* (?: \\( \\))? ) #outer_pragma\n\t\t\t\t\t)\\s+\n\t\t\t\t)*",
       "captures": {
         "1": {
           "name": "storage.type.sub.pir"
@@ -108,44 +106,40 @@
         "6": {
           "name": "keyword.other.outer_pragma.pir"
         }
-      },
-      "match": "(?x)\n\t\t\t\t\\s* (\\.sub) \\s+ ([_a-zA-Z](?:[_a-zA-Z0-9]+)?)\n\t\t\t\t(?:\\s+\n\t\t\t\t\t(?: (:(?:load|init|immediate|postcomp|main|anon|lex)) #sub_pragma\n\t\t\t\t\t| (:vtable \\s* (?: \\(\"\\S+\"\\) )? ) #vtable_pragma\n\t\t\t\t\t| (:multi  \\s* (?: \\( \\))? ) #multi_pragma\n\t\t\t\t\t| (:outer  \\s* (?: \\( \\))? ) #outer_pragma\n\t\t\t\t\t)\\s+\n\t\t\t\t)*",
-      "name": "meta.function.pir"
+      }
     },
     {
-      "match": "\\+|-|/|\\*\\*|\\*|%|<<|>>|<>|&&|\\|\\||~~|\\||&|~|\\.",
-      "name": "keyword.operator.binary.pir"
+      "name": "keyword.operator.binary.pir",
+      "match": "\\+|-|/|\\*\\*|\\*|%|\u003c\u003c|\u003e\u003e|\u003c\u003e|\u0026\u0026|\\|\\||~~|\\||\u0026|~|\\."
     },
     {
-      "match": "\\+=|-=|\\=|%=|\\*=|\\.=|&=|\\|=|~=|<<=|>>=|<>=",
-      "name": "keyword.operator.assign.pir"
+      "name": "keyword.operator.assign.pir",
+      "match": "\\+=|-=|\\=|%=|\\*=|\\.=|\u0026=|\\|=|~=|\u003c\u003c=|\u003e\u003e=|\u003c\u003e="
     },
     {
       "begin": "(^[ \\t]+)?(?=#)",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.whitespace.comment.leading.pir"
-        }
-      },
       "end": "(?!\\G)",
       "patterns": [
         {
+          "name": "comment.line.number-sign.pir",
           "begin": "#",
+          "end": "\\n",
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.comment.pir"
             }
-          },
-          "end": "\\n",
-          "name": "comment.line.number-sign.pir"
+          }
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.whitespace.comment.leading.pir"
+        }
+      }
     },
     {
-      "match": "\\b([_a-zA-Z]([_a-zA-Z0-9]+)?)\\b",
-      "name": "variable.other.identifier.pir"
+      "name": "variable.other.identifier.pir",
+      "match": "\\b([_a-zA-Z]([_a-zA-Z0-9]+)?)\\b"
     }
-  ],
-  "scopeName": "source.parrot.pir",
-  "uuid": "74BEF177-5D2E-469A-BF43-441F1167AB95"
+  ]
 }

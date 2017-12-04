@@ -1,9 +1,5 @@
 {
   "scopeName": "source.js.regexp.replacement",
-  "name": "Regular Expression Replacement (JavaScript)",
-  "fileTypes": [
-
-  ],
   "patterns": [
     {
       "include": "#regexp-replacement"
@@ -13,16 +9,16 @@
     "regexp-replacement": {
       "patterns": [
         {
-          "match": "\\$([1-9][0-9]|[1-9]|0[1-9]|[&`'])",
-          "name": "variable.regexp.replacement"
+          "name": "variable.regexp.replacement",
+          "match": "\\$([1-9][0-9]|[1-9]|0[1-9]|[\u0026`'])"
         },
         {
-          "match": "\\$\\$",
-          "name": "constant.character.escape.dollar.regexp.replacement"
+          "name": "constant.character.escape.dollar.regexp.replacement",
+          "match": "\\$\\$"
         },
         {
-          "match": "\\\\[^$]",
-          "name": "constant.character.escape.backslash.regexp.replacement"
+          "name": "constant.character.escape.backslash.regexp.replacement",
+          "match": "\\\\[^$]"
         }
       ]
     }

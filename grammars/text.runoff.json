@@ -1,57 +1,12 @@
 {
   "name": "RUNOFF",
   "scopeName": "text.runoff",
-  "fileTypes": [
-    "rnb",
-    "rnc",
-    "rnd",
-    "rne",
-    "rnh",
-    "rnl",
-    "rnm",
-    "rno",
-    "rnp",
-    "rns",
-    "rnt",
-    "rnx",
-    "run"
-  ],
   "patterns": [
     {
       "include": "#main"
     }
   ],
   "repository": {
-    "main": {
-      "patterns": [
-        {
-          "include": "#comment"
-        },
-        {
-          "include": "#underline"
-        },
-        {
-          "include": "#commands"
-        },
-        {
-          "include": "#special-characters"
-        }
-      ]
-    },
-    "comment": {
-      "name": "comment.line.runoff",
-      "begin": "^\\.[!*~]",
-      "end": "$",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.comment.runoff"
-        }
-      }
-    },
-    "underline": {
-      "name": "markup.underline.link.runoff",
-      "match": "[^_]\b(?=_)|(?<=_)\b[^_]"
-    },
     "arguments": {
       "patterns": [
         {
@@ -97,26 +52,28 @@
     },
     "commands": {
       "name": "meta.control-line.runoff",
-      "begin": "^\f*(?=\\.)",
+      "begin": "^\u000c*(?=\\.)",
       "end": "$|;(?!\\.)",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.terminator.statement.runoff"
-        }
-      },
       "patterns": [
         {
           "name": "comment.line.runoff",
           "begin": "!",
           "end": "$",
           "beginCaptures": {
-            "0": "punctuation.definition.comment.runoff"
+            "0": {
+              "name": "punctuation.definition.comment.runoff"
+            }
           }
         },
         {
           "name": "meta.condition.runoff",
-          "begin": "(?i)(?:^|(?<=;))((\\.)(?:IF|ELSE|ENDIF))(?=$|\\s|;)",
+          "begin": "(?i)(?:^|(?\u003c=;))((\\.)(?:IF|ELSE|ENDIF))(?=$|\\s|;)",
           "end": "$|(;)|(?=!)",
+          "patterns": [
+            {
+              "include": "#arguments"
+            }
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.control.runoff"
@@ -129,12 +86,7 @@
             "1": {
               "name": "punctuation.terminator.statement.runoff"
             }
-          },
-          "patterns": [
-            {
-              "include": "#arguments"
-            }
-          ]
+          }
         },
         {
           "contentName": "markup.raw.runoff",
@@ -181,9 +133,9 @@
         },
         {
           "name": "meta.function.debugging-comment.runoff",
+          "contentName": "string.unquoted.runoff",
           "begin": "(?i)((\\.)COMMENT)\\b",
           "end": "$|(;)|(?=!)",
-          "contentName": "string.unquoted.runoff",
           "beginCaptures": {
             "0": {
               "name": "keyword.function.name.runoff"
@@ -234,6 +186,37 @@
             }
           }
         }
+      ],
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.terminator.statement.runoff"
+        }
+      }
+    },
+    "comment": {
+      "name": "comment.line.runoff",
+      "begin": "^\\.[!*~]",
+      "end": "$",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.comment.runoff"
+        }
+      }
+    },
+    "main": {
+      "patterns": [
+        {
+          "include": "#comment"
+        },
+        {
+          "include": "#underline"
+        },
+        {
+          "include": "#commands"
+        },
+        {
+          "include": "#special-characters"
+        }
       ]
     },
     "name-innards": {
@@ -242,16 +225,16 @@
           "include": "#special-characters"
         },
         {
-          "match": "\\.",
-          "name": "punctuation.delimiter.period.full-stop.runoff"
+          "name": "punctuation.delimiter.period.full-stop.runoff",
+          "match": "\\."
         },
         {
-          "match": "\\,",
-          "name": "punctuation.separator.comma.runoff"
+          "name": "punctuation.separator.comma.runoff",
+          "match": "\\,"
         },
         {
-          "match": "\\d+(?=$|\\n|,|\\.(?!\\d))",
-          "name": "constant.numeric.runoff"
+          "name": "constant.numeric.runoff",
+          "match": "\\d+(?=$|\\n|,|\\.(?!\\d))"
         }
       ]
     },
@@ -259,7 +242,7 @@
       "patterns": [
         {
           "name": "constant.character.escape.special-character.runoff",
-          "match": "(_)[!^\\\\#&_.]",
+          "match": "(_)[!^\\\\#\u0026_.]",
           "captures": {
             "1": {
               "name": "punctuation.definition.escape.runoff"
@@ -289,7 +272,7 @@
           }
         },
         {
-          "match": "(&)([!^\\\\#&_.]*)(\\S+)",
+          "match": "(\u0026)([!^\\\\#\u0026_.]*)(\\S+)",
           "captures": {
             "1": {
               "name": "punctuation.definition.entity.runoff"
@@ -316,6 +299,10 @@
           }
         }
       ]
+    },
+    "underline": {
+      "name": "markup.underline.link.runoff",
+      "match": "[^_]\u0008(?=_)|(?\u003c=_)\u0008[^_]"
     }
   }
 }

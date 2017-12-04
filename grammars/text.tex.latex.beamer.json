@@ -1,13 +1,16 @@
 {
-  "fileTypes": [
-
-  ],
-  "firstLineMatch": "^\\\\documentclass(\\[.*\\])?\\{beamer\\}",
-  "keyEquivalent": "^~B",
   "name": "LaTeX Beamer",
+  "scopeName": "text.tex.latex.beamer",
   "patterns": [
     {
+      "name": "meta.function.environment.frame.latex",
       "begin": "(?:\\s*)((\\\\)begin)(\\{)(frame)(\\})",
+      "end": "((\\\\)end)(\\{)(frame)(\\})",
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ],
       "captures": {
         "1": {
           "name": "support.function.be.latex"
@@ -24,16 +27,11 @@
         "5": {
           "name": "punctuation.definition.arguments.end.latex"
         }
-      },
-      "end": "((\\\\)end)(\\{)(frame)(\\})",
-      "name": "meta.function.environment.frame.latex",
-      "patterns": [
-        {
-          "include": "$self"
-        }
-      ]
+      }
     },
     {
+      "name": "meta.function.frametitle.latex",
+      "match": "((\\\\)frametitle)(\\{)(.*)(\\})",
       "captures": {
         "1": {
           "name": "support.function.frametitle.latex"
@@ -50,14 +48,10 @@
         "5": {
           "name": "punctuation.definition.arguments.end.latex"
         }
-      },
-      "match": "((\\\\)frametitle)(\\{)(.*)(\\})",
-      "name": "meta.function.frametitle.latex"
+      }
     },
     {
       "include": "text.tex.latex"
     }
-  ],
-  "scopeName": "text.tex.latex.beamer",
-  "uuid": "2ACA20AA-B008-469B-A04A-6DE232973ED8"
+  ]
 }

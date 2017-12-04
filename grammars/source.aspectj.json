@@ -1,10 +1,10 @@
 {
-  "fileTypes": [
-    "aj"
-  ],
   "name": "AspectJ",
+  "scopeName": "source.aspectj",
   "patterns": [
     {
+      "name": "meta.package.java",
+      "match": "^\\s*(package)\\b(?:\\s*([^ ;$]+)\\s*(;)?)?",
       "captures": {
         "1": {
           "name": "keyword.other.package.java"
@@ -15,11 +15,11 @@
         "3": {
           "name": "punctuation.terminator.java"
         }
-      },
-      "match": "^\\s*(package)\\b(?:\\s*([^ ;$]+)\\s*(;)?)?",
-      "name": "meta.package.java"
+      }
     },
     {
+      "name": "meta.import.java",
+      "match": "^\\s*(import)\\b(?:\\s*([^ ;$]+)\\s*(;)?)?",
       "captures": {
         "1": {
           "name": "keyword.other.import.java"
@@ -30,15 +30,75 @@
         "3": {
           "name": "punctuation.terminator.java"
         }
-      },
-      "match": "^\\s*(import)\\b(?:\\s*([^ ;$]+)\\s*(;)?)?",
-      "name": "meta.import.java"
+      }
     },
     {
       "include": "#code"
     }
   ],
   "repository": {
+    "advice": {
+      "name": "meta.advice.aspectj",
+      "begin": "(?!new)(?!.*pointcut)(?=[^=:]+\\([^\\)]*\\)[^=]*:)",
+      "end": "}|(?=;)",
+      "patterns": [
+        {
+          "include": "#storage-modifiers"
+        },
+        {
+          "name": "meta.method.identifier.java",
+          "begin": "(around|after|before|throwing|returning)\\s*\\(",
+          "end": "\\)",
+          "patterns": [
+            {
+              "include": "#parameters"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.other.advice.aspectj"
+            }
+          }
+        },
+        {
+          "name": "keyword.other.advice.aspectj",
+          "match": "(throwing|returning)(?=\\s*:)"
+        },
+        {
+          "name": "meta.advice.identifier.aspectj",
+          "begin": ":",
+          "end": "(?={)",
+          "patterns": [
+            {
+              "include": "#pointcut-definitions"
+            }
+          ]
+        },
+        {
+          "name": "meta.method.return-type.java",
+          "begin": "(?=\\w.*\\s+\\w+\\s*\\()",
+          "end": "(?=\\w+\\s*\\()",
+          "patterns": [
+            {
+              "include": "#all-types"
+            }
+          ]
+        },
+        {
+          "include": "#throws"
+        },
+        {
+          "name": "meta.method.body.java",
+          "begin": "{",
+          "end": "(?=})",
+          "patterns": [
+            {
+              "include": "#code"
+            }
+          ]
+        }
+      ]
+    },
     "all-types": {
       "patterns": [
         {
@@ -55,7 +115,29 @@
     "annotations": {
       "patterns": [
         {
+          "name": "meta.declaration.annotation.java",
           "begin": "(@[^ (]+)(\\()",
+          "end": "(\\))",
+          "patterns": [
+            {
+              "match": "(\\w*)\\s*(=)",
+              "captures": {
+                "1": {
+                  "name": "constant.other.key.java"
+                },
+                "2": {
+                  "name": "keyword.operator.assignment.java"
+                }
+              }
+            },
+            {
+              "include": "#code"
+            },
+            {
+              "name": "punctuation.seperator.property.java",
+              "match": ","
+            }
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.type.annotation.java"
@@ -64,56 +146,24 @@
               "name": "punctuation.definition.annotation-arguments.begin.java"
             }
           },
-          "end": "(\\))",
           "endCaptures": {
             "1": {
               "name": "punctuation.definition.annotation-arguments.end.java"
             }
-          },
-          "name": "meta.declaration.annotation.java",
-          "patterns": [
-            {
-              "captures": {
-                "1": {
-                  "name": "constant.other.key.java"
-                },
-                "2": {
-                  "name": "keyword.operator.assignment.java"
-                }
-              },
-              "match": "(\\w*)\\s*(=)"
-            },
-            {
-              "include": "#code"
-            },
-            {
-              "match": ",",
-              "name": "punctuation.seperator.property.java"
-            }
-          ]
+          }
         },
         {
-          "match": "@\\w*",
-          "name": "storage.type.annotation.java"
+          "name": "storage.type.annotation.java",
+          "match": "@\\w*"
         }
       ]
     },
     "anonymous-classes-and-new": {
       "begin": "\\bnew\\b",
-      "beginCaptures": {
-        "0": {
-          "name": "keyword.control.new.java"
-        }
-      },
-      "end": "(?<=\\)|\\])(?!\\s*{)|(?<=})|(?=;)",
+      "end": "(?\u003c=\\)|\\])(?!\\s*{)|(?\u003c=})|(?=;)",
       "patterns": [
         {
           "begin": "(\\w+)\\s*(?=\\[)",
-          "beginCaptures": {
-            "1": {
-              "name": "storage.type.java"
-            }
-          },
           "end": "}|(?=;|\\))",
           "patterns": [
             {
@@ -134,75 +184,80 @@
                 }
               ]
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "storage.type.java"
+            }
+          }
         },
         {
           "begin": "(?=\\w.*\\()",
-          "end": "(?<=\\))",
+          "end": "(?\u003c=\\))",
           "patterns": [
             {
               "include": "#object-types"
             },
             {
               "begin": "\\(",
-              "beginCaptures": {
-                "1": {
-                  "name": "storage.type.java"
-                }
-              },
               "end": "\\)",
               "patterns": [
                 {
                   "include": "#code"
                 }
-              ]
+              ],
+              "beginCaptures": {
+                "1": {
+                  "name": "storage.type.java"
+                }
+              }
             }
           ]
         },
         {
+          "name": "meta.inner-class.java",
           "begin": "{",
           "end": "}",
-          "name": "meta.inner-class.java",
           "patterns": [
             {
               "include": "#class-body"
             }
           ]
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "keyword.control.new.java"
+        }
+      }
     },
     "assertions": {
       "patterns": [
         {
-          "begin": "\\b(assert)\\s",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.control.assert.java"
-            }
-          },
-          "end": "$",
           "name": "meta.declaration.assertion.java",
+          "begin": "\\b(assert)\\s",
+          "end": "$",
           "patterns": [
             {
-              "match": ":",
-              "name": "keyword.operator.assert.expression-seperator.java"
+              "name": "keyword.operator.assert.expression-seperator.java",
+              "match": ":"
             },
             {
               "include": "#code"
             }
-          ]
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.control.assert.java"
+            }
+          }
         }
       ]
     },
     "class": {
+      "name": "meta.class.aspectj",
       "begin": "(?=\\w?[\\w\\s]*(?:class|(?:@)?interface|enum|aspect)\\s+\\w+)",
       "end": "}",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.section.class.end.java"
-        }
-      },
-      "name": "meta.class.aspectj",
       "patterns": [
         {
           "include": "#storage-modifiers"
@@ -211,6 +266,8 @@
           "include": "#comments"
         },
         {
+          "name": "meta.class.identifier.aspectj",
+          "match": "(class|(?:@)?interface|enum|aspect)\\s+(\\w+)",
           "captures": {
             "1": {
               "name": "storage.type.java"
@@ -218,19 +275,30 @@
             "2": {
               "name": "entity.name.type.class.java"
             }
-          },
-          "match": "(class|(?:@)?interface|enum|aspect)\\s+(\\w+)",
-          "name": "meta.class.identifier.aspectj"
+          }
         },
         {
+          "name": "meta.definition.class.inherited.classes.java",
           "begin": "extends",
+          "end": "(?={|implements)",
+          "patterns": [
+            {
+              "include": "#object-types-inherited"
+            },
+            {
+              "include": "#comments"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "storage.modifier.extends.java"
             }
-          },
-          "end": "(?={|implements)",
-          "name": "meta.definition.class.inherited.classes.java",
+          }
+        },
+        {
+          "name": "meta.definition.class.implemented.interfaces.java",
+          "begin": "(implements)\\s",
+          "end": "(?=\\s*extends|\\{)",
           "patterns": [
             {
               "include": "#object-types-inherited"
@@ -238,37 +306,29 @@
             {
               "include": "#comments"
             }
-          ]
-        },
-        {
-          "begin": "(implements)\\s",
+          ],
           "beginCaptures": {
             "1": {
               "name": "storage.modifier.implements.java"
             }
-          },
-          "end": "(?=\\s*extends|\\{)",
-          "name": "meta.definition.class.implemented.interfaces.java",
-          "patterns": [
-            {
-              "include": "#object-types-inherited"
-            },
-            {
-              "include": "#comments"
-            }
-          ]
+          }
         },
         {
+          "name": "meta.class.body.java",
           "begin": "{",
           "end": "(?=})",
-          "name": "meta.class.body.java",
           "patterns": [
             {
               "include": "#class-body"
             }
           ]
         }
-      ]
+      ],
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.section.class.end.java"
+        }
+      }
     },
     "class-body": {
       "patterns": [
@@ -355,21 +415,21 @@
           "include": "#all-types"
         },
         {
-          "match": "\\b(proceed)\\b",
-          "name": "support.function.builtin.aspectj"
+          "name": "support.function.builtin.aspectj",
+          "match": "\\b(proceed)\\b"
         }
       ]
     },
     "comments": {
       "patterns": [
         {
+          "name": "comment.block.empty.java",
+          "match": "/\\*\\*/",
           "captures": {
             "0": {
               "name": "punctuation.definition.comment.java"
             }
-          },
-          "match": "/\\*\\*/",
-          "name": "comment.block.empty.java"
+          }
         },
         {
           "include": "text.html.javadoc"
@@ -382,16 +442,17 @@
     "comments-inline": {
       "patterns": [
         {
+          "name": "comment.block.java",
           "begin": "/\\*",
+          "end": "\\*/",
           "captures": {
             "0": {
               "name": "punctuation.definition.comment.java"
             }
-          },
-          "end": "\\*/",
-          "name": "comment.block.java"
+          }
         },
         {
+          "match": "\\s*((//).*$\\n?)",
           "captures": {
             "1": {
               "name": "comment.line.double-slash.java"
@@ -399,49 +460,126 @@
             "2": {
               "name": "punctuation.definition.comment.java"
             }
-          },
-          "match": "\\s*((//).*$\\n?)"
+          }
         }
       ]
     },
     "constants-and-special-vars": {
       "patterns": [
         {
-          "match": "\\b(true|false|null)\\b",
-          "name": "constant.language.java"
+          "name": "constant.language.java",
+          "match": "\\b(true|false|null)\\b"
         },
         {
-          "match": "\\b(this|super)\\b",
-          "name": "variable.language.java"
+          "name": "variable.language.java",
+          "match": "\\b(this|super)\\b"
         },
         {
-          "match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)([LlFfUuDd]|UL|ul)?\\b",
-          "name": "constant.numeric.java"
+          "name": "constant.numeric.java",
+          "match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)([LlFfUuDd]|UL|ul)?\\b"
         },
         {
+          "name": "constant.other.java",
+          "match": "(\\.)?\\b([A-Z][A-Z0-9_]+)(?!\u003c|\\.class|\\s*\\w+\\s*=)\\b",
           "captures": {
             "1": {
               "name": "keyword.operator.dereference.java"
             }
-          },
-          "match": "(\\.)?\\b([A-Z][A-Z0-9_]+)(?!<|\\.class|\\s*\\w+\\s*=)\\b",
-          "name": "constant.other.java"
+          }
         }
       ]
+    },
+    "declare-constructs": {
+      "name": "meta.declare.construct.aspectj",
+      "begin": "(declare)\\s+(@(?:type|method|field|package|constructor))\\s*:",
+      "end": ";",
+      "patterns": [
+        {
+          "include": "#keywords"
+        },
+        {
+          "include": "#all-types"
+        },
+        {
+          "include": "#storage-modifiers"
+        },
+        {
+          "include": "#strings"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.declare.aspectj"
+        },
+        "2": {
+          "name": "storage.type.declare.construct.aspectj"
+        }
+      }
+    },
+    "declare-parents": {
+      "name": "meta.declare.precedence.aspectj",
+      "begin": "(declare)\\s+(parents)\\s*:",
+      "end": ";",
+      "patterns": [
+        {
+          "include": "#keywords"
+        },
+        {
+          "name": "storage.modifier.class.aspectj",
+          "match": "\\b(implements|extends)\\b"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.declare.aspectj"
+        },
+        "2": {
+          "name": "storage.type.declare.parents.aspectj"
+        }
+      }
+    },
+    "declare-precedence": {
+      "name": "meta.declare.precedence.aspectj",
+      "begin": "(declare)\\s+(precedence)\\s*:",
+      "end": ";",
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.declare.aspectj"
+        },
+        "2": {
+          "name": "storage.type.declare.precedence.aspectj"
+        }
+      }
+    },
+    "declare-warnings-errors": {
+      "name": "meta.declare.alerts.aspectj",
+      "begin": "(declare)\\s+(warning|error)\\s*:",
+      "end": ";",
+      "patterns": [
+        {
+          "include": "#pointcut-definitions"
+        },
+        {
+          "include": "#strings"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.declare.aspectj"
+        },
+        "2": {
+          "name": "storage.type.declare.alerts.aspectj"
+        }
+      }
     },
     "enums": {
       "begin": "^(?=\\s*[A-Z0-9_]+\\s*({|\\(|,))",
       "end": "(?=;|})",
       "patterns": [
         {
-          "begin": "\\w+",
-          "beginCaptures": {
-            "0": {
-              "name": "constant.other.enum.java"
-            }
-          },
-          "end": "(?=,|;|})",
           "name": "meta.enum.java",
+          "begin": "\\w+",
+          "end": "(?=,|;|})",
           "patterns": [
             {
               "include": "#parens"
@@ -455,85 +593,90 @@
                 }
               ]
             }
-          ]
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "constant.other.enum.java"
+            }
+          }
         }
       ]
     },
     "keywords": {
       "patterns": [
         {
-          "match": "\\b(try|catch|finally|throw)\\b",
-          "name": "keyword.control.catch-exception.java"
+          "name": "keyword.control.catch-exception.java",
+          "match": "\\b(try|catch|finally|throw)\\b"
         },
         {
-          "match": "\\?|:",
-          "name": "keyword.control.java"
+          "name": "keyword.control.java",
+          "match": "\\?|:"
         },
         {
-          "match": "\\b(return|break|case|continue|default|do|while|for|switch|if|else)\\b",
-          "name": "keyword.control.java"
+          "name": "keyword.control.java",
+          "match": "\\b(return|break|case|continue|default|do|while|for|switch|if|else)\\b"
         },
         {
-          "match": "\\b(instanceof)\\b",
-          "name": "keyword.operator.java"
+          "name": "keyword.operator.java",
+          "match": "\\b(instanceof)\\b"
         },
         {
-          "match": "(==|!=|<=|>=|<>|<|>)",
-          "name": "keyword.operator.comparison.java"
+          "name": "keyword.operator.comparison.java",
+          "match": "(==|!=|\u003c=|\u003e=|\u003c\u003e|\u003c|\u003e)"
         },
         {
-          "match": "(=)",
-          "name": "keyword.operator.assignment.java"
+          "name": "keyword.operator.assignment.java",
+          "match": "(=)"
         },
         {
-          "match": "(\\-\\-|\\+\\+)",
-          "name": "keyword.operator.increment-decrement.java"
+          "name": "keyword.operator.increment-decrement.java",
+          "match": "(\\-\\-|\\+\\+)"
         },
         {
-          "match": "(\\-|\\+|\\*|\\/|%)",
-          "name": "keyword.operator.arithmetic.java"
+          "name": "keyword.operator.arithmetic.java",
+          "match": "(\\-|\\+|\\*|\\/|%)"
         },
         {
-          "match": "(!|&&|\\|\\|)",
-          "name": "keyword.operator.logical.java"
+          "name": "keyword.operator.logical.java",
+          "match": "(!|\u0026\u0026|\\|\\|)"
         },
         {
-          "match": "(?<=\\S)\\.(?=\\S)",
-          "name": "keyword.operator.dereference.java"
+          "name": "keyword.operator.dereference.java",
+          "match": "(?\u003c=\\S)\\.(?=\\S)"
         },
         {
-          "match": ";",
-          "name": "punctuation.terminator.java"
+          "name": "punctuation.terminator.java",
+          "match": ";"
         }
       ]
     },
     "methods": {
+      "name": "meta.method.java",
       "begin": "(?!new)(?!.*pointcut)(?=\\w[^=:]*\\s+)(?=[^=:]+\\()(?!.*:)",
       "end": "}|(?=;)",
-      "name": "meta.method.java",
       "patterns": [
         {
           "include": "#storage-modifiers"
         },
         {
+          "name": "meta.method.identifier.java",
           "begin": "([\\w\\.]+)\\s*\\(",
+          "end": "\\)",
+          "patterns": [
+            {
+              "include": "#parameters"
+            }
+          ],
           "beginCaptures": {
             "1": {
               "name": "entity.name.function.java"
             }
-          },
-          "end": "\\)",
-          "name": "meta.method.identifier.java",
-          "patterns": [
-            {
-              "include": "#parameters"
-            }
-          ]
+          }
         },
         {
+          "name": "meta.method.return-type.java",
           "begin": "(?=\\w.*\\s+\\w+\\s*\\()",
           "end": "(?=\\w+\\s*\\()",
-          "name": "meta.method.return-type.java",
           "patterns": [
             {
               "include": "#all-types"
@@ -544,208 +687,9 @@
           "include": "#throws"
         },
         {
+          "name": "meta.method.body.java",
           "begin": "{",
           "end": "(?=})",
-          "name": "meta.method.body.java",
-          "patterns": [
-            {
-              "include": "#code"
-            }
-          ]
-        }
-      ]
-    },
-    "pointcut-definitions": {
-      "patterns": [
-        {
-          "include": "#keywords"
-        },
-        {
-          "include": "#all-types"
-        },
-        {
-          "match": "(@annotation|\\b(get|set|adviceexecution|execution|call|target|args|within|withincode|handler|cflow|cflowbelow|this|if|preinitialization|staticinitialization|initialization)\\b)",
-          "name": "support.function.builtin.aspectj"
-        }
-      ]
-    },
-    "pointcuts": {
-      "begin": "(?=\\w?.*\\s+)(pointcut)(?=\\s+[^=]+\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.type.aspectj"
-        }
-      },
-      "end": ";",
-      "name": "meta.pointcut.aspectj",
-      "patterns": [
-        {
-          "include": "#storage-modifiers"
-        },
-        {
-          "begin": "(\\w+)\\s*\\(",
-          "beginCaptures": {
-            "1": {
-              "name": "entity.name.function.aspectj"
-            }
-          },
-          "end": "\\)",
-          "name": "meta.pointcut.identifier.aspectj",
-          "patterns": [
-            {
-              "include": "#parameters"
-            }
-          ]
-        },
-        {
-          "begin": ":",
-          "end": "(?=;)",
-          "name": "meta.pointcut.body.aspectj",
-          "patterns": [
-            {
-              "include": "#pointcut-definitions"
-            }
-          ]
-        }
-      ]
-    },
-    "declare-precedence": {
-      "begin": "(declare)\\s+(precedence)\\s*:",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.type.declare.aspectj"
-        },
-        "2": {
-          "name": "storage.type.declare.precedence.aspectj"
-        }
-      },
-      "end": ";",
-      "name": "meta.declare.precedence.aspectj"
-    },
-    "declare-parents": {
-      "begin": "(declare)\\s+(parents)\\s*:",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.type.declare.aspectj"
-        },
-        "2": {
-          "name": "storage.type.declare.parents.aspectj"
-        }
-      },
-      "end": ";",
-      "name": "meta.declare.precedence.aspectj",
-      "patterns": [
-        {
-          "include": "#keywords"
-        },
-        {
-          "match": "\\b(implements|extends)\\b",
-          "name": "storage.modifier.class.aspectj"
-        }
-      ]
-    },
-    "declare-constructs": {
-      "begin": "(declare)\\s+(@(?:type|method|field|package|constructor))\\s*:",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.type.declare.aspectj"
-        },
-        "2": {
-          "name": "storage.type.declare.construct.aspectj"
-        }
-      },
-      "end": ";",
-      "name": "meta.declare.construct.aspectj",
-      "patterns": [
-        {
-          "include": "#keywords"
-        },
-        {
-          "include": "#all-types"
-        },
-        {
-          "include": "#storage-modifiers"
-        },
-        {
-          "include": "#strings"
-        }
-      ]
-    },
-    "declare-warnings-errors": {
-      "begin": "(declare)\\s+(warning|error)\\s*:",
-      "beginCaptures": {
-        "1": {
-          "name": "storage.type.declare.aspectj"
-        },
-        "2": {
-          "name": "storage.type.declare.alerts.aspectj"
-        }
-      },
-      "end": ";",
-      "name": "meta.declare.alerts.aspectj",
-      "patterns": [
-        {
-          "include": "#pointcut-definitions"
-        },
-        {
-          "include": "#strings"
-        }
-      ]
-    },
-    "advice": {
-      "begin": "(?!new)(?!.*pointcut)(?=[^=:]+\\([^\\)]*\\)[^=]*:)",
-      "end": "}|(?=;)",
-      "name": "meta.advice.aspectj",
-      "patterns": [
-        {
-          "include": "#storage-modifiers"
-        },
-        {
-          "begin": "(around|after|before|throwing|returning)\\s*\\(",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.other.advice.aspectj"
-            }
-          },
-          "end": "\\)",
-          "name": "meta.method.identifier.java",
-          "patterns": [
-            {
-              "include": "#parameters"
-            }
-          ]
-        },
-        {
-          "match": "(throwing|returning)(?=\\s*:)",
-          "name": "keyword.other.advice.aspectj"
-        },
-        {
-          "begin": ":",
-          "end": "(?={)",
-          "name": "meta.advice.identifier.aspectj",
-          "patterns": [
-            {
-              "include": "#pointcut-definitions"
-            }
-          ]
-        },
-        {
-          "begin": "(?=\\w.*\\s+\\w+\\s*\\()",
-          "end": "(?=\\w+\\s*\\()",
-          "name": "meta.method.return-type.java",
-          "patterns": [
-            {
-              "include": "#all-types"
-            }
-          ]
-        },
-        {
-          "include": "#throws"
-        },
-        {
-          "begin": "{",
-          "end": "(?=})",
-          "name": "meta.method.body.java",
           "patterns": [
             {
               "include": "#code"
@@ -757,25 +701,24 @@
     "object-types": {
       "patterns": [
         {
-          "begin": "\\b((?:[a-z]\\w*\\.)*[A-Z]+\\w*)<",
-          "end": ">|[^\\w\\s,\\?<\\[\\]]",
           "name": "storage.type.generic.java",
+          "begin": "\\b((?:[a-z]\\w*\\.)*[A-Z]+\\w*)\u003c",
+          "end": "\u003e|[^\\w\\s,\\?\u003c\\[\\]]",
           "patterns": [
             {
               "include": "#object-types"
             },
             {
-              "begin": "<",
-              "comment": "This is just to support <>'s with no actual type prefix",
-              "end": ">|[^\\w\\s,\\[\\]<]",
-              "name": "storage.type.generic.java"
+              "name": "storage.type.generic.java",
+              "begin": "\u003c",
+              "end": "\u003e|[^\\w\\s,\\[\\]\u003c]"
             }
           ]
         },
         {
+          "name": "storage.type.object.array.java",
           "begin": "\\b((?:[a-z]\\w*\\.)*[A-Z]+\\w*)(?=\\[)",
           "end": "(?=[^\\]\\s])",
-          "name": "storage.type.object.array.java",
           "patterns": [
             {
               "begin": "\\[",
@@ -789,50 +732,49 @@
           ]
         },
         {
+          "name": "storage.type.java",
+          "match": "\\b(?:[a-z]\\w*(\\.))*[A-Z]+\\w*\\b",
           "captures": {
             "1": {
               "name": "keyword.operator.dereference.java"
             }
-          },
-          "match": "\\b(?:[a-z]\\w*(\\.))*[A-Z]+\\w*\\b",
-          "name": "storage.type.java"
+          }
         }
       ]
     },
     "object-types-inherited": {
       "patterns": [
         {
-          "begin": "\\b((?:[a-z]\\w*\\.)*[A-Z]+\\w*)<",
-          "end": ">|[^\\w\\s,<]",
           "name": "entity.other.inherited-class.java",
+          "begin": "\\b((?:[a-z]\\w*\\.)*[A-Z]+\\w*)\u003c",
+          "end": "\u003e|[^\\w\\s,\u003c]",
           "patterns": [
             {
               "include": "#object-types"
             },
             {
-              "begin": "<",
-              "comment": "This is just to support <>'s with no actual type prefix",
-              "end": ">|[^\\w\\s,<]",
-              "name": "storage.type.generic.java"
+              "name": "storage.type.generic.java",
+              "begin": "\u003c",
+              "end": "\u003e|[^\\w\\s,\u003c]"
             }
           ]
         },
         {
+          "name": "entity.other.inherited-class.java",
+          "match": "\\b(?:[a-z]\\w*(\\.))*[A-Z]+\\w*",
           "captures": {
             "1": {
               "name": "keyword.operator.dereference.java"
             }
-          },
-          "match": "\\b(?:[a-z]\\w*(\\.))*[A-Z]+\\w*",
-          "name": "entity.other.inherited-class.java"
+          }
         }
       ]
     },
     "parameters": {
       "patterns": [
         {
-          "match": "final",
-          "name": "storage.modifier.java"
+          "name": "storage.modifier.java",
+          "match": "final"
         },
         {
           "include": "#primitive-arrays"
@@ -844,8 +786,8 @@
           "include": "#object-types"
         },
         {
-          "match": "\\w+",
-          "name": "variable.parameter.java"
+          "name": "variable.parameter.java",
+          "match": "\\w+"
         }
       ]
     },
@@ -858,19 +800,73 @@
         }
       ]
     },
+    "pointcut-definitions": {
+      "patterns": [
+        {
+          "include": "#keywords"
+        },
+        {
+          "include": "#all-types"
+        },
+        {
+          "name": "support.function.builtin.aspectj",
+          "match": "(@annotation|\\b(get|set|adviceexecution|execution|call|target|args|within|withincode|handler|cflow|cflowbelow|this|if|preinitialization|staticinitialization|initialization)\\b)"
+        }
+      ]
+    },
+    "pointcuts": {
+      "name": "meta.pointcut.aspectj",
+      "begin": "(?=\\w?.*\\s+)(pointcut)(?=\\s+[^=]+\\()",
+      "end": ";",
+      "patterns": [
+        {
+          "include": "#storage-modifiers"
+        },
+        {
+          "name": "meta.pointcut.identifier.aspectj",
+          "begin": "(\\w+)\\s*\\(",
+          "end": "\\)",
+          "patterns": [
+            {
+              "include": "#parameters"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "entity.name.function.aspectj"
+            }
+          }
+        },
+        {
+          "name": "meta.pointcut.body.aspectj",
+          "begin": ":",
+          "end": "(?=;)",
+          "patterns": [
+            {
+              "include": "#pointcut-definitions"
+            }
+          ]
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "storage.type.aspectj"
+        }
+      }
+    },
     "primitive-arrays": {
       "patterns": [
         {
-          "match": "\\b(?:void|boolean|byte|char|short|int|float|long|double)(\\[\\])*\\b",
-          "name": "storage.type.primitive.array.java"
+          "name": "storage.type.primitive.array.java",
+          "match": "\\b(?:void|boolean|byte|char|short|int|float|long|double)(\\[\\])*\\b"
         }
       ]
     },
     "primitive-types": {
       "patterns": [
         {
-          "match": "\\b(?:void|boolean|byte|char|short|int|float|long|double)\\b",
-          "name": "storage.type.primitive.java"
+          "name": "storage.type.primitive.java",
+          "match": "\\b(?:void|boolean|byte|char|short|int|float|long|double)\\b"
         }
       ]
     },
@@ -889,63 +885,63 @@
     "strings": {
       "patterns": [
         {
+          "name": "string.quoted.double.java",
           "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.java",
+              "match": "\\\\."
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.string.begin.java"
             }
           },
-          "end": "\"",
           "endCaptures": {
             "0": {
               "name": "punctuation.definition.string.end.java"
             }
-          },
-          "name": "string.quoted.double.java",
-          "patterns": [
-            {
-              "match": "\\\\.",
-              "name": "constant.character.escape.java"
-            }
-          ]
+          }
         },
         {
+          "name": "string.quoted.single.java",
           "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "name": "constant.character.escape.java",
+              "match": "\\\\."
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.string.begin.java"
             }
           },
-          "end": "'",
           "endCaptures": {
             "0": {
               "name": "punctuation.definition.string.end.java"
             }
-          },
-          "name": "string.quoted.single.java",
-          "patterns": [
-            {
-              "match": "\\\\.",
-              "name": "constant.character.escape.java"
-            }
-          ]
+          }
         }
       ]
     },
     "throws": {
-      "begin": "throws",
-      "beginCaptures": {
-        "0": {
-          "name": "storage.modifier.java"
-        }
-      },
-      "end": "(?={|;)",
       "name": "meta.throwables.java",
+      "begin": "throws",
+      "end": "(?={|;)",
       "patterns": [
         {
           "include": "#object-types"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "storage.modifier.java"
+        }
+      }
     },
     "values": {
       "patterns": [
@@ -960,7 +956,5 @@
         }
       ]
     }
-  },
-  "scopeName": "source.aspectj",
-  "uuid": "8ace1709-b6d3-4b3c-8b59-262545406403"
+  }
 }

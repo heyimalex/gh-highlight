@@ -1,12 +1,9 @@
 {
-  "scopeName": "text.shell-session",
   "name": "Shell Session",
-  "fileTypes": [
-    "sh-session"
-  ],
+  "scopeName": "text.shell-session",
   "patterns": [
     {
-      "match": "(?x) ^ (?: ( (?:\\(\\S+\\))? (?: sh\\S*?                       | \\w+\\S+[@:]\\S+(?:\\s+\\S+)? | \\[\\S+[@:][^\\n]+\\].+ ) ) \\s* )? ( [>$#%] ) \\s+ (.*) $",
+      "match": "(?x) ^ (?: ( (?:\\(\\S+\\))? (?: sh\\S*?                       | \\w+\\S+[@:]\\S+(?:\\s+\\S+)? | \\[\\S+[@:][^\\n]+\\].+ ) ) \\s* )? ( [\u003e$#%] | \\p{Greek} ) \\s+ (.*) $",
       "captures": {
         "1": {
           "name": "entity.other.prompt-prefix.shell-session"
@@ -25,8 +22,8 @@
       }
     },
     {
-      "match": "^.+$",
-      "name": "meta.output.shell-session"
+      "name": "meta.output.shell-session",
+      "match": "^.+$"
     }
   ]
 }

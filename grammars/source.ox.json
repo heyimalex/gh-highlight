@@ -1,46 +1,30 @@
 {
-  "fileTypes": [
-    "ox"
-  ],
-  "firstLineMatch": "-[*]-( Mode:)? C -[*]-",
-  "foldingStartMarker": "(?x)\n\t\t /\\*\\*(?!\\*)\n\t\t|^(?![^{]*?//|[^{]*?/\\*(?!.*?\\*/.*?\\{)).*?\\{\\s*($|//|/\\*(?!.*?\\*/.*\\S))\n\t",
-  "foldingStopMarker": "(?<!\\*)\\*\\*/|^\\s*\\}",
-  "keyEquivalent": "^~C",
   "name": "Ox",
+  "scopeName": "source.ox",
   "patterns": [
     {
       "include": "#comments"
     },
     {
-      "match": "\\b(break|case|continue|default|delete|do|else|for|new|parallel for|foreach|goto|if|_Pragma|return|switch|switch_single|while)\\b",
-      "name": "keyword.control.ox"
+      "name": "keyword.control.ox",
+      "match": "\\b(break|case|continue|default|delete|do|else|for|new|parallel for|foreach|goto|if|_Pragma|return|switch|switch_single|while)\\b"
     },
     {
-      "match": "\\b(array|char|class|const|decl|double|enum|extern|int|matrix|static|serial|string|struct)\\b",
-      "name": "storage.type.ox"
+      "name": "storage.type.ox",
+      "match": "\\b(array|char|class|const|decl|double|enum|extern|int|matrix|static|serial|string|struct)\\b"
     },
     {
-      "match": "^\\s*.\\s*(.NaN|.Inf|TRUE|FALSE)\\b",
-      "name": "constant.language.ox"
+      "name": "constant.language.ox",
+      "match": "^\\s*.\\s*(.NaN|.Inf|TRUE|FALSE)\\b"
     },
     {
-      "match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b",
-      "name": "constant.numeric.ox"
+      "name": "constant.numeric.ox",
+      "match": "\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)(L|l|UL|ul|u|U|F|f|ll|LL|ull|ULL)?\\b"
     },
     {
-      "begin": "\"",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.ox"
-        }
-      },
-      "end": "\"",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.ox"
-        }
-      },
       "name": "string.quoted.double.ox",
+      "begin": "\"",
+      "end": "\"",
       "patterns": [
         {
           "include": "#string_escaped_char"
@@ -48,50 +32,58 @@
         {
           "include": "#string_placeholder"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.ox"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.ox"
+        }
+      }
     },
     {
       "begin": "^\\s*#\\s*(include|import|pragma)\\b\\s+",
+      "end": "(?=(?://|/\\*))|$",
       "captures": {
         "1": {
           "name": "keyword.control.import.include.ox"
         }
-      },
-      "end": "(?=(?://|/\\*))|$"
+      }
     }
   ],
   "repository": {
     "comments": {
       "patterns": [
         {
+          "name": "comment.block.ox",
           "begin": "/\\*",
+          "end": "\\*/",
           "captures": {
             "0": {
               "name": "punctuation.definition.comment.ox"
             }
-          },
-          "end": "\\*/",
-          "name": "comment.block.ox"
+          }
         },
         {
+          "name": "comment.line.double-slash.ox",
           "begin": "//",
+          "end": "$\\n?",
+          "patterns": [
+            {
+              "name": "punctuation.separator.continuation.ox",
+              "match": "(?\u003e\\\\\\s*\\n)"
+            }
+          ],
           "beginCaptures": {
             "0": {
               "name": "punctuation.definition.comment.ox"
             }
-          },
-          "end": "$\\n?",
-          "name": "comment.line.double-slash.ox",
-          "patterns": [
-            {
-              "match": "(?>\\\\\\s*\\n)",
-              "name": "punctuation.separator.continuation.ox"
-            }
-          ]
+          }
         }
       ]
     }
-  },
-  "scopeName": "source.ox",
-  "uuid": "967c730b-e53a-457c-8ca1-dbacc58ff292"
+  }
 }

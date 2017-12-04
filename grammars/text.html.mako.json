@@ -1,65 +1,45 @@
 {
-  "fileTypes": [
-    "mako",
-    "html"
-  ],
-  "foldingStartMarker": "(<(?i:(head|table|div|style|script|ul|ol|form|dl))\\b.*?>|\\{)",
-  "foldingStopMarker": "(</(?i:(head|table|div|style|script|ul|ol|form|dl))>|\\})",
   "name": "HTML (Mako)",
+  "scopeName": "text.html.mako",
   "patterns": [
     {
-      "comment": "comments",
-      "match": "(##(.*)$)",
-      "name": "comment.line.mako"
+      "name": "comment.line.mako",
+      "match": "(##(.*)$)"
     },
     {
-      "begin": "(<%\\s)",
-      "captures": {
-        "1": {
-          "name": "keyword.control"
-        }
-      },
-      "end": "(%>)",
       "name": "source.mako.substitution",
+      "begin": "(\u003c%\\s)",
+      "end": "(%\u003e)",
       "patterns": [
         {
           "include": "source.python"
         }
-      ]
-    },
-    {
-      "begin": "(<%!\\s)",
+      ],
       "captures": {
         "1": {
           "name": "keyword.control"
         }
-      },
-      "end": "(%>)",
+      }
+    },
+    {
       "name": "source.mako.substitution",
+      "begin": "(\u003c%!\\s)",
+      "end": "(%\u003e)",
       "patterns": [
         {
           "include": "source.python"
         }
-      ]
-    },
-    {
-      "begin": "(<%(text)>)",
+      ],
       "captures": {
         "1": {
           "name": "keyword.control"
-        },
-        "2": {
-          "name": "storage.type.function.python"
         }
-      },
-      "end": "(</%(\\2)>)",
+      }
+    },
+    {
       "name": "source.mako.text",
-      "patterns": [
-
-      ]
-    },
-    {
-      "begin": "(<%(doc)>)",
+      "begin": "(\u003c%(text)\u003e)",
+      "end": "(\u003c/%(\\2)\u003e)",
       "captures": {
         "1": {
           "name": "keyword.control"
@@ -67,66 +47,12 @@
         "2": {
           "name": "storage.type.function.python"
         }
-      },
-      "end": "(</%(\\2)>)",
+      }
+    },
+    {
       "name": "comment.block.mako",
-      "patterns": [
-
-      ]
-    },
-    {
-      "begin": "(\\${)",
-      "captures": {
-        "1": {
-          "name": "keyword.control"
-        },
-        "2": {
-          "name": "keyword.control"
-        }
-      },
-      "end": "(})",
-      "name": "source.mako.expression",
-      "patterns": [
-        {
-          "include": "source.python"
-        }
-      ]
-    },
-    {
-      "begin": "^\\s*(%)(\\s*((endfor)|(endif)|(endwhile)))?",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.control"
-        },
-        "2": {
-          "name": "keyword.control"
-        }
-      },
-      "end": "$",
-      "name": "source.doc.python.mako.controlline",
-      "patterns": [
-        {
-          "include": "source.python"
-        }
-      ]
-    },
-    {
-      "begin": "^(#)",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.control"
-        }
-      },
-      "end": "$",
-      "name": "source.python.mako.line",
-      "patterns": [
-        {
-          "include": "comment.block"
-        }
-      ]
-    },
-    {
-      "begin": "(<%(def)\\S?)",
+      "begin": "(\u003c%(doc)\u003e)",
+      "end": "(\u003c/%(\\2)\u003e)",
       "captures": {
         "1": {
           "name": "keyword.control"
@@ -134,16 +60,78 @@
         "2": {
           "name": "storage.type.function.python"
         }
-      },
-      "end": "(</%(\\2)>)",
-      "name": "source.mako.def",
+      }
+    },
+    {
+      "name": "source.mako.expression",
+      "begin": "(\\${)",
+      "end": "(})",
       "patterns": [
         {
-          "begin": "(?<=<%def)",
-          "end": "(?=>)",
+          "include": "source.python"
+        }
+      ],
+      "captures": {
+        "1": {
+          "name": "keyword.control"
+        },
+        "2": {
+          "name": "keyword.control"
+        }
+      }
+    },
+    {
+      "name": "source.doc.python.mako.controlline",
+      "begin": "^\\s*(%)(\\s*((endfor)|(endif)|(endwhile)))?",
+      "end": "$",
+      "patterns": [
+        {
+          "include": "source.python"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control"
+        },
+        "2": {
+          "name": "keyword.control"
+        }
+      }
+    },
+    {
+      "name": "source.python.mako.line",
+      "begin": "^(#)",
+      "end": "$",
+      "patterns": [
+        {}
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control"
+        }
+      }
+    },
+    {
+      "name": "source.mako.def",
+      "begin": "(\u003c%(def)\\S?)",
+      "end": "(\u003c/%(\\2)\u003e)",
+      "patterns": [
+        {
+          "begin": "(?\u003c=\u003c%def)",
+          "end": "(?=\u003e)",
           "patterns": [
             {
+              "contentName": "entity.name.function.python",
               "begin": "(name)\\s*(=)\\s*(\")(?=[A-Za-z_][A-Za-z0-9_]*)",
+              "end": "(\")",
+              "patterns": [
+                {
+                  "include": "#function_def"
+                },
+                {
+                  "include": "#entity_name"
+                }
+              ],
               "beginCaptures": {
                 "1": {
                   "name": "keyword.control"
@@ -155,21 +143,11 @@
                   "name": "punctuation.section.function.begin.python"
                 }
               },
-              "contentName": "entity.name.function.python",
-              "end": "(\")",
               "endCaptures": {
                 "1": {
                   "name": "punctuation.section.function.begin.python"
                 }
-              },
-              "patterns": [
-                {
-                  "include": "#function_def"
-                },
-                {
-                  "include": "#entity_name"
-                }
-              ]
+              }
             },
             {
               "include": "#tag-stuff"
@@ -177,23 +155,20 @@
           ]
         },
         {
-          "begin": "(>)",
-          "captures": {
-            "1": {
-              "name": "keyword.control"
-            }
-          },
-          "end": "(?=</%def>)",
+          "begin": "(\u003e)",
+          "end": "(?=\u003c/%def\u003e)",
           "patterns": [
             {
               "include": "$self"
             }
-          ]
+          ],
+          "captures": {
+            "1": {
+              "name": "keyword.control"
+            }
+          }
         }
-      ]
-    },
-    {
-      "begin": "(<%(call))",
+      ],
       "captures": {
         "1": {
           "name": "keyword.control"
@@ -201,94 +176,21 @@
         "2": {
           "name": "storage.type.function.python"
         }
-      },
-      "end": "(</%(\\2)>)",
+      }
+    },
+    {
       "name": "source.mako.call",
+      "begin": "(\u003c%(call))",
+      "end": "(\u003c/%(\\2)\u003e)",
       "patterns": [
         {
           "begin": "(expr)\\s*(=)\\s*(\")",
-          "beginCaptures": {
-            "1": {
-              "name": "keyword.control"
-            },
-            "2": {
-              "name": "keyword.operator"
-            },
-            "3": {
-              "name": "punctuation.section.function.begin.python"
-            }
-          },
           "end": "(\")",
-          "endCaptures": {
-            "1": {
-              "name": "punctuation.section.function.begin.python"
-            }
-          },
           "patterns": [
             {
               "include": "source.python"
             }
-          ]
-        },
-        {
-          "begin": "(>)",
-          "captures": {
-            "1": {
-              "name": "keyword.control"
-            }
-          },
-          "end": "(?=</%call>)",
-          "patterns": [
-            {
-              "include": "$self"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "begin": "(<%(inherit|namespace|include)) ",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.control"
-        },
-        "2": {
-          "name": "storage.type.function.python"
-        }
-      },
-      "end": "(/>)",
-      "endCaptures": {
-        "1": {
-          "name": "keyword.control"
-        }
-      },
-      "name": "source.mako.inherit",
-      "patterns": [
-        {
-          "include": "#tag-stuff"
-        }
-      ]
-    },
-    {
-      "begin": "(<%(page))",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.control"
-        },
-        "2": {
-          "name": "storage.type.function.python"
-        }
-      },
-      "end": "(\\/>)",
-      "endCaptures": {
-        "1": {
-          "name": "keyword.control"
-        }
-      },
-      "name": "source.mako.page",
-      "patterns": [
-        {
-          "begin": "(args)\\s*(=)\\s*(\")",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.control"
@@ -300,12 +202,67 @@
               "name": "punctuation.section.function.begin.python"
             }
           },
-          "end": "(\")",
           "endCaptures": {
             "1": {
-              "name": "punctuation.section.function.end.python"
+              "name": "punctuation.section.function.begin.python"
             }
-          },
+          }
+        },
+        {
+          "begin": "(\u003e)",
+          "end": "(?=\u003c/%call\u003e)",
+          "patterns": [
+            {
+              "include": "$self"
+            }
+          ],
+          "captures": {
+            "1": {
+              "name": "keyword.control"
+            }
+          }
+        }
+      ],
+      "captures": {
+        "1": {
+          "name": "keyword.control"
+        },
+        "2": {
+          "name": "storage.type.function.python"
+        }
+      }
+    },
+    {
+      "name": "source.mako.inherit",
+      "begin": "(\u003c%(inherit|namespace|include)) ",
+      "end": "(/\u003e)",
+      "patterns": [
+        {
+          "include": "#tag-stuff"
+        }
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control"
+        },
+        "2": {
+          "name": "storage.type.function.python"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "keyword.control"
+        }
+      }
+    },
+    {
+      "name": "source.mako.page",
+      "begin": "(\u003c%(page))",
+      "end": "(\\/\u003e)",
+      "patterns": [
+        {
+          "begin": "(args)\\s*(=)\\s*(\")",
+          "end": "(\")",
           "patterns": [
             {
               "include": "#positional_args"
@@ -313,28 +270,7 @@
             {
               "include": "#keyword_arguments"
             }
-          ]
-        },
-        {
-          "include": "#tag-stuff"
-        }
-      ]
-    },
-    {
-      "begin": "(<%([a-zA-Z0-9:_]+))",
-      "captures": {
-        "1": {
-          "name": "keyword.control"
-        },
-        "2": {
-          "name": "storage.type.function.python"
-        }
-      },
-      "end": "(</%(\\2)>|\\/>)",
-      "name": "source.mako.genericcall",
-      "patterns": [
-        {
-          "begin": "(expr)\\s*(=)\\s*(\")",
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.control"
@@ -346,36 +282,86 @@
               "name": "punctuation.section.function.begin.python"
             }
           },
-          "end": "(\")",
           "endCaptures": {
             "1": {
-              "name": "punctuation.section.function.begin.python"
+              "name": "punctuation.section.function.end.python"
             }
-          },
-          "patterns": [
-            {
-              "include": "source.python"
-            }
-          ]
-        },
-        {
-          "begin": "(>)",
-          "captures": {
-            "1": {
-              "name": "keyword.control"
-            }
-          },
-          "end": "(?=</%[a-zA-Z0-9:_]+>)",
-          "patterns": [
-            {
-              "include": "$self"
-            }
-          ]
+          }
         },
         {
           "include": "#tag-stuff"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control"
+        },
+        "2": {
+          "name": "storage.type.function.python"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "keyword.control"
+        }
+      }
+    },
+    {
+      "name": "source.mako.genericcall",
+      "begin": "(\u003c%([a-zA-Z0-9:_]+))",
+      "end": "(\u003c/%(\\2)\u003e|\\/\u003e)",
+      "patterns": [
+        {
+          "begin": "(expr)\\s*(=)\\s*(\")",
+          "end": "(\")",
+          "patterns": [
+            {
+              "include": "source.python"
+            }
+          ],
+          "beginCaptures": {
+            "1": {
+              "name": "keyword.control"
+            },
+            "2": {
+              "name": "keyword.operator"
+            },
+            "3": {
+              "name": "punctuation.section.function.begin.python"
+            }
+          },
+          "endCaptures": {
+            "1": {
+              "name": "punctuation.section.function.begin.python"
+            }
+          }
+        },
+        {
+          "begin": "(\u003e)",
+          "end": "(?=\u003c/%[a-zA-Z0-9:_]+\u003e)",
+          "patterns": [
+            {
+              "include": "$self"
+            }
+          ],
+          "captures": {
+            "1": {
+              "name": "keyword.control"
+            }
+          }
+        },
+        {
+          "include": "#tag-stuff"
+        }
+      ],
+      "captures": {
+        "1": {
+          "name": "keyword.control"
+        },
+        "2": {
+          "name": "storage.type.function.python"
+        }
+      }
     },
     {
       "include": "text.html.basic"
@@ -383,28 +369,28 @@
   ],
   "repository": {
     "builtin_exceptions": {
-      "match": "(?x)\\b((Arithmetic|Assertion|Attribute|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|OS|Overflow|NotImplemented|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Translate|Encode|Decode)?|Value|ZeroDivision)Error|(Deprecation|Future|Overflow|PendingDeprecation|Runtime|Syntax|User)?Warning|KeyboardInterrupt|NotImplemented|StopIteration|SystemExit|(Base)?Exception)\\b",
-      "name": "support.type.exception.python"
+      "name": "support.type.exception.python",
+      "match": "(?x)\\b((Arithmetic|Assertion|Attribute|EOF|Environment|FloatingPoint|IO|Import|Indentation|Index|Key|Lookup|Memory|Name|OS|Overflow|NotImplemented|Reference|Runtime|Standard|Syntax|System|Tab|Type|UnboundLocal|Unicode(Translate|Encode|Decode)?|Value|ZeroDivision)Error|(Deprecation|Future|Overflow|PendingDeprecation|Runtime|Syntax|User)?Warning|KeyboardInterrupt|NotImplemented|StopIteration|SystemExit|(Base)?Exception)\\b"
     },
     "builtin_functions": {
-      "match": "(?x)\\b(\n                __import__|all|abs|any|apply|callable|chr|cmp|coerce|compile|delattr|dir|\n                divmod|eval|execfile|filter|getattr|globals|hasattr|hash|hex|id|\n                input|intern|isinstance|issubclass|iter|len|locals|map|max|min|oct|\n                ord|pow|range|raw_input|reduce|reload|repr|round|setattr|sorted|\n                sum|unichr|vars|zip\n\t\t\t)\\b",
-      "name": "support.function.builtin.python"
+      "name": "support.function.builtin.python",
+      "match": "(?x)\\b(\n                __import__|all|abs|any|apply|callable|chr|cmp|coerce|compile|delattr|dir|\n                divmod|eval|execfile|filter|getattr|globals|hasattr|hash|hex|id|\n                input|intern|isinstance|issubclass|iter|len|locals|map|max|min|oct|\n                ord|pow|range|raw_input|reduce|reload|repr|round|setattr|sorted|\n                sum|unichr|vars|zip\n\t\t\t)\\b"
     },
     "builtin_types": {
-      "match": "(?x)\\b(\n\t\t\t\tbasestring|bool|buffer|classmethod|complex|dict|enumerate|file|\n\t\t\t\tfloat|frozenset|int|list|long|object|open|property|reversed|set|\n\t\t\t\tslice|staticmethod|str|super|tuple|type|unicode|xrange\n\t\t\t)\\b",
-      "name": "support.type.python"
+      "name": "support.type.python",
+      "match": "(?x)\\b(\n\t\t\t\tbasestring|bool|buffer|classmethod|complex|dict|enumerate|file|\n\t\t\t\tfloat|frozenset|int|list|long|object|open|property|reversed|set|\n\t\t\t\tslice|staticmethod|str|super|tuple|type|unicode|xrange\n\t\t\t)\\b"
     },
     "constant_placeholder": {
-      "match": "(?i:%(\\([a-z_]+\\))?#?0?\\-?[ ]?\\+?([0-9]*|\\*)(\\.([0-9]*|\\*))?[hL]?[a-z%])",
-      "name": "constant.other.placeholder.python"
+      "name": "constant.other.placeholder.python",
+      "match": "(?i:%(\\([a-z_]+\\))?#?0?\\-?[ ]?\\+?([0-9]*|\\*)(\\.([0-9]*|\\*))?[hL]?[a-z%])"
     },
     "dotted_entity_name": {
       "begin": "(?=[A-Za-z_][A-Za-z0-9_]*(\\.[A-Za-z_][A-Za-z0-9_]*)*)",
-      "end": "(?<=[A-Za-z0-9_])",
+      "end": "(?\u003c=[A-Za-z0-9_])",
       "patterns": [
         {
           "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
-          "end": "(?<=[A-Za-z0-9_])",
+          "end": "(?\u003c=[A-Za-z0-9_])",
           "patterns": [
             {
               "include": "#entity_name"
@@ -416,6 +402,8 @@
     "entities": {
       "patterns": [
         {
+          "name": "constant.character.entity.html",
+          "match": "(\u0026)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)",
           "captures": {
             "1": {
               "name": "punctuation.definition.entity.html"
@@ -423,19 +411,17 @@
             "3": {
               "name": "punctuation.definition.entity.html"
             }
-          },
-          "match": "(&)([a-zA-Z0-9]+|#[0-9]+|#x[0-9a-fA-F]+)(;)",
-          "name": "constant.character.entity.html"
+          }
         },
         {
-          "match": "&",
-          "name": "invalid.illegal.bad-ampersand.html"
+          "name": "invalid.illegal.bad-ampersand.html",
+          "match": "\u0026"
         }
       ]
     },
     "entity_name": {
       "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
-      "end": "(?<=[A-Za-z0-9_])",
+      "end": "(?\u003c=[A-Za-z0-9_])",
       "patterns": [
         {
           "include": "#magic_function_names"
@@ -461,23 +447,13 @@
       ]
     },
     "escaped_char": {
-      "match": "\\\\[.\\n]",
-      "name": "constant.character.escape.python"
+      "name": "constant.character.escape.python",
+      "match": "\\\\[.\\n]"
     },
     "function_def": {
-      "begin": "(\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "punctuation.section.parameters.begin.python"
-        }
-      },
       "contentName": "meta.function.parameters.python",
+      "begin": "(\\()",
       "end": "(\\))\\s*(?=\\\")",
-      "endCaptures": {
-        "1": {
-          "name": "punctuation.section.parameters.end.python"
-        }
-      },
       "patterns": [
         {
           "include": "#keyword_arguments"
@@ -485,11 +461,21 @@
         {
           "include": "#positional_args"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "punctuation.section.parameters.begin.python"
+        }
+      },
+      "endCaptures": {
+        "1": {
+          "name": "punctuation.section.parameters.end.python"
+        }
+      }
     },
     "function_name": {
       "begin": "(?=[A-Za-z_][A-Za-z0-9_]*)",
-      "end": "(?<=[A-Za-z0-9_])",
+      "end": "(?\u003c=[A-Za-z0-9_])",
       "patterns": [
         {
           "include": "#magic_function_names"
@@ -515,11 +501,17 @@
       "match": "[A-Za-z_][A-Za-z0-9_]*"
     },
     "illegal_names": {
-      "match": "\\b(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|not|or|pass|print|raise|return|try|while|with|yield)\\b",
-      "name": "invalid.illegal.name.python"
+      "name": "invalid.illegal.name.python",
+      "match": "\\b(and|as|assert|break|class|continue|def|del|elif|else|except|exec|finally|for|from|global|if|import|in|is|lambda|not|or|pass|print|raise|return|try|while|with|yield)\\b"
     },
     "keyword_arguments": {
       "begin": "\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(=)",
+      "end": "\\s*(?:(,)|(?=$\\n?|[\\)\"]))",
+      "patterns": [
+        {
+          "include": "$base"
+        }
+      ],
       "beginCaptures": {
         "1": {
           "name": "variable.parameter.function.python"
@@ -528,19 +520,14 @@
           "name": "keyword.operator.assignment.python"
         }
       },
-      "end": "\\s*(?:(,)|(?=$\\n?|[\\)\"]))",
       "endCaptures": {
         "1": {
           "name": "punctuation.separator.parameters.python"
         }
-      },
-      "patterns": [
-        {
-          "include": "$base"
-        }
-      ]
+      }
     },
     "line_continuation": {
+      "match": "(\\\\)(.*)$\\n?",
       "captures": {
         "1": {
           "name": "punctuation.separator.continuation.line.python"
@@ -548,20 +535,18 @@
         "2": {
           "name": "invalid.illegal.unexpected-text.python"
         }
-      },
-      "match": "(\\\\)(.*)$\\n?"
+      }
     },
     "magic_function_names": {
-      "comment": "these methods have magic interpretation by python and are generally called indirectly through syntactic constructs",
-      "match": "(?x)\\b(__(?:\n\t\t\t\t\t\tabs|add|and|call|cmp|coerce|complex|contains|del|delattr|\n\t\t\t\t\t\tdelete|delitem|delslice|div|divmod|enter|eq|exit|float|\n\t\t\t\t\t\tfloordiv|ge|get|getattr|getattribute|getitem|getslice|gt|\n\t\t\t\t\t\thash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|\n\t\t\t\t\t\tint|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|\n\t\t\t\t\t\tlong|lshift|lt|mod|mul|ne|neg|new|nonzero|oct|or|pos|pow|\n\t\t\t\t\t\tradd|rand|rdiv|rdivmod|repr|rfloordiv|rlshift|rmod|rmul|ror|\n\t\t\t\t\t\trpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|\n\t\t\t\t\t\tsetslice|str|sub|truediv|unicode|xor\n\t\t\t\t\t)__)\\b",
-      "name": "entity.name.function.magic.python"
+      "name": "entity.name.function.magic.python",
+      "match": "(?x)\\b(__(?:\n\t\t\t\t\t\tabs|add|and|call|cmp|coerce|complex|contains|del|delattr|\n\t\t\t\t\t\tdelete|delitem|delslice|div|divmod|enter|eq|exit|float|\n\t\t\t\t\t\tfloordiv|ge|get|getattr|getattribute|getitem|getslice|gt|\n\t\t\t\t\t\thash|hex|iadd|iand|idiv|ifloordiv|ilshift|imod|imul|init|\n\t\t\t\t\t\tint|invert|ior|ipow|irshift|isub|iter|itruediv|ixor|le|len|\n\t\t\t\t\t\tlong|lshift|lt|mod|mul|ne|neg|new|nonzero|oct|or|pos|pow|\n\t\t\t\t\t\tradd|rand|rdiv|rdivmod|repr|rfloordiv|rlshift|rmod|rmul|ror|\n\t\t\t\t\t\trpow|rrshift|rshift|rsub|rtruediv|rxor|set|setattr|setitem|\n\t\t\t\t\t\tsetslice|str|sub|truediv|unicode|xor\n\t\t\t\t\t)__)\\b"
     },
     "magic_variable_names": {
-      "comment": "magic variables which a class/module may have.",
-      "match": "\\b__(all|bases|class|debug|dict|doc|file|members|metaclass|methods|name|slots|weakref)__\\b",
-      "name": "support.variable.magic.python"
+      "name": "support.variable.magic.python",
+      "match": "\\b__(all|bases|class|debug|dict|doc|file|members|metaclass|methods|name|slots|weakref)__\\b"
     },
     "positional_args": {
+      "match": "\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(,)|(?=[\\n\\)\"]))",
       "captures": {
         "1": {
           "name": "variable.parameter.function.python"
@@ -569,14 +554,23 @@
         "2": {
           "name": "punctuation.separator.parameters.python"
         }
-      },
-      "match": "\\b([a-zA-Z_][a-zA-Z_0-9]*)\\s*(?:(,)|(?=[\\n\\)\"]))"
+      }
     },
     "source_mako_tagargs": {
       "name": "source.mako.tagargs",
       "patterns": [
         {
+          "contentName": "entity.name.function.python",
           "begin": "(name)\\s*(=)\\s*(\")(?=[A-Za-z_][A-Za-z0-9_]*)",
+          "end": "(\")",
+          "patterns": [
+            {
+              "include": "#function_def"
+            },
+            {
+              "include": "#entity_name"
+            }
+          ],
           "beginCaptures": {
             "1": {
               "name": "keyword.control"
@@ -588,21 +582,11 @@
               "name": "punctuation.section.function.begin.python"
             }
           },
-          "contentName": "entity.name.function.python",
-          "end": "(\")",
           "endCaptures": {
             "1": {
               "name": "punctuation.section.function.begin.python"
             }
-          },
-          "patterns": [
-            {
-              "include": "#function_def"
-            },
-            {
-              "include": "#entity_name"
-            }
-          ]
+          }
         },
         {
           "include": "#tag-stuff"
@@ -610,19 +594,9 @@
       ]
     },
     "string-double-quoted": {
-      "begin": "\"",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.html"
-        }
-      },
-      "end": "\"",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.html"
-        }
-      },
       "name": "string.quoted.double.html",
+      "begin": "\"",
+      "end": "\"",
       "patterns": [
         {
           "include": "#embedded-code"
@@ -630,22 +604,22 @@
         {
           "include": "#entities"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.html"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.html"
+        }
+      }
     },
     "string-single-quoted": {
-      "begin": "'",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.html"
-        }
-      },
-      "end": "'",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.html"
-        }
-      },
       "name": "string.quoted.single.html",
+      "begin": "'",
+      "end": "'",
       "patterns": [
         {
           "include": "#embedded-code"
@@ -653,14 +627,76 @@
         {
           "include": "#entities"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.html"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.html"
+        }
+      }
     },
     "tag-generic-attribute": {
-      "match": "\\b([a-zA-Z\\-_:]+)",
-      "name": "entity.other.attribute-name.html"
+      "name": "entity.other.attribute-name.html",
+      "match": "\\b([a-zA-Z\\-_:]+)"
     },
     "tag-id-attribute": {
+      "name": "meta.attribute-with-value.id.html",
       "begin": "\\b(id)\\b\\s*(=)",
+      "end": "(?\u003c='|\")",
+      "patterns": [
+        {
+          "name": "string.quoted.double.html",
+          "contentName": "meta.toc-list.id.html",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "include": "#embedded-code"
+            },
+            {
+              "include": "#entities"
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.html"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.html"
+            }
+          }
+        },
+        {
+          "name": "string.quoted.single.html",
+          "contentName": "meta.toc-list.id.html",
+          "begin": "'",
+          "end": "'",
+          "patterns": [
+            {
+              "include": "#embedded-code"
+            },
+            {
+              "include": "#entities"
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.html"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.html"
+            }
+          }
+        }
+      ],
       "captures": {
         "1": {
           "name": "entity.other.attribute-name.id.html"
@@ -668,59 +704,7 @@
         "2": {
           "name": "punctuation.separator.key-value.html"
         }
-      },
-      "end": "(?<='|\")",
-      "name": "meta.attribute-with-value.id.html",
-      "patterns": [
-        {
-          "begin": "\"",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.begin.html"
-            }
-          },
-          "contentName": "meta.toc-list.id.html",
-          "end": "\"",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.end.html"
-            }
-          },
-          "name": "string.quoted.double.html",
-          "patterns": [
-            {
-              "include": "#embedded-code"
-            },
-            {
-              "include": "#entities"
-            }
-          ]
-        },
-        {
-          "begin": "'",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.begin.html"
-            }
-          },
-          "contentName": "meta.toc-list.id.html",
-          "end": "'",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.end.html"
-            }
-          },
-          "name": "string.quoted.single.html",
-          "patterns": [
-            {
-              "include": "#embedded-code"
-            },
-            {
-              "include": "#entities"
-            }
-          ]
-        }
-      ]
+      }
     },
     "tag-stuff": {
       "patterns": [
@@ -738,7 +722,5 @@
         }
       ]
     }
-  },
-  "scopeName": "text.html.mako",
-  "uuid": "8580C15A-0134-4D25-9705-14F98729B2C5"
+  }
 }

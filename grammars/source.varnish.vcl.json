@@ -1,45 +1,44 @@
 {
-  "fileTypes": [
-    "vcl.erb",
-    "vcl"
-  ],
-  "foldingStartMarker": "^.*\\b(backend|sub)\\s*(\\w+\\s*)?(\\s*\\{[^\\}]*)?\\s*$",
-  "foldingStopMarker": "^\\s*\\}",
-  "keyEquivalent": "^~V",
   "name": "VCL",
+  "scopeName": "source.varnish.vcl",
   "patterns": [
     {
-      "match": "\\#.*",
-      "name": "comment.line.number-sign.vcl"
+      "name": "comment.line.number-sign.vcl",
+      "match": "\\#.*"
     },
     {
-      "match": "\\/\\/.*",
-      "name": "comment.line.double-slash.vcl"
+      "name": "comment.line.double-slash.vcl",
+      "match": "\\/\\/.*"
     },
     {
+      "name": "comment.block.vcl",
       "begin": "\\/\\*",
-      "end": "\\*\\/",
-      "name": "comment.block.vcl"
+      "end": "\\*\\/"
     },
     {
       "name": "meta.include.vcl",
       "begin": "\\b(import|include)\\b\\s*",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.control.import.php"
-        }
-      },
       "end": "(?=\\s|;|$)",
       "patterns": [
         {
           "include": "#strings"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.import.php"
+        }
+      }
     },
     {
       "name": "meta.director.vcl",
       "begin": "(?i)^\\s*(director)\\s+([a-z0-9_]+)\\s+(round\\-robin|random|client|hash|dns|fallback)\\s*\\{",
       "end": "\\}",
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ],
       "captures": {
         "1": {
           "name": "storage.type.director.vcl"
@@ -50,17 +49,17 @@
         "3": {
           "name": "storage.type.director.family.vcl"
         }
-      },
-      "patterns": [
-        {
-          "include": "$self"
-        }
-      ]
+      }
     },
     {
       "name": "meta.backend.vcl",
       "begin": "(?i)^\\s*(backend)\\s+([a-z0-9_]+)\\s*\\{",
       "end": "\\}",
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ],
       "captures": {
         "1": {
           "name": "storage.type.backend.vcl"
@@ -68,17 +67,17 @@
         "2": {
           "name": "entity.name.type.backend.vcl"
         }
-      },
-      "patterns": [
-        {
-          "include": "$self"
-        }
-      ]
+      }
     },
     {
       "name": "meta.acl.vcl",
       "begin": "(?i)^\\s*(acl)\\s+([a-z0-9_]+)\\s*\\{",
       "end": "\\}",
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ],
       "captures": {
         "1": {
           "name": "storage.type.acl.vcl"
@@ -86,12 +85,7 @@
         "2": {
           "name": "entity.name.type.acl.vcl"
         }
-      },
-      "patterns": [
-        {
-          "include": "$self"
-        }
-      ]
+      }
     },
     {
       "name": "meta.probe.vcl",
@@ -109,6 +103,11 @@
       "name": "meta.subroutine.vcl",
       "begin": "(?i)^\\s*(sub)\\s+([a-z0-9_]+)\\s*\\{",
       "end": "\\}",
+      "patterns": [
+        {
+          "include": "$self"
+        }
+      ],
       "captures": {
         "1": {
           "name": "storage.type.subroutine.vcl"
@@ -116,40 +115,30 @@
         "2": {
           "name": "entity.name.type.subroutine.vcl"
         }
-      },
-      "patterns": [
-        {
-          "include": "$self"
-        }
-      ]
+      }
     },
     {
       "begin": "\\b(return)\\s*\\(",
       "end": "\\)",
+      "patterns": [
+        {
+          "name": "constant.language.return.vcl",
+          "match": "(deliver|error|fetch|hash|hit_for_pass|lookup|ok|pass|pipe|restart|synth|retry|abandon|fail|purge)"
+        },
+        {
+          "name": "meta.error.vcl",
+          "match": ".*"
+        }
+      ],
       "captures": {
         "1": {
           "name": "keyword.control.vcl"
         }
-      },
-      "patterns": [
-        {
-          "match": "(deliver|error|fetch|hash|hit_for_pass|lookup|ok|pass|pipe|restart|synth|retry|abandon|fail|purge)",
-          "name": "constant.language.return.vcl"
-        },
-        {
-          "match": ".*",
-          "name": "meta.error.vcl"
-        }
-      ]
+      }
     },
     {
       "name": "meta.error.vcl",
       "begin": "\\b(error)\\b\\s*",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.control.error"
-        }
-      },
       "end": "(?=\\s|;|$)",
       "patterns": [
         {
@@ -158,7 +147,12 @@
         {
           "include": "#numbers"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "1": {
+          "name": "keyword.control.error"
+        }
+      }
     },
     {
       "match": "\\b(set|unset|remove|synthetic|call|if|else|elsif|else if)\\b",
@@ -204,45 +198,109 @@
         }
       ]
     },
-    "subkeys": {
-      "patterns": [
-        {
-          "name": "variable.subkey.vcl",
-          "match": "\\.(max_connections|first_byte_timeout|between_bytes_timeout|probe|host_header|retries|backend|weight|host|list|port|connect_timeout|ttl|suffix|url|request|window|threshold|initial|expected_response|interval|timeout)\\b"
-        }
-      ]
-    },
     "constants": {
       "patterns": [
         {
-          "match": "\\b(true|false|now)\\b",
-          "name": "constant.builtin.vcl"
+          "name": "constant.builtin.vcl",
+          "match": "\\b(true|false|now)\\b"
         }
       ]
     },
     "functions": {
       "patterns": [
         {
-          "match": "(hash_data|regsuball|regsub|ban_url|ban|purge|synth)",
-          "name": "support.function.builtin.vcl"
+          "name": "support.function.builtin.vcl",
+          "match": "(hash_data|regsuball|regsub|ban_url|ban|purge|synth)"
         },
         {
-          "match": "std\\.(log|toupper|tolower|set_ip_tos|random|log|syslog|fileread|collect|duration|integer|ip)",
-          "name": "support.function.module.std.vcl"
+          "name": "support.function.module.std.vcl",
+          "match": "std\\.(log|toupper|tolower|set_ip_tos|random|log|syslog|fileread|collect|duration|integer|ip)"
         },
         {
-          "match": "redis[0-9]?\\.(call|send|pipeline|init_redis)",
-          "name": "support.function.module.libvmodredis.vcl"
+          "name": "support.function.module.libvmodredis.vcl",
+          "match": "redis[0-9]?\\.(call|send|pipeline|init_redis)"
         }
       ]
     },
-    "variables": {
+    "numbers": {
       "patterns": [
         {
-          "match": "(req|bereq|obj|beresp|client|server|resp)\\.[a-zA-Z0-9\\-\\_\\.]+",
-          "name": "variable.other.vcl"
+          "name": "constant.numeric.time.vcl",
+          "match": "\\b[0-9]+ ?(m|s|h|d|w)\\b"
+        },
+        {
+          "name": "constant.numeric.vcl",
+          "match": "\\b[0-9]+(\\b|;)"
         }
       ]
+    },
+    "string-double-quoted": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.vcl",
+          "contentName": "meta.string-contents.quoted.double.vcl",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.vcl",
+              "match": "\\\\[\\\\\"]"
+            }
+          ],
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.vcl"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.vcl"
+            }
+          }
+        }
+      ]
+    },
+    "string-long": {
+      "patterns": [
+        {
+          "name": "string.quoted.long.vcl",
+          "contentName": "meta.string-contents.quoted.double.vcl",
+          "begin": "\\{\"",
+          "end": "\"\\}",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.begin.vcl"
+            }
+          },
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.vcl"
+            }
+          }
+        }
+      ]
+    },
+    "string-single-quoted": {
+      "name": "string.quoted.single.vcl",
+      "contentName": "meta.string-contents.quoted.single.vcl",
+      "begin": "'",
+      "end": "'",
+      "patterns": [
+        {
+          "name": "constant.character.escape.vcl",
+          "match": "\\\\[\\\\']"
+        }
+      ],
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.begin.vcl"
+        }
+      },
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.string.end.vcl"
+        }
+      }
     },
     "strings": {
       "patterns": [
@@ -257,87 +315,21 @@
         }
       ]
     },
-    "numbers": {
+    "subkeys": {
       "patterns": [
         {
-          "match": "\\b[0-9]+ ?(m|s|h|d|w)\\b",
-          "name": "constant.numeric.time.vcl"
-        },
-        {
-          "match": "\\b[0-9]+(\\b|;)",
-          "name": "constant.numeric.vcl"
+          "name": "variable.subkey.vcl",
+          "match": "\\.(max_connections|first_byte_timeout|between_bytes_timeout|probe|host_header|retries|backend|weight|host|list|port|connect_timeout|ttl|suffix|url|request|window|threshold|initial|expected_response|interval|timeout)\\b"
         }
       ]
     },
-    "string-long": {
+    "variables": {
       "patterns": [
         {
-          "begin": "\\{\"",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.begin.vcl"
-            }
-          },
-          "contentName": "meta.string-contents.quoted.double.vcl",
-          "end": "\"\\}",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.end.vcl"
-            }
-          },
-          "name": "string.quoted.long.vcl"
-        }
-      ]
-    },
-    "string-double-quoted": {
-      "patterns": [
-        {
-          "begin": "\"",
-          "beginCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.begin.vcl"
-            }
-          },
-          "contentName": "meta.string-contents.quoted.double.vcl",
-          "end": "\"",
-          "endCaptures": {
-            "0": {
-              "name": "punctuation.definition.string.end.vcl"
-            }
-          },
-          "name": "string.quoted.double.vcl",
-          "patterns": [
-            {
-              "match": "\\\\[\\\\\"]",
-              "name": "constant.character.escape.vcl"
-            }
-          ]
-        }
-      ]
-    },
-    "string-single-quoted": {
-      "begin": "'",
-      "beginCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.begin.vcl"
-        }
-      },
-      "contentName": "meta.string-contents.quoted.single.vcl",
-      "end": "'",
-      "endCaptures": {
-        "0": {
-          "name": "punctuation.definition.string.end.vcl"
-        }
-      },
-      "name": "string.quoted.single.vcl",
-      "patterns": [
-        {
-          "match": "\\\\[\\\\']",
-          "name": "constant.character.escape.vcl"
+          "name": "variable.other.vcl",
+          "match": "(req|bereq|obj|beresp|client|server|resp)\\.[a-zA-Z0-9\\-\\_\\.]+"
         }
       ]
     }
-  },
-  "scopeName": "source.varnish.vcl",
-  "uuid": "D03975D6-0E30-46EC-9A63-AE75EA409EB9"
+  }
 }

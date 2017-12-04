@@ -1,11 +1,6 @@
 {
   "name": "fsharp.fsi",
   "scopeName": "source.fsharp.fsi",
-  "fileTypes": [
-    "fsi"
-  ],
-  "foldingStartMarker": "",
-  "foldingStopMarker": "",
   "patterns": [
     {
       "include": "source.fsharp"

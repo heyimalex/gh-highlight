@@ -1,71 +1,56 @@
 {
-  "fileTypes": [
-    "hamlc"
-  ],
-  "foldingStartMarker": "^\\s*([-%#\\:\\.\\w\\=].*)\\s$",
-  "foldingStopMarker": "^\\s*$",
   "name": "Coffee Haml",
+  "scopeName": "text.hamlc",
   "patterns": [
     {
+      "name": "meta.prolog.haml",
+      "match": "^(!!!)($|\\s.*)",
       "captures": {
         "1": {
           "name": "punctuation.definition.prolog.haml"
         }
-      },
-      "match": "^(!!!)($|\\s.*)",
-      "name": "meta.prolog.haml"
+      }
     },
     {
+      "name": "comment.line.slash.haml",
+      "match": "^ *(/)\\s*\\S.*$\\n?",
       "captures": {
         "1": {
           "name": "punctuation.section.comment.haml"
         }
-      },
-      "match": "^ *(/)\\s*\\S.*$\\n?",
-      "name": "comment.line.slash.haml"
+      }
     },
     {
-      "begin": "^( *)(/)\\s*$",
-      "beginCaptures": {
-        "2": {
-          "name": "punctuation.section.comment.haml"
-        }
-      },
-      "end": "^(?! *$|\\1 )",
       "name": "comment.block.haml",
+      "begin": "^( *)(/)\\s*$",
+      "end": "^(?! *$|\\1 )",
       "patterns": [
         {
           "include": "text.haml"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "2": {
+          "name": "punctuation.section.comment.haml"
+        }
+      }
     },
     {
       "begin": "^\\s*(?:((%)([\\w:-]+))|(?=\\.|#))",
-      "captures": {
-        "1": {
-          "name": "meta.tag.haml"
-        },
-        "2": {
-          "name": "punctuation.definition.tag.haml"
-        },
-        "3": {
-          "name": "entity.name.tag.haml"
-        }
-      },
       "end": "$|(?!\\.|#|\\{|\\[|\\(|=|-|~|/)",
       "patterns": [
         {
-          "match": "\\.[\\w-]+",
-          "name": "entity.name.tag.class.haml"
+          "name": "entity.name.tag.class.haml",
+          "match": "\\.[\\w-]+"
         },
         {
-          "match": "#[\\w-]+",
-          "name": "entity.name.tag.id.haml"
+          "name": "entity.name.tag.id.haml",
+          "match": "#[\\w-]+"
         },
         {
+          "name": "meta.section.attributes.haml",
           "begin": "\\{(?=.*\\}|.*(\\||,)\\s*$)",
           "end": "(\\}$|\\}(\\s+)?\\|(\\s+)?$)",
-          "name": "meta.section.attributes.haml",
           "patterns": [
             {
               "include": "source.coffee"
@@ -76,9 +61,9 @@
           ]
         },
         {
+          "name": "meta.section.attributes.haml",
           "begin": "\\(|\\((?=.*\\)|.*\\|\\s*$)",
           "end": "\\)",
-          "name": "meta.section.attributes.haml",
           "patterns": [
             {
               "include": "#tag-stuff"
@@ -89,9 +74,9 @@
           ]
         },
         {
+          "name": "meta.section.object.haml",
           "begin": "\\[(?=.*\\]|.*\\|\\s*$)",
           "end": "\\]|$|^(?!.*\\|\\s*$)",
-          "name": "meta.section.object.haml",
           "patterns": [
             {
               "include": "source.coffee"
@@ -105,18 +90,29 @@
           "include": "#coffeeline"
         },
         {
-          "match": "/",
-          "name": "punctuation.terminator.tag.haml"
+          "name": "punctuation.terminator.tag.haml",
+          "match": "/"
         }
-      ]
+      ],
+      "captures": {
+        "1": {
+          "name": "meta.tag.haml"
+        },
+        "2": {
+          "name": "punctuation.definition.tag.haml"
+        },
+        "3": {
+          "name": "entity.name.tag.haml"
+        }
+      }
     },
     {
+      "match": "^\\s*(\\\\.)",
       "captures": {
         "1": {
           "name": "meta.escape.haml"
         }
-      },
-      "match": "^\\s*(\\\\.)"
+      }
     },
     {
       "begin": "^\\s*(?==|-|~)",
@@ -128,78 +124,61 @@
       ]
     },
     {
-      "begin": "^(\\s*)(:css)",
-      "beginCaptures": {
-        "2": {
-          "name": "entity.name.tag.haml"
-        }
-      },
-      "end": "^(?! *$|\\1 )",
       "name": "source.css.embedded.html",
+      "begin": "^(\\s*)(:css)",
+      "end": "^(?! *$|\\1 )",
       "patterns": [
         {
           "include": "source.css"
         }
-      ]
-    },
-    {
-      "begin": "^(\\s*)(:javascript)",
+      ],
       "beginCaptures": {
         "2": {
           "name": "entity.name.tag.haml"
         }
-      },
-      "end": "^(?! *$|\\1 )",
+      }
+    },
+    {
       "name": "source.js.embedded.html",
+      "begin": "^(\\s*)(:javascript)",
+      "end": "^(?! *$|\\1 )",
       "patterns": [
         {
           "include": "source.js"
         }
-      ]
+      ],
+      "beginCaptures": {
+        "2": {
+          "name": "entity.name.tag.haml"
+        }
+      }
     },
     {
-      "begin": "#{",
-      "captures": {
-        "0": {
-          "name": "punctuation.section.embedded.coffee"
-        }
-      },
-      "end": "}",
       "name": "source.coffee.embedded.html",
+      "begin": "#{",
+      "end": "}",
       "patterns": [
         {
           "include": "source.coffee"
         }
-      ]
+      ],
+      "captures": {
+        "0": {
+          "name": "punctuation.section.embedded.coffee"
+        }
+      }
     }
   ],
   "repository": {
-    "continuation": {
-      "captures": {
-        "1": {
-          "name": "punctuation.separator.continuation.haml"
-        }
-      },
-      "match": "(\\|,)\\s*\\n"
-    },
     "coffeeline": {
-      "begin": "=|-|~",
-      "contentName": "source.coffee.embedded.haml",
-      "end": "((do|\\{)( \\|[^|]+\\|)?)$|$|^(?!.*\\|\\s*$)",
-      "endCaptures": {
-        "1": {
-          "name": "source.coffee.embedded.html"
-        },
-        "2": {
-          "name": "keyword.control.coffee.start-block"
-        }
-      },
       "name": "meta.line.coffee.haml",
+      "contentName": "source.coffee.embedded.haml",
+      "begin": "=|-|~",
+      "end": "((do|\\{)( \\|[^|]+\\|)?)$|$|^(?!.*\\|\\s*$)",
       "patterns": [
         {
-          "comment": "Hack to let coffee comments work in this context properly",
-          "match": "#.*$",
-          "name": "comment.line.number-sign.coffee"
+          "name": "comment.line.number-sign.coffee",
+          "match": "#.*$"
         },
         {
           "include": "source.coffee"
@@ -207,11 +186,27 @@
         {
           "include": "#continuation"
         }
-      ]
+      ],
+      "endCaptures": {
+        "1": {
+          "name": "source.coffee.embedded.html"
+        },
+        "2": {
+          "name": "keyword.control.coffee.start-block"
+        }
+      }
+    },
+    "continuation": {
+      "match": "(\\|,)\\s*\\n",
+      "captures": {
+        "1": {
+          "name": "punctuation.separator.continuation.haml"
+        }
+      }
     },
     "tag-generic-attribute": {
-      "match": "\\b([a-zA-Z\\-:]+)",
-      "name": "entity.other.attribute-name.haml"
+      "name": "entity.other.attribute-name.haml",
+      "match": "\\b([a-zA-Z\\-:]+)"
     },
     "tag-stuff": {
       "patterns": [
@@ -220,6 +215,5 @@
         }
       ]
     }
-  },
-  "scopeName": "text.hamlc"
+  }
 }
